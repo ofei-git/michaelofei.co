@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lens Method - Visual Concepts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding-bottom: 80px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        h1 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #888;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* CONCEPT 1: Light Ray Diagram */
+        .light-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            padding: 60px 20px;
+        }
+
+        .light-source {
+            width: 140px;
+            height: 200px;
+            position: relative;
+        }
+
+        .light-rays-scattered {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .ray-scattered {
+            position: absolute;
+            right: 0;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd93d);
+            transform-origin: right center;
+            opacity: 0.6;
+        }
+
+        .ray-scattered:nth-child(1) { transform: rotate(-35deg); }
+        .ray-scattered:nth-child(2) { transform: rotate(-20deg); }
+        .ray-scattered:nth-child(3) { transform: rotate(-8deg); }
+        .ray-scattered:nth-child(4) { transform: rotate(8deg); }
+        .ray-scattered:nth-child(5) { transform: rotate(20deg); }
+        .ray-scattered:nth-child(6) { transform: rotate(35deg); }
+
+        .light-label {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffd93d;
+            white-space: nowrap;
+        }
+
+        .lens-container {
+            width: 80px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .lens {
+            width: 20px;
+            height: 160px;
+            background: linear-gradient(180deg, #4ecdc4, #44a08d);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .lens::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 140px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+        }
+
+        .lens-label {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #4ecdc4;
+            white-space: nowrap;
+        }
+
+        .focused-beam {
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+
+        .beam {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, #4ecdc4, #fff, #fff);
+            transform: translateY(-50%);
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.5);
+        }
+
+        .beam-glow {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #fff, transparent);
+            border-radius: 50%;
+        }
+
+        .output-label {
+            position: absolute;
+            bottom: -40px;
+            right: 0;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        /* CONCEPT 2: Venn-style Overlap */
+        .venn-container {
+            display: flex;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .venn {
+            position: relative;
+            width: 500px;
+            height: 300px;
+        }
+
+        .venn-circle {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .venn-expert {
+            left: 50px;
+            top: 50px;
+            background: rgba(255, 217, 61, 0.2);
+            border: 2px solid #ffd93d;
+        }
+
+        .venn-author {
+            left: 180px;
+            top: 50px;
+            background: rgba(78, 205, 196, 0.2);
+            border: 2px solid #4ecdc4;
+        }
+
+        .venn-center {
+            position: absolute;
+            left: 175px;
+            top: 100px;
+            width: 110px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .venn-center-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .venn-sublabel {
+            font-size: 9px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .venn-outside-label {
+            position: absolute;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .expert-has {
+            left: 20px;
+            top: 140px;
+            text-align: right;
+            width: 80px;
+        }
+
+        .author-has {
+            right: 70px;
+            top: 140px;
+            text-align: left;
+            width: 80px;
+        }
+
+        /* CONCEPT 3: Flow/Process */
+        .flow-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 60px 20px;
+            flex-wrap: wrap;
+        }
+
+        .flow-box {
+            padding: 30px 25px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 160px;
+        }
+
+        .flow-expert {
+            background: rgba(255, 217, 61, 0.15);
+            border: 1px solid rgba(255, 217, 61, 0.3);
+        }
+
+        .flow-author {
+            background: rgba(78, 205, 196, 0.15);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+        }
+
+        .flow-output {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .flow-role {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .flow-expert .flow-role { color: #ffd93d; }
+        .flow-author .flow-role { color: #4ecdc4; }
+        .flow-output .flow-role { color: #fff; }
+
+        .flow-provides {
+            font-size: 13px;
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .flow-arrow {
+            font-size: 24px;
+            color: #444;
+        }
+
+        .plus-sign {
+            font-size: 28px;
+            color: #444;
+        }
+
+        .equals-sign {
+            font-size: 28px;
+            color: #666;
+        }
+
+        /* CONCEPT 4: Industry Examples */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            padding: 40px 20px;
+        }
+
+        .example-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 35px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .example-industry {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .example-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .example-roles {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .example-role {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .role-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .role-indicator.author { background: #4ecdc4; }
+        .role-indicator.expert { background: #ffd93d; }
+        .role-indicator.contributor { background: #a855f7; }
+
+        .role-content {
+            flex: 1;
+        }
+
+        .role-type {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .role-type.author { color: #4ecdc4; }
+        .role-type.expert { color: #ffd93d; }
+        .role-type.contributor { color: #a855f7; }
+
+        .role-person {
+            font-size: 14px;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .role-title {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .role-brings {
+            font-size: 12px;
+            color: #999;
+            margin-top: 8px;
+            padding-left: 12px;
+            border-left: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .example-output {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .output-label-small {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .output-text {
+            font-size: 13px;
+            color: #ccc;
+        }
+
+        /* CONCEPT 5: Simple Equation */
+        .equation-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            padding: 60px 20px;
+            flex-wrap: wrap;
+        }
+
+        .equation-term {
+            text-align: center;
+        }
+
+        .equation-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 32px;
+        }
+
+        .equation-icon.experience {
+            background: rgba(255, 217, 61, 0.2);
+            border: 2px solid #ffd93d;
+        }
+
+        .equation-icon.perspective {
+            background: rgba(78, 205, 196, 0.2);
+            border: 2px solid #4ecdc4;
+        }
+
+        .equation-icon.article {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #fff;
+        }
+
+        .equation-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .equation-label.experience { color: #ffd93d; }
+        .equation-label.perspective { color: #4ecdc4; }
+        .equation-label.article { color: #fff; }
+
+        .equation-sublabel {
+            font-size: 10px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .equation-operator {
+            font-size: 32px;
+            color: #444;
+        }
+
+        /* Concept 6: Ownership Spectrum */
+        .spectrum-container {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .spectrum-bar {
+            height: 8px;
+            background: linear-gradient(90deg, #ffd93d, #4ecdc4);
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+
+        .spectrum-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+
+        .spectrum-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .spectrum-label.left { color: #ffd93d; }
+        .spectrum-label.right { color: #4ecdc4; }
+
+        .spectrum-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .spectrum-example {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .spectrum-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .spectrum-example-text {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .spectrum-position {
+            flex-shrink: 0;
+            width: 120px;
+            font-size: 11px;
+            color: #666;
+            text-align: right;
+        }
+
+        /* Notes section */
+        .notes {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .notes-title {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .notes-text {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CONCEPT 1: Light Ray Diagram -->
+    <div class="section">
+        <h1>Concept 1: The Light Diagram</h1>
+
+        <div class="light-diagram">
+            <div class="light-source">
+                <div class="light-rays-scattered">
+                    <div class="ray-scattered"></div>
+                    <div class="ray-scattered"></div>
+                    <div class="ray-scattered"></div>
+                    <div class="ray-scattered"></div>
+                    <div class="ray-scattered"></div>
+                    <div class="ray-scattered"></div>
+                </div>
+                <div class="light-label">Expert Experience</div>
+            </div>
+
+            <div class="lens-container">
+                <div class="lens"></div>
+                <div class="lens-label">Writer's Lens</div>
+            </div>
+
+            <div class="focused-beam">
+                <div class="beam"></div>
+                <div class="beam-glow"></div>
+                <div class="output-label">Focused Article</div>
+            </div>
+        </div>
+
+        <div class="notes">
+            <div class="notes-title">Concept Note</div>
+            <div class="notes-text">
+                Expert experience scatters in multiple directions without focus. The writer's lens concentrates it into something directed and useful for a specific audience.
+            </div>
+        </div>
+    </div>
+
+    <!-- CONCEPT 2: Simple Equation -->
+    <div class="section">
+        <h1>Concept 2: The Equation</h1>
+
+        <div class="equation-container">
+            <div class="equation-term">
+                <div class="equation-icon experience">&#9728;</div>
+                <div class="equation-label experience">Experience</div>
+                <div class="equation-sublabel">What they did</div>
+            </div>
+
+            <div class="equation-operator">+</div>
+
+            <div class="equation-term">
+                <div class="equation-icon perspective">&#9678;</div>
+                <div class="equation-label perspective">Perspective</div>
+                <div class="equation-sublabel">Why it matters</div>
+            </div>
+
+            <div class="equation-operator">=</div>
+
+            <div class="equation-term">
+                <div class="equation-icon article">&#9998;</div>
+                <div class="equation-label article">Authored Work</div>
+                <div class="equation-sublabel">Owned by the lens</div>
+            </div>
+        </div>
+
+        <div class="notes">
+            <div class="notes-title">Concept Note</div>
+            <div class="notes-text">
+                The simplest expression: Experience (expert) + Perspective (writer) = Authored work. The writer owns the output because they provided the perspective that made the experience meaningful.
+            </div>
+        </div>
+    </div>
+
+    <!-- CONCEPT 3: What Each Brings -->
+    <div class="section">
+        <h1>Concept 3: What Each Brings</h1>
+
+        <div class="flow-container">
+            <div class="flow-box flow-expert">
+                <div class="flow-role">Expert</div>
+                <div class="flow-provides">
+                    Stories<br>
+                    Data<br>
+                    Proof<br>
+                    Credibility
+                </div>
+            </div>
+
+            <div class="plus-sign">+</div>
+
+            <div class="flow-box flow-author">
+                <div class="flow-role">Writer</div>
+                <div class="flow-provides">
+                    Thesis<br>
+                    Structure<br>
+                    Synthesis<br>
+                    Accountability
+                </div>
+            </div>
+
+            <div class="equals-sign">=</div>
+
+            <div class="flow-box flow-output">
+                <div class="flow-role">Article</div>
+                <div class="flow-provides">
+                    Expert proof<br>
+                    Writer's pattern<br>
+                    Reader value
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONCEPT 4: Industry Examples -->
+    <div class="section">
+        <h1>Concept 4: The Method in Different Industries</h1>
+
+        <div class="examples-grid">
+            <!-- B2B Manufacturing Example -->
+            <div class="example-card">
+                <div class="example-industry">B2B &mdash; Manufacturing</div>
+                <div class="example-title">"How Predictive Maintenance Cut Our Downtime by 40%"</div>
+
+                <div class="example-roles">
+                    <div class="example-role">
+                        <div class="role-indicator author"></div>
+                        <div class="role-content">
+                            <div class="role-type author">Writer</div>
+                            <div class="role-person">Sarah Chen</div>
+                            <div class="role-title">Editor, Industrial Equipment Weekly</div>
+                            <div class="role-brings">Thesis: Predictive maintenance ROI depends more on culture change than technology. Interviewed 3 plant managers, identified the pattern.</div>
+                        </div>
+                    </div>
+
+                    <div class="example-role">
+                        <div class="role-indicator expert"></div>
+                        <div class="role-content">
+                            <div class="role-type expert">Expert</div>
+                            <div class="role-person">Marcus Webb</div>
+                            <div class="role-title">Plant Manager, Midwest Automotive Parts</div>
+                            <div class="role-brings">18 months implementing predictive maintenance. Real numbers on downtime reduction, team resistance, what actually changed.</div>
+                        </div>
+                    </div>
+
+                    <div class="example-role">
+                        <div class="role-indicator contributor"></div>
+                        <div class="role-content">
+                            <div class="role-type contributor">Contributor</div>
+                            <div class="role-person">Dr. Anil Kapoor</div>
+                            <div class="role-title">Industrial IoT Consultant</div>
+                            <div class="role-brings">Technical context on sensor technology, common implementation mistakes, validates Marcus's approach.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-output">
+                    <div class="output-label-small">Why authority stays with Sarah</div>
+                    <div class="output-text">Marcus knows what he did. Sarah identified that his success came from culture change, not just technology&mdash;a pattern she saw across all three interviews.</div>
+                </div>
+            </div>
+
+            <!-- B2C Fitness Example -->
+            <div class="example-card">
+                <div class="example-industry">B2C &mdash; Fitness</div>
+                <div class="example-title">"Your First Marathon: What the Training Plans Don't Tell You"</div>
+
+                <div class="example-roles">
+                    <div class="example-role">
+                        <div class="role-indicator author"></div>
+                        <div class="role-content">
+                            <div class="role-type author">Writer</div>
+                            <div class="role-person">James Okonkwo</div>
+                            <div class="role-title">Editor, Runner's Path Magazine</div>
+                            <div class="role-brings">Thesis: The mental game matters more than the physical after week 12. Structures the piece around the emotional arc, not just the training blocks.</div>
+                        </div>
+                    </div>
+
+                    <div class="example-role">
+                        <div class="role-indicator expert"></div>
+                        <div class="role-content">
+                            <div class="role-type expert">Expert</div>
+                            <div class="role-person">Coach Diana Reyes</div>
+                            <div class="role-title">USATF Certified Coach, 20 years experience</div>
+                            <div class="role-brings">Training methodology, common mistakes she sees, how to know if you're overtraining, race day strategy.</div>
+                        </div>
+                    </div>
+
+                    <div class="example-role">
+                        <div class="role-indicator contributor"></div>
+                        <div class="role-content">
+                            <div class="role-type contributor">Contributor</div>
+                            <div class="role-person">Tom Nakamura</div>
+                            <div class="role-title">First-time marathoner, finished Chicago 2025</div>
+                            <div class="role-brings">The reader's perspective. What surprised him, where he almost quit, what he wishes he'd known.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-output">
+                    <div class="output-label-small">Why authority stays with James</div>
+                    <div class="output-text">Diana has the expertise, Tom has the relatable experience. James saw that both kept returning to the same insight about the mental shift after week 12&mdash;that's his pattern.</div>
+                </div>
+            </div>
+
+            <!-- B2B Healthcare Example -->
+            <div class="example-card">
+                <div class="example-industry">B2B &mdash; Healthcare IT</div>
+                <div class="example-title">"EHR Migration: Lessons from 3 Hospital Systems"</div>
+
+                <div class="example-roles">
+                    <div class="example-role">
+                        <div class="role-indicator author"></div>
+                        <div class="role-content">
+                            <div class="role-type author">Writer</div>
+                            <div class="role-person">Rachel Oduya</div>
+                            <div class="role-title">Senior Editor, HealthTech Today</div>
+                            <div class="role-brings">Thesis: Successful EHR migrations prioritize physician workflow over feature completeness. Synthesized across 3 CTO interviews.</div>
+                        </div>
+                    </div>
+
+                    <div class="example-role">
+                        <div class="role-indicator expert"></div>
+                        <div class="role-content">
+                            <div class="role-type expert">Expert</div>
+                            <div class="role-person">Dr. Michael Torres</div>
+                            <div class="role-title">CTO, Regional Medical Center (450 beds)</div>
+                            <div class="role-brings">Led 18-month Epic migration. Specific data on adoption rates, physician satisfaction scores, what went wrong in month 6.</div>
+                        </div>
+                    </div>
+
+                    <div class="example-role">
+                        <div class="role-indicator contributor"></div>
+                        <div class="role-content">
+                            <div class="role-type contributor">Contributor</div>
+                            <div class="role-person">Linda Park, RN</div>
+                            <div class="role-title">Nurse Informaticist, same hospital</div>
+                            <div class="role-brings">Front-line perspective on what the CTO's decisions looked like in practice. The gap between leadership vision and daily reality.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-output">
+                    <div class="output-label-small">Why authority stays with Rachel</div>
+                    <div class="output-text">Torres knows his migration. Rachel identified that all three CTOs—despite different systems and sizes—made the same mistake and recovered the same way.</div>
+                </div>
+            </div>
+
+            <!-- B2C Home/Garden Example -->
+            <div class="example-card">
+                <div class="example-industry">B2C &mdash; Home & Garden</div>
+                <div class="example-title">"Starting a Vegetable Garden: A Year-One Survival Guide"</div>
+
+                <div class="example-roles">
+                    <div class="example-role">
+                        <div class="role-indicator author"></div>
+                        <div class="role-content">
+                            <div class="role-type author">Writer</div>
+                            <div class="role-person">Emma Lindqvist</div>
+                            <div class="role-title">Garden Editor, Homestead Living</div>
+                            <div class="role-brings">Thesis: Year-one success is about soil and expectations, not seed selection. Frames the piece around managing disappointment, not just technique.</div>
+                        </div>
+                    </div>
+
+                    <div class="example-role">
+                        <div class="role-indicator expert"></div>
+                        <div class="role-content">
+                            <div class="role-type expert">Expert</div>
+                            <div class="role-person">Kevin Espinoza</div>
+                            <div class="role-title">Owner, Epic Gardening (8M YouTube subscribers)</div>
+                            <div class="role-brings">Decades of teaching beginners. Knows the 5 mistakes everyone makes, has the before/after photos, understands what actually motivates people to keep going.</div>
+                        </div>
+                    </div>
+
+                    <div class="example-role">
+                        <div class="role-indicator contributor"></div>
+                        <div class="role-content">
+                            <div class="role-type contributor">Contributor</div>
+                            <div class="role-person">Priya Sharma</div>
+                            <div class="role-title">Second-year gardener, suburban Chicago</div>
+                            <div class="role-brings">What she got wrong year one, what she'd do differently, the emotional rollercoaster of watching plants die.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-output">
+                    <div class="output-label-small">Why authority stays with Emma</div>
+                    <div class="output-text">Kevin has the expertise, Priya has the relatable struggle. Emma identified that both kept circling back to expectations—that's the lens she applied.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONCEPT 5: Ownership Test -->
+    <div class="section">
+        <h1>Concept 5: The Ownership Test</h1>
+
+        <div class="spectrum-container">
+            <div class="spectrum-bar"></div>
+            <div class="spectrum-labels">
+                <div class="spectrum-label left">Expert owns it</div>
+                <div class="spectrum-label right">Writer owns it</div>
+            </div>
+
+            <div class="spectrum-examples">
+                <div class="spectrum-example">
+                    <div class="spectrum-dot" style="background: #ffd93d;"></div>
+                    <div class="spectrum-example-text">Guest post: Expert writes, you publish</div>
+                    <div class="spectrum-position">Expert's piece</div>
+                </div>
+
+                <div class="spectrum-example">
+                    <div class="spectrum-dot" style="background: #c4a83a;"></div>
+                    <div class="spectrum-example-text">Q&A interview: Expert answers, you transcribe</div>
+                    <div class="spectrum-position">Mostly expert</div>
+                </div>
+
+                <div class="spectrum-example">
+                    <div class="spectrum-dot" style="background: #8ab89e;"></div>
+                    <div class="spectrum-example-text">Quote roundup: Multiple experts, thin synthesis</div>
+                    <div class="spectrum-position">Dispersed</div>
+                </div>
+
+                <div class="spectrum-example">
+                    <div class="spectrum-dot" style="background: #5dbdaa;"></div>
+                    <div class="spectrum-example-text">Lens Method: Expert proof, writer's pattern</div>
+                    <div class="spectrum-position">Writer's piece</div>
+                </div>
+
+                <div class="spectrum-example">
+                    <div class="spectrum-dot" style="background: #4ecdc4;"></div>
+                    <div class="spectrum-example-text">Original research: Your data, your conclusions</div>
+                    <div class="spectrum-position">Fully writer</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="notes">
+            <div class="notes-title">The Test</div>
+            <div class="notes-text">
+                Could the expert have written this piece themselves? If yes, you're a conduit. If no—because you brought a frame, a synthesis, an audience understanding they don't have—you're the writer.
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
