@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Michael Ofei</title>
+    <link>https://michaelofei.com</link>
+    <description>Essays on content, editorial leadership, and building things.</description>
+    <language>en-us</language>
+    <atom:link href="https://michaelofei.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>The Lens Method: Collaborative Authority in Content</title>
+      <link>https://michaelofei.com/essays/the-lens-method</link>
+      <guid>https://michaelofei.com/essays/the-lens-method</guid>
+      <pubDate>Mon, 06 Jan 2026 00:00:00 GMT</pubDate>
+      <description>Expert experience is raw light. The writer provides the lens—deciding what matters, what connects, and what it means for a specific audience.</description>
+    </item>
+
+    <!-- Add new items here. Most recent first. -->
+
+  </channel>
+</rss>
