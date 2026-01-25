@@ -106,6 +106,62 @@
             color: var(--green);
         }
 
+        /* Newsletter signup */
+        .newsletter {
+            margin: 48px 0;
+        }
+
+        .newsletter p {
+            margin-bottom: 1rem;
+        }
+
+        .newsletter .dim {
+            color: var(--dim);
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .subscribe-form input[type="email"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.75rem;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 1rem;
+            background: #5a1a15;
+            border: 1px solid var(--dim);
+            color: var(--text);
+        }
+
+        .subscribe-form input[type="email"]::placeholder {
+            color: var(--dim);
+        }
+
+        .subscribe-form input[type="email"]:focus {
+            outline: none;
+            border-color: var(--yellow);
+        }
+
+        .subscribe-form button {
+            padding: 0.75rem 1.5rem;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 1rem;
+            background: transparent;
+            border: 1px solid var(--green);
+            color: var(--green);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .subscribe-form button:hover {
+            background: var(--green);
+            color: var(--bg);
+        }
+
         @media (max-width: 500px) {
             body {
                 font-size: 14px;
@@ -133,9 +189,22 @@
 
         <p>I take great joy in building with Claude Code. I'm not a software engineer. The tools have changed who can make things.</p>
 
-        <p>This site is where I think in public. No schedule, no newsletter. Just essays when I have something worth sharing. Subscribe via <a href="feed.xml">RSS</a> if you want to follow along.</p>
+        <p>This site is where I think in public. No schedule. Just essays when I have something worth sharing.</p>
 
     </article>
+
+    <section class="newsletter">
+        <p>Get essays by email — <span class="dim">no spam, no schedule.</span></p>
+        <form
+            action="https://buttondown.email/api/emails/embed-subscribe/ofei"
+            method="post"
+            target="popupwindow"
+            class="subscribe-form"
+        >
+            <input type="email" name="email" placeholder="your@email.com" required />
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
 
     <footer>
         <a href="index.html">← back to home</a>
