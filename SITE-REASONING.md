@@ -73,6 +73,16 @@ The Lens Method is the first essay because:
 3. Add entry to `/feed.xml`
 4. Optionally add to home page "Recent Essays"
 
+## Audience and Content Perspective
+
+**The reader:** A professional creator navigating the AI shift. Content strategists, editors, writers, marketers — people who've been doing this long enough to have taste and instincts, but who feel the ground moving under their feet. Not beginners looking for tutorials. Mid-career people asking: *What's still valuable about what I do?*
+
+**The unique angle:** Michael answers this from three places at once — a decade-deep editorial leader, a storytelling student (psychology, triggers, narrative mechanics), and a builder shipping software with AI tools. That combination is rare. Most content strategy voices don't build products. Most builder voices don't have deep editorial chops. Most storytelling writers don't run content teams at scale.
+
+**The territory:** What survives when AI can produce anything. Each essay answers this from a different angle — owned synthesis (Lens Method), thesis-driven thinking (Why Helpful Content Gets Forgotten), psychological mechanics (Story Triggers), craft and taste (Building a Mirror), rich human context (Voice Prompting). The consistency is in the lens, not the subject matter.
+
+**The content library framing:** The website is not a blog with a publishing cadence. It's a library of crystallized thinking that grows at the pace of genuine insight. Each essay is a durable asset that can be deployed to other formats and platforms (podcasts, X articles, LinkedIn, workshops, talks) without starting from scratch. The library compounds — each new piece strengthens the whole body of work.
+
 ## The Compounding Effect
 
 Each essay builds:
