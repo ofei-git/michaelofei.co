@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tour Method — Michael Ofei</title>
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
+    <style>
+        :root {
+            /* Red Sands palette */
+            --bg: #7A251E;
+            --bg-light: #8a352e;
+            --bg-dark: #6a1f18;
+            --text: #D7C9A7;
+            --text-bright: #E8DAB8;
+            --yellow: #E7B000;
+            --green: #00BB00;
+            --red: #FF3F00;
+            --dim: #a89878;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+            padding: 40px 20px;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 48px;
+        }
+
+        .back {
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        .back:hover {
+            color: var(--green);
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: normal;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            color: var(--text-bright);
+        }
+
+        .meta {
+            color: var(--yellow);
+            font-size: 14px;
+        }
+
+        article {
+            margin-bottom: 60px;
+        }
+
+        article p {
+            margin-bottom: 20px;
+        }
+
+        article h2 {
+            font-size: 16px;
+            font-weight: normal;
+            color: var(--yellow);
+            margin-top: 48px;
+            margin-bottom: 16px;
+        }
+
+        article a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        article a:hover {
+            text-decoration: underline;
+        }
+
+        article strong {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        article em {
+            color: var(--dim);
+            font-style: normal;
+        }
+
+        blockquote {
+            border-left: 2px solid var(--yellow);
+            padding-left: 20px;
+            margin: 24px 0;
+            color: var(--dim);
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--bg-light);
+            margin: 32px 0;
+        }
+
+        /* INLINE VISUALS */
+        .visual {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 32px 24px;
+            margin: 32px 0;
+        }
+
+        .visual-caption {
+            font-size: 12px;
+            color: var(--dim);
+            text-align: center;
+            margin-top: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Flow Diagram: Asset → Tour → Salience */
+        .flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .flow-box {
+            background: var(--bg-light);
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--text);
+            text-align: center;
+        }
+
+        .flow-box--accent {
+            background: var(--bg-light);
+            border: 1px solid var(--yellow);
+            color: var(--yellow);
+        }
+
+        .flow-box--result {
+            background: var(--bg-light);
+            border: 1px solid var(--green);
+            color: var(--green);
+        }
+
+        .flow-arrow {
+            color: var(--yellow);
+        }
+
+        /* Touring Spectrum */
+        .spectrum {
+            position: relative;
+            padding-top: 8px;
+        }
+
+        .spectrum-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--yellow), var(--green));
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        .spectrum-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .spectrum-markers {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 0 4px;
+        }
+
+        .spectrum-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .spectrum-marker-name {
+            font-size: 10px;
+            color: var(--text-bright);
+            white-space: nowrap;
+        }
+
+        .spectrum-marker-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--text-bright);
+        }
+
+        .spectrum-marker:first-child .spectrum-marker-dot {
+            border-color: var(--yellow);
+        }
+
+        .spectrum-marker:last-child .spectrum-marker-dot {
+            border-color: var(--green);
+        }
+
+        /* Saturation Visual */
+        .saturation-blocks {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 12px;
+            height: 40px;
+        }
+
+        .sat-block {
+            flex: 1;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: rgba(232, 218, 184, 0.5);
+        }
+
+        .sat-1 { background: var(--bg-light); opacity: 1; }
+        .sat-2 { background: var(--bg-light); opacity: 0.85; }
+        .sat-3 { background: var(--bg-light); opacity: 0.7; }
+        .sat-4 { background: var(--bg-light); opacity: 0.55; }
+        .sat-5 { background: var(--bg-light); opacity: 0.4; }
+        .sat-6 { background: var(--bg-light); opacity: 0.3; }
+        .sat-7 { background: var(--bg-light); opacity: 0.2; }
+
+        .saturation-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            margin-bottom: 14px;
+        }
+
+        .sat-label-left {
+            color: var(--text);
+        }
+
+        .sat-label-right {
+            color: var(--dim);
+        }
+
+        .sat-threshold {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .sat-threshold-line {
+            flex: 1;
+            height: 1px;
+            background: var(--yellow);
+            opacity: 0.5;
+        }
+
+        .sat-threshold-label {
+            font-size: 10px;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .sat-marker {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+        }
+
+        .sat-marker-most {
+            color: var(--red);
+        }
+
+        .sat-marker-few {
+            color: var(--green);
+        }
+
+        /* Three Paths */
+        .paths {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .path-box {
+            background: var(--bg-light);
+            border-radius: 4px;
+            padding: 16px 14px;
+            text-align: center;
+        }
+
+        .path-label {
+            font-size: 13px;
+            color: var(--yellow);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .path-desc {
+            font-size: 11px;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+
+        /* Example separator */
+        .example-label {
+            font-size: 11px;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            margin-top: 36px;
+        }
+
+        /* Newsletter signup */
+        .newsletter {
+            margin: 60px 0;
+            padding-top: 24px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .newsletter p {
+            margin-bottom: 1rem;
+        }
+
+        .newsletter .dim {
+            color: var(--dim);
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .subscribe-form input[type="email"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.75rem;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 1rem;
+            background: #5a1a15;
+            border: 1px solid var(--dim);
+            color: var(--text);
+        }
+
+        .subscribe-form input[type="email"]::placeholder {
+            color: var(--dim);
+        }
+
+        .subscribe-form input[type="email"]:focus {
+            outline: none;
+            border-color: var(--yellow);
+        }
+
+        .subscribe-form button {
+            padding: 0.75rem 1.5rem;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 1rem;
+            background: transparent;
+            border: 1px solid var(--green);
+            color: var(--green);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .subscribe-form button:hover {
+            background: var(--green);
+            color: var(--bg);
+        }
+
+        footer {
+            margin-top: 80px;
+            padding-top: 24px;
+            border-top: 1px solid var(--bg-light);
+            color: var(--dim);
+            font-size: 13px;
+        }
+
+        footer a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--green);
+        }
+
+        @media (max-width: 500px) {
+            body {
+                font-size: 14px;
+                padding: 24px 16px;
+            }
+
+            .visual {
+                padding: 24px 16px;
+            }
+
+            .flow {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .paths {
+                grid-template-columns: 1fr;
+            }
+
+            .spectrum-markers {
+                gap: 4px;
+            }
+
+            .spectrum-marker-name {
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back">&larr; home</a>
+        <h1>The Tour Method</h1>
+        <p class="meta">February 2026</p>
+    </header>
+
+    <article>
+        <p>Most content strategies work like writing a new song for every show. You publish, hope it performs, move on, start again. Each piece has to earn its own attention from scratch. <em>(I've <a href="why-helpful-content-gets-forgotten.html">written before</a> about why even genuinely helpful content gets forgotten — this is the other side of that coin.)</em></p>
+
+        <p><strong>The Tour Method is the opposite: create something worth touring, then tour it everywhere.</strong> Front-load the effort into something with genuine insight — original research, a unique framework, a fresh perspective — then take that investment across every platform and format until people associate the topic with your name.</p>
+
+        <p>A piece of research becomes a blog post, a LinkedIn breakdown, a podcast episode, a conference talk, a webinar, a guest article. Different stages, same core material. The asset is the investment. The tour is where it compounds.</p>
+
+        <!-- VISUAL 1: The Tour Method flow -->
+        <div class="visual">
+            <div class="flow">
+                <div class="flow-box flow-box--accent">Front-load<br>the effort</div>
+                <span class="flow-arrow">&rarr;</span>
+                <div class="flow-box">Create the<br>asset</div>
+                <span class="flow-arrow">&rarr;</span>
+                <div class="flow-box">Tour it across<br>stages &amp; formats</div>
+                <span class="flow-arrow">&rarr;</span>
+                <div class="flow-box flow-box--result">Earn the<br>association</div>
+            </div>
+            <p class="visual-caption">The core mechanic</p>
+        </div>
+
+        <p>Artists have understood this for decades. Jerry Seinfeld <a href="https://www.nytimes.com/2012/12/23/magazine/jerry-seinfeld-intends-to-die-standing-up.html" target="_blank">develops a set</a>, refines it in clubs, then tours it across hundreds of shows before retiring the material and building the next one. Beyonc&eacute; doesn't treat an album as a finish line — it's a starting gun. Lemonade became a visual album, a world tour, a cultural conversation that lasted years. Renaissance became <a href="https://variety.com/2023/music/news/beyonces-renaissance-world-tour-revenue-1235743490/" target="_blank">one of the highest-grossing concert tours in history</a>.</p>
+
+        <p>The pattern: they don't create new material for every performance. They invest deeply, then tour relentlessly.</p>
+
+        <h2>Where this came from</h2>
+
+        <p>The idea crystallized during a content strategy discussion at work earlier this year. The direction was clear — fewer pieces, more impactful ones. But when someone pushed back on the return of investing more per piece, measured against revenue driven from organic search, the conversation got interesting.</p>
+
+        <p>My argument was that the question was too narrow. If you create something genuinely worth talking about, the value goes beyond search rankings. Other teams want to distribute it. It becomes a conference talk. It fuels partnerships. It builds the kind of association where people — and AI agents — start connecting the topic with your brand.</p>
+
+        <p>But you have to keep the show on the road until you're almost sick of it. Every time you distribute something, only a fraction of the market sees it. You have to tour the idea across stages and formats, again and again, until the association sticks.</p>
+
+        <h2>Three scales</h2>
+
+        <p>The Tour Method works at different scales. You can build your whole career around one idea, build a company around it, or tour a single asset while doing other work.</p>
+
+        <hr>
+
+        <p class="example-label">Identity-level tour</p>
+
+        <p><strong>One word, one career.</strong> April Dunford spent twenty-five years in marketing at seven startups. She could have been a general startup consultant. Instead, she picked one word: <strong>positioning</strong>. Her website, podcast, newsletter, both books, every keynote, every consulting engagement — positioning. Nothing else.</p>
+
+        <p>Consulting rates went from a few thousand dollars per engagement to <a href="https://podcast.everyonehatesmarketers.com/episodes/how-april-dunford-built-a-7-figure-solo-consulting-biz" target="_blank">a seven-figure solo business</a>. Booked months in advance, 100% inbound. <a href="https://aprildunford.substack.com/about" target="_blank">Over 200 companies</a>, including Google and Epic Games. When <a href="https://www.lennysnewsletter.com/p/positioning" target="_blank">Lenny Rachitsky wrote about positioning</a>, he said: "When I think positioning, I immediately think of one person: April Dunford."</p>
+
+        <p>Your whole career becomes the tour. The most powerful version, and the most demanding.</p>
+
+        <hr>
+
+        <p class="example-label">Category-level tour</p>
+
+        <p><strong>One category, one company.</strong> In 2016, Drift entered the market as a chat tool with no differentiation. So instead of competing in an existing category, they created one: <strong>conversational marketing</strong>. Then they toured it everywhere — a <a href="https://shortyawards.com/11th/seeking-wisdom-podcast" target="_blank">Shorty Award-nominated podcast</a>, a <a href="https://emc3.com/moments/drift-hypergrowth/" target="_blank">conference that grew to over 5,000 attendees</a>, a book published by Wiley, a certification program. They even publicly killed every lead form on their website to demonstrate the philosophy.</p>
+
+        <p>Result: $0 to $100 million in annual revenue. A <a href="https://techcrunch.com/2021/09/01/vista-equity-takes-majority-stake-in-saas-startup-drift-taking-it-to-unicorn-status/" target="_blank">billion-dollar valuation</a>. And the strongest proof of category ownership — Gartner used Drift's own term in their <a href="https://www.businesswire.com/news/home/20180702005092/en/Drift-Named-a-%E2%80%9CCool-Vendor%E2%80%9D-in-Conversational-Marketing-by-Gartner" target="_blank">official analyst report</a>. Competitors were forced to adopt their language.</p>
+
+        <hr>
+
+        <p class="example-label">Asset-level tour</p>
+
+        <p><strong>One study, five years of stages.</strong> In 2019, Rand Fishkin published original research on SparkToro's blog: <a href="https://sparktoro.com/blog/less-than-half-of-google-searches-now-result-in-a-click/" target="_blank">over 50% of Google searches now end without a click</a>. One finding, one study.</p>
+
+        <p>He toured it for over five years. Conference keynotes. Podcast appearances. LinkedIn breakdowns. Updated studies in <a href="https://sparktoro.com/blog/in-2020-two-thirds-of-google-searches-ended-without-a-click/" target="_blank">2020</a> and <a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank">2024</a>, each refresh restarting the cycle. The research was cited hundreds of thousands of times and <a href="https://www.seroundtable.com/rand-fishkin-congressional-hearing-on-google-27904.html" target="_blank">referenced in a US Congressional antitrust hearing</a>.</p>
+
+        <p>The zero-click research isn't Fishkin's whole identity — SparkToro is an audience research tool, and he wrote a book about startup culture. But the study is the work that travels furthest.</p>
+
+        <p>This is the most accessible version. You don't need to rebuild your brand. You need to recognize the thing you've already created that could travel, and tour it.</p>
+
+        <!-- VISUAL 2: Touring Spectrum -->
+        <div class="visual">
+            <div class="spectrum">
+                <div class="spectrum-markers">
+                    <div class="spectrum-marker">
+                        <span class="spectrum-marker-name">Dunford</span>
+                        <div class="spectrum-marker-dot"></div>
+                    </div>
+                    <div class="spectrum-marker">
+                        <span class="spectrum-marker-name">Drift</span>
+                        <div class="spectrum-marker-dot"></div>
+                    </div>
+                    <div class="spectrum-marker">
+                        <span class="spectrum-marker-name">Fishkin</span>
+                        <div class="spectrum-marker-dot"></div>
+                    </div>
+                </div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-labels">
+                    <span>Identity-level</span>
+                    <span>Category-level</span>
+                    <span>Asset-level</span>
+                </div>
+            </div>
+            <p class="visual-caption">The touring spectrum</p>
+        </div>
+
+        <h2>The tour I almost missed</h2>
+
+        <p>I know this because I've lived the incomplete version.</p>
+
+        <p>A couple of years ago, I wrote a piece about information gain. It got featured by a few people on LinkedIn. Someone did a teardown of the introduction as an example of best practice. I got tagged in threads I didn't start. Then I got an email asking if I could present on information gain at an in-person conference — my first. That led to a podcast invitation.</p>
+
+        <p>If I'd been deliberate, I could have kept touring that piece — guest articles, more podcasts, more conferences. Instead, I moved on to the next thing.</p>
+
+        <p>That's the part we get wrong. We create something worth touring and abandon it after the first few stops. The saturation threshold is always further away than it feels.</p>
+
+        <!-- VISUAL 3: Saturation Threshold -->
+        <div class="visual">
+            <div class="saturation-blocks">
+                <div class="sat-block sat-1">1</div>
+                <div class="sat-block sat-2">2</div>
+                <div class="sat-block sat-3">3</div>
+                <div class="sat-block sat-4">4</div>
+                <div class="sat-block sat-5">5</div>
+                <div class="sat-block sat-6">6</div>
+                <div class="sat-block sat-7">7</div>
+            </div>
+            <div class="saturation-labels">
+                <span class="sat-label-left">Publish &amp; first push</span>
+                <span class="sat-label-right">Association forms</span>
+            </div>
+            <div class="sat-threshold">
+                <div class="sat-threshold-line"></div>
+                <span class="sat-threshold-label">Saturation threshold</span>
+                <div class="sat-threshold-line"></div>
+            </div>
+            <div class="sat-marker">
+                <span class="sat-marker-most">&uarr; Most people stop here</span>
+                <span class="sat-marker-few">&uarr; The association forms here</span>
+            </div>
+            <p class="visual-caption">Why we quit too early</p>
+        </div>
+
+        <p>Seinfeld tours the same set across hundreds of shows. Dunford has been saying "positioning" for a decade. Fishkin has refreshed the same study three times.</p>
+
+        <h2>What makes something worth touring</h2>
+
+        <p>Not everything justifies the investment. The things that travel tend to have at least one of three qualities.</p>
+
+        <!-- VISUAL 4: Three Paths -->
+        <div class="visual">
+            <div class="paths">
+                <div class="path-box">
+                    <div class="path-label">Access</div>
+                    <div class="path-desc">Information you can get because of who you are, where you work, or who you know</div>
+                </div>
+                <div class="path-box">
+                    <div class="path-label">Research</div>
+                    <div class="path-desc">Going out and finding things nobody else has found</div>
+                </div>
+                <div class="path-box">
+                    <div class="path-label">Reframing</div>
+                    <div class="path-desc">Presenting something familiar in a way that changes how people see it</div>
+                </div>
+            </div>
+            <p class="visual-caption">Three paths to something worth touring</p>
+        </div>
+
+        <p>Fishkin had clickstream data most people couldn't get. Survey 500 people in your industry, and that data is yours — a tour waiting to happen. Drift didn't invent chat; they reframed it as "conversational marketing."</p>
+
+        <h2>The honest trade-off</h2>
+
+        <p>I don't think this replaces volume. Volume has a real place — especially for discovery. Short-form creators test rapidly, find what resonates, then lean into the format that works. That's a legitimate strategy.</p>
+
+        <p>The Tour Method is a different game, and honestly, a harder one.</p>
+
+        <p>It demands more judgment upfront. You're making a bigger bet on fewer things. You need the skill to identify a topic worth investing in, the craft to front-load enough originality that it actually travels, and the discipline to keep touring it long after the novelty has worn off for you.</p>
+
+        <p>You also need to know the investment makes sense for your context. A topic might be perfect for your personal brand but irrelevant to your company's product. The best touring candidates sit at the intersection of what you can uniquely say and what has direct value to your audience or business.</p>
+
+        <p>That's why people default to volume. It's lower stakes per piece. You're hedging.</p>
+
+        <p>But when the Tour Method works, it compounds in a way that volume can't. Each stop builds on the last. The investment pays off across ten formats instead of one. And over time, the attention comes to you rather than you chasing it.</p>
+
+        <p>Dunford's authority built over a decade. Drift's category crystallized over five years. Fishkin's study needed multiple refresh cycles to reach Congressional hearings. None of it happened overnight. But each tour stop made the next one easier.</p>
+
+        <p>I've written things on this site — like <a href="the-lens-method.html">The Lens Method</a> — that I've shared with a few colleagues and they now reference themselves. Ideas already traveling, even at a small scale. Sometimes all it takes is writing and thinking in public — then recognizing what's worth touring.</p>
+
+        <blockquote>
+            This is a working document. The thinking continues to evolve — and I intend to tour it.
+        </blockquote>
+    </article>
+
+    <section class="newsletter">
+        <p>Get essays by email — <span class="dim">no spam, no schedule.</span></p>
+        <form
+            action="https://buttondown.email/api/emails/embed-subscribe/ofei"
+            method="post"
+            target="popupwindow"
+            class="subscribe-form"
+        >
+            <input type="email" name="email" placeholder="your@email.com" required />
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <footer>
+        <a href="../index.html">&larr; back to home</a>
+    </footer>
+    <script async data-id="101499378" src="//static.getclicky.com/js"></script>
+</body>
+</html>
