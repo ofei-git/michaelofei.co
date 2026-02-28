@@ -8,6 +8,14 @@
     <atom:link href="https://michaelofei.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
+      <title>The Content Library</title>
+      <link>https://michaelofei.com/essays/the-content-library</link>
+      <guid>https://michaelofei.com/essays/the-content-library</guid>
+      <pubDate>Sat, 01 Mar 2026 00:00:00 GMT</pubDate>
+      <description>A content library is the collection of crystallized thinking you build over time. It might be the most important asset you can build right now, because it's the one thing that survives when platforms shift.</description>
+    </item>
+
+    <item>
       <title>The Tour Method</title>
       <link>https://michaelofei.com/essays/the-tour-method</link>
       <guid>https://michaelofei.com/essays/the-tour-method</guid>
