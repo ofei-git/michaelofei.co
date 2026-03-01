@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Library Valuation — Michael Ofei</title>
+    <style>
+        :root {
+            --bg: #7A251E;
+            --bg-light: #8a352e;
+            --bg-dark: #6a1f18;
+            --bg-darker: #5a1a15;
+            --text: #D7C9A7;
+            --text-bright: #E8DAB8;
+            --yellow: #E7B000;
+            --green: #00BB00;
+            --green-dim: #009900;
+            --red: #FF3F00;
+            --dim: #a89878;
+            --dim-dark: #8a7a5a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* ── Layout: Full-width sections with inner containers ── */
+        .section {
+            width: 100%;
+            padding: 0 48px;
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-narrow {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        /* ── Top bar ── */
+        .topbar {
+            padding: 20px 48px;
+        }
+
+        .back {
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .back:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* HERO                                   */
+        /* ══════════════════════════════════════ */
+        .hero {
+            padding: 80px 48px 64px;
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dim);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 1.25;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero .lead {
+            font-size: 17px;
+            color: var(--text);
+            line-height: 1.65;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .hero-cta {
+            font-size: 13px;
+            color: var(--dim);
+            margin-top: 16px;
+        }
+
+        .hero-calc-link {
+            color: var(--green);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--green-dim);
+        }
+
+        .hero-calc-link:hover {
+            border-bottom-style: solid;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* STATS BAR                              */
+        /* ══════════════════════════════════════ */
+        .stats-bar {
+            background: var(--bg-dark);
+            padding: 40px 48px;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--yellow);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.45;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* REFRAME                                */
+        /* ══════════════════════════════════════ */
+        .reframe-section {
+            padding: 80px 48px;
+        }
+
+        .reframe-intro {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .reframe-intro h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .reframe-intro p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .reframe-intro p:last-child { margin-bottom: 0; }
+
+        .reframe-intro strong {
+            color: var(--text-bright);
+        }
+
+        .reframe-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 0;
+            align-items: center;
+        }
+
+        .reframe-side {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 40px 32px;
+        }
+
+        .reframe-side--old {
+            opacity: 0.6;
+        }
+
+        .reframe-side--new {
+            border: 1px solid var(--green-dim);
+        }
+
+        .reframe-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dim);
+            margin-bottom: 20px;
+        }
+
+        .reframe-side--new .reframe-label {
+            color: var(--green);
+        }
+
+        .reframe-item {
+            font-size: 15px;
+            color: var(--text);
+            padding: 8px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .reframe-item:last-child { border-bottom: none; }
+
+        .reframe-side--old .reframe-item {
+            text-decoration: line-through;
+            color: var(--dim-dark);
+        }
+
+        .reframe-side--new .reframe-item {
+            color: var(--text-bright);
+        }
+
+        .reframe-arrow {
+            text-align: center;
+            font-size: 28px;
+            color: var(--yellow);
+        }
+
+        .reframe-caption {
+            max-width: 720px;
+            margin: 40px auto 0;
+        }
+
+        .reframe-caption p {
+            font-size: 15px;
+            color: var(--text);
+            margin: 0 0 12px;
+            line-height: 1.7;
+        }
+
+        .reframe-caption strong {
+            color: var(--text-bright);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* ASSET DEFINITION                       */
+        /* ══════════════════════════════════════ */
+        .definition-section {
+            padding: 0 48px 80px;
+        }
+
+        .definition-card {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 48px;
+            border-left: 3px solid var(--yellow);
+        }
+
+        .definition-header {
+            margin-bottom: 24px;
+        }
+
+        .definition-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .definition-statement {
+            font-size: 17px;
+            color: var(--text-bright);
+            line-height: 1.6;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .definition-types {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .definition-types p {
+            font-size: 13px;
+            color: var(--dim);
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .asset-type-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .asset-type-tag {
+            font-size: 12px;
+            color: var(--text);
+            background: var(--bg-darker);
+            padding: 6px 14px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .definition-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .definition-col h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--yellow);
+            margin-bottom: 12px;
+        }
+
+        .definition-col p {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .definition-col p:last-child { margin-bottom: 0; }
+
+        .definition-note {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* DISCOVERY VALUE                        */
+        /* ══════════════════════════════════════ */
+        .discovery-section {
+            padding: 80px 48px;
+            background: var(--bg-dark);
+        }
+
+        .discovery-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .discovery-text h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .discovery-text p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .discovery-text p:last-child { margin-bottom: 0; }
+
+        .discovery-text strong {
+            color: var(--text-bright);
+        }
+
+        .discovery-chain {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .discovery-chain-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 20px;
+        }
+
+        .chain-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 4px;
+        }
+
+        .chain-number {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--green);
+            background: var(--bg-dark);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .chain-content {
+            flex: 1;
+        }
+
+        .chain-content strong {
+            font-size: 14px;
+            color: var(--text-bright);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .chain-content span {
+            font-size: 13px;
+            color: var(--dim);
+        }
+
+        .chain-arrow {
+            text-align: center;
+            color: var(--dim-dark);
+            font-size: 14px;
+            padding: 4px 0 4px 44px;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* DISTRIBUTION ENGINE                    */
+        /* ══════════════════════════════════════ */
+        .distribution-section {
+            padding: 80px 48px;
+        }
+
+        .distribution-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .distribution-text h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .distribution-text p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .distribution-text p:last-child { margin-bottom: 0; }
+
+        .distribution-text strong {
+            color: var(--text-bright);
+        }
+
+        .distribution-visual {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        /* Pipeline visual */
+        .pipe-source {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 16px;
+            background: var(--bg-darker);
+            border-left: 3px solid var(--yellow);
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 2px;
+        }
+
+        .pipe-source-label {
+            font-size: 13px;
+            color: var(--yellow);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .pipe-source-desc {
+            font-size: 11px;
+            color: var(--dim);
+        }
+
+        .pipe-connector {
+            padding: 4px 0 4px 20px;
+        }
+
+        .pipe-connector-line {
+            width: 2px;
+            height: 8px;
+            background: var(--dim-dark);
+        }
+
+        .pipe-branches {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding-left: 20px;
+            border-left: 2px solid var(--dim-dark);
+        }
+
+        .pipe-branch {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 14px;
+            position: relative;
+        }
+
+        .pipe-branch::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 50%;
+            width: 12px;
+            height: 2px;
+            background: var(--dim-dark);
+        }
+
+        .pipe-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--dim);
+            flex-shrink: 0;
+            animation: pipeDotPulse 3s ease-in-out infinite;
+        }
+
+        .pipe-branch:nth-child(1) .pipe-dot { animation-delay: 0s; }
+        .pipe-branch:nth-child(2) .pipe-dot { animation-delay: 0.4s; }
+        .pipe-branch:nth-child(3) .pipe-dot { animation-delay: 0.8s; }
+        .pipe-branch:nth-child(4) .pipe-dot { animation-delay: 1.2s; }
+        .pipe-branch:nth-child(5) .pipe-dot { animation-delay: 1.6s; }
+        .pipe-branch:nth-child(6) .pipe-dot { animation-delay: 2.0s; }
+        .pipe-branch:nth-child(7) .pipe-dot { animation-delay: 2.4s; }
+
+        @keyframes pipeDotPulse {
+            0% { background: var(--dim-dark); transform: scale(1); }
+            15% { background: var(--yellow); transform: scale(1.4); }
+            30% { background: var(--dim-dark); transform: scale(1); }
+            100% { background: var(--dim-dark); transform: scale(1); }
+        }
+
+        .pipe-channel-name {
+            font-size: 12px;
+            color: var(--text);
+            min-width: 130px;
+        }
+
+        .pipe-bar-track {
+            flex: 1;
+            height: 4px;
+            background: var(--bg);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .pipe-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+        }
+
+        .pipe-branch:nth-child(1) .pipe-bar-fill { animation: pipeBar70 3s ease-out infinite 0s; }
+        .pipe-branch:nth-child(2) .pipe-bar-fill { animation: pipeBar55 3s ease-out infinite 0.4s; }
+        .pipe-branch:nth-child(3) .pipe-bar-fill { animation: pipeBar60 3s ease-out infinite 0.8s; }
+        .pipe-branch:nth-child(4) .pipe-bar-fill { animation: pipeBar40 3s ease-out infinite 1.2s; }
+        .pipe-branch:nth-child(5) .pipe-bar-fill { animation: pipeBar45 3s ease-out infinite 1.6s; }
+        .pipe-branch:nth-child(6) .pipe-bar-fill { animation: pipeBar35 3s ease-out infinite 2.0s; }
+
+        @keyframes pipeBar70 {
+            0% { width: 0; background: var(--dim-dark); }
+            15% { width: 70%; background: var(--yellow); }
+            70% { width: 70%; background: var(--yellow); }
+            100% { width: 70%; background: var(--dim-dark); }
+        }
+        @keyframes pipeBar55 {
+            0% { width: 0; background: var(--dim-dark); }
+            15% { width: 55%; background: var(--yellow); }
+            70% { width: 55%; background: var(--yellow); }
+            100% { width: 55%; background: var(--dim-dark); }
+        }
+        @keyframes pipeBar60 {
+            0% { width: 0; background: var(--dim-dark); }
+            15% { width: 60%; background: var(--yellow); }
+            70% { width: 60%; background: var(--yellow); }
+            100% { width: 60%; background: var(--dim-dark); }
+        }
+        @keyframes pipeBar40 {
+            0% { width: 0; background: var(--dim-dark); }
+            15% { width: 40%; background: var(--yellow); }
+            70% { width: 40%; background: var(--yellow); }
+            100% { width: 40%; background: var(--dim-dark); }
+        }
+        @keyframes pipeBar45 {
+            0% { width: 0; background: var(--dim-dark); }
+            15% { width: 45%; background: var(--yellow); }
+            70% { width: 45%; background: var(--yellow); }
+            100% { width: 45%; background: var(--dim-dark); }
+        }
+        @keyframes pipeBar35 {
+            0% { width: 0; background: var(--dim-dark); }
+            15% { width: 35%; background: var(--yellow); }
+            70% { width: 35%; background: var(--yellow); }
+            100% { width: 35%; background: var(--dim-dark); }
+        }
+
+        .pipe-branch--credit .pipe-dot {
+            background: var(--green);
+        }
+
+        .pipe-branch--credit .pipe-channel-name {
+            color: var(--green);
+        }
+
+        .pipe-branch--credit .pipe-bar-fill {
+            animation: pipeBarGreen 3s ease-out infinite 2.4s !important;
+        }
+
+        @keyframes pipeBarGreen {
+            0% { width: 0; background: var(--green-dim); }
+            15% { width: 100%; background: var(--green); }
+            70% { width: 100%; background: var(--green); }
+            100% { width: 100%; background: var(--green-dim); }
+        }
+
+        .pipe-credit-label {
+            font-size: 9px;
+            color: var(--dim);
+            margin-left: 4px;
+        }
+
+        .pipe-footnote {
+            font-size: 10px;
+            color: var(--dim);
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* FIVE LENSES                            */
+        /* ══════════════════════════════════════ */
+        .lenses-section {
+            padding: 80px 48px;
+        }
+
+        .lenses-header {
+            max-width: 720px;
+            margin: 0 auto 40px;
+        }
+
+        .lenses-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+
+        .lenses-header p {
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .lenses-header p:last-child { margin-bottom: 0; }
+
+        .lenses-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .lens-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 28px 22px;
+            border-top: 3px solid var(--dim-dark);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lens-card:nth-child(1) { border-top-color: var(--green); }
+        .lens-card:nth-child(2) { border-top-color: var(--green); }
+        .lens-card:nth-child(3) { border-top-color: var(--yellow); }
+        .lens-card:nth-child(4) { border-top-color: var(--yellow); }
+        .lens-card:nth-child(5) { border-top-color: var(--red); }
+
+        .lens-number {
+            font-size: 11px;
+            color: var(--dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .lens-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .lens-question {
+            font-size: 13px;
+            color: var(--dim);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .lens-desc {
+            font-size: 13px;
+            line-height: 1.55;
+            flex-grow: 1;
+        }
+
+        .lens-audience {
+            font-size: 11px;
+            color: var(--yellow);
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* CALCULATOR                             */
+        /* ══════════════════════════════════════ */
+        .calc-section {
+            padding: 80px 48px;
+            background: var(--bg-dark);
+        }
+
+        .calc-header {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .calc-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .calc-header p {
+            color: var(--dim);
+            font-size: 14px;
+        }
+
+        .calc-form {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+        }
+
+        .calc-panel {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 28px 24px;
+        }
+
+        .calc-panel-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--yellow);
+            margin-bottom: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 22px;
+        }
+
+        .input-group:last-child { margin-bottom: 0; }
+
+        .input-label {
+            display: block;
+            font-size: 13px;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .input-hint {
+            font-size: 11px;
+            color: var(--dim);
+            margin-bottom: 8px;
+            display: block;
+            line-height: 1.5;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px 12px;
+            font-family: inherit;
+            font-size: 15px;
+            background: var(--bg-darker);
+            border: 1px solid var(--bg-light);
+            border-radius: 6px;
+            color: var(--text-bright);
+            outline: none;
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"]:focus { border-color: var(--yellow); }
+        input[type="number"]::placeholder { color: var(--dim-dark); }
+
+        .input-prefix {
+            font-size: 15px;
+            color: var(--dim);
+            flex-shrink: 0;
+        }
+
+        .input-suffix {
+            font-size: 13px;
+            color: var(--dim);
+            flex-shrink: 0;
+        }
+
+        .calc-button-wrap {
+            max-width: 1200px;
+            margin: 28px auto 0;
+            text-align: center;
+        }
+
+        .calc-button {
+            padding: 16px 64px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            background: transparent;
+            border: 2px solid var(--green);
+            border-radius: 6px;
+            color: var(--green);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .calc-button:hover {
+            background: var(--green);
+            color: var(--bg-dark);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* RESULTS                                */
+        /* ══════════════════════════════════════ */
+        .results {
+            display: none;
+            padding: 80px 48px 40px;
+            background: var(--bg-dark);
+        }
+
+        .results.visible { display: block; }
+
+        .results-header {
+            max-width: 1200px;
+            margin: 0 auto 48px;
+            text-align: center;
+        }
+
+        .results-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .results-header p {
+            color: var(--dim);
+            font-size: 14px;
+        }
+
+        /* Top two results: side by side */
+        .results-top {
+            max-width: 1200px;
+            margin: 0 auto 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* Bottom three results: three columns */
+        .results-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+        }
+
+        .result-card {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 28px 24px;
+            border-top: 3px solid var(--bg-light);
+        }
+
+        .result-card--green { border-top-color: var(--green); }
+        .result-card--yellow { border-top-color: var(--yellow); }
+        .result-card--red { border-top-color: var(--red); }
+
+        .result-lens-label {
+            font-size: 11px;
+            color: var(--dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .result-lens-title {
+            font-size: 14px;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .result-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--green);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .result-value--yellow { color: var(--yellow); }
+        .result-value--red { color: var(--red); }
+
+        .result-sublabel {
+            font-size: 11px;
+            color: var(--dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .result-narrative {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .result-breakdown {
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.7;
+        }
+
+        .result-breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .result-breakdown-row:last-child { border-bottom: none; }
+
+        .result-breakdown-value {
+            color: var(--text);
+            font-weight: 600;
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+
+        /* ── Summary ── */
+        .summary-section {
+            max-width: 1200px;
+            margin: 48px auto 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .summary-card {
+            background: var(--bg);
+            border: 2px solid var(--green);
+            border-radius: 10px;
+            padding: 32px 28px;
+        }
+
+        .summary-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .summary-oneliner {
+            font-size: 16px;
+            color: var(--text-bright);
+            line-height: 1.55;
+        }
+
+        .summary-table-card {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 32px 28px;
+        }
+
+        .summary-table-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--yellow);
+            margin-bottom: 16px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 9px 0;
+            border-bottom: 1px solid var(--bg-light);
+            font-size: 13px;
+        }
+
+        .summary-row:last-child { border-bottom: none; }
+
+        .summary-row-label { color: var(--dim); }
+        .summary-row-value { color: var(--text-bright); font-weight: 600; }
+        .summary-row-value--green { color: var(--green); }
+        .summary-row-value--red { color: var(--red); }
+
+        /* ── Caveat ── */
+        .caveat-section {
+            max-width: 1200px;
+            margin: 40px auto 0;
+        }
+
+        .caveat {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 24px 28px;
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.65;
+        }
+
+        .caveat strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* CLOSING                                */
+        /* ══════════════════════════════════════ */
+        .closing {
+            padding: 80px 48px;
+            text-align: center;
+        }
+
+        .closing-inner {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .closing blockquote {
+            font-size: 18px;
+            color: var(--text-bright);
+            line-height: 1.55;
+            border: none;
+            padding: 0;
+            margin-bottom: 24px;
+        }
+
+        .closing p {
+            color: var(--dim);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .closing a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        .closing a:hover { text-decoration: underline; }
+
+        /* ── Newsletter ── */
+        .newsletter-section {
+            padding: 48px 48px 80px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .newsletter-inner {
+            max-width: 480px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-inner p {
+            margin-bottom: 16px;
+        }
+
+        .newsletter-inner .dim { color: var(--dim); }
+
+        .subscribe-form {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .subscribe-form input[type="email"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            font-family: inherit;
+            font-size: 14px;
+            background: var(--bg-darker);
+            border: 1px solid var(--dim);
+            border-radius: 4px;
+            color: var(--text);
+        }
+
+        .subscribe-form input[type="email"]::placeholder { color: var(--dim); }
+        .subscribe-form input[type="email"]:focus { outline: none; border-color: var(--yellow); }
+
+        .subscribe-form button {
+            padding: 10px 20px;
+            font-family: inherit;
+            font-size: 14px;
+            background: transparent;
+            border: 1px solid var(--green);
+            border-radius: 4px;
+            color: var(--green);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .subscribe-form button:hover {
+            background: var(--green);
+            color: var(--bg);
+        }
+
+        /* ── Footer ── */
+        .footer-section {
+            padding: 24px 48px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--dim);
+            font-size: 13px;
+        }
+
+        .footer-inner a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+
+        .footer-inner a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* RESPONSIVE                             */
+        /* ══════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .section, .hero, .stats-bar, .lenses-section,
+            .calc-section, .results, .closing, .newsletter-section,
+            .footer-section, .topbar, .reframe-section,
+            .definition-section, .discovery-section,
+            .distribution-section {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+            .lenses-grid { grid-template-columns: 1fr; gap: 12px; }
+            .calc-form { grid-template-columns: 1fr; }
+            .results-top { grid-template-columns: 1fr; }
+            .results-bottom { grid-template-columns: 1fr; }
+            .summary-section { grid-template-columns: 1fr; }
+            .reframe-grid { grid-template-columns: 1fr; gap: 16px; }
+            .reframe-arrow { transform: rotate(90deg); text-align: center; }
+            .definition-grid { grid-template-columns: 1fr; }
+            .definition-card { padding: 32px 24px; }
+            .discovery-inner { grid-template-columns: 1fr; }
+            .distribution-inner { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 26px; }
+            .stat-number { font-size: 32px; }
+            .result-value { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top bar -->
+    <div class="topbar">
+        <a href="index.html" class="back">&larr; michaelofei.co</a>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- HERO                                       -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="hero">
+        <div class="hero-inner">
+            <div class="hero-label">A valuation framework for content libraries</div>
+            <h1>Your content library is a business asset. Do you know what it&rsquo;s worth?</h1>
+            <p class="lead">Most content teams can tell you what they spent. Few can articulate what they built. This framework gives you five views for understanding the value of a content library &mdash; not as a collection of blog posts, but as a compounding asset that drives discovery, builds brand authority, and powers distribution across the entire business.</p>
+            <p class="hero-cta">Read the framework, then <a href="#calc-section" class="hero-calc-link">calculate your own &darr;</a></p>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- STATS BAR                                  -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="stats-bar">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">58%</div>
+                <div class="stat-label">Of Google searches now include AI-generated features</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50M+</div>
+                <div class="stat-label">Monthly impressions a mature content library generates</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0.1%</div>
+                <div class="stat-label">Average CTR when AI Overviews appear in results</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">65%</div>
+                <div class="stat-label">Of content leaders say they can&rsquo;t prove impact to the C-suite</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- REFRAME                                    -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="reframe-section">
+        <div class="reframe-intro">
+            <h2>The measurement hasn&rsquo;t caught up to the reality</h2>
+            <p>Content measurement was designed for a simpler world: you publish a piece, it ranks, someone clicks, you count the click. That worked when clicks were the primary value content generated.</p>
+            <p>Today, your content appears across search results, AI Overviews, ChatGPT citations, Google Discover, and social previews. A single URL generates brand impressions across surfaces that never produce a click. The content is working. The dashboard just can&rsquo;t see it.</p>
+            <p>The fix isn&rsquo;t better attribution. It&rsquo;s a different question entirely.</p>
+        </div>
+
+        <div class="reframe-grid">
+            <div class="reframe-side reframe-side--old">
+                <div class="reframe-label">Attribution</div>
+                <div class="reframe-item">What did this article produce?</div>
+                <div class="reframe-item">Cost per click</div>
+                <div class="reframe-item">Leads per piece</div>
+                <div class="reframe-item">ROI on individual assets</div>
+            </div>
+            <div class="reframe-arrow">&rarr;</div>
+            <div class="reframe-side reframe-side--new">
+                <div class="reframe-label">Valuation</div>
+                <div class="reframe-item">What is this library worth?</div>
+                <div class="reframe-item">What would it cost to replace?</div>
+                <div class="reframe-item">What visibility does it generate?</div>
+                <div class="reframe-item">What happens if it disappears?</div>
+            </div>
+        </div>
+
+        <div class="reframe-caption">
+            <p><strong>Attribution asks what each article did.</strong> It makes almost every piece look like a bad investment, because most individual articles don&rsquo;t drive measurable revenue. That&rsquo;s not a content problem. It&rsquo;s a unit-of-analysis problem.</p>
+            <p><strong>Valuation asks what the library is worth.</strong> It treats content like what it is: a capital asset that was expensive to build, generates ongoing returns, compounds as it grows, and creates real risk if lost. The same way you&rsquo;d evaluate a building, a patent portfolio, or a brand.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- ASSET DEFINITION                           -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="definition-section">
+        <div class="definition-card">
+            <div class="definition-header">
+                <h3>What counts as a content asset?</h3>
+            </div>
+            <div class="definition-statement">A content asset is a published unit of crystallized thinking. The URL is the asset. Think of your content library as a database &mdash; every published URL in your CMS is a line item. Each one represents research, expertise, editorial judgment, and strategic intent, captured in a form that can generate value indefinitely.</div>
+            <div class="definition-types">
+                <p>This framework covers the educational and editorial content your team creates and maintains &mdash; the library that drives organic discovery, builds authority, and powers distribution across the business:</p>
+                <div class="asset-type-row">
+                    <span class="asset-type-tag">Blog posts &amp; articles</span>
+                    <span class="asset-type-tag">Guides &amp; tutorials</span>
+                    <span class="asset-type-tag">Research &amp; data reports</span>
+                    <span class="asset-type-tag">Templates &amp; resources</span>
+                    <span class="asset-type-tag">Tool &amp; calculator pages</span>
+                    <span class="asset-type-tag">Resource hubs</span>
+                </div>
+            </div>
+            <div class="definition-grid">
+                <div class="definition-col">
+                    <h4>Flagship assets</h4>
+                    <p>Content designed to own a topic. These have a clear through-line, feature genuine expertise, and often include original frameworks, named methodologies, or primary research. They&rsquo;re more expensive to produce and harder to replicate.</p>
+                    <p>The replacement cost of a flagship asset goes well beyond production &mdash; it includes the thinking, the expert relationships, and the authority that made it credible.</p>
+                </div>
+                <div class="definition-col">
+                    <h4>Standard assets</h4>
+                    <p>Content designed to serve a need well. Clear, well-researched, properly optimized. These answer questions, capture search demand, and form the backbone of any content library.</p>
+                    <p>Standard doesn&rsquo;t mean low-value. A well-executed standard asset can outperform a mediocre flagship piece. The distinction is about intent and investment, not quality.</p>
+                </div>
+            </div>
+            <div class="definition-note">Components like templates, checklists, original graphics, and interactive tools increase an asset&rsquo;s deployment potential and replacement cost. A guide with a downloadable framework is a more valuable asset than a guide without one.</div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- DISCOVERY VALUE                            -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="discovery-section">
+        <div class="discovery-inner">
+            <div class="discovery-text">
+                <h2>The value your dashboard doesn&rsquo;t show</h2>
+                <p>A content library with 50 million monthly search impressions and 150,000 clicks has a click-through rate of 0.3%. Traditional measurement sees only the 150,000 clicks.</p>
+                <p>But what about the other 49.85 million times your brand appeared in front of someone searching for answers in your space? Those aren&rsquo;t nothing. They&rsquo;re brand impressions &mdash; the same thing display advertisers pay $5&ndash;$15 CPM to achieve.</p>
+                <p><strong>Discovery value</strong> is the cumulative effect of your content appearing across search and AI surfaces, whether or not anyone clicks. It&rsquo;s the reason branded search can be at an all-time high while organic clicks are declining. People are seeing your content everywhere. Then they search for you by name.</p>
+            </div>
+            <div class="discovery-chain">
+                <div class="discovery-chain-title">The discovery-to-demand chain</div>
+
+                <div class="chain-step">
+                    <div class="chain-number">1</div>
+                    <div class="chain-content">
+                        <strong>Content publishes</strong>
+                        <span>URL enters the index across multiple surfaces</span>
+                    </div>
+                </div>
+                <div class="chain-arrow">&darr;</div>
+
+                <div class="chain-step">
+                    <div class="chain-number">2</div>
+                    <div class="chain-content">
+                        <strong>Brand appears</strong>
+                        <span>Search results, AI Overviews, ChatGPT, Discover, social previews</span>
+                    </div>
+                </div>
+                <div class="chain-arrow">&darr;</div>
+
+                <div class="chain-step">
+                    <div class="chain-number">3</div>
+                    <div class="chain-content">
+                        <strong>Awareness compounds</strong>
+                        <span>Repeated exposure builds brand recognition and trust</span>
+                    </div>
+                </div>
+                <div class="chain-arrow">&darr;</div>
+
+                <div class="chain-step">
+                    <div class="chain-number">4</div>
+                    <div class="chain-content">
+                        <strong>Branded search increases</strong>
+                        <span>People search for you by name when they&rsquo;re ready to act</span>
+                    </div>
+                </div>
+                <div class="chain-arrow">&darr;</div>
+
+                <div class="chain-step">
+                    <div class="chain-number">5</div>
+                    <div class="chain-content">
+                        <strong>High-intent conversion</strong>
+                        <span>Branded traffic converts at dramatically higher rates</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- DISTRIBUTION ENGINE                        -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="distribution-section">
+        <div class="distribution-inner">
+            <div class="distribution-text">
+                <h2>Your library powers more than search</h2>
+                <p>Organic discovery is only one dimension of a content library&rsquo;s value. The other &mdash; often larger &mdash; dimension is what happens when the rest of the company draws from it.</p>
+                <p>The email team pulls from your guides for nurture campaigns. Social repurposes your research into posts and carousels. Paid amplifies your best-performing assets through sponsored distribution and retargeting. Sales sends your articles to prospects as enablement material. Support links to your tutorials. PR pitches stories grounded in your original data. Webinars and events build on frameworks your team developed.</p>
+                <p><strong>Content teams have been providing this value for years without getting credit</strong> &mdash; because attribution assigns the conversion to whatever channel delivered the last touch. The email &ldquo;got&rdquo; the lead. The sales rep &ldquo;closed&rdquo; the deal. But the thinking that powered all of it came from the library.</p>
+                <p>When you cut the content team, you&rsquo;re not just losing organic traffic. You&rsquo;re cutting off the source every other channel depends on.</p>
+            </div>
+            <div class="distribution-visual">
+                <div class="pipe-source">
+                    <div class="pipe-source-label">Content library</div>
+                    <div class="pipe-source-desc">Research, guides, frameworks, data &rarr;</div>
+                </div>
+                <div class="pipe-connector"><div class="pipe-connector-line"></div></div>
+                <div class="pipe-branches">
+                    <div class="pipe-branch">
+                        <div class="pipe-dot"></div>
+                        <div class="pipe-channel-name">Email campaigns</div>
+                        <div class="pipe-bar-track"><div class="pipe-bar-fill"></div></div>
+                    </div>
+                    <div class="pipe-branch">
+                        <div class="pipe-dot"></div>
+                        <div class="pipe-channel-name">Social content</div>
+                        <div class="pipe-bar-track"><div class="pipe-bar-fill"></div></div>
+                    </div>
+                    <div class="pipe-branch">
+                        <div class="pipe-dot"></div>
+                        <div class="pipe-channel-name">Paid amplification</div>
+                        <div class="pipe-bar-track"><div class="pipe-bar-fill"></div></div>
+                    </div>
+                    <div class="pipe-branch">
+                        <div class="pipe-dot"></div>
+                        <div class="pipe-channel-name">Sales enablement</div>
+                        <div class="pipe-bar-track"><div class="pipe-bar-fill"></div></div>
+                    </div>
+                    <div class="pipe-branch">
+                        <div class="pipe-dot"></div>
+                        <div class="pipe-channel-name">PR &amp; media</div>
+                        <div class="pipe-bar-track"><div class="pipe-bar-fill"></div></div>
+                    </div>
+                    <div class="pipe-branch">
+                        <div class="pipe-dot"></div>
+                        <div class="pipe-channel-name">Support &amp; events</div>
+                        <div class="pipe-bar-track"><div class="pipe-bar-fill"></div></div>
+                    </div>
+                    <div class="pipe-branch pipe-branch--credit">
+                        <div class="pipe-dot"></div>
+                        <div class="pipe-channel-name">Organic search <span class="pipe-credit-label">(credits you)</span></div>
+                        <div class="pipe-bar-track"><div class="pipe-bar-fill"></div></div>
+                    </div>
+                </div>
+                <div class="pipe-footnote">Every channel draws from the library. Only one sends attribution back.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- FIVE LENSES                                -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="lenses-section">
+        <div class="lenses-header">
+            <h2>Five ways to show what your library is worth</h2>
+            <p>There&rsquo;s no single number that captures a content library&rsquo;s value, the same way there&rsquo;s no single number that captures what a building is worth. It depends on who&rsquo;s asking and why.</p>
+            <p>A CFO needs replacement cost. A CMO needs visibility equivalency. A CEO asking &ldquo;how does this translate to revenue?&rdquo; needs the brand authority signal. Each view answers a different question for a different conversation.</p>
+        </div>
+
+        <div class="lenses-grid">
+            <div class="lens-card">
+                <div class="lens-number">View 1</div>
+                <div class="lens-title">Replacement Cost</div>
+                <div class="lens-question">What would it cost to rebuild this library from scratch?</div>
+                <div class="lens-desc">Production costs, update investment, editorial infrastructure, institutional knowledge, and the backlink profile that took years to earn. This is the insurance appraisal of your content library.</div>
+                <div class="lens-audience">Use with: CFO, leadership</div>
+            </div>
+            <div class="lens-card">
+                <div class="lens-number">View 2</div>
+                <div class="lens-title">Visibility Equivalency</div>
+                <div class="lens-question">What would you pay for this visibility through other channels?</div>
+                <div class="lens-desc">Three layers: click-through value (equivalent ad spend), discovery value (brand impressions without clicks), and distribution value (visibility generated when other teams deploy your content across their channels).</div>
+                <div class="lens-audience">Use with: CMO, paid media</div>
+            </div>
+            <div class="lens-card">
+                <div class="lens-number">View 3</div>
+                <div class="lens-title">Compounding Value</div>
+                <div class="lens-question">How does this asset&rsquo;s return profile change over time?</div>
+                <div class="lens-desc">Content produced in Year 1 still generates value in Year 5. Each new asset benefits from the library&rsquo;s existing authority. A different return profile than channels that stop producing the moment you stop spending.</div>
+                <div class="lens-audience">Use with: Strategy, board</div>
+            </div>
+            <div class="lens-card">
+                <div class="lens-number">View 4</div>
+                <div class="lens-title">Brand Authority</div>
+                <div class="lens-question">Is this library creating demand, not just capturing it?</div>
+                <div class="lens-desc">Branded search trends, AI citations, brand mentions. When branded search is growing while organic clicks are declining, the library is building the brand through discovery, not just serving existing demand.</div>
+                <div class="lens-audience">Use with: CEO, revenue question</div>
+            </div>
+            <div class="lens-card">
+                <div class="lens-number">View 5</div>
+                <div class="lens-title">Risk of Loss</div>
+                <div class="lens-question">What would 6 months without this team actually cost?</div>
+                <div class="lens-desc">Traffic erosion, lost visibility, stalled brand momentum, dispersed institutional knowledge, rebuilding costs. The savings-to-damage ratio reveals whether a cut is an optimization or a false economy.</div>
+                <div class="lens-audience">Use with: Budget planning</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- CALCULATOR                                 -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="calc-section" id="calc-section">
+        <div class="calc-header">
+            <h2>Calculate your library&rsquo;s value</h2>
+            <p>Enter your numbers. All calculations run in your browser &mdash; nothing is sent anywhere.</p>
+        </div>
+
+        <div class="calc-form">
+            <!-- Column 1: Library -->
+            <div class="calc-panel">
+                <div class="calc-panel-title">Your content library</div>
+
+                <div class="input-group">
+                    <label class="input-label">Total published assets</label>
+                    <span class="input-hint">Published editorial and educational URLs your team creates and maintains</span>
+                    <input type="number" id="totalAssets" placeholder="e.g. 450">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Flagship assets (%)</label>
+                    <span class="input-hint">Content designed to own a topic: original frameworks, deep research, named methodologies</span>
+                    <div class="input-row">
+                        <input type="number" id="flagshipPct" placeholder="e.g. 25" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Average cost per asset</label>
+                    <span class="input-hint">Writing, editing, design, strategy, companion resources &mdash; blended average</span>
+                    <div class="input-row">
+                        <span class="input-prefix">$</span>
+                        <input type="number" id="avgCost" placeholder="e.g. 2500">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Library age (years)</label>
+                    <span class="input-hint">How long has this library been building?</span>
+                    <input type="number" id="libraryAge" placeholder="e.g. 8">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Distribution rate (%)</label>
+                    <span class="input-hint">What % of assets get deployed beyond organic search? Email, social, paid amplification, PR, sales enablement. Mature operations: 40&ndash;60%.</span>
+                    <div class="input-row">
+                        <input type="number" id="distributionRate" placeholder="e.g. 50" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 2: Visibility -->
+            <div class="calc-panel">
+                <div class="calc-panel-title">Visibility data</div>
+
+                <div class="input-group">
+                    <label class="input-label">Monthly organic clicks</label>
+                    <span class="input-hint">From Google Search Console &rarr; Performance</span>
+                    <input type="number" id="monthlyClicks" placeholder="e.g. 150000">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Monthly search impressions</label>
+                    <span class="input-hint">From GSC &mdash; total impressions, not just clicks</span>
+                    <input type="number" id="monthlyImpressions" placeholder="e.g. 50000000">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Monthly traffic cost estimate</label>
+                    <span class="input-hint">From Semrush or Ahrefs &mdash; equivalent ad spend for your organic traffic</span>
+                    <div class="input-row">
+                        <span class="input-prefix">$</span>
+                        <input type="number" id="trafficCost" placeholder="e.g. 500000">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 3: Team -->
+            <div class="calc-panel">
+                <div class="calc-panel-title">Team investment</div>
+
+                <div class="input-group">
+                    <label class="input-label">Annual content team cost</label>
+                    <span class="input-hint">Salaries, freelancers, tools, design &mdash; the total annual content function cost</span>
+                    <div class="input-row">
+                        <span class="input-prefix">$</span>
+                        <input type="number" id="annualTeamCost" placeholder="e.g. 400000">
+                    </div>
+                </div>
+
+                <div style="margin-top: 32px; padding: 20px; background: var(--bg-dark); border-radius: 8px;">
+                    <div style="font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Where to find these numbers</div>
+                    <div style="font-size: 12px; color: var(--dim); line-height: 1.6;">
+                        <strong style="color: var(--text);">Clicks + impressions:</strong> Google Search Console &rarr; Performance<br><br>
+                        <strong style="color: var(--text);">Traffic cost:</strong> Semrush &rarr; Domain Overview &rarr; Organic Rankings &rarr; Traffic Cost<br><br>
+                        <strong style="color: var(--text);">Team cost:</strong> Total salaries + freelance + tools + design budget
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="calc-button-wrap">
+            <button class="calc-button" onclick="calculate()">Calculate library value</button>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- RESULTS                                    -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="results" id="results">
+        <div class="results-header">
+            <h2>Your content library valuation</h2>
+            <p>Five views, five stories. Use the right one for the conversation you&rsquo;re in.</p>
+        </div>
+
+        <!-- Top row: Replacement + Visibility -->
+        <div class="results-top">
+            <div class="result-card result-card--green">
+                <div class="result-lens-label">View 1 &mdash; Replacement Cost</div>
+                <div class="result-lens-title">What it would cost to rebuild</div>
+                <div class="result-value" id="r-replacement">&mdash;</div>
+                <div class="result-sublabel">Estimated replacement cost</div>
+                <div class="result-breakdown" id="r-replacement-breakdown"></div>
+                <div class="result-narrative" id="r-replacement-narrative"></div>
+            </div>
+            <div class="result-card result-card--green">
+                <div class="result-lens-label">View 2 &mdash; Visibility Equivalency</div>
+                <div class="result-lens-title">What this visibility would cost through paid channels</div>
+                <div class="result-value" id="r-visibility">&mdash;</div>
+                <div class="result-sublabel">Annual visibility value</div>
+                <div class="result-breakdown" id="r-visibility-breakdown"></div>
+                <div class="result-narrative" id="r-visibility-narrative"></div>
+            </div>
+        </div>
+
+        <!-- Bottom row: Compounding + Brand + Risk -->
+        <div class="results-bottom">
+            <div class="result-card result-card--yellow">
+                <div class="result-lens-label">View 3 &mdash; Compounding</div>
+                <div class="result-lens-title">Return on cumulative investment</div>
+                <div class="result-value result-value--yellow" id="r-compounding">&mdash;</div>
+                <div class="result-sublabel">Annual return vs. total investment</div>
+                <div class="result-breakdown" id="r-compounding-breakdown"></div>
+                <div class="result-narrative" id="r-compounding-narrative"></div>
+            </div>
+            <div class="result-card result-card--yellow">
+                <div class="result-lens-label">View 4 &mdash; Brand Authority</div>
+                <div class="result-lens-title">Discovery beyond clicks</div>
+                <div class="result-value result-value--yellow" id="r-brand">&mdash;</div>
+                <div class="result-sublabel">Monthly brand impressions without clicks</div>
+                <div class="result-breakdown" id="r-brand-breakdown"></div>
+                <div class="result-narrative" id="r-brand-narrative"></div>
+            </div>
+            <div class="result-card result-card--red">
+                <div class="result-lens-label">View 5 &mdash; Risk of Loss</div>
+                <div class="result-lens-title">The cost of a 6-month content pause</div>
+                <div class="result-value result-value--red" id="r-risk">&mdash;</div>
+                <div class="result-sublabel">Estimated 6-month damage</div>
+                <div class="result-breakdown" id="r-risk-breakdown"></div>
+                <div class="result-narrative" id="r-risk-narrative"></div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary-section">
+            <div class="summary-card">
+                <div class="summary-title">The picture</div>
+                <div class="summary-oneliner" id="summary-oneliner"></div>
+            </div>
+            <div class="summary-table-card">
+                <div class="summary-table-title">At a glance</div>
+                <div id="summary-table"></div>
+            </div>
+        </div>
+
+        <!-- Caveat -->
+        <div class="caveat-section">
+            <div class="caveat">
+                <strong>A note on precision and assumptions.</strong> These are estimates, not audited figures. Every number should be read as an order of magnitude &mdash; &ldquo;roughly $1.5M,&rdquo; not &ldquo;$1,537,422.&rdquo;<br><br>
+                <strong>Traffic cost</strong> (from Semrush/Ahrefs) represents what it would cost to buy equivalent organic visibility through paid ads. It measures visibility equivalency, not revenue value &mdash; the traffic itself may convert at very different rates than paid traffic would.<br><br>
+                <strong>Discovery value</strong> uses $5 CPM, the low end of B2B display advertising rates ($5&ndash;$15 CPM). Search impressions arguably carry higher intent context than display ads, making this a conservative estimate.<br><br>
+                <strong>Distribution value</strong> applies a 0.6 multiplier to account for channel overlap and lower per-channel reach density compared to organic search. At 50% distribution rate, this adds roughly 30% to click-through value.<br><br>
+                <strong>Traffic decay</strong> assumes 35% erosion over 6 months without active content investment &mdash; consistent with observed patterns in mature content libraries that stop publishing and updating.<br><br>
+                <strong>What this doesn&rsquo;t measure:</strong> direct revenue attribution. This framework values the asset, not the conversion path. Connecting content to pipeline is a different exercise. The gap between &ldquo;this library is worth $X in visibility&rdquo; and &ldquo;this library generated $Y in revenue&rdquo; is real &mdash; and closing it requires attribution modeling beyond the scope of a valuation framework.
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- CLOSING                                    -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="closing">
+        <div class="closing-inner">
+            <blockquote>The next conversation about content ROI doesn&rsquo;t have to start with clicks.</blockquote>
+            <p>Content libraries compound. They drive discovery, power distribution across every channel, and build the brand authority that turns impressions into intent. The teams that understand what they&rsquo;ve built will invest accordingly.</p>
+            <p style="margin-top: 24px;"><a href="essays/the-content-library.html">Related essay: The Content Library &rarr;</a></p>
+        </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="newsletter-section">
+        <div class="newsletter-inner">
+            <p>Get essays on content, craft, and building things &mdash; <span class="dim">no spam, no schedule.</span></p>
+            <form
+                action="https://buttondown.email/api/emails/embed-subscribe/ofei"
+                method="post"
+                target="popupwindow"
+                class="subscribe-form"
+            >
+                <input type="email" name="email" placeholder="your@email.com" required />
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section">
+        <div class="footer-inner">
+            <a href="index.html">&larr; michaelofei.co</a>
+            <span>Framework by Michael Ofei. February 2026.</span>
+        </div>
+    </div>
+
+<script>
+function fmt(n) {
+    if (n >= 1000000000) return '$' + (n / 1000000000).toFixed(1) + 'B';
+    if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+    if (n >= 1000) return '$' + (n / 1000).toFixed(0) + 'K';
+    return '$' + n.toFixed(0);
+}
+
+function fmtRaw(n) {
+    if (n >= 1000000000) return (n / 1000000000).toFixed(1) + 'B';
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+    if (n >= 1000) return (n / 1000).toFixed(0) + 'K';
+    return n.toFixed(0);
+}
+
+function fmtPct(n) {
+    if (n >= 10) return n.toFixed(0) + 'x';
+    return n.toFixed(1) + 'x';
+}
+
+function breakdownRow(label, value) {
+    return '<div class="result-breakdown-row"><span>' + label + '</span><span class="result-breakdown-value">' + value + '</span></div>';
+}
+
+function calculate() {
+    var totalAssets = parseFloat(document.getElementById('totalAssets').value) || 0;
+    var flagshipPct = parseFloat(document.getElementById('flagshipPct').value) || 0;
+    var avgCost = parseFloat(document.getElementById('avgCost').value) || 0;
+    var libraryAge = parseFloat(document.getElementById('libraryAge').value) || 1;
+    var distributionRate = parseFloat(document.getElementById('distributionRate').value) || 0;
+    var monthlyClicks = parseFloat(document.getElementById('monthlyClicks').value) || 0;
+    var monthlyImpressions = parseFloat(document.getElementById('monthlyImpressions').value) || 0;
+    var trafficCost = parseFloat(document.getElementById('trafficCost').value) || 0;
+    var annualTeamCost = parseFloat(document.getElementById('annualTeamCost').value) || 0;
+
+    var flagshipCount = Math.round(totalAssets * (flagshipPct / 100));
+    var standardCount = totalAssets - flagshipCount;
+
+    // VIEW 1: Replacement Cost
+    var productionCost = totalAssets * avgCost;
+    var updatePremium = productionCost * 0.15;
+    var infraCost = annualTeamCost * 0.06;
+    var rampCost = annualTeamCost * 0.12;
+    var flagshipPremium = flagshipCount * avgCost * 0.25;
+    var replacementCost = productionCost + updatePremium + infraCost + rampCost + flagshipPremium;
+
+    document.getElementById('r-replacement').textContent = fmt(replacementCost);
+    document.getElementById('r-replacement-breakdown').innerHTML =
+        breakdownRow('Production (' + totalAssets + ' assets)', fmt(productionCost)) +
+        breakdownRow('Flagship premium (' + flagshipCount + ' assets)', fmt(flagshipPremium)) +
+        breakdownRow('Update investment', fmt(updatePremium)) +
+        breakdownRow('Infrastructure rebuild', fmt(infraCost)) +
+        breakdownRow('Talent ramp-up', fmt(rampCost));
+    document.getElementById('r-replacement-narrative').textContent =
+        'Rebuilding this library would cost approximately ' + fmt(replacementCost) + '. That includes not just production, but the update cycles, editorial standards, and institutional knowledge embedded in ' + flagshipCount + ' flagship assets that represent original thinking.';
+
+    // VIEW 2: Visibility Equivalency
+    var annualTrafficValue = trafficCost * 12;
+    var discoveryImpressions = Math.max(0, monthlyImpressions - monthlyClicks);
+    var annualDiscoveryValue = (discoveryImpressions / 1000) * 5 * 12;
+    var annualDistributionValue = annualTrafficValue * (distributionRate / 100) * 0.6;
+    var totalVisibility = annualTrafficValue + annualDiscoveryValue + annualDistributionValue;
+
+    var returnRatio = annualTeamCost > 0 ? (totalVisibility / annualTeamCost) : 0;
+
+    document.getElementById('r-visibility').textContent = fmt(totalVisibility) + '/yr';
+    var visBreakdown =
+        breakdownRow('Click-through value', fmt(annualTrafficValue) + '/yr') +
+        breakdownRow('Discovery value (' + fmtRaw(discoveryImpressions) + ' imp/mo)', fmt(annualDiscoveryValue) + '/yr');
+    if (distributionRate > 0) {
+        visBreakdown += breakdownRow('Distribution value (' + distributionRate + '% usage)', fmt(annualDistributionValue) + '/yr');
+    }
+    visBreakdown += breakdownRow('Return on team cost', fmtPct(returnRatio));
+    document.getElementById('r-visibility-breakdown').innerHTML = visBreakdown;
+
+    var visNarrative = 'This library generates ' + fmt(totalVisibility) + ' per year in equivalent paid visibility.';
+    if (distributionRate > 0) {
+        visNarrative += ' That includes ' + fmt(annualDistributionValue) + ' in distribution value from ' + distributionRate + '% of assets being deployed across email, social, paid, and other channels beyond organic search.';
+    }
+    visNarrative += ' The return on your ' + fmt(annualTeamCost) + ' annual investment is ' + fmtPct(returnRatio) + '.';
+    document.getElementById('r-visibility-narrative').textContent = visNarrative;
+
+    // VIEW 3: Compounding Value
+    var estimatedTotalInvestment = annualTeamCost * libraryAge * 0.7;
+    var compoundRatio = estimatedTotalInvestment > 0 ? (annualTrafficValue / estimatedTotalInvestment) : 0;
+
+    document.getElementById('r-compounding').textContent = fmtPct(compoundRatio);
+    document.getElementById('r-compounding-breakdown').innerHTML =
+        breakdownRow('Est. total investment (' + libraryAge + ' yrs)', fmt(estimatedTotalInvestment)) +
+        breakdownRow('Annual click-through value', fmt(annualTrafficValue)) +
+        breakdownRow('Ratio', fmtPct(compoundRatio));
+    document.getElementById('r-compounding-narrative').textContent =
+        compoundRatio >= 1
+        ? 'This library\'s annual value now exceeds the estimated total investment across ' + libraryAge + ' years. Content produced years ago still generates returns. Each new asset benefits from the authority the library has already built.'
+        : 'At ' + libraryAge + ' years, this library is building toward the compounding threshold. Each new asset benefits from the library\'s growing authority. This ratio typically crosses 1x between years 4 and 8.';
+
+    // VIEW 4: Brand Authority Signal
+    var CTR = monthlyImpressions > 0 ? (monthlyClicks / monthlyImpressions * 100) : 0;
+
+    document.getElementById('r-brand').textContent = fmtRaw(discoveryImpressions);
+    document.getElementById('r-brand-breakdown').innerHTML =
+        breakdownRow('Monthly impressions', fmtRaw(monthlyImpressions)) +
+        breakdownRow('Monthly clicks', fmtRaw(monthlyClicks)) +
+        breakdownRow('Overall CTR', CTR.toFixed(2) + '%');
+    document.getElementById('r-brand-narrative').textContent =
+        'This library appears ' + fmtRaw(monthlyImpressions) + ' times per month across search and AI surfaces. ' + fmtRaw(discoveryImpressions) + ' of those are brand impressions without clicks \u2014 the discovery layer that drives branded search and long-term demand generation.';
+
+    // VIEW 5: Risk of Loss
+    var sixMonthSavings = annualTeamCost / 2;
+    var lostTrafficValue = trafficCost * 0.35 * 6;
+    var lostDistributionValue = annualDistributionValue / 2;
+    var rebuildCost = annualTeamCost * 0.35;
+    var totalRisk = lostTrafficValue + lostDistributionValue + rebuildCost;
+    var damageRatio = sixMonthSavings > 0 ? (totalRisk / sixMonthSavings) : 0;
+
+    document.getElementById('r-risk').textContent = fmt(totalRisk);
+    var riskBreakdown =
+        breakdownRow('6-month team savings', fmt(sixMonthSavings)) +
+        breakdownRow('Lost traffic value (35% decay)', fmt(lostTrafficValue));
+    if (distributionRate > 0) {
+        riskBreakdown += breakdownRow('Lost distribution value', fmt(lostDistributionValue));
+    }
+    riskBreakdown +=
+        breakdownRow('Rebuild cost', fmt(rebuildCost)) +
+        breakdownRow('Savings-to-damage ratio', '1:' + damageRatio.toFixed(0));
+    document.getElementById('r-risk-breakdown').innerHTML = riskBreakdown;
+    document.getElementById('r-risk-narrative').textContent =
+        'Pausing this team for 6 months saves ' + fmt(sixMonthSavings) + ' but creates approximately ' + fmt(totalRisk) + ' in damage. For every $1 saved, roughly $' + damageRatio.toFixed(0) + ' in value erodes \u2014 from traffic decay, lost visibility, ' + (distributionRate > 0 ? 'halted distribution pipeline, ' : '') + 'and the cost of rebuilding institutional knowledge.';
+
+    // SUMMARY
+    var summaryText = 'This content library has an estimated replacement cost of ' + fmt(replacementCost) + ' and generates ' + fmt(totalVisibility) + ' per year in total visibility value';
+    if (distributionRate > 0) {
+        summaryText += ' \u2014 including ' + fmt(annualDistributionValue) + ' from distribution across non-organic channels';
+    }
+    summaryText += '. It represents a ' + fmtPct(returnRatio) + ' return on annual team investment, with ' + fmtRaw(discoveryImpressions) + ' monthly brand impressions beyond what clicks capture.';
+    document.getElementById('summary-oneliner').textContent = summaryText;
+
+    document.getElementById('summary-table').innerHTML =
+        '<div class="summary-row"><span class="summary-row-label">Replacement cost</span><span class="summary-row-value summary-row-value--green">' + fmt(replacementCost) + '</span></div>' +
+        '<div class="summary-row"><span class="summary-row-label">Annual visibility value</span><span class="summary-row-value summary-row-value--green">' + fmt(totalVisibility) + '/yr</span></div>' +
+        '<div class="summary-row"><span class="summary-row-label">Return on team investment</span><span class="summary-row-value">' + fmtPct(returnRatio) + '</span></div>' +
+        '<div class="summary-row"><span class="summary-row-label">Monthly brand impressions</span><span class="summary-row-value">' + fmtRaw(discoveryImpressions) + '</span></div>' +
+        '<div class="summary-row"><span class="summary-row-label">6-month pause damage ratio</span><span class="summary-row-value summary-row-value--red">1:' + damageRatio.toFixed(0) + '</span></div>';
+
+    document.getElementById('results').classList.add('visible');
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+<script async data-id="101499378" src="//static.getclicky.com/js"></script>
+</body>
+</html>
