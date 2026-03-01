@@ -43,14 +43,36 @@ Green: #00BB00 (links, hover states)
 ### Structure
 ```
 ofei-site/
-├── index.html          # Home
-├── about.html          # About
-├── projects.html       # Projects
-├── feed.xml            # RSS
+├── index.html                     # Home
+├── about.html                     # About
+├── tools.html                     # Tools listing
+├── content-library-valuation.html # Tool: valuation calculator
+├── through-line-guide.html        # Tool: through-line worksheet
+├── feed.xml                       # RSS
 └── essays/
-    ├── index.html      # Essays listing
-    └── the-lens-method.html
+    ├── index.html                 # Essays listing
+    └── [essay].html               # Individual essays
 ```
+
+### Two Page Types: Essays vs. Tools
+
+**Essays** use a narrow, reading-focused layout:
+- `max-width: 680px` centered body
+- Standard article typography
+- Inline visuals (CSS-only diagrams, charts)
+- Newsletter signup before footer
+
+**Tool pages** use a full-width, immersive layout:
+- Full-width body with no max-width constraint
+- Section-based structure with alternating backgrounds
+- `.section { width: 100%; padding: 0 48px; }`
+- `.section-inner { max-width: 1200px; }` for wide content (calculators, grids)
+- `.section-narrow { max-width: 720px; }` for text blocks
+- Hero section with centered headline
+- Interactive elements (forms, toggles, calculators)
+- The experience should feel distinct from reading an essay — like opening a different kind of page
+
+Tool pages follow the Content Library Valuation page (`content-library-valuation.html`) as the reference template. Every new tool should use this full-width section approach.
 
 ## Technical Stack
 

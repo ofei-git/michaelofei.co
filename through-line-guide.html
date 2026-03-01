@@ -27,98 +27,154 @@
             color: var(--text);
             line-height: 1.7;
             font-size: 15px;
-            padding: 40px 20px;
-            max-width: 740px;
+        }
+
+        /* ── Layout: Full-width sections with inner containers ── */
+        .section {
+            width: 100%;
+            padding: 0 48px;
+        }
+
+        .section-inner {
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* ── Header ── */
-        header {
-            margin-bottom: 48px;
+        .section-narrow {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        /* ── Top bar ── */
+        .topbar {
+            padding: 20px 48px;
         }
 
         .back {
             color: var(--dim);
             text-decoration: none;
-            font-size: 14px;
-            display: inline-block;
-            margin-bottom: 24px;
+            font-size: 13px;
         }
 
         .back:hover { color: var(--green); }
 
-        h1 {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--text-bright);
-            margin-bottom: 8px;
-            line-height: 1.3;
+        /* ══════════════════════════════════════ */
+        /* HERO                                   */
+        /* ══════════════════════════════════════ */
+        .hero {
+            padding: 80px 48px 64px;
+            text-align: center;
         }
 
-        .subtitle {
-            color: var(--dim);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 8px;
+        .hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .tool-label {
-            font-size: 10px;
+        .hero-label {
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--yellow);
+            margin-bottom: 20px;
         }
 
-        /* ── Intro ── */
-        .intro {
-            margin-bottom: 40px;
-            padding-bottom: 32px;
-            border-bottom: 1px solid var(--bg-light);
-        }
-
-        .intro p {
-            margin-bottom: 16px;
-            font-size: 14px;
-            color: var(--text);
-            line-height: 1.7;
-        }
-
-        .intro strong {
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 600;
             color: var(--text-bright);
+            line-height: 1.25;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
         }
 
-        .intro em {
+        .hero .lead {
+            font-size: 17px;
+            color: var(--text);
+            line-height: 1.65;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .hero .lead em {
             color: var(--dim);
             font-style: normal;
         }
 
-        /* ── Shared form elements ── */
-        label {
+        /* ══════════════════════════════════════ */
+        /* HOW IT WORKS BAR                       */
+        /* ══════════════════════════════════════ */
+        .how-bar {
+            background: var(--bg-dark);
+            padding: 40px 48px;
+        }
+
+        .how-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .how-card {
+            text-align: center;
+        }
+
+        .how-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--yellow);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .how-label {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.45;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* TOPIC SECTION                          */
+        /* ══════════════════════════════════════ */
+        .topic-section {
+            padding: 80px 48px;
+        }
+
+        .topic-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .topic-section label {
             display: block;
-            font-size: 14px;
+            font-size: 18px;
+            font-weight: 600;
             color: var(--text-bright);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .label-hint {
-            font-size: 12px;
+            font-size: 13px;
             color: var(--dim);
             font-weight: normal;
             display: block;
-            margin-top: 4px;
-            line-height: 1.5;
+            margin-bottom: 16px;
+            line-height: 1.6;
         }
 
+        /* ── Shared form elements ── */
         input[type="text"],
         textarea {
             width: 100%;
-            padding: 12px;
+            padding: 14px 16px;
             font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
-            font-size: 14px;
+            font-size: 15px;
             background: var(--bg-darker);
             border: 1px solid var(--bg-light);
             color: var(--text);
-            border-radius: 4px;
+            border-radius: 6px;
             line-height: 1.6;
             resize: vertical;
         }
@@ -134,29 +190,63 @@
             color: var(--dim-dark);
         }
 
-        /* ── Topic input ── */
-        .topic-section {
-            margin-bottom: 40px;
+        /* ══════════════════════════════════════ */
+        /* FOUR QUESTIONS                         */
+        /* ══════════════════════════════════════ */
+        .questions-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
         }
 
-        /* ── Step sections ── */
+        .questions-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--yellow);
+            margin-bottom: 8px;
+        }
+
+        .questions-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+
+        .questions-subtitle {
+            font-size: 14px;
+            color: var(--dim);
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        .questions-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
         .step {
-            margin-bottom: 36px;
+            background: var(--bg-darker);
+            border-radius: 8px;
+            padding: 28px 24px;
         }
 
         .step-header {
             display: flex;
             align-items: baseline;
             gap: 12px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .step-number {
             font-size: 11px;
             color: var(--bg);
             background: var(--yellow);
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -168,57 +258,58 @@
         .step-title {
             font-size: 15px;
             color: var(--text-bright);
+            font-weight: 600;
         }
 
         .step-desc {
             font-size: 13px;
             color: var(--dim);
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             line-height: 1.6;
-            padding-left: 34px;
         }
 
-        .step textarea {
-            margin-left: 0;
+        /* ══════════════════════════════════════ */
+        /* CANDIDATES                             */
+        /* ══════════════════════════════════════ */
+        .candidates-section {
+            padding: 80px 48px;
         }
 
-        /* ── Section dividers ── */
-        .section-divider {
-            border: none;
-            border-top: 1px solid var(--bg-light);
-            margin: 40px 0;
+        .candidates-inner {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .section-label {
-            font-size: 10px;
+        .candidates-label {
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--yellow);
-            margin-bottom: 20px;
+            margin-bottom: 8px;
         }
 
-        /* ── Through-line candidates panel ── */
+        .candidates-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .candidates-subtitle {
+            font-size: 14px;
+            color: var(--dim);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
         .candidates-panel {
             background: var(--bg-dark);
             border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 40px;
-        }
-
-        .candidates-header {
-            font-size: 14px;
-            color: var(--text-bright);
-            margin-bottom: 4px;
-        }
-
-        .candidates-hint {
-            font-size: 12px;
-            color: var(--dim);
-            margin-bottom: 16px;
+            padding: 32px;
         }
 
         .candidate-input {
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .candidate-input:last-of-type {
@@ -228,19 +319,21 @@
         .candidate-label {
             font-size: 11px;
             color: var(--dim);
-            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
             display: block;
         }
 
         .candidate-field {
             width: 100%;
-            padding: 10px 12px;
+            padding: 12px 16px;
             font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
-            font-size: 14px;
+            font-size: 15px;
             background: var(--bg-darker);
             border: 1px solid var(--bg-light);
             color: var(--green);
-            border-radius: 4px;
+            border-radius: 6px;
         }
 
         .candidate-field:focus {
@@ -252,35 +345,67 @@
             color: var(--dim-dark);
         }
 
-        /* ── Testing section ── */
+        /* ══════════════════════════════════════ */
+        /* TESTING                                */
+        /* ══════════════════════════════════════ */
+        .testing-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .testing-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--yellow);
+            margin-bottom: 8px;
+        }
+
+        .testing-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .testing-subtitle {
+            font-size: 14px;
+            color: var(--dim);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
         .test-grid {
+            max-width: 800px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 3px;
         }
 
         .test-row {
             display: grid;
-            grid-template-columns: 1fr 60px;
+            grid-template-columns: 1fr 72px;
             gap: 1px;
-            background: var(--bg-dark);
-            border-radius: 4px;
+            background: var(--bg);
+            border-radius: 6px;
             overflow: hidden;
         }
 
         .test-info {
-            padding: 14px 16px;
+            padding: 18px 20px;
             background: var(--bg-darker);
         }
 
         .test-name {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text-bright);
-            margin-bottom: 2px;
+            margin-bottom: 3px;
+            font-weight: 600;
         }
 
         .test-question {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--dim);
             line-height: 1.5;
         }
@@ -296,11 +421,11 @@
         }
 
         .test-toggle:hover {
-            background: var(--bg-dark);
+            background: var(--bg);
         }
 
         .test-toggle-icon {
-            font-size: 16px;
+            font-size: 18px;
             color: var(--dim-dark);
             transition: color 0.15s;
         }
@@ -315,24 +440,25 @@
 
         /* ── Score bar ── */
         .score-bar {
-            margin-top: 16px;
+            max-width: 800px;
+            margin: 24px auto 0;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
 
         .score-track {
             flex: 1;
-            height: 6px;
+            height: 8px;
             background: var(--bg-darker);
-            border-radius: 3px;
+            border-radius: 4px;
             overflow: hidden;
         }
 
         .score-fill {
             height: 100%;
             background: var(--dim-dark);
-            border-radius: 3px;
+            border-radius: 4px;
             transition: width 0.3s, background 0.3s;
             width: 0%;
         }
@@ -342,16 +468,18 @@
         .score-fill.weak { background: var(--dim); }
 
         .score-label {
-            font-size: 12px;
+            font-size: 14px;
             color: var(--dim);
             min-width: 40px;
             text-align: right;
+            font-weight: 600;
         }
 
         .score-verdict {
-            font-size: 12px;
+            max-width: 800px;
+            margin: 12px auto 0;
+            font-size: 13px;
             color: var(--dim);
-            margin-top: 8px;
         }
 
         .score-verdict strong {
@@ -359,50 +487,69 @@
             font-weight: normal;
         }
 
-        /* ── Claude prompt section ── */
+        /* ══════════════════════════════════════ */
+        /* CLAUDE PROMPT                          */
+        /* ══════════════════════════════════════ */
         .prompt-section {
+            padding: 80px 48px;
+        }
+
+        .prompt-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .prompt-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--yellow);
+            margin-bottom: 8px;
+        }
+
+        .prompt-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .prompt-subtitle {
+            font-size: 14px;
+            color: var(--dim);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .prompt-card {
             background: var(--bg-dark);
             border-radius: 8px;
-            padding: 24px;
-            margin: 40px 0;
-        }
-
-        .prompt-header {
-            font-size: 14px;
-            color: var(--text-bright);
-            margin-bottom: 4px;
-        }
-
-        .prompt-hint {
-            font-size: 12px;
-            color: var(--dim);
-            margin-bottom: 16px;
-            line-height: 1.5;
+            padding: 32px;
         }
 
         .prompt-output {
             background: var(--bg-darker);
             border: 1px solid var(--bg-light);
-            border-radius: 4px;
-            padding: 16px;
-            font-size: 12px;
+            border-radius: 6px;
+            padding: 20px;
+            font-size: 13px;
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.7;
             white-space: pre-wrap;
-            max-height: 300px;
+            max-height: 360px;
             overflow-y: auto;
         }
 
         .copy-btn {
             display: inline-block;
-            margin-top: 12px;
-            padding: 8px 16px;
+            margin-top: 16px;
+            padding: 10px 20px;
             font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
-            font-size: 12px;
+            font-size: 13px;
             background: transparent;
             border: 1px solid var(--green);
             color: var(--green);
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -419,15 +566,26 @@
             background: transparent;
         }
 
-        /* ── Newsletter ── */
-        .newsletter {
-            margin: 60px 0;
-            padding-top: 24px;
-            border-top: 1px solid var(--bg-light);
+        /* ══════════════════════════════════════ */
+        /* NEWSLETTER                             */
+        /* ══════════════════════════════════════ */
+        .newsletter-section {
+            background: var(--bg-dark);
+            padding: 64px 48px;
         }
 
-        .newsletter p { margin-bottom: 1rem; }
-        .newsletter .dim { color: var(--dim); }
+        .newsletter-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .newsletter-inner p {
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-inner .dim {
+            color: var(--dim);
+        }
 
         .subscribe-form {
             display: flex;
@@ -444,6 +602,7 @@
             background: var(--bg-darker);
             border: 1px solid var(--dim);
             color: var(--text);
+            border-radius: 6px;
         }
 
         .subscribe-form input[type="email"]::placeholder { color: var(--dim); }
@@ -463,6 +622,7 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            border-radius: 6px;
         }
 
         .subscribe-form button:hover {
@@ -471,231 +631,304 @@
         }
 
         /* ── Footer ── */
-        footer {
-            margin-top: 80px;
-            padding-top: 24px;
-            border-top: 1px solid var(--bg-light);
+        .footer {
+            padding: 24px 48px;
             color: var(--dim);
             font-size: 13px;
         }
 
-        footer a {
+        .footer a {
             color: var(--dim);
             text-decoration: none;
         }
 
-        footer a:hover { color: var(--green); }
+        .footer a:hover { color: var(--green); }
 
-        /* ── Article links ── */
-        a.text-link {
-            color: var(--green);
-            text-decoration: none;
-        }
+        /* ══════════════════════════════════════ */
+        /* RESPONSIVE                             */
+        /* ══════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .hero { padding: 60px 24px 48px; }
+            .hero h1 { font-size: 26px; }
+            .hero .lead { font-size: 15px; }
 
-        a.text-link:hover { text-decoration: underline; }
+            .how-bar { padding: 32px 24px; }
+            .how-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+            .how-number { font-size: 24px; }
+            .how-label { font-size: 11px; }
 
-        /* ── Responsive ── */
-        @media (max-width: 500px) {
-            body {
-                font-size: 14px;
-                padding: 24px 16px;
+            .topic-section { padding: 48px 24px; }
+            .questions-section { padding: 48px 24px; }
+            .candidates-section { padding: 48px 24px; }
+            .testing-section { padding: 48px 24px; }
+            .prompt-section { padding: 48px 24px; }
+            .newsletter-section { padding: 48px 24px; }
+            .footer { padding: 24px; }
+            .topbar { padding: 16px 24px; }
+
+            .questions-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
             }
 
             .test-row {
-                grid-template-columns: 1fr 50px;
+                grid-template-columns: 1fr 56px;
             }
+        }
+
+        @media (max-width: 500px) {
+            body { font-size: 14px; }
+            .hero h1 { font-size: 22px; }
+            .hero { padding: 40px 16px 32px; }
+            .how-bar { padding: 24px 16px; }
+            .topic-section,
+            .questions-section,
+            .candidates-section,
+            .testing-section,
+            .prompt-section,
+            .newsletter-section { padding: 40px 16px; }
+            .footer, .topbar { padding: 16px; }
+            .candidates-panel, .prompt-card { padding: 20px; }
+            .step { padding: 20px 16px; }
         }
     </style>
 </head>
 <body>
-    <header>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TOP BAR                                 -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="topbar">
         <a href="index.html" class="back">&larr; home</a>
-        <p class="tool-label">Interactive tool</p>
-        <h1>Through-Line Development Guide</h1>
-        <p class="subtitle">Find the central idea that makes your content memorable instead of just helpful.</p>
-    </header>
-
-    <div class="intro">
-        <p>A <strong>through-line</strong> is the central idea that organizes your entire piece. It's the perspective that connects your sections, gives them a reason to exist in that order, and gives the reader something to hold onto when the details fade.</p>
-
-        <p>Most content answers a question well and gets forgotten the next day. A through-line is what turns helpful content into content that sticks — because the reader walks away with a framework, not just information.</p>
-
-        <p><em>This tool walks you through four questions to find your through-line, then five tests to sharpen it. Everything runs in your browser — nothing is saved or sent anywhere.</em></p>
     </div>
 
-    <!-- ═══════════════════════════════ -->
-    <!-- TOPIC INPUT                     -->
-    <!-- ═══════════════════════════════ -->
+    <!-- ═══════════════════════════════════════ -->
+    <!-- HERO                                    -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="hero">
+        <div class="hero-inner">
+            <p class="hero-label">Interactive tool</p>
+            <h1>Through-Line Development Guide</h1>
+            <p class="lead">Find the central idea that makes your content memorable instead of just helpful. Work through four questions, draft candidates, then test them.</p>
+            <p class="lead" style="margin-top: 16px;"><em>Everything runs in your browser — nothing is saved or sent anywhere.</em></p>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- HOW IT WORKS BAR                        -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="how-bar">
+        <div class="how-grid">
+            <div class="how-card">
+                <div class="how-number">4</div>
+                <div class="how-label">Discovery questions<br>to surface your angle</div>
+            </div>
+            <div class="how-card">
+                <div class="how-number">3</div>
+                <div class="how-label">Through-line candidates<br>to compare and refine</div>
+            </div>
+            <div class="how-card">
+                <div class="how-number">5</div>
+                <div class="how-label">Tests to check if<br>it's sharp enough</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TOPIC INPUT                             -->
+    <!-- ═══════════════════════════════════════ -->
     <div class="topic-section">
-        <label for="topic-input">What's the topic or keyword?
+        <div class="topic-inner">
+            <label for="topic-input">What's the topic or keyword?</label>
             <span class="label-hint">The subject you're writing about. e.g. "SEO strategy," "content marketing ROI," "email onboarding sequences"</span>
-        </label>
-        <input type="text" id="topic-input" placeholder="Enter your topic...">
-    </div>
-
-    <hr class="section-divider">
-
-    <!-- ═══════════════════════════════ -->
-    <!-- FOUR QUESTIONS                  -->
-    <!-- ═══════════════════════════════ -->
-    <p class="section-label">Find your through-line</p>
-
-    <div class="step">
-        <div class="step-header">
-            <div class="step-number">1</div>
-            <div class="step-title">What's the misconception?</div>
-        </div>
-        <p class="step-desc">What do most people assume about this topic that isn't quite right? The through-line can be the correction.</p>
-        <textarea id="q-misconception" rows="3" placeholder="e.g. Most people think SEO strategy means doing more things. Actually, it means making fewer, clearer decisions."></textarea>
-    </div>
-
-    <div class="step">
-        <div class="step-header">
-            <div class="step-number">2</div>
-            <div class="step-title">What's the transformation?</div>
-        </div>
-        <p class="step-desc">If the reader fully absorbs this piece, what changes for them? Name the shift concretely — not "they'll know more" but "they'll stop doing X and start doing Y."</p>
-        <textarea id="q-transformation" rows="3" placeholder="e.g. They'll stop treating SEO as a task list and start treating it as five decisions about their business."></textarea>
-    </div>
-
-    <div class="step">
-        <div class="step-header">
-            <div class="step-number">3</div>
-            <div class="step-title">What connects the parts?</div>
-        </div>
-        <p class="step-desc">If your outline has multiple sections, steps, or tips — what single principle do they all serve? That underlying principle might be the through-line.</p>
-        <textarea id="q-connection" rows="3" placeholder="e.g. Every section is a decision to make, not a task to complete. The constraint: it all fits on one page."></textarea>
-    </div>
-
-    <div class="step">
-        <div class="step-header">
-            <div class="step-number">4</div>
-            <div class="step-title">What would you say over coffee?</div>
-        </div>
-        <p class="step-desc">If someone asked your honest take on this topic, what would it be? That instinct is often the through-line hiding in plain sight.</p>
-        <textarea id="q-coffee" rows="3" placeholder="e.g. Most people don't need more SEO knowledge. They need to make five decisions and stop second-guessing them."></textarea>
-    </div>
-
-    <hr class="section-divider">
-
-    <!-- ═══════════════════════════════ -->
-    <!-- CANDIDATES                      -->
-    <!-- ═══════════════════════════════ -->
-    <p class="section-label">Draft your through-line</p>
-
-    <div class="candidates-panel">
-        <p class="candidates-header">Through-line candidates</p>
-        <p class="candidates-hint">Based on your answers above, write up to three through-line options. One sentence each. The best ones reframe the topic, not just describe it.</p>
-        <div class="candidate-input">
-            <span class="candidate-label">Option A</span>
-            <input type="text" class="candidate-field" id="candidate-a" placeholder="Your strongest through-line...">
-        </div>
-        <div class="candidate-input">
-            <span class="candidate-label">Option B</span>
-            <input type="text" class="candidate-field" id="candidate-b" placeholder="An alternative angle...">
-        </div>
-        <div class="candidate-input">
-            <span class="candidate-label">Option C</span>
-            <input type="text" class="candidate-field" id="candidate-c" placeholder="The boldest version...">
+            <input type="text" id="topic-input" placeholder="Enter your topic...">
         </div>
     </div>
 
-    <hr class="section-divider">
+    <!-- ═══════════════════════════════════════ -->
+    <!-- FOUR QUESTIONS                          -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="questions-section">
+        <div class="section-narrow">
+            <p class="questions-label">Step 1</p>
+            <h2 class="questions-title">Find your through-line</h2>
+            <p class="questions-subtitle">A through-line is the central idea that organizes your entire piece. Answer these four questions to surface yours — the best through-lines usually emerge from the tension between what people assume and what's actually true.</p>
+        </div>
 
-    <!-- ═══════════════════════════════ -->
-    <!-- TESTING                         -->
-    <!-- ═══════════════════════════════ -->
-    <p class="section-label">Test your through-line</p>
-    <p style="font-size: 13px; color: var(--dim); margin-bottom: 20px;">Pick your strongest candidate and run it through these five checks. Click to toggle pass/fail.</p>
+        <div class="questions-grid">
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-title">What's the misconception?</div>
+                </div>
+                <p class="step-desc">What do most people assume about this topic that isn't quite right? The through-line can be the correction.</p>
+                <textarea id="q-misconception" rows="3" placeholder="e.g. Most people think SEO strategy means doing more things. Actually, it means making fewer, clearer decisions."></textarea>
+            </div>
 
-    <div class="test-grid">
-        <div class="test-row">
-            <div class="test-info">
-                <div class="test-name">Colleague test</div>
-                <div class="test-question">Could someone explain it to a colleague in one sentence?</div>
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-title">What's the transformation?</div>
+                </div>
+                <p class="step-desc">If the reader fully absorbs this piece, what changes for them? Name the shift concretely — not "they'll know more" but "they'll stop doing X and start doing Y."</p>
+                <textarea id="q-transformation" rows="3" placeholder="e.g. They'll stop treating SEO as a task list and start treating it as five decisions about their business."></textarea>
             </div>
-            <div class="test-toggle" onclick="toggleTest(this)">
-                <span class="test-toggle-icon">&mdash;</span>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-title">What connects the parts?</div>
+                </div>
+                <p class="step-desc">If your outline has multiple sections, steps, or tips — what single principle do they all serve? That underlying principle might be the through-line.</p>
+                <textarea id="q-connection" rows="3" placeholder="e.g. Every section is a decision to make, not a task to complete. The constraint: it all fits on one page."></textarea>
             </div>
-        </div>
-        <div class="test-row">
-            <div class="test-info">
-                <div class="test-name">Organization test</div>
-                <div class="test-question">Does it give your content a spine? Can each section serve it?</div>
-            </div>
-            <div class="test-toggle" onclick="toggleTest(this)">
-                <span class="test-toggle-icon">&mdash;</span>
-            </div>
-        </div>
-        <div class="test-row">
-            <div class="test-info">
-                <div class="test-name">Tension test</div>
-                <div class="test-question">Does it push against a common approach? Would anyone disagree?</div>
-            </div>
-            <div class="test-toggle" onclick="toggleTest(this)">
-                <span class="test-toggle-icon">&mdash;</span>
-            </div>
-        </div>
-        <div class="test-row">
-            <div class="test-info">
-                <div class="test-name">Intent test</div>
-                <div class="test-question">Does the reader still get what they searched for?</div>
-            </div>
-            <div class="test-toggle" onclick="toggleTest(this)">
-                <span class="test-toggle-icon">&mdash;</span>
-            </div>
-        </div>
-        <div class="test-row">
-            <div class="test-info">
-                <div class="test-name">Travel test</div>
-                <div class="test-question">Could this become a video, webinar, LinkedIn post, or workshop?</div>
-            </div>
-            <div class="test-toggle" onclick="toggleTest(this)">
-                <span class="test-toggle-icon">&mdash;</span>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <div class="step-title">What would you say over coffee?</div>
+                </div>
+                <p class="step-desc">If someone asked your honest take on this topic, what would it be? That instinct is often the through-line hiding in plain sight.</p>
+                <textarea id="q-coffee" rows="3" placeholder="e.g. Most people don't need more SEO knowledge. They need to make five decisions and stop second-guessing them."></textarea>
             </div>
         </div>
     </div>
 
-    <div class="score-bar">
-        <div class="score-track">
-            <div class="score-fill" id="score-fill"></div>
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CANDIDATES                              -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="candidates-section">
+        <div class="candidates-inner">
+            <p class="candidates-label">Step 2</p>
+            <h2 class="candidates-title">Draft your through-line</h2>
+            <p class="candidates-subtitle">Based on your answers above, write up to three through-line options. One sentence each. The best ones reframe the topic, not just describe it.</p>
+
+            <div class="candidates-panel">
+                <div class="candidate-input">
+                    <span class="candidate-label">Option A</span>
+                    <input type="text" class="candidate-field" id="candidate-a" placeholder="Your strongest through-line...">
+                </div>
+                <div class="candidate-input">
+                    <span class="candidate-label">Option B</span>
+                    <input type="text" class="candidate-field" id="candidate-b" placeholder="An alternative angle...">
+                </div>
+                <div class="candidate-input">
+                    <span class="candidate-label">Option C</span>
+                    <input type="text" class="candidate-field" id="candidate-c" placeholder="The boldest version...">
+                </div>
+            </div>
         </div>
-        <div class="score-label" id="score-label">0/5</div>
     </div>
-    <div class="score-verdict" id="score-verdict"></div>
 
-    <hr class="section-divider">
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TESTING                                 -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="testing-section">
+        <div class="section-narrow">
+            <p class="testing-label">Step 3</p>
+            <h2 class="testing-title">Test your through-line</h2>
+            <p class="testing-subtitle">Pick your strongest candidate and run it through these five checks. Click the right side to toggle: untested &rarr; pass &rarr; fail.</p>
+        </div>
 
-    <!-- ═══════════════════════════════ -->
-    <!-- CLAUDE PROMPT                   -->
-    <!-- ═══════════════════════════════ -->
-    <p class="section-label">Need help? Use Claude</p>
+        <div class="test-grid">
+            <div class="test-row">
+                <div class="test-info">
+                    <div class="test-name">Colleague test</div>
+                    <div class="test-question">Could someone explain it to a colleague in one sentence?</div>
+                </div>
+                <div class="test-toggle" onclick="toggleTest(this)">
+                    <span class="test-toggle-icon">&mdash;</span>
+                </div>
+            </div>
+            <div class="test-row">
+                <div class="test-info">
+                    <div class="test-name">Organization test</div>
+                    <div class="test-question">Does it give your content a spine? Can each section serve it?</div>
+                </div>
+                <div class="test-toggle" onclick="toggleTest(this)">
+                    <span class="test-toggle-icon">&mdash;</span>
+                </div>
+            </div>
+            <div class="test-row">
+                <div class="test-info">
+                    <div class="test-name">Tension test</div>
+                    <div class="test-question">Does it push against a common approach? Would anyone disagree?</div>
+                </div>
+                <div class="test-toggle" onclick="toggleTest(this)">
+                    <span class="test-toggle-icon">&mdash;</span>
+                </div>
+            </div>
+            <div class="test-row">
+                <div class="test-info">
+                    <div class="test-name">Intent test</div>
+                    <div class="test-question">Does the reader still get what they searched for?</div>
+                </div>
+                <div class="test-toggle" onclick="toggleTest(this)">
+                    <span class="test-toggle-icon">&mdash;</span>
+                </div>
+            </div>
+            <div class="test-row">
+                <div class="test-info">
+                    <div class="test-name">Travel test</div>
+                    <div class="test-question">Could this become a video, webinar, LinkedIn post, or workshop?</div>
+                </div>
+                <div class="test-toggle" onclick="toggleTest(this)">
+                    <span class="test-toggle-icon">&mdash;</span>
+                </div>
+            </div>
+        </div>
 
+        <div class="score-bar">
+            <div class="score-track">
+                <div class="score-fill" id="score-fill"></div>
+            </div>
+            <div class="score-label" id="score-label">0/5</div>
+        </div>
+        <div class="score-verdict" id="score-verdict"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CLAUDE PROMPT                           -->
+    <!-- ═══════════════════════════════════════ -->
     <div class="prompt-section">
-        <p class="prompt-header">Generated prompt</p>
-        <p class="prompt-hint">This prompt is built from your inputs above. Copy it into Claude (or any AI assistant) to explore through-line options. The output is a starting point — the through-line will sharpen through writing and editing.</p>
-        <div class="prompt-output" id="prompt-output">Enter a topic above to generate your prompt...</div>
-        <button class="copy-btn" id="copy-btn" onclick="copyPrompt()">Copy prompt</button>
+        <div class="prompt-inner">
+            <p class="prompt-label">Bonus</p>
+            <h2 class="prompt-title">Generate a Claude prompt</h2>
+            <p class="prompt-subtitle">This prompt is built from your inputs above. Copy it into Claude (or any AI assistant) to explore through-line options further. The output is a starting point — the through-line will sharpen through writing and editing.</p>
+
+            <div class="prompt-card">
+                <div class="prompt-output" id="prompt-output">Enter a topic above to generate your prompt...</div>
+                <button class="copy-btn" id="copy-btn" onclick="copyPrompt()">Copy prompt</button>
+            </div>
+        </div>
     </div>
 
-    <section class="newsletter">
-        <p>Get essays by email &mdash; <span class="dim">no spam, no schedule.</span></p>
-        <form
-            action="https://buttondown.email/api/emails/embed-subscribe/ofei"
-            method="post"
-            target="popupwindow"
-            class="subscribe-form"
-        >
-            <input type="email" name="email" placeholder="your@email.com" required />
-            <button type="submit">Subscribe</button>
-        </form>
-    </section>
+    <!-- ═══════════════════════════════════════ -->
+    <!-- NEWSLETTER                              -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="newsletter-section">
+        <div class="newsletter-inner">
+            <p>Get essays by email &mdash; <span class="dim">no spam, no schedule.</span></p>
+            <form
+                action="https://buttondown.email/api/emails/embed-subscribe/ofei"
+                method="post"
+                target="popupwindow"
+                class="subscribe-form"
+            >
+                <input type="email" name="email" placeholder="your@email.com" required />
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
 
-    <footer>
+    <!-- ═══════════════════════════════════════ -->
+    <!-- FOOTER                                  -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="footer">
         <a href="index.html">&larr; back to home</a> &middot;
         <a href="essays/the-content-library.html">The Content Library essay</a> &middot;
         <a href="tools.html">All tools</a>
-    </footer>
+    </div>
     <script async data-id="101499378" src="//static.getclicky.com/js"></script>
 
 <script>
