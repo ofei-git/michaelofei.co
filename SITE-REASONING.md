@@ -74,6 +74,42 @@ ofei-site/
 
 Tool pages follow the Content Library Valuation page (`content-library-valuation.html`) as the reference template. Every new tool should use this full-width section approach.
 
+### Tool Page Anatomy
+
+Every tool page follows a four-part experience:
+
+1. **Orient** — Topbar (back link) → Hero (centered title, subtitle, lead text) → Stats/How-it-works bar (3-4 numbers summarizing the experience). The reader should understand what the tool does and what they'll get within 5 seconds.
+
+2. **Input** — The working area where users provide their data. Section-based with alternating backgrounds (`--bg` and `--bg-dark`). Interactive elements (forms, textareas, calculators) sit inside wider containers (`section-inner` at 1200px), while explanatory text uses narrower containers (`section-narrow` at 720px). Each input phase gets its own labeled section (Step 1, Step 2, etc.).
+
+3. **Output** — Where the tool gives something back. Score bars, verdicts, results cards, generated prompts. This is the payoff for the input work. Should feel like a reward, not just a summary.
+
+4. **Extend** — Newsletter signup (centered, `max-width: 480px`) + footer with links to related essays and tools. The newsletter CTA is always centered with `text-align: center` and `justify-content: center` on the form.
+
+### Tool Page Design Principles
+
+- **Every tool links to its parent essay.** The essay explains the thinking; the tool makes it actionable. Link in the hero ("Based on the ideas in...") and in the footer.
+- **Auto-assist where possible.** Don't make users do all the work manually. Suggest, pre-fill, extract, synthesize. The Through-Line Guide's "Suggest from answers" button is the model: it bridges the gap between input and creative synthesis.
+- **Nothing is saved or sent.** All tools run client-side in the browser. State this explicitly in the hero. This builds trust and removes friction.
+- **Placeholder text teaches.** The placeholder examples in form fields are as important as the instructions. They show users exactly what good input looks like. Use a consistent, non-marketing B2B example throughout each tool (e.g., "customer onboarding" for the through-line guide).
+- **AI prompt generation is a standard output.** Every tool should generate a tailored AI prompt from the user's inputs. Branded as "AI prompt" (not Claude-specific) for universality. This extends the tool's value beyond the page itself.
+
+### Current Tool Pages
+
+| Tool | File | Parent Essay | Key Features |
+|------|------|-------------|--------------|
+| Content Library Valuation | `content-library-valuation.html` | The Content Library | 5-view calculator, results cards, stats bar |
+| Through-Line Development Guide | `through-line-guide.html` | Why Helpful Content Gets Forgotten | 4 questions, auto-suggest, 5-test scoring, AI prompt generator |
+
+### How to Add New Tools
+
+1. Create new HTML file at root (copy section structure from existing tool)
+2. Follow the four-part anatomy: Orient → Input → Output → Extend
+3. Link to parent essay in hero and footer
+4. Add entry to `tools.html`
+5. Include Clicky analytics and newsletter signup
+6. Include AI prompt generation section if the tool collects structured input
+
 ## Technical Stack
 
 - **Pure static HTML/CSS** — no build step, no framework
