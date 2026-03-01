@@ -45,13 +45,15 @@ Green: #00BB00 (links, hover states)
 ofei-site/
 ├── index.html                     # Home
 ├── about.html                     # About
-├── tools.html                     # Tools listing
-├── content-library-valuation.html # Tool: valuation calculator
-├── through-line-guide.html        # Tool: through-line worksheet
+├── projects.html                  # Projects
 ├── feed.xml                       # RSS
-└── essays/
-    ├── index.html                 # Essays listing
-    └── [essay].html               # Individual essays
+├── essays/
+│   ├── index.html                 # Essays listing
+│   └── [essay].html               # Individual essays
+└── tools/
+    ├── index.html                 # Tools listing
+    ├── content-library-valuation.html  # Tool: valuation calculator
+    └── through-line-guide.html         # Tool: through-line worksheet
 ```
 
 ### Two Page Types: Essays vs. Tools
@@ -72,7 +74,7 @@ ofei-site/
 - Interactive elements (forms, toggles, calculators)
 - The experience should feel distinct from reading an essay — like opening a different kind of page
 
-Tool pages follow the Content Library Valuation page (`content-library-valuation.html`) as the reference template. Every new tool should use this full-width section approach.
+Tool pages follow the Content Library Valuation page (`tools/content-library-valuation.html`) as the reference template. Every new tool should use this full-width section approach.
 
 ### Tool Page Anatomy
 
@@ -98,15 +100,15 @@ Every tool page follows a four-part experience:
 
 | Tool | File | Parent Essay | Key Features |
 |------|------|-------------|--------------|
-| Content Library Valuation | `content-library-valuation.html` | The Content Library | 5-view calculator, results cards, stats bar |
-| Through-Line Development Guide | `through-line-guide.html` | Why Helpful Content Gets Forgotten | 4 questions, auto-suggest, 5-test scoring, AI prompt generator |
+| Content Library Valuation | `tools/content-library-valuation.html` | The Content Library | 5-view calculator, results cards, stats bar |
+| Through-Line Development Guide | `tools/through-line-guide.html` | Why Helpful Content Gets Forgotten | 4 questions, auto-suggest, 5-test scoring, AI prompt generator |
 
 ### How to Add New Tools
 
-1. Create new HTML file at root (copy section structure from existing tool)
+1. Create new HTML file in `tools/` directory (copy section structure from existing tool)
 2. Follow the four-part anatomy: Orient → Input → Output → Extend
-3. Link to parent essay in hero and footer
-4. Add entry to `tools.html`
+3. Link to parent essay in hero and footer (use `../essays/` relative paths)
+4. Add entry to `tools/index.html`
 5. Include Clicky analytics and newsletter signup
 6. Include AI prompt generation section if the tool collects structured input
 
