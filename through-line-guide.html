@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Through-Line Development Guide — Michael Ofei</title>
+    <style>
+        :root {
+            --bg: #7A251E;
+            --bg-light: #8a352e;
+            --bg-dark: #6a1f18;
+            --bg-darker: #5a1a15;
+            --text: #D7C9A7;
+            --text-bright: #E8DAB8;
+            --yellow: #E7B000;
+            --green: #00BB00;
+            --green-dim: #009900;
+            --dim: #a89878;
+            --dim-dark: #8a7a5a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+            padding: 40px 20px;
+            max-width: 740px;
+            margin: 0 auto;
+        }
+
+        /* ── Header ── */
+        header {
+            margin-bottom: 48px;
+        }
+
+        .back {
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        .back:hover { color: var(--green); }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            color: var(--dim);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .tool-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--yellow);
+        }
+
+        /* ── Intro ── */
+        .intro {
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .intro p {
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .intro strong {
+            color: var(--text-bright);
+        }
+
+        .intro em {
+            color: var(--dim);
+            font-style: normal;
+        }
+
+        /* ── Shared form elements ── */
+        label {
+            display: block;
+            font-size: 14px;
+            color: var(--text-bright);
+            margin-bottom: 6px;
+        }
+
+        .label-hint {
+            font-size: 12px;
+            color: var(--dim);
+            font-weight: normal;
+            display: block;
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 14px;
+            background: var(--bg-darker);
+            border: 1px solid var(--bg-light);
+            color: var(--text);
+            border-radius: 4px;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--yellow);
+        }
+
+        input[type="text"]::placeholder,
+        textarea::placeholder {
+            color: var(--dim-dark);
+        }
+
+        /* ── Topic input ── */
+        .topic-section {
+            margin-bottom: 40px;
+        }
+
+        /* ── Step sections ── */
+        .step {
+            margin-bottom: 36px;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .step-number {
+            font-size: 11px;
+            color: var(--bg);
+            background: var(--yellow);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: 15px;
+            color: var(--text-bright);
+        }
+
+        .step-desc {
+            font-size: 13px;
+            color: var(--dim);
+            margin-bottom: 14px;
+            line-height: 1.6;
+            padding-left: 34px;
+        }
+
+        .step textarea {
+            margin-left: 0;
+        }
+
+        /* ── Section dividers ── */
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--bg-light);
+            margin: 40px 0;
+        }
+
+        .section-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        /* ── Through-line candidates panel ── */
+        .candidates-panel {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+
+        .candidates-header {
+            font-size: 14px;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+
+        .candidates-hint {
+            font-size: 12px;
+            color: var(--dim);
+            margin-bottom: 16px;
+        }
+
+        .candidate-input {
+            margin-bottom: 12px;
+        }
+
+        .candidate-input:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .candidate-label {
+            font-size: 11px;
+            color: var(--dim);
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .candidate-field {
+            width: 100%;
+            padding: 10px 12px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 14px;
+            background: var(--bg-darker);
+            border: 1px solid var(--bg-light);
+            color: var(--green);
+            border-radius: 4px;
+        }
+
+        .candidate-field:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+
+        .candidate-field::placeholder {
+            color: var(--dim-dark);
+        }
+
+        /* ── Testing section ── */
+        .test-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .test-row {
+            display: grid;
+            grid-template-columns: 1fr 60px;
+            gap: 1px;
+            background: var(--bg-dark);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .test-info {
+            padding: 14px 16px;
+            background: var(--bg-darker);
+        }
+
+        .test-name {
+            font-size: 13px;
+            color: var(--text-bright);
+            margin-bottom: 2px;
+        }
+
+        .test-question {
+            font-size: 11px;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+
+        .test-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-darker);
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.15s;
+        }
+
+        .test-toggle:hover {
+            background: var(--bg-dark);
+        }
+
+        .test-toggle-icon {
+            font-size: 16px;
+            color: var(--dim-dark);
+            transition: color 0.15s;
+        }
+
+        .test-toggle.pass .test-toggle-icon {
+            color: var(--green);
+        }
+
+        .test-toggle.fail .test-toggle-icon {
+            color: var(--dim-dark);
+        }
+
+        /* ── Score bar ── */
+        .score-bar {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .score-track {
+            flex: 1;
+            height: 6px;
+            background: var(--bg-darker);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            background: var(--dim-dark);
+            border-radius: 3px;
+            transition: width 0.3s, background 0.3s;
+            width: 0%;
+        }
+
+        .score-fill.good { background: var(--green); }
+        .score-fill.okay { background: var(--yellow); }
+        .score-fill.weak { background: var(--dim); }
+
+        .score-label {
+            font-size: 12px;
+            color: var(--dim);
+            min-width: 40px;
+            text-align: right;
+        }
+
+        .score-verdict {
+            font-size: 12px;
+            color: var(--dim);
+            margin-top: 8px;
+        }
+
+        .score-verdict strong {
+            color: var(--text-bright);
+            font-weight: normal;
+        }
+
+        /* ── Claude prompt section ── */
+        .prompt-section {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 40px 0;
+        }
+
+        .prompt-header {
+            font-size: 14px;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+
+        .prompt-hint {
+            font-size: 12px;
+            color: var(--dim);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .prompt-output {
+            background: var(--bg-darker);
+            border: 1px solid var(--bg-light);
+            border-radius: 4px;
+            padding: 16px;
+            font-size: 12px;
+            color: var(--text);
+            line-height: 1.6;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .copy-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 16px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 12px;
+            background: transparent;
+            border: 1px solid var(--green);
+            color: var(--green);
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .copy-btn:hover {
+            background: var(--green);
+            color: var(--bg);
+        }
+
+        .copy-btn.copied {
+            border-color: var(--dim);
+            color: var(--dim);
+            background: transparent;
+        }
+
+        /* ── Newsletter ── */
+        .newsletter {
+            margin: 60px 0;
+            padding-top: 24px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .newsletter p { margin-bottom: 1rem; }
+        .newsletter .dim { color: var(--dim); }
+
+        .subscribe-form {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .subscribe-form input[type="email"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.75rem;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 1rem;
+            background: var(--bg-darker);
+            border: 1px solid var(--dim);
+            color: var(--text);
+        }
+
+        .subscribe-form input[type="email"]::placeholder { color: var(--dim); }
+
+        .subscribe-form input[type="email"]:focus {
+            outline: none;
+            border-color: var(--yellow);
+        }
+
+        .subscribe-form button {
+            padding: 0.75rem 1.5rem;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 1rem;
+            background: transparent;
+            border: 1px solid var(--green);
+            color: var(--green);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .subscribe-form button:hover {
+            background: var(--green);
+            color: var(--bg);
+        }
+
+        /* ── Footer ── */
+        footer {
+            margin-top: 80px;
+            padding-top: 24px;
+            border-top: 1px solid var(--bg-light);
+            color: var(--dim);
+            font-size: 13px;
+        }
+
+        footer a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+
+        footer a:hover { color: var(--green); }
+
+        /* ── Article links ── */
+        a.text-link {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        a.text-link:hover { text-decoration: underline; }
+
+        /* ── Responsive ── */
+        @media (max-width: 500px) {
+            body {
+                font-size: 14px;
+                padding: 24px 16px;
+            }
+
+            .test-row {
+                grid-template-columns: 1fr 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back">&larr; home</a>
+        <p class="tool-label">Interactive tool</p>
+        <h1>Through-Line Development Guide</h1>
+        <p class="subtitle">Find the central idea that makes your content memorable instead of just helpful.</p>
+    </header>
+
+    <div class="intro">
+        <p>A <strong>through-line</strong> is the central idea that organizes your entire piece. It's the perspective that connects your sections, gives them a reason to exist in that order, and gives the reader something to hold onto when the details fade.</p>
+
+        <p>Most content answers a question well and gets forgotten the next day. A through-line is what turns helpful content into content that sticks — because the reader walks away with a framework, not just information.</p>
+
+        <p><em>This tool walks you through four questions to find your through-line, then five tests to sharpen it. Everything runs in your browser — nothing is saved or sent anywhere.</em></p>
+    </div>
+
+    <!-- ═══════════════════════════════ -->
+    <!-- TOPIC INPUT                     -->
+    <!-- ═══════════════════════════════ -->
+    <div class="topic-section">
+        <label for="topic-input">What's the topic or keyword?
+            <span class="label-hint">The subject you're writing about. e.g. "SEO strategy," "content marketing ROI," "email onboarding sequences"</span>
+        </label>
+        <input type="text" id="topic-input" placeholder="Enter your topic...">
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- ═══════════════════════════════ -->
+    <!-- FOUR QUESTIONS                  -->
+    <!-- ═══════════════════════════════ -->
+    <p class="section-label">Find your through-line</p>
+
+    <div class="step">
+        <div class="step-header">
+            <div class="step-number">1</div>
+            <div class="step-title">What's the misconception?</div>
+        </div>
+        <p class="step-desc">What do most people assume about this topic that isn't quite right? The through-line can be the correction.</p>
+        <textarea id="q-misconception" rows="3" placeholder="e.g. Most people think SEO strategy means doing more things. Actually, it means making fewer, clearer decisions."></textarea>
+    </div>
+
+    <div class="step">
+        <div class="step-header">
+            <div class="step-number">2</div>
+            <div class="step-title">What's the transformation?</div>
+        </div>
+        <p class="step-desc">If the reader fully absorbs this piece, what changes for them? Name the shift concretely — not "they'll know more" but "they'll stop doing X and start doing Y."</p>
+        <textarea id="q-transformation" rows="3" placeholder="e.g. They'll stop treating SEO as a task list and start treating it as five decisions about their business."></textarea>
+    </div>
+
+    <div class="step">
+        <div class="step-header">
+            <div class="step-number">3</div>
+            <div class="step-title">What connects the parts?</div>
+        </div>
+        <p class="step-desc">If your outline has multiple sections, steps, or tips — what single principle do they all serve? That underlying principle might be the through-line.</p>
+        <textarea id="q-connection" rows="3" placeholder="e.g. Every section is a decision to make, not a task to complete. The constraint: it all fits on one page."></textarea>
+    </div>
+
+    <div class="step">
+        <div class="step-header">
+            <div class="step-number">4</div>
+            <div class="step-title">What would you say over coffee?</div>
+        </div>
+        <p class="step-desc">If someone asked your honest take on this topic, what would it be? That instinct is often the through-line hiding in plain sight.</p>
+        <textarea id="q-coffee" rows="3" placeholder="e.g. Most people don't need more SEO knowledge. They need to make five decisions and stop second-guessing them."></textarea>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- ═══════════════════════════════ -->
+    <!-- CANDIDATES                      -->
+    <!-- ═══════════════════════════════ -->
+    <p class="section-label">Draft your through-line</p>
+
+    <div class="candidates-panel">
+        <p class="candidates-header">Through-line candidates</p>
+        <p class="candidates-hint">Based on your answers above, write up to three through-line options. One sentence each. The best ones reframe the topic, not just describe it.</p>
+        <div class="candidate-input">
+            <span class="candidate-label">Option A</span>
+            <input type="text" class="candidate-field" id="candidate-a" placeholder="Your strongest through-line...">
+        </div>
+        <div class="candidate-input">
+            <span class="candidate-label">Option B</span>
+            <input type="text" class="candidate-field" id="candidate-b" placeholder="An alternative angle...">
+        </div>
+        <div class="candidate-input">
+            <span class="candidate-label">Option C</span>
+            <input type="text" class="candidate-field" id="candidate-c" placeholder="The boldest version...">
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- ═══════════════════════════════ -->
+    <!-- TESTING                         -->
+    <!-- ═══════════════════════════════ -->
+    <p class="section-label">Test your through-line</p>
+    <p style="font-size: 13px; color: var(--dim); margin-bottom: 20px;">Pick your strongest candidate and run it through these five checks. Click to toggle pass/fail.</p>
+
+    <div class="test-grid">
+        <div class="test-row">
+            <div class="test-info">
+                <div class="test-name">Colleague test</div>
+                <div class="test-question">Could someone explain it to a colleague in one sentence?</div>
+            </div>
+            <div class="test-toggle" onclick="toggleTest(this)">
+                <span class="test-toggle-icon">&mdash;</span>
+            </div>
+        </div>
+        <div class="test-row">
+            <div class="test-info">
+                <div class="test-name">Organization test</div>
+                <div class="test-question">Does it give your content a spine? Can each section serve it?</div>
+            </div>
+            <div class="test-toggle" onclick="toggleTest(this)">
+                <span class="test-toggle-icon">&mdash;</span>
+            </div>
+        </div>
+        <div class="test-row">
+            <div class="test-info">
+                <div class="test-name">Tension test</div>
+                <div class="test-question">Does it push against a common approach? Would anyone disagree?</div>
+            </div>
+            <div class="test-toggle" onclick="toggleTest(this)">
+                <span class="test-toggle-icon">&mdash;</span>
+            </div>
+        </div>
+        <div class="test-row">
+            <div class="test-info">
+                <div class="test-name">Intent test</div>
+                <div class="test-question">Does the reader still get what they searched for?</div>
+            </div>
+            <div class="test-toggle" onclick="toggleTest(this)">
+                <span class="test-toggle-icon">&mdash;</span>
+            </div>
+        </div>
+        <div class="test-row">
+            <div class="test-info">
+                <div class="test-name">Travel test</div>
+                <div class="test-question">Could this become a video, webinar, LinkedIn post, or workshop?</div>
+            </div>
+            <div class="test-toggle" onclick="toggleTest(this)">
+                <span class="test-toggle-icon">&mdash;</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="score-bar">
+        <div class="score-track">
+            <div class="score-fill" id="score-fill"></div>
+        </div>
+        <div class="score-label" id="score-label">0/5</div>
+    </div>
+    <div class="score-verdict" id="score-verdict"></div>
+
+    <hr class="section-divider">
+
+    <!-- ═══════════════════════════════ -->
+    <!-- CLAUDE PROMPT                   -->
+    <!-- ═══════════════════════════════ -->
+    <p class="section-label">Need help? Use Claude</p>
+
+    <div class="prompt-section">
+        <p class="prompt-header">Generated prompt</p>
+        <p class="prompt-hint">This prompt is built from your inputs above. Copy it into Claude (or any AI assistant) to explore through-line options. The output is a starting point — the through-line will sharpen through writing and editing.</p>
+        <div class="prompt-output" id="prompt-output">Enter a topic above to generate your prompt...</div>
+        <button class="copy-btn" id="copy-btn" onclick="copyPrompt()">Copy prompt</button>
+    </div>
+
+    <section class="newsletter">
+        <p>Get essays by email &mdash; <span class="dim">no spam, no schedule.</span></p>
+        <form
+            action="https://buttondown.email/api/emails/embed-subscribe/ofei"
+            method="post"
+            target="popupwindow"
+            class="subscribe-form"
+        >
+            <input type="email" name="email" placeholder="your@email.com" required />
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <footer>
+        <a href="index.html">&larr; back to home</a> &middot;
+        <a href="essays/the-content-library.html">The Content Library essay</a> &middot;
+        <a href="tools.html">All tools</a>
+    </footer>
+    <script async data-id="101499378" src="//static.getclicky.com/js"></script>
+
+<script>
+// ── Test toggles ──
+function toggleTest(el) {
+    const icon = el.querySelector('.test-toggle-icon');
+    if (el.classList.contains('pass')) {
+        el.classList.remove('pass');
+        el.classList.add('fail');
+        icon.innerHTML = '&times;';
+    } else if (el.classList.contains('fail')) {
+        el.classList.remove('fail');
+        icon.innerHTML = '&mdash;';
+    } else {
+        el.classList.add('pass');
+        icon.innerHTML = '&#10003;';
+    }
+    updateScore();
+}
+
+function updateScore() {
+    const toggles = document.querySelectorAll('.test-toggle');
+    let passed = 0;
+    let answered = 0;
+    toggles.forEach(t => {
+        if (t.classList.contains('pass')) { passed++; answered++; }
+        if (t.classList.contains('fail')) { answered++; }
+    });
+
+    const fill = document.getElementById('score-fill');
+    const label = document.getElementById('score-label');
+    const verdict = document.getElementById('score-verdict');
+
+    const pct = (passed / 5) * 100;
+    fill.style.width = pct + '%';
+    fill.className = 'score-fill';
+    if (passed >= 4) fill.classList.add('good');
+    else if (passed >= 2) fill.classList.add('okay');
+    else if (answered > 0) fill.classList.add('weak');
+
+    label.textContent = passed + '/5';
+
+    if (answered === 0) {
+        verdict.innerHTML = '';
+    } else if (passed === 5) {
+        verdict.innerHTML = '<strong>Strong through-line.</strong> It passes all five tests. This is ready to organize a piece of content.';
+    } else if (passed >= 4) {
+        verdict.innerHTML = '<strong>Almost there.</strong> Consider whether the failing test reveals a real weakness or an acceptable tradeoff.';
+    } else if (passed >= 2) {
+        verdict.innerHTML = '<strong>Getting closer.</strong> The through-line might need sharpening. Revisit the four questions — especially the misconception and the coffee test.';
+    } else {
+        verdict.innerHTML = '<strong>Keep exploring.</strong> This might be a topic dressed as a through-line. What would you argue, not just explain?';
+    }
+}
+
+// ── Dynamic prompt generation ──
+const topicInput = document.getElementById('topic-input');
+const qMisconception = document.getElementById('q-misconception');
+const qTransformation = document.getElementById('q-transformation');
+const qConnection = document.getElementById('q-connection');
+const qCoffee = document.getElementById('q-coffee');
+const candidateA = document.getElementById('candidate-a');
+const candidateB = document.getElementById('candidate-b');
+const candidateC = document.getElementById('candidate-c');
+const promptOutput = document.getElementById('prompt-output');
+
+const allInputs = [topicInput, qMisconception, qTransformation, qConnection, qCoffee, candidateA, candidateB, candidateC];
+allInputs.forEach(input => input.addEventListener('input', updatePrompt));
+
+function updatePrompt() {
+    const topic = topicInput.value.trim();
+    if (!topic) {
+        promptOutput.textContent = 'Enter a topic above to generate your prompt...';
+        return;
+    }
+
+    let prompt = `I'm developing a flagship piece of content about "${topic}" and need help finding the through-line — the one central idea that will organize the entire piece while still fully serving the search intent.\n`;
+
+    const misconception = qMisconception.value.trim();
+    const transformation = qTransformation.value.trim();
+    const connection = qConnection.value.trim();
+    const coffee = qCoffee.value.trim();
+
+    if (misconception || transformation || connection || coffee) {
+        prompt += `\nHere's my thinking so far:\n`;
+        if (misconception) prompt += `- Misconception: ${misconception}\n`;
+        if (transformation) prompt += `- Transformation: ${transformation}\n`;
+        if (connection) prompt += `- What connects the parts: ${connection}\n`;
+        if (coffee) prompt += `- Honest take (coffee test): ${coffee}\n`;
+    }
+
+    const candidates = [candidateA.value.trim(), candidateB.value.trim(), candidateC.value.trim()].filter(Boolean);
+    if (candidates.length > 0) {
+        prompt += `\nThrough-line candidates I'm considering:\n`;
+        candidates.forEach((c, i) => {
+            prompt += `${i + 1}. ${c}\n`;
+        });
+        prompt += `\nFor each candidate, evaluate:\n`;
+        prompt += `- Does it organize the content (give each section a reason to exist)?\n`;
+        prompt += `- Does the reader still get what they searched for?\n`;
+        prompt += `- Could someone explain it to a colleague in one sentence?\n`;
+        prompt += `- Does it push against a common approach?\n`;
+        prompt += `- Could it travel to other formats (video, webinar, LinkedIn)?\n`;
+        prompt += `\nThen recommend which is strongest and suggest how to sharpen it.`;
+    } else {
+        prompt += `\nHelp me find the through-line by working through these questions:\n`;
+        prompt += `1. What's the common misconception about this topic?\n`;
+        prompt += `2. What transformation should the reader experience?\n`;
+        prompt += `3. If there are multiple sections, what single principle connects them all?\n`;
+        prompt += `4. What's the honest, slightly opinionated take?\n`;
+        prompt += `\nGive me 3 through-line options. For each one:\n`;
+        prompt += `- The through-line (one sentence)\n`;
+        prompt += `- How it would organize the content\n`;
+        prompt += `- The intent check (does the reader still get what they searched for?)\n`;
+        prompt += `- The travel check (could this become a video, webinar, or social post?)\n`;
+        prompt += `\nThen tell me which is boldest, which is safest, and which best organizes the existing structure.`;
+    }
+
+    promptOutput.textContent = prompt;
+}
+
+function copyPrompt() {
+    const text = promptOutput.textContent;
+    if (text === 'Enter a topic above to generate your prompt...') return;
+
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.textContent = 'Copy prompt';
+            btn.classList.remove('copied');
+        }, 2000);
+    });
+}
+</script>
+</body>
+</html>

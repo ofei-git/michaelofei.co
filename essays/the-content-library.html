@@ -208,6 +208,36 @@
             color: var(--yellow);
         }
 
+        /* Tool callout */
+        .tool-callout {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            padding: 14px 16px;
+            background: var(--bg-dark);
+            border-left: 2px solid var(--green);
+            border-radius: 0 4px 4px 0;
+            margin: 24px 0;
+            font-size: 13px;
+        }
+
+        .tool-callout-label {
+            color: var(--dim);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            flex-shrink: 0;
+        }
+
+        .tool-callout a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        .tool-callout a:hover {
+            text-decoration: underline;
+        }
+
         /* INLINE VISUALS */
         .visual {
             background: var(--bg-dark);
@@ -722,6 +752,11 @@
             <p class="visual-caption">Your library is something you can see, count, and deploy from</p>
         </div>
 
+        <div class="tool-callout">
+            <span class="tool-callout-label">Tool</span>
+            <span>Want to know what your library is worth? <a href="../content-library-valuation.html">Calculate it &rarr;</a></span>
+        </div>
+
         <hr>
 
         <p>The idea came from Nicolas Cole. He was being interviewed about his next book, which is built around this concept of helping writers develop a content library. I was listening on a dog walk — the kind of thing that lands in the back of your mind and just sits there.</p>
@@ -809,7 +844,7 @@
 
         <p>This essay is a good example. The conversation that led to it started in a completely different place — an analysis of my existing essays, a question about audience, an observation about what the writing had in common. The content library concept emerged through the dialogue, then evolved through the drafting, and the argument you're reading now is significantly different from where I began. Writing doesn't just capture thinking. It develops it.</p>
 
-        <p>The content library is what accumulates when this becomes a practice. Each piece is thinking rescued from depreciation. And over time, the collection becomes more valuable than any individual piece — because it represents the full shape of how you see your domain. If you're building the case for content investment at your organization, I've been working on <a href="../content-library-valuation.html">a framework for valuing a content library as a business asset</a>.</p>
+        <p>The content library is what accumulates when this becomes a practice. Each piece is thinking rescued from depreciation. And over time, the collection becomes more valuable than any individual piece — because it represents the full shape of how you see your domain.</p>
 
         <!-- VISUAL 2: Depreciation Curve -->
         <div class="visual">
