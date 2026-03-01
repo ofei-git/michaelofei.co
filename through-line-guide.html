@@ -101,6 +101,22 @@
             font-style: normal;
         }
 
+        .hero-cta {
+            font-size: 13px;
+            color: var(--dim);
+            margin-top: 20px;
+        }
+
+        .hero-cta a {
+            color: var(--green);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--green-dim);
+        }
+
+        .hero-cta a:hover {
+            border-bottom-style: solid;
+        }
+
         /* ══════════════════════════════════════ */
         /* HOW IT WORKS BAR                       */
         /* ══════════════════════════════════════ */
@@ -308,6 +324,51 @@
             padding: 32px;
         }
 
+        .suggest-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .suggest-hint {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+
+        .suggest-btn {
+            padding: 8px 16px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 12px;
+            background: transparent;
+            border: 1px dashed var(--green-dim);
+            color: var(--green);
+            border-radius: 6px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.15s;
+        }
+
+        .suggest-btn:hover:not(:disabled) {
+            border-style: solid;
+            background: rgba(0, 187, 0, 0.08);
+        }
+
+        .suggest-btn:disabled {
+            border-color: var(--dim-dark);
+            color: var(--dim-dark);
+            cursor: default;
+        }
+
+        .suggest-btn.filled {
+            border-color: var(--dim);
+            color: var(--dim);
+            border-style: solid;
+        }
+
         .candidate-input {
             margin-bottom: 16px;
         }
@@ -322,7 +383,17 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 6px;
-            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .candidate-source {
+            font-size: 10px;
+            color: var(--dim-dark);
+            text-transform: none;
+            letter-spacing: 0;
+            font-style: italic;
         }
 
         .candidate-field {
@@ -488,7 +559,7 @@
         }
 
         /* ══════════════════════════════════════ */
-        /* CLAUDE PROMPT                          */
+        /* AI PROMPT                              */
         /* ══════════════════════════════════════ */
         .prompt-section {
             padding: 80px 48px;
@@ -674,6 +745,12 @@
             .test-row {
                 grid-template-columns: 1fr 56px;
             }
+
+            .suggest-bar {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
         }
 
         @media (max-width: 500px) {
@@ -711,6 +788,7 @@
             <h1>Through-Line Development Guide</h1>
             <p class="lead">Find the central idea that makes your content memorable instead of just helpful. Work through four questions, draft candidates, then test them.</p>
             <p class="lead" style="margin-top: 16px;"><em>Everything runs in your browser — nothing is saved or sent anywhere.</em></p>
+            <p class="hero-cta">Based on the ideas in <a href="essays/why-helpful-content-gets-forgotten.html">Why Helpful Content Gets Forgotten</a></p>
         </div>
     </div>
 
@@ -740,7 +818,7 @@
     <div class="topic-section">
         <div class="topic-inner">
             <label for="topic-input">What's the topic or keyword?</label>
-            <span class="label-hint">The subject you're writing about. e.g. "SEO strategy," "content marketing ROI," "email onboarding sequences"</span>
+            <span class="label-hint">The subject you're writing about. e.g. "customer onboarding," "product documentation," "enterprise sales enablement"</span>
             <input type="text" id="topic-input" placeholder="Enter your topic...">
         </div>
     </div>
@@ -762,7 +840,7 @@
                     <div class="step-title">What's the misconception?</div>
                 </div>
                 <p class="step-desc">What do most people assume about this topic that isn't quite right? The through-line can be the correction.</p>
-                <textarea id="q-misconception" rows="3" placeholder="e.g. Most people think SEO strategy means doing more things. Actually, it means making fewer, clearer decisions."></textarea>
+                <textarea id="q-misconception" rows="3" placeholder="e.g. Most companies think customer onboarding is about teaching product features. Actually, it's about reducing time to first value."></textarea>
             </div>
 
             <div class="step">
@@ -771,7 +849,7 @@
                     <div class="step-title">What's the transformation?</div>
                 </div>
                 <p class="step-desc">If the reader fully absorbs this piece, what changes for them? Name the shift concretely — not "they'll know more" but "they'll stop doing X and start doing Y."</p>
-                <textarea id="q-transformation" rows="3" placeholder="e.g. They'll stop treating SEO as a task list and start treating it as five decisions about their business."></textarea>
+                <textarea id="q-transformation" rows="3" placeholder="e.g. They'll stop building 12-step tutorial flows and start designing for one early win that proves the product is worth it."></textarea>
             </div>
 
             <div class="step">
@@ -780,7 +858,7 @@
                     <div class="step-title">What connects the parts?</div>
                 </div>
                 <p class="step-desc">If your outline has multiple sections, steps, or tips — what single principle do they all serve? That underlying principle might be the through-line.</p>
-                <textarea id="q-connection" rows="3" placeholder="e.g. Every section is a decision to make, not a task to complete. The constraint: it all fits on one page."></textarea>
+                <textarea id="q-connection" rows="3" placeholder="e.g. Every section comes back to the same principle: speed to value matters more than thoroughness of training."></textarea>
             </div>
 
             <div class="step">
@@ -789,7 +867,7 @@
                     <div class="step-title">What would you say over coffee?</div>
                 </div>
                 <p class="step-desc">If someone asked your honest take on this topic, what would it be? That instinct is often the through-line hiding in plain sight.</p>
-                <textarea id="q-coffee" rows="3" placeholder="e.g. Most people don't need more SEO knowledge. They need to make five decisions and stop second-guessing them."></textarea>
+                <textarea id="q-coffee" rows="3" placeholder="e.g. Most onboarding programs try to teach everything. The best ones help users succeed at one thing fast, then get out of the way."></textarea>
             </div>
         </div>
     </div>
@@ -801,19 +879,32 @@
         <div class="candidates-inner">
             <p class="candidates-label">Step 2</p>
             <h2 class="candidates-title">Draft your through-line</h2>
-            <p class="candidates-subtitle">Based on your answers above, write up to three through-line options. One sentence each. The best ones reframe the topic, not just describe it.</p>
+            <p class="candidates-subtitle">Write up to three through-line options. One sentence each. The best ones reframe the topic, not just describe it. Or use the suggest button to seed candidates from your answers above.</p>
 
             <div class="candidates-panel">
+                <div class="suggest-bar">
+                    <span class="suggest-hint">Fill empty fields from your answers above</span>
+                    <button class="suggest-btn" id="suggest-btn" onclick="suggestCandidates()" disabled>Suggest from answers</button>
+                </div>
                 <div class="candidate-input">
-                    <span class="candidate-label">Option A</span>
+                    <span class="candidate-label">
+                        Option A
+                        <span class="candidate-source" id="source-a"></span>
+                    </span>
                     <input type="text" class="candidate-field" id="candidate-a" placeholder="Your strongest through-line...">
                 </div>
                 <div class="candidate-input">
-                    <span class="candidate-label">Option B</span>
+                    <span class="candidate-label">
+                        Option B
+                        <span class="candidate-source" id="source-b"></span>
+                    </span>
                     <input type="text" class="candidate-field" id="candidate-b" placeholder="An alternative angle...">
                 </div>
                 <div class="candidate-input">
-                    <span class="candidate-label">Option C</span>
+                    <span class="candidate-label">
+                        Option C
+                        <span class="candidate-source" id="source-c"></span>
+                    </span>
                     <input type="text" class="candidate-field" id="candidate-c" placeholder="The boldest version...">
                 </div>
             </div>
@@ -888,13 +979,13 @@
     </div>
 
     <!-- ═══════════════════════════════════════ -->
-    <!-- CLAUDE PROMPT                           -->
+    <!-- AI PROMPT                               -->
     <!-- ═══════════════════════════════════════ -->
     <div class="prompt-section">
         <div class="prompt-inner">
             <p class="prompt-label">Bonus</p>
-            <h2 class="prompt-title">Generate a Claude prompt</h2>
-            <p class="prompt-subtitle">This prompt is built from your inputs above. Copy it into Claude (or any AI assistant) to explore through-line options further. The output is a starting point — the through-line will sharpen through writing and editing.</p>
+            <h2 class="prompt-title">Generate an AI prompt</h2>
+            <p class="prompt-subtitle">This prompt is built from your inputs above. Copy it into any AI assistant to explore through-line options further. The output is a starting point — the through-line will sharpen through writing and editing.</p>
 
             <div class="prompt-card">
                 <div class="prompt-output" id="prompt-output">Enter a topic above to generate your prompt...</div>
@@ -926,7 +1017,8 @@
     <!-- ═══════════════════════════════════════ -->
     <div class="footer">
         <a href="index.html">&larr; back to home</a> &middot;
-        <a href="essays/the-content-library.html">The Content Library essay</a> &middot;
+        <a href="essays/why-helpful-content-gets-forgotten.html">Why Helpful Content Gets Forgotten</a> &middot;
+        <a href="essays/the-content-library.html">The Content Library</a> &middot;
         <a href="tools.html">All tools</a>
     </div>
     <script async data-id="101499378" src="//static.getclicky.com/js"></script>
@@ -984,6 +1076,108 @@ function updateScore() {
     }
 }
 
+// ── Suggest through-line candidates ──
+const suggestBtn = document.getElementById('suggest-btn');
+
+function updateSuggestButton() {
+    const filled = [qMisconception, qTransformation, qConnection, qCoffee]
+        .filter(el => el.value.trim().length > 0).length;
+    suggestBtn.disabled = filled < 2;
+}
+
+function suggestCandidates() {
+    const coffee = qCoffee.value.trim();
+    const misconception = qMisconception.value.trim();
+    const transformation = qTransformation.value.trim();
+    const connection = qConnection.value.trim();
+
+    let filled = 0;
+
+    // Option A: From coffee test — your honest instinct
+    if (!candidateA.value.trim() && coffee) {
+        candidateA.value = firstSentence(coffee);
+        document.getElementById('source-a').textContent = 'from coffee test';
+        filled++;
+    }
+
+    // Option B: From misconception — the correction
+    if (!candidateB.value.trim() && misconception) {
+        candidateB.value = extractCorrection(misconception);
+        document.getElementById('source-b').textContent = 'from misconception';
+        filled++;
+    }
+
+    // Option C: From connection or transformation — the principle
+    if (!candidateC.value.trim()) {
+        if (connection) {
+            candidateC.value = firstSentence(connection);
+            document.getElementById('source-c').textContent = 'from connection';
+            filled++;
+        } else if (transformation) {
+            candidateC.value = firstSentence(transformation);
+            document.getElementById('source-c').textContent = 'from transformation';
+            filled++;
+        }
+    }
+
+    // Fill remaining empty slots from unused sources
+    if (!candidateA.value.trim() && transformation) {
+        candidateA.value = firstSentence(transformation);
+        document.getElementById('source-a').textContent = 'from transformation';
+        filled++;
+    }
+    if (!candidateB.value.trim() && connection) {
+        candidateB.value = firstSentence(connection);
+        document.getElementById('source-b').textContent = 'from connection';
+        filled++;
+    }
+
+    if (filled > 0) {
+        suggestBtn.textContent = 'Suggestions filled';
+        suggestBtn.classList.add('filled');
+        setTimeout(() => {
+            suggestBtn.textContent = 'Suggest from answers';
+            suggestBtn.classList.remove('filled');
+        }, 2000);
+        updatePrompt();
+    }
+}
+
+function firstSentence(text) {
+    // Get first complete sentence
+    const match = text.match(/^[^.!?]+[.!?]/);
+    if (match && match[0].length <= 160) return match[0].trim();
+    // If no sentence boundary or too long, trim at word boundary
+    if (text.length <= 130) return text;
+    return text.substring(0, 130).replace(/\s+\S*$/, '').replace(/[,;:\s]+$/, '') + '...';
+}
+
+function extractCorrection(text) {
+    // Try to find the "correction" after a turning word
+    const lower = text.toLowerCase();
+    const turns = [
+        'actually,', 'actually ', 'but ', 'in reality,', 'in reality ',
+        'the truth is', 'really,', 'really ', 'in fact,', 'in fact ',
+        'instead,', 'instead '
+    ];
+    for (const turn of turns) {
+        const idx = lower.indexOf(turn);
+        if (idx > 0) {
+            let after = text.substring(idx + turn.length).trim();
+            // Capitalize first letter
+            after = after.charAt(0).toUpperCase() + after.slice(1);
+            return firstSentence(after);
+        }
+    }
+    // Try second sentence if there are multiple
+    const sentences = text.match(/[^.!?]+[.!?]/g);
+    if (sentences && sentences.length >= 2) {
+        return sentences[1].trim();
+    }
+    // Fallback: return first sentence
+    return firstSentence(text);
+}
+
 // ── Dynamic prompt generation ──
 const topicInput = document.getElementById('topic-input');
 const qMisconception = document.getElementById('q-misconception');
@@ -997,6 +1191,11 @@ const promptOutput = document.getElementById('prompt-output');
 
 const allInputs = [topicInput, qMisconception, qTransformation, qConnection, qCoffee, candidateA, candidateB, candidateC];
 allInputs.forEach(input => input.addEventListener('input', updatePrompt));
+
+// Also update suggest button state when questions change
+[qMisconception, qTransformation, qConnection, qCoffee].forEach(input => {
+    input.addEventListener('input', updateSuggestButton);
+});
 
 function updatePrompt() {
     const topic = topicInput.value.trim();
