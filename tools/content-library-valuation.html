@@ -147,6 +147,23 @@
             line-height: 1.45;
         }
 
+        .stat-source {
+            font-size: 10px;
+            color: var(--dim-dark);
+            margin-top: 6px;
+        }
+
+        .stat-source a {
+            color: var(--dim-dark);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+        }
+
+        .stat-source a:hover {
+            color: var(--green);
+            border-bottom-color: var(--green);
+        }
+
         /* ══════════════════════════════════════ */
         /* REFRAME                                */
         /* ══════════════════════════════════════ */
@@ -252,6 +269,119 @@
 
         .reframe-caption strong {
             color: var(--text-bright);
+        }
+
+        /* ── Balance Sheet Visual ── */
+        .reframe-visual {
+            max-width: 720px;
+            margin: 48px auto 0;
+        }
+
+        .balance-shift {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .balance-sheet {
+            flex: 1;
+            padding: 24px;
+            border-radius: 8px;
+            min-height: 200px;
+        }
+
+        .balance-sheet--old {
+            background: rgba(90, 26, 21, 0.6);
+            border: 1px solid rgba(138, 122, 90, 0.15);
+        }
+
+        .balance-sheet--new {
+            background: rgba(90, 26, 21, 0.6);
+            border: 1px solid rgba(0, 187, 0, 0.2);
+        }
+
+        .balance-sheet-title {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dim-dark);
+            margin-bottom: 16px;
+        }
+
+        .balance-sheet--new .balance-sheet-title {
+            color: var(--green-dim);
+        }
+
+        .bs-section-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dim-dark);
+            margin-bottom: 8px;
+            margin-top: 16px;
+        }
+
+        .bs-section-label:first-of-type {
+            margin-top: 0;
+        }
+
+        .bs-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            padding: 3px 0;
+            color: var(--dim);
+        }
+
+        .bs-line--content {
+            color: var(--text);
+        }
+
+        .bs-line--struck {
+            color: var(--dim-dark);
+            text-decoration: line-through;
+        }
+
+        .bs-line--moved {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        .bs-divider {
+            border: none;
+            border-top: 1px solid rgba(138, 122, 90, 0.2);
+            margin: 8px 0;
+        }
+
+        .balance-arrow {
+            text-align: center;
+            font-size: 24px;
+            color: var(--dim-dark);
+            flex-shrink: 0;
+            animation: pulseArrow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseArrow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        .bs-annotation {
+            font-size: 9px;
+            color: var(--green-dim);
+            margin-top: 12px;
+            line-height: 1.5;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .reframe-visual-caption {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dim-dark);
+            text-align: center;
+            margin-top: 24px;
         }
 
         /* ══════════════════════════════════════ */
@@ -1224,6 +1354,8 @@
             .summary-section { grid-template-columns: 1fr; }
             .reframe-grid { grid-template-columns: 1fr; gap: 16px; }
             .reframe-arrow { transform: rotate(90deg); text-align: center; }
+            .balance-shift { flex-direction: column; gap: 16px; }
+            .balance-arrow { transform: rotate(90deg); }
             .definition-grid { grid-template-columns: 1fr; }
             .definition-card { padding: 32px 24px; }
             .discovery-inner { grid-template-columns: 1fr; }
@@ -1260,19 +1392,23 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-number">58%</div>
-                <div class="stat-label">Of Google searches now include AI-generated features</div>
+                <div class="stat-label">Fewer clicks to #1 results when AI Overviews appear</div>
+                <div class="stat-source"><a href="https://ahrefs.com/blog/ai-overviews-reduce-clicks-update/" target="_blank" rel="noopener">Ahrefs, 2025</a></div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">50M+</div>
-                <div class="stat-label">Monthly impressions a mature content library generates</div>
+                <div class="stat-number">1 in 3</div>
+                <div class="stat-label">Google searches result in a click to the open web</div>
+                <div class="stat-source"><a href="https://sparktoro.com/blog/in-a-zero-click-world-traffic-is-a-terrible-goal/" target="_blank" rel="noopener">SparkToro/Datos, 2025</a></div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">0.1%</div>
-                <div class="stat-label">Average CTR when AI Overviews appear in results</div>
+                <div class="stat-number">56%</div>
+                <div class="stat-label">Of B2B marketers can&rsquo;t attribute ROI to content efforts</div>
+                <div class="stat-source"><a href="https://contentmarketinginstitute.com/enterprise-research/enterprise-content-marketing-research-findings" target="_blank" rel="noopener">CMI, 2024</a></div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">65%</div>
-                <div class="stat-label">Of content leaders say they can&rsquo;t prove impact to the C-suite</div>
+                <div class="stat-number">7.7%</div>
+                <div class="stat-label">Of revenue is all the average CMO has to work with</div>
+                <div class="stat-source"><a href="https://www.gartner.com/en/newsroom/press-releases/2025-05-12-gartner-2025-cmo-spend-survey-reveals-marketing-budgets-have-flatlined-at-seven-percent-of-overall-company-revenue" target="_blank" rel="noopener">Gartner CMO Survey, 2025</a></div>
             </div>
         </div>
     </div>
@@ -1283,8 +1419,8 @@
     <div class="reframe-section">
         <div class="reframe-intro">
             <h2>The measurement hasn&rsquo;t caught up to the reality</h2>
-            <p>Content measurement was designed for a simpler world: you publish a piece, it ranks, someone clicks, you count the click. That worked when clicks were the primary value content generated.</p>
-            <p>Today, your content appears across search results, AI Overviews, ChatGPT citations, Google Discover, and social previews. A single URL generates brand impressions across surfaces that never produce a click. The content is working. The dashboard just can&rsquo;t see it.</p>
+            <p>Content measurement was designed for simplicity: you publish a piece, it ranks, someone clicks, you count the click. That worked when clicks were the primary value content generated.</p>
+            <p>Today, your content appears across SERP features, AI answers, and social previews &mdash; then other teams repurpose it across their own channels. A single URL generates brand impressions across surfaces that never produce a click. The content is working. The dashboard just can&rsquo;t see it.</p>
             <p>The fix isn&rsquo;t better attribution. It&rsquo;s a different question entirely.</p>
         </div>
 
@@ -1309,6 +1445,44 @@
         <div class="reframe-caption">
             <p><strong>Attribution asks what each article did.</strong> It makes almost every piece look like a bad investment, because most individual articles don&rsquo;t drive measurable revenue. That&rsquo;s not a content problem. It&rsquo;s a unit-of-analysis problem.</p>
             <p><strong>Valuation asks what the library is worth.</strong> It treats content like what it is: a capital asset that was expensive to build, generates ongoing returns, compounds as it grows, and creates real risk if lost. The same way you&rsquo;d evaluate a building, a patent portfolio, or a brand.</p>
+        </div>
+
+        <div class="reframe-visual">
+            <div class="balance-shift">
+                <div class="balance-sheet balance-sheet--old">
+                    <div class="balance-sheet-title">How content is treated</div>
+                    <div class="bs-section-label">P&amp;L &mdash; Operating Expenses</div>
+                    <div class="bs-line"><span>Engineering</span><span>$2.4M</span></div>
+                    <div class="bs-line"><span>Sales</span><span>$1.8M</span></div>
+                    <div class="bs-line"><span>Paid media</span><span>$900K</span></div>
+                    <div class="bs-line bs-line--content"><span>Content team</span><span>$400K</span></div>
+                    <hr class="bs-divider">
+                    <div class="bs-section-label">Balance Sheet &mdash; Assets</div>
+                    <div class="bs-line"><span>Real estate</span><span>$3.2M</span></div>
+                    <div class="bs-line"><span>Patents / IP</span><span>$1.1M</span></div>
+                    <div class="bs-line"><span>Brand</span><span>$800K</span></div>
+                </div>
+
+                <div class="balance-arrow">&rarr;</div>
+
+                <div class="balance-sheet balance-sheet--new">
+                    <div class="balance-sheet-title">How content should be treated</div>
+                    <div class="bs-section-label">P&amp;L &mdash; Operating Expenses</div>
+                    <div class="bs-line"><span>Engineering</span><span>$2.4M</span></div>
+                    <div class="bs-line"><span>Sales</span><span>$1.8M</span></div>
+                    <div class="bs-line"><span>Paid media</span><span>$900K</span></div>
+                    <div class="bs-line bs-line--struck"><span>Content team</span><span>$400K</span></div>
+                    <hr class="bs-divider">
+                    <div class="bs-section-label">Balance Sheet &mdash; Assets</div>
+                    <div class="bs-line"><span>Real estate</span><span>$3.2M</span></div>
+                    <div class="bs-line"><span>Patents / IP</span><span>$1.1M</span></div>
+                    <div class="bs-line"><span>Brand</span><span>$800K</span></div>
+                    <div class="bs-line bs-line--moved"><span>Content library</span><span>$1.4M</span></div>
+                    <div class="bs-annotation">The $400K is the team cost. The $1.4M is what they built.</div>
+                </div>
+            </div>
+
+            <div class="reframe-visual-caption">The team is an expense. The library they build is an asset.</div>
         </div>
     </div>
 
@@ -1418,7 +1592,7 @@
                 <h2>Your library powers more than search</h2>
                 <p>Organic discovery is only one dimension of a content library&rsquo;s value. The other &mdash; often larger &mdash; dimension is what happens when the rest of the company draws from it.</p>
                 <p>The email team pulls from your guides for nurture campaigns. Social repurposes your research into posts and carousels. Paid amplifies your best-performing assets through sponsored distribution and retargeting. Sales sends your articles to prospects as enablement material. Support links to your tutorials. PR pitches stories grounded in your original data. Webinars and events build on frameworks your team developed.</p>
-                <p><strong>Content teams have been providing this value for years without getting credit</strong> &mdash; because attribution assigns the conversion to whatever channel delivered the last touch. The email &ldquo;got&rdquo; the lead. The sales rep &ldquo;closed&rdquo; the deal. But the thinking that powered all of it came from the library.</p>
+                <p><strong>Content teams have been providing this value for years without getting credit</strong> &mdash; because attribution assigns the conversion to whatever channel delivered the last touch. The email &ldquo;got&rdquo; the lead. The sales rep &ldquo;closed&rdquo; the deal. But the substance behind many of those touches started in the library.</p>
                 <p>When you cut the content team, you&rsquo;re not just losing organic traffic. You&rsquo;re cutting off the source every other channel depends on.</p>
             </div>
             <div class="distribution-visual">
@@ -1485,35 +1659,35 @@
                 <div class="lens-title">Replacement Cost</div>
                 <div class="lens-question">What would it cost to rebuild this library from scratch?</div>
                 <div class="lens-desc">Production costs, update investment, editorial infrastructure, institutional knowledge, and the backlink profile that took years to earn. This is the insurance appraisal of your content library.</div>
-                <div class="lens-audience">Use with: CFO, leadership</div>
+                <div class="lens-audience">Matters to: CFO, leadership</div>
             </div>
             <div class="lens-card">
                 <div class="lens-number">View 2</div>
                 <div class="lens-title">Visibility Equivalency</div>
                 <div class="lens-question">What would you pay for this visibility through other channels?</div>
                 <div class="lens-desc">Three layers: click-through value (equivalent ad spend), discovery value (brand impressions without clicks), and distribution value (visibility generated when other teams deploy your content across their channels).</div>
-                <div class="lens-audience">Use with: CMO, paid media</div>
+                <div class="lens-audience">Matters to: CMO, paid media</div>
             </div>
             <div class="lens-card">
                 <div class="lens-number">View 3</div>
                 <div class="lens-title">Compounding Value</div>
                 <div class="lens-question">How does this asset&rsquo;s return profile change over time?</div>
                 <div class="lens-desc">Content produced in Year 1 still generates value in Year 5. Each new asset benefits from the library&rsquo;s existing authority. A different return profile than channels that stop producing the moment you stop spending.</div>
-                <div class="lens-audience">Use with: Strategy, board</div>
+                <div class="lens-audience">Matters to: Strategy, board</div>
             </div>
             <div class="lens-card">
                 <div class="lens-number">View 4</div>
                 <div class="lens-title">Brand Authority</div>
                 <div class="lens-question">Is this library creating demand, not just capturing it?</div>
                 <div class="lens-desc">Branded search trends, AI citations, brand mentions. When branded search is growing while organic clicks are declining, the library is building the brand through discovery, not just serving existing demand.</div>
-                <div class="lens-audience">Use with: CEO, revenue question</div>
+                <div class="lens-audience">Matters to: CEO, revenue question</div>
             </div>
             <div class="lens-card">
                 <div class="lens-number">View 5</div>
                 <div class="lens-title">Risk of Loss</div>
                 <div class="lens-question">What would 6 months without this team actually cost?</div>
                 <div class="lens-desc">Traffic erosion, lost visibility, stalled brand momentum, dispersed institutional knowledge, rebuilding costs. The savings-to-damage ratio reveals whether a cut is an optimization or a false economy.</div>
-                <div class="lens-audience">Use with: Budget planning</div>
+                <div class="lens-audience">Matters to: Budget planning</div>
             </div>
         </div>
     </div>
@@ -1716,7 +1890,7 @@
         <div class="closing-inner">
             <blockquote>The next conversation about content ROI doesn&rsquo;t have to start with clicks.</blockquote>
             <p>Content libraries compound. They drive discovery, power distribution across every channel, and build the brand authority that turns impressions into intent. The teams that understand what they&rsquo;ve built will invest accordingly.</p>
-            <p style="margin-top: 24px;"><a href="../essays/the-content-library.html">Related essay: The Content Library &rarr;</a></p>
+            <p style="margin-top: 24px;"><a href="essays/the-content-library.html">Related essay: The Content Library &rarr;</a></p>
         </div>
     </div>
 
@@ -1739,7 +1913,7 @@
     <!-- Footer -->
     <div class="footer-section">
         <div class="footer-inner">
-            <a href="index.html">&larr; michaelofei.co</a>
+            <a href="../index.html">&larr; michaelofei.co</a>
             <span>Framework by Michael Ofei. February 2026.</span>
         </div>
     </div>
