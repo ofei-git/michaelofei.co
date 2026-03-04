@@ -8,6 +8,14 @@
     <atom:link href="https://michaelofei.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
+      <title>What LLMs Actually See When They Read Your Page</title>
+      <link>https://michaelofei.com/essays/what-llms-actually-see</link>
+      <guid>https://michaelofei.com/essays/what-llms-actually-see</guid>
+      <pubDate>Tue, 04 Mar 2026 00:00:00 GMT</pubDate>
+      <description>How AI systems actually process your web content — what the research says, what's still speculation, and why every platform works differently.</description>
+    </item>
+
+    <item>
       <title>The Content Library</title>
       <link>https://michaelofei.com/essays/the-content-library</link>
       <guid>https://michaelofei.com/essays/the-content-library</guid>
