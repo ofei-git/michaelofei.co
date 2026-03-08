@@ -2,87 +2,87 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Michael Ofei</title>
-    <link>https://michaelofei.com</link>
+    <link>https://michaelofei.co</link>
     <description>Essays on content, editorial leadership, and building things.</description>
     <language>en-us</language>
-    <atom:link href="https://michaelofei.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://michaelofei.co/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
       <title>Content Teams Don't Have a Speed Problem</title>
-      <link>https://michaelofei.com/essays/content-teams-dont-have-a-speed-problem</link>
-      <guid>https://michaelofei.com/essays/content-teams-dont-have-a-speed-problem</guid>
+      <link>https://michaelofei.co/essays/content-teams-dont-have-a-speed-problem</link>
+      <guid>https://michaelofei.co/essays/content-teams-dont-have-a-speed-problem</guid>
       <pubDate>Sat, 08 Mar 2026 00:00:00 GMT</pubDate>
       <description>Every content leader is carrying the same quiet anxiety about AI and speed. The real bottleneck was never production — it was always the thinking.</description>
     </item>
 
     <item>
       <title>What LLMs Actually See When They Read Your Page</title>
-      <link>https://michaelofei.com/essays/what-llms-actually-see</link>
-      <guid>https://michaelofei.com/essays/what-llms-actually-see</guid>
+      <link>https://michaelofei.co/essays/what-llms-actually-see</link>
+      <guid>https://michaelofei.co/essays/what-llms-actually-see</guid>
       <pubDate>Tue, 04 Mar 2026 00:00:00 GMT</pubDate>
       <description>How AI systems actually process your web content — what the research says, what's still speculation, and why every platform works differently.</description>
     </item>
 
     <item>
       <title>The Content Library</title>
-      <link>https://michaelofei.com/essays/the-content-library</link>
-      <guid>https://michaelofei.com/essays/the-content-library</guid>
+      <link>https://michaelofei.co/essays/the-content-library</link>
+      <guid>https://michaelofei.co/essays/the-content-library</guid>
       <pubDate>Sat, 01 Mar 2026 00:00:00 GMT</pubDate>
       <description>A content library is the collection of crystallized thinking you build over time. It might be the most important asset you can build right now, because it's the one thing that survives when platforms shift.</description>
     </item>
 
     <item>
       <title>The Tour Method</title>
-      <link>https://michaelofei.com/essays/the-tour-method</link>
-      <guid>https://michaelofei.com/essays/the-tour-method</guid>
+      <link>https://michaelofei.co/essays/the-tour-method</link>
+      <guid>https://michaelofei.co/essays/the-tour-method</guid>
       <pubDate>Thu, 27 Feb 2026 00:00:00 GMT</pubDate>
       <description>Create something worth touring. Then tour it everywhere. How artists, companies, and creators build lasting authority by front-loading effort and distributing relentlessly.</description>
     </item>
 
     <item>
       <title>Story Triggers</title>
-      <link>https://michaelofei.com/essays/story-triggers</link>
-      <guid>https://michaelofei.com/essays/story-triggers</guid>
+      <link>https://michaelofei.co/essays/story-triggers</link>
+      <guid>https://michaelofei.co/essays/story-triggers</guid>
       <pubDate>Fri, 06 Feb 2026 00:00:00 GMT</pubDate>
       <description>Most people feel story triggers every day and never realize there's machinery underneath. Once you see them, you can't unsee them.</description>
     </item>
 
     <item>
       <title>Building a Mirror</title>
-      <link>https://michaelofei.com/essays/building-a-mirror</link>
-      <guid>https://michaelofei.com/essays/building-a-mirror</guid>
+      <link>https://michaelofei.co/essays/building-a-mirror</link>
+      <guid>https://michaelofei.co/essays/building-a-mirror</guid>
       <pubDate>Sun, 01 Feb 2026 00:00:00 GMT</pubDate>
       <description>What shipping my first app taught me about time, awareness, and becoming a builder.</description>
     </item>
 
     <item>
       <title>Why Helpful Content Gets Forgotten</title>
-      <link>https://michaelofei.com/essays/why-helpful-content-gets-forgotten</link>
-      <guid>https://michaelofei.com/essays/why-helpful-content-gets-forgotten</guid>
+      <link>https://michaelofei.co/essays/why-helpful-content-gets-forgotten</link>
+      <guid>https://michaelofei.co/essays/why-helpful-content-gets-forgotten</guid>
       <pubDate>Wed, 29 Jan 2026 00:00:00 GMT</pubDate>
       <description>Comprehensive content serves the immediate intent. Thesis-driven content shifts how you think. That's what survives the forgetting.</description>
     </item>
 
     <item>
       <title>Speaking Expands, Typing Compresses</title>
-      <link>https://michaelofei.com/essays/voice-prompting</link>
-      <guid>https://michaelofei.com/essays/voice-prompting</guid>
+      <link>https://michaelofei.co/essays/voice-prompting</link>
+      <guid>https://michaelofei.co/essays/voice-prompting</guid>
       <pubDate>Thu, 23 Jan 2026 00:00:00 GMT</pubDate>
       <description>When you type, you compress. When you speak, you expand. For AI collaboration, expanding is a cheat code.</description>
     </item>
 
     <item>
       <title>Claude Code for Writers</title>
-      <link>https://michaelofei.com/essays/claude-code-for-writers</link>
-      <guid>https://michaelofei.com/essays/claude-code-for-writers</guid>
+      <link>https://michaelofei.co/essays/claude-code-for-writers</link>
+      <guid>https://michaelofei.co/essays/claude-code-for-writers</guid>
       <pubDate>Mon, 13 Jan 2026 00:00:00 GMT</pubDate>
       <description>Claude Code isn't really about code. It's about directing context. And that realization changed how I work.</description>
     </item>
 
     <item>
       <title>The Lens Method: Collaborative Authority in Content</title>
-      <link>https://michaelofei.com/essays/the-lens-method</link>
-      <guid>https://michaelofei.com/essays/the-lens-method</guid>
+      <link>https://michaelofei.co/essays/the-lens-method</link>
+      <guid>https://michaelofei.co/essays/the-lens-method</guid>
       <pubDate>Mon, 06 Jan 2026 00:00:00 GMT</pubDate>
       <description>Expert experience is raw light. The writer provides the lens—deciding what matters, what connects, and what it means for a specific audience.</description>
     </item>
