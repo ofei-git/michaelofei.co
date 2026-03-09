@@ -8,6 +8,14 @@
     <atom:link href="https://michaelofei.co/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
+      <title>It All Starts with Writing</title>
+      <link>https://michaelofei.co/essays/it-all-starts-with-writing</link>
+      <guid>https://michaelofei.co/essays/it-all-starts-with-writing</guid>
+      <pubDate>Mon, 09 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Every format is downstream of writing. You don't write to publish — you write to think. Writing is the forcing function for clarity.</description>
+    </item>
+
+    <item>
       <title>Content Teams Don't Have a Speed Problem</title>
       <link>https://michaelofei.co/essays/content-teams-dont-have-a-speed-problem</link>
       <guid>https://michaelofei.co/essays/content-teams-dont-have-a-speed-problem</guid>
