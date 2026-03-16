@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Impression Value Calculator — Michael Ofei</title>
+    <meta name="description" content="Calculate the brand exposure value of your search impressions, weighted by SERP feature and business relevance.">
+    <meta property="og:title" content="Search Impression Value Calculator">
+    <meta property="og:description" content="Calculate the brand exposure value of your search impressions, weighted by SERP feature and business relevance.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://michaelofei.co/tools/impression-value-calculator.html">
+    <style>
+        :root {
+            --bg: #7A251E;
+            --bg-light: #8a352e;
+            --bg-dark: #6a1f18;
+            --bg-darker: #5a1a15;
+            --text: #D7C9A7;
+            --text-bright: #E8DAB8;
+            --yellow: #E7B000;
+            --green: #00BB00;
+            --green-dim: #009900;
+            --red: #FF3F00;
+            --dim: #a89878;
+            --dim-dark: #8a7a5a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* ── Layout ── */
+        .section {
+            width: 100%;
+            padding: 0 48px;
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-narrow {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        /* ── Top bar ── */
+        .topbar {
+            padding: 20px 48px;
+        }
+
+        .back {
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .back:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* HERO                                   */
+        /* ══════════════════════════════════════ */
+        .hero {
+            padding: 80px 48px 64px;
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dim);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 1.25;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero .lead {
+            font-size: 17px;
+            color: var(--text);
+            line-height: 1.65;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .hero-cta {
+            font-size: 13px;
+            color: var(--dim);
+            margin-top: 16px;
+        }
+
+        .hero-calc-link {
+            color: var(--green);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--green-dim);
+        }
+
+        .hero-calc-link:hover {
+            border-bottom-style: solid;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* STATS BAR                              */
+        /* ══════════════════════════════════════ */
+        .stats-bar {
+            background: var(--bg-dark);
+            padding: 40px 48px;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--yellow);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.45;
+        }
+
+        .stat-source {
+            font-size: 10px;
+            color: var(--dim-dark);
+            margin-top: 6px;
+        }
+
+        .stat-source a {
+            color: var(--dim-dark);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+        }
+
+        .stat-source a:hover {
+            color: var(--green);
+            border-bottom-color: var(--green);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* REFRAME                                */
+        /* ══════════════════════════════════════ */
+        .reframe-section {
+            padding: 80px 48px;
+        }
+
+        .reframe-intro {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .reframe-intro h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .reframe-intro p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .reframe-intro p:last-child { margin-bottom: 0; }
+
+        .reframe-intro strong {
+            color: var(--text-bright);
+        }
+
+        /* ── Taxonomy Visual ── */
+        .taxonomy-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2px;
+        }
+
+        .taxonomy-row {
+            display: grid;
+            grid-template-columns: 200px 1fr 80px;
+            gap: 0;
+            align-items: center;
+            background: var(--bg-dark);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .taxonomy-row--header {
+            background: transparent;
+            margin-bottom: 4px;
+        }
+
+        .taxonomy-row--header .taxonomy-cell {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dim-dark);
+            padding: 0 16px 8px;
+        }
+
+        .taxonomy-cell {
+            padding: 14px 16px;
+            font-size: 13px;
+        }
+
+        .taxonomy-feature {
+            color: var(--text-bright);
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .taxonomy-rationale {
+            color: var(--dim);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .taxonomy-weight {
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .taxonomy-weight--very-high { color: var(--green); }
+        .taxonomy-weight--high { color: var(--yellow); }
+        .taxonomy-weight--medium { color: var(--text); }
+        .taxonomy-weight--low { color: var(--dim); }
+        .taxonomy-weight--very-low { color: var(--dim-dark); }
+
+        .taxonomy-bar-track {
+            height: 4px;
+            background: var(--bg-darker);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+
+        .taxonomy-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.8s ease-out;
+        }
+
+        .taxonomy-bar-fill--very-high { width: 100%; background: var(--green); }
+        .taxonomy-bar-fill--high { width: 85%; background: var(--yellow); }
+        .taxonomy-bar-fill--medium-high { width: 75%; background: var(--yellow); }
+        .taxonomy-bar-fill--medium { width: 55%; background: var(--text); }
+        .taxonomy-bar-fill--low-medium { width: 35%; background: var(--dim); }
+        .taxonomy-bar-fill--low { width: 20%; background: var(--dim); }
+        .taxonomy-bar-fill--very-low { width: 10%; background: var(--dim-dark); }
+
+        .taxonomy-caption {
+            max-width: 720px;
+            margin: 32px auto 0;
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+        }
+
+        .taxonomy-caption strong {
+            color: var(--text);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* RELEVANCE                              */
+        /* ══════════════════════════════════════ */
+        .relevance-section {
+            padding: 80px 48px;
+            background: var(--bg-dark);
+        }
+
+        .relevance-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .relevance-header {
+            max-width: 720px;
+            margin: 0 auto 40px;
+        }
+
+        .relevance-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .relevance-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .relevance-header p:last-child { margin-bottom: 0; }
+
+        .relevance-header strong {
+            color: var(--text-bright);
+        }
+
+        .relevance-cards {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .relevance-card {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 28px 22px;
+            border-top: 3px solid var(--dim-dark);
+        }
+
+        .relevance-card:nth-child(1) { border-top-color: var(--green); }
+        .relevance-card:nth-child(2) { border-top-color: var(--yellow); }
+        .relevance-card:nth-child(3) { border-top-color: var(--dim); }
+
+        .relevance-tier {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dim);
+            margin-bottom: 6px;
+        }
+
+        .relevance-card:nth-child(1) .relevance-tier { color: var(--green); }
+        .relevance-card:nth-child(2) .relevance-tier { color: var(--yellow); }
+
+        .relevance-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .relevance-desc {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .relevance-example {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.5;
+            padding-top: 12px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .relevance-multiplier {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .relevance-card:nth-child(1) .relevance-multiplier { color: var(--green); }
+        .relevance-card:nth-child(2) .relevance-multiplier { color: var(--yellow); }
+        .relevance-card:nth-child(3) .relevance-multiplier { color: var(--dim); }
+
+        /* ══════════════════════════════════════ */
+        /* FORMULA                                */
+        /* ══════════════════════════════════════ */
+        .formula-section {
+            padding: 80px 48px;
+        }
+
+        .formula-card {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 48px;
+            border-left: 3px solid var(--yellow);
+        }
+
+        .formula-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 24px;
+        }
+
+        .formula-equation {
+            font-size: 14px;
+            color: var(--text-bright);
+            line-height: 1.8;
+            padding: 24px;
+            background: var(--bg-darker);
+            border-radius: 8px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .formula-equation .formula-var {
+            color: var(--yellow);
+            font-weight: 600;
+        }
+
+        .formula-equation .formula-op {
+            color: var(--dim);
+            padding: 0 4px;
+        }
+
+        .formula-note {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.65;
+        }
+
+        .formula-note strong {
+            color: var(--text);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* CALCULATOR                             */
+        /* ══════════════════════════════════════ */
+        .calc-section {
+            padding: 80px 48px;
+            background: var(--bg-dark);
+        }
+
+        .calc-header {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .calc-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .calc-header p {
+            color: var(--dim);
+            font-size: 14px;
+        }
+
+        .calc-form {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+        }
+
+        .calc-panel {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 28px 24px;
+        }
+
+        .calc-panel-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--yellow);
+            margin-bottom: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 22px;
+        }
+
+        .input-group:last-child { margin-bottom: 0; }
+
+        .input-label {
+            display: block;
+            font-size: 13px;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .input-hint {
+            font-size: 11px;
+            color: var(--dim);
+            margin-bottom: 8px;
+            display: block;
+            line-height: 1.5;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px 12px;
+            font-family: inherit;
+            font-size: 15px;
+            background: var(--bg-darker);
+            border: 1px solid var(--bg-light);
+            border-radius: 6px;
+            color: var(--text-bright);
+            outline: none;
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"]:focus, select:focus { border-color: var(--yellow); }
+        input[type="number"]::placeholder { color: var(--dim-dark); }
+
+        select {
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a89878' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 32px;
+        }
+
+        select option {
+            background: var(--bg-darker);
+            color: var(--text-bright);
+        }
+
+        .input-prefix {
+            font-size: 15px;
+            color: var(--dim);
+            flex-shrink: 0;
+        }
+
+        .input-suffix {
+            font-size: 13px;
+            color: var(--dim);
+            flex-shrink: 0;
+        }
+
+        .pct-remaining {
+            font-size: 11px;
+            color: var(--dim);
+            margin-top: 4px;
+        }
+
+        .pct-remaining.over {
+            color: var(--red);
+        }
+
+        .pct-remaining.exact {
+            color: var(--green);
+        }
+
+        .calc-button-wrap {
+            max-width: 1200px;
+            margin: 28px auto 0;
+            text-align: center;
+        }
+
+        .calc-button {
+            padding: 16px 64px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            background: transparent;
+            border: 2px solid var(--green);
+            border-radius: 6px;
+            color: var(--green);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .calc-button:hover {
+            background: var(--green);
+            color: var(--bg-dark);
+        }
+
+        .help-box {
+            margin-top: 24px;
+            padding: 20px;
+            background: var(--bg-dark);
+            border-radius: 8px;
+        }
+
+        .help-box-title {
+            font-size: 11px;
+            color: var(--dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .help-box-content {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.6;
+        }
+
+        .help-box-content strong {
+            color: var(--text);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* RESULTS                                */
+        /* ══════════════════════════════════════ */
+        .results {
+            display: none;
+            padding: 80px 48px 40px;
+            background: var(--bg-dark);
+        }
+
+        .results.visible { display: block; }
+
+        .results-header {
+            max-width: 1200px;
+            margin: 0 auto 48px;
+            text-align: center;
+        }
+
+        .results-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .results-header p {
+            color: var(--dim);
+            font-size: 14px;
+        }
+
+        /* Headline result */
+        .result-headline {
+            max-width: 1200px;
+            margin: 0 auto 32px;
+            background: var(--bg);
+            border: 2px solid var(--green);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .result-headline-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 12px;
+        }
+
+        .result-headline-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--green);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .result-headline-sublabel {
+            font-size: 14px;
+            color: var(--dim);
+        }
+
+        /* Result cards grid */
+        .results-grid {
+            max-width: 1200px;
+            margin: 0 auto 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .results-grid-3 {
+            max-width: 1200px;
+            margin: 0 auto 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+        }
+
+        .result-card {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 28px 24px;
+            border-top: 3px solid var(--bg-light);
+        }
+
+        .result-card--green { border-top-color: var(--green); }
+        .result-card--yellow { border-top-color: var(--yellow); }
+        .result-card--red { border-top-color: var(--red); }
+
+        .result-card-label {
+            font-size: 11px;
+            color: var(--dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .result-card-title {
+            font-size: 14px;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .result-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--green);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .result-value--yellow { color: var(--yellow); }
+        .result-value--dim { color: var(--dim); }
+
+        .result-sublabel {
+            font-size: 11px;
+            color: var(--dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .result-narrative {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .result-breakdown {
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.7;
+        }
+
+        .result-breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .result-breakdown-row:last-child { border-bottom: none; }
+
+        .result-breakdown-value {
+            color: var(--text);
+            font-weight: 600;
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+
+        /* Feature breakdown bar chart */
+        .feature-bars {
+            margin-top: 16px;
+        }
+
+        .feature-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .feature-bar-label {
+            font-size: 11px;
+            color: var(--dim);
+            min-width: 140px;
+            text-align: right;
+        }
+
+        .feature-bar-track {
+            flex: 1;
+            height: 8px;
+            background: var(--bg-dark);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .feature-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: var(--yellow);
+            transition: width 0.6s ease-out;
+        }
+
+        .feature-bar-fill--green { background: var(--green); }
+        .feature-bar-fill--yellow { background: var(--yellow); }
+        .feature-bar-fill--dim { background: var(--dim); }
+
+        .feature-bar-value {
+            font-size: 12px;
+            color: var(--text);
+            font-weight: 600;
+            min-width: 70px;
+        }
+
+        /* Efficiency meter */
+        .efficiency-meter {
+            margin-top: 16px;
+        }
+
+        .efficiency-track {
+            height: 12px;
+            background: var(--bg-dark);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .efficiency-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.8s ease-out;
+        }
+
+        .efficiency-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 10px;
+            color: var(--dim-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Caveat */
+        .caveat-section {
+            max-width: 1200px;
+            margin: 40px auto 0;
+        }
+
+        .caveat {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 24px 28px;
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.65;
+        }
+
+        .caveat strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* CLOSING                                */
+        /* ══════════════════════════════════════ */
+        .closing {
+            padding: 80px 48px;
+            text-align: center;
+        }
+
+        .closing-inner {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .closing blockquote {
+            font-size: 18px;
+            color: var(--text-bright);
+            line-height: 1.55;
+            border: none;
+            padding: 0;
+            margin-bottom: 24px;
+        }
+
+        .closing p {
+            color: var(--dim);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .closing a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        .closing a:hover { text-decoration: underline; }
+
+        /* ── Newsletter ── */
+        .newsletter-section {
+            padding: 48px 48px 80px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .newsletter-inner {
+            max-width: 480px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-inner p {
+            margin-bottom: 16px;
+        }
+
+        .newsletter-inner .dim { color: var(--dim); }
+
+        .subscribe-form {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .subscribe-form input[type="email"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            font-family: inherit;
+            font-size: 14px;
+            background: var(--bg-darker);
+            border: 1px solid var(--dim);
+            border-radius: 4px;
+            color: var(--text);
+        }
+
+        .subscribe-form input[type="email"]::placeholder { color: var(--dim); }
+        .subscribe-form input[type="email"]:focus { outline: none; border-color: var(--yellow); }
+
+        .subscribe-form button {
+            padding: 10px 20px;
+            font-family: inherit;
+            font-size: 14px;
+            background: transparent;
+            border: 1px solid var(--green);
+            border-radius: 4px;
+            color: var(--green);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .subscribe-form button:hover {
+            background: var(--green);
+            color: var(--bg);
+        }
+
+        /* ── Footer ── */
+        .footer-section {
+            padding: 24px 48px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--dim);
+            font-size: 13px;
+        }
+
+        .footer-inner a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+
+        .footer-inner a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* RESPONSIVE                             */
+        /* ══════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .section, .hero, .stats-bar, .calc-section, .results,
+            .closing, .newsletter-section, .footer-section, .topbar,
+            .reframe-section, .relevance-section, .formula-section {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+            .calc-form { grid-template-columns: 1fr; }
+            .results-grid { grid-template-columns: 1fr; }
+            .results-grid-3 { grid-template-columns: 1fr; }
+            .relevance-cards { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 26px; }
+            .stat-number { font-size: 32px; }
+            .result-value { font-size: 28px; }
+            .result-headline-value { font-size: 36px; }
+            .formula-card { padding: 32px 24px; }
+
+            .taxonomy-row {
+                grid-template-columns: 1fr 60px;
+            }
+
+            .taxonomy-row .taxonomy-cell:nth-child(2) {
+                display: none;
+            }
+
+            .taxonomy-row--header .taxonomy-cell:nth-child(2) {
+                display: none;
+            }
+
+            .feature-bar-label {
+                min-width: 100px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top bar -->
+    <div class="topbar">
+        <a href="../index.html" class="back">&larr; michaelofei.co</a>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- HERO                                       -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="hero">
+        <div class="hero-inner">
+            <div class="hero-label">A framework for the zero-click era</div>
+            <h1>Your search impressions have value. Even without the click.</h1>
+            <p class="lead">60% of Google searches end without a click. But your brand still appeared. This calculator helps you understand the brand exposure value of your search impressions &mdash; weighted by SERP feature type, business relevance, and industry context.</p>
+            <p class="hero-cta">Read the framework, then <a href="#calc-section" class="hero-calc-link">calculate your own &darr;</a></p>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- STATS BAR                                  -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="stats-bar">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">58.5%</div>
+                <div class="stat-label">Of Google searches end with zero clicks to the open web</div>
+                <div class="stat-source"><a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank" rel="noopener">SparkToro/Datos, 2024</a></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">83%</div>
+                <div class="stat-label">Zero-click rate when AI Overviews appear in search results</div>
+                <div class="stat-source"><a href="https://ahrefs.com/blog/the-great-decoupling/" target="_blank" rel="noopener">Ahrefs, 2025</a></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">80%</div>
+                <div class="stat-label">Lift in brand awareness from top search position (Google/Ipsos)</div>
+                <div class="stat-source"><a href="https://www.thinkwithgoogle.com/marketing-strategies/search/search-ads-lift-brand-awareness/" target="_blank" rel="noopener">Google/Ipsos, 2014</a></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5&ndash;7</div>
+                <div class="stat-label">Impressions needed for brand recall (mere exposure effect)</div>
+                <div class="stat-source"><a href="https://www.simplypsychology.org/mere-exposure-effect.html" target="_blank" rel="noopener">Zajonc, 1968</a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- REFRAME: THE TAXONOMY                      -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="reframe-section">
+        <div class="reframe-intro">
+            <h2>Not all impressions are created equal</h2>
+            <p>Google Search Console reports all impressions as a single number. But your brand appearing as a named recommendation in an AI Overview is fundamentally different from appearing at position 9 below the fold.</p>
+            <p>The <strong>attention weight</strong> of an impression depends on where it appears. A SERP feature that puts your brand name in front of the user&rsquo;s eyes, embedded in a trusted answer, carries more brand value than a blue link that most users never scroll to.</p>
+        </div>
+
+        <div class="taxonomy-grid">
+            <div class="taxonomy-row taxonomy-row--header">
+                <div class="taxonomy-cell">SERP Feature</div>
+                <div class="taxonomy-cell">Rationale</div>
+                <div class="taxonomy-cell">Weight</div>
+            </div>
+            <div class="taxonomy-row">
+                <div class="taxonomy-cell"><span class="taxonomy-feature">AI Overview &mdash; named in answer</span><div class="taxonomy-bar-track"><div class="taxonomy-bar-fill taxonomy-bar-fill--very-high"></div></div></div>
+                <div class="taxonomy-cell"><span class="taxonomy-rationale">Your brand embedded in Google&rsquo;s AI narrative. The highest implicit endorsement available in search.</span></div>
+                <div class="taxonomy-cell"><span class="taxonomy-weight taxonomy-weight--very-high">1.00</span></div>
+            </div>
+            <div class="taxonomy-row">
+                <div class="taxonomy-cell"><span class="taxonomy-feature">Featured Snippet</span><div class="taxonomy-bar-track"><div class="taxonomy-bar-fill taxonomy-bar-fill--high"></div></div></div>
+                <div class="taxonomy-cell"><span class="taxonomy-rationale">Position zero. Your content displayed prominently with brand attribution above all organic results.</span></div>
+                <div class="taxonomy-cell"><span class="taxonomy-weight taxonomy-weight--very-high">0.85</span></div>
+            </div>
+            <div class="taxonomy-row">
+                <div class="taxonomy-cell"><span class="taxonomy-feature">Knowledge Panel</span><div class="taxonomy-bar-track"><div class="taxonomy-bar-fill taxonomy-bar-fill--high"></div></div></div>
+                <div class="taxonomy-cell"><span class="taxonomy-rationale">Google saying &ldquo;this is an established entity.&rdquo; Strong authority signal for brand queries.</span></div>
+                <div class="taxonomy-cell"><span class="taxonomy-weight taxonomy-weight--high">0.80</span></div>
+            </div>
+            <div class="taxonomy-row">
+                <div class="taxonomy-cell"><span class="taxonomy-feature">Map Pack (top 3)</span><div class="taxonomy-bar-track"><div class="taxonomy-bar-fill taxonomy-bar-fill--medium-high"></div></div></div>
+                <div class="taxonomy-cell"><span class="taxonomy-rationale">Rich impression: brand + star rating + location + social proof. Local businesses only.</span></div>
+                <div class="taxonomy-cell"><span class="taxonomy-weight taxonomy-weight--high">0.75</span></div>
+            </div>
+            <div class="taxonomy-row">
+                <div class="taxonomy-cell"><span class="taxonomy-feature">Top 3 organic (no AI Overview)</span><div class="taxonomy-bar-track"><div class="taxonomy-bar-fill taxonomy-bar-fill--medium-high"></div></div></div>
+                <div class="taxonomy-cell"><span class="taxonomy-rationale">Classic above-the-fold visibility. User scans, brand registers. The traditional gold standard.</span></div>
+                <div class="taxonomy-cell"><span class="taxonomy-weight taxonomy-weight--high">0.75</span></div>
+            </div>
+            <div class="taxonomy-row">
+                <div class="taxonomy-cell"><span class="taxonomy-feature">AI Overview &mdash; cited as source</span><div class="taxonomy-bar-track"><div class="taxonomy-bar-fill taxonomy-bar-fill--medium-high"></div></div></div>
+                <div class="taxonomy-cell"><span class="taxonomy-rationale">Authority signal in the reference links. User must notice the citation area, but credibility transfers.</span></div>
+                <div class="taxonomy-cell"><span class="taxonomy-weight taxonomy-weight--high">0.70</span></div>
+            </div>
+            <div class="taxonomy-row">
+                <div class="taxonomy-cell"><span class="taxonomy-feature">People Also Ask</span><div class="taxonomy-bar-track"><div class="taxonomy-bar-fill taxonomy-bar-fill--medium"></div></div></div>
+                <div class="taxonomy-cell"><span class="taxonomy-rationale">Visible when expanded &mdash; your brand becomes the answer. Double opportunity if you don&rsquo;t rank organically.</span></div>
+                <div class="taxonomy-cell"><span class="taxonomy-weight taxonomy-weight--medium">0.45</span></div>
+            </div>
+            <div class="taxonomy-row">
+                <div class="taxonomy-cell"><span class="taxonomy-feature">Top 3 organic (AI Overview present)</span><div class="taxonomy-bar-track"><div class="taxonomy-bar-fill taxonomy-bar-fill--medium"></div></div></div>
+                <div class="taxonomy-cell"><span class="taxonomy-rationale">Pushed below the AI Overview. No longer truly above the fold. Significantly reduced scan attention.</span></div>
+                <div class="taxonomy-cell"><span class="taxonomy-weight taxonomy-weight--medium">0.45</span></div>
+            </div>
+            <div class="taxonomy-row">
+                <div class="taxonomy-cell"><span class="taxonomy-feature">Image / Video carousel</span><div class="taxonomy-bar-track"><div class="taxonomy-bar-fill taxonomy-bar-fill--medium"></div></div></div>
+                <div class="taxonomy-cell"><span class="taxonomy-rationale">Visual attention is strong but brand attribution is often weak. People see the image, not always the source.</span></div>
+                <div class="taxonomy-cell"><span class="taxonomy-weight taxonomy-weight--medium">0.40</span></div>
+            </div>
+            <div class="taxonomy-row">
+                <div class="taxonomy-cell"><span class="taxonomy-feature">Google Discover</span><div class="taxonomy-bar-track"><div class="taxonomy-bar-fill taxonomy-bar-fill--low-medium"></div></div></div>
+                <div class="taxonomy-cell"><span class="taxonomy-rationale">Interest-aligned push, but passive browsing context. Unsolicited exposure creates awareness, not intent.</span></div>
+                <div class="taxonomy-cell"><span class="taxonomy-weight taxonomy-weight--low">0.35</span></div>
+            </div>
+            <div class="taxonomy-row">
+                <div class="taxonomy-cell"><span class="taxonomy-feature">Positions 4&ndash;7</span><div class="taxonomy-bar-track"><div class="taxonomy-bar-fill taxonomy-bar-fill--low"></div></div></div>
+                <div class="taxonomy-cell"><span class="taxonomy-rationale">Below the fold on most devices. Some scrolling users will scan, but focused attention is low.</span></div>
+                <div class="taxonomy-cell"><span class="taxonomy-weight taxonomy-weight--very-low">0.20</span></div>
+            </div>
+            <div class="taxonomy-row">
+                <div class="taxonomy-cell"><span class="taxonomy-feature">Positions 8&ndash;10</span><div class="taxonomy-bar-track"><div class="taxonomy-bar-fill taxonomy-bar-fill--very-low"></div></div></div>
+                <div class="taxonomy-cell"><span class="taxonomy-rationale">Page bottom. Minimal scan attention. Most users have already found what they need or refined their query.</span></div>
+                <div class="taxonomy-cell"><span class="taxonomy-weight taxonomy-weight--very-low">0.10</span></div>
+            </div>
+        </div>
+
+        <div class="taxonomy-caption">
+            <strong>The benchmark is 1.00</strong> &mdash; set at the highest-value impression (brand named in an AI Overview). All other features are weighted relative to this. These weights reflect attention value for brand exposure, not click likelihood. A featured snippet might get fewer clicks than a top-3 result, but the brand impression it delivers is stronger.
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- RELEVANCE                                  -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="relevance-section">
+        <div class="relevance-header">
+            <h2>Business relevance changes everything</h2>
+            <p>A million impressions for &ldquo;what time is it in Tokyo&rdquo; is not the same as a million impressions for &ldquo;enterprise SEO platform.&rdquo; The keyword has to relate to what you actually do for the impression to carry meaningful brand value.</p>
+            <p>This is the adjustment most impression analyses miss entirely. <strong>Not all visibility is strategic visibility.</strong></p>
+        </div>
+
+        <div class="relevance-cards">
+            <div class="relevance-card">
+                <div class="relevance-tier">High relevance</div>
+                <div class="relevance-multiplier">1.0x</div>
+                <div class="relevance-title">Core business keywords</div>
+                <div class="relevance-desc">Keywords directly related to your product, service, or primary expertise. Someone seeing your brand here associates you with exactly what you want to be known for.</div>
+                <div class="relevance-example">e.g. HubSpot appearing for &ldquo;CRM software&rdquo; or &ldquo;marketing automation platform&rdquo;</div>
+            </div>
+            <div class="relevance-card">
+                <div class="relevance-tier">Medium relevance</div>
+                <div class="relevance-multiplier">0.5x</div>
+                <div class="relevance-title">Adjacent topic keywords</div>
+                <div class="relevance-desc">Topics where appearing builds topical authority but isn&rsquo;t a direct product association. You&rsquo;re known as knowledgeable in the space, not necessarily as the solution.</div>
+                <div class="relevance-example">e.g. HubSpot appearing for &ldquo;how to build a sales funnel&rdquo; or &ldquo;email marketing best practices&rdquo;</div>
+            </div>
+            <div class="relevance-card">
+                <div class="relevance-tier">Low relevance</div>
+                <div class="relevance-multiplier">0.15x</div>
+                <div class="relevance-title">Informational / tangential keywords</div>
+                <div class="relevance-desc">Broad informational queries where you&rsquo;re helpful but the brand association is weak. These drive volume but contribute little to how people think of your brand.</div>
+                <div class="relevance-example">e.g. HubSpot appearing for &ldquo;what is a KPI&rdquo; or &ldquo;how to write a business plan&rdquo;</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- FORMULA                                    -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="formula-section">
+        <div class="formula-card">
+            <h3>The calculation</h3>
+            <div class="formula-equation">
+                <span class="formula-var">Impressions</span>
+                <span class="formula-op">&times;</span>
+                <span class="formula-var">Feature Weight</span>
+                <span class="formula-op">&times;</span>
+                <span class="formula-var">Relevance Weight</span>
+                <span class="formula-op">&divide;</span>
+                1,000
+                <span class="formula-op">&times;</span>
+                <span class="formula-var">Industry CPM</span>
+                <span class="formula-op">&times;</span>
+                <span class="formula-var">Organic Premium</span>
+                <span class="formula-op">=</span>
+                <span class="formula-var" style="color: var(--green);">Weighted Impression Value</span>
+            </div>
+            <div class="formula-note">
+                <strong>Industry CPM</strong> is the cost per thousand impressions an advertiser would pay in your vertical through Google Ads. It anchors the value to real market rates.<br><br>
+                <strong>Organic premium</strong> is an optional 1.5x multiplier. Organic search results carry an implicit trust signal &mdash; Google&rsquo;s algorithm chose you, which is an endorsement paid ads don&rsquo;t receive. Some practitioners apply this premium; others prefer the conservative base rate.
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- CALCULATOR                                 -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="calc-section" id="calc-section">
+        <div class="calc-header">
+            <h2>Calculate your impression value</h2>
+            <p>Enter your numbers. All calculations run in your browser &mdash; nothing is sent anywhere.</p>
+        </div>
+
+        <div class="calc-form">
+            <!-- Column 1: Impression Data -->
+            <div class="calc-panel">
+                <div class="calc-panel-title">Your impression data</div>
+
+                <div class="input-group">
+                    <label class="input-label">Monthly search impressions</label>
+                    <span class="input-hint">From Google Search Console &rarr; Performance &rarr; Total impressions</span>
+                    <input type="number" id="totalImpressions" placeholder="e.g. 5000000">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Monthly clicks</label>
+                    <span class="input-hint">From GSC &mdash; used to calculate your no-click impression volume</span>
+                    <input type="number" id="totalClicks" placeholder="e.g. 150000">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">% of keywords with AI Overviews</label>
+                    <span class="input-hint">Check Semrush &rarr; SERP Features. If unsure, 15&ndash;25% is a reasonable starting estimate for most industries.</span>
+                    <div class="input-row">
+                        <input type="number" id="aiOverviewPct" placeholder="e.g. 20" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Local business?</label>
+                    <span class="input-hint">Do you appear in Map Pack / Local Pack results?</span>
+                    <select id="hasMapPack">
+                        <option value="no">No &mdash; not a local business</option>
+                        <option value="yes">Yes &mdash; I appear in Map Pack results</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Column 2: SERP Feature Mix -->
+            <div class="calc-panel">
+                <div class="calc-panel-title">SERP feature mix (est. %)</div>
+                <span class="input-hint" style="margin-bottom: 16px; display: block;">Estimate how your impressions are distributed across SERP features. Doesn&rsquo;t need to be exact &mdash; directional is fine.</span>
+
+                <div class="input-group">
+                    <label class="input-label">AI Overview &mdash; named in answer</label>
+                    <div class="input-row">
+                        <input type="number" id="pctAIONamed" placeholder="e.g. 3" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">AI Overview &mdash; cited as source</label>
+                    <div class="input-row">
+                        <input type="number" id="pctAIOCited" placeholder="e.g. 5" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Featured Snippets</label>
+                    <div class="input-row">
+                        <input type="number" id="pctSnippet" placeholder="e.g. 4" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">People Also Ask</label>
+                    <div class="input-row">
+                        <input type="number" id="pctPAA" placeholder="e.g. 8" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Image / Video carousels</label>
+                    <div class="input-row">
+                        <input type="number" id="pctMedia" placeholder="e.g. 5" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Google Discover</label>
+                    <div class="input-row">
+                        <input type="number" id="pctDiscover" placeholder="e.g. 3" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div id="mapPackGroup" class="input-group" style="display: none;">
+                    <label class="input-label">Map Pack</label>
+                    <div class="input-row">
+                        <input type="number" id="pctMapPack" placeholder="e.g. 10" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="pct-remaining" id="pctRemaining">Remaining goes to standard organic positions (auto-calculated)</div>
+            </div>
+
+            <!-- Column 3: Business Context -->
+            <div class="calc-panel">
+                <div class="calc-panel-title">Business context</div>
+
+                <div class="input-group">
+                    <label class="input-label">Business relevance breakdown</label>
+                    <span class="input-hint">What % of your ranking keywords fall into each relevance tier?</span>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label" style="color: var(--green); font-size: 12px;">High relevance %</label>
+                    <div class="input-row">
+                        <input type="number" id="relHigh" placeholder="e.g. 25" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label" style="color: var(--yellow); font-size: 12px;">Medium relevance %</label>
+                    <div class="input-row">
+                        <input type="number" id="relMedium" placeholder="e.g. 45" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label" style="color: var(--dim); font-size: 12px;">Low relevance %</label>
+                    <div class="input-row">
+                        <input type="number" id="relLow" placeholder="e.g. 30" min="0" max="100">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="pct-remaining" id="relRemaining">Must total 100%</div>
+
+                <div class="input-group" style="margin-top: 22px;">
+                    <label class="input-label">Industry</label>
+                    <span class="input-hint">Sets your CPM benchmark. Average Google CPM varies significantly by vertical.</span>
+                    <select id="industryCPM">
+                        <option value="17.80">General / Mixed ($17.80 CPM)</option>
+                        <option value="36.00">Healthcare ($36.00 CPM)</option>
+                        <option value="28.00">Finance &amp; Insurance ($28.00 CPM)</option>
+                        <option value="24.50">Legal ($24.50 CPM)</option>
+                        <option value="22.00">B2B / SaaS ($22.00 CPM)</option>
+                        <option value="18.00">Real Estate ($18.00 CPM)</option>
+                        <option value="15.00">Education ($15.00 CPM)</option>
+                        <option value="12.00">E-commerce ($12.00 CPM)</option>
+                        <option value="10.00">Travel ($10.00 CPM)</option>
+                        <option value="8.00">Entertainment ($8.00 CPM)</option>
+                        <option value="5.00">News / Publishing ($5.00 CPM)</option>
+                        <option value="2.71">Online Marketplaces ($2.71 CPM)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Apply organic premium?</label>
+                    <span class="input-hint">1.5x multiplier for organic&rsquo;s implicit trust signal over paid placements</span>
+                    <select id="organicPremium">
+                        <option value="1.0">No &mdash; use base CPM (conservative)</option>
+                        <option value="1.5">Yes &mdash; apply 1.5x organic premium</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="calc-button-wrap">
+            <button class="calc-button" onclick="calculate()">Calculate impression value</button>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- RESULTS                                    -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="results" id="results">
+        <div class="results-header">
+            <h2>Your search impression valuation</h2>
+            <p>The brand exposure value of your Google search presence, weighted by attention and relevance.</p>
+        </div>
+
+        <!-- Headline number -->
+        <div class="result-headline">
+            <div class="result-headline-label">Weighted monthly impression value</div>
+            <div class="result-headline-value" id="r-headline">&mdash;</div>
+            <div class="result-headline-sublabel" id="r-headline-sub">Per month in equivalent brand exposure</div>
+        </div>
+
+        <!-- Top row: Feature breakdown + Relevance breakdown -->
+        <div class="results-grid">
+            <div class="result-card result-card--green">
+                <div class="result-card-label">By SERP feature</div>
+                <div class="result-card-title">Where your impression value comes from</div>
+                <div class="feature-bars" id="r-feature-bars"></div>
+            </div>
+            <div class="result-card result-card--yellow">
+                <div class="result-card-label">By business relevance</div>
+                <div class="result-card-title">How much is strategically valuable</div>
+                <div class="result-breakdown" id="r-relevance-breakdown"></div>
+                <div class="result-narrative" id="r-relevance-narrative" style="margin-top: 16px;"></div>
+            </div>
+        </div>
+
+        <!-- Bottom row: Efficiency + Raw vs Weighted + Annual -->
+        <div class="results-grid-3">
+            <div class="result-card result-card--green">
+                <div class="result-card-label">Efficiency ratio</div>
+                <div class="result-card-title">Value per 1,000 raw impressions</div>
+                <div class="result-value" id="r-efficiency">&mdash;</div>
+                <div class="result-sublabel">Per 1,000 impressions</div>
+                <div class="result-narrative" id="r-efficiency-narrative"></div>
+            </div>
+            <div class="result-card result-card--yellow">
+                <div class="result-card-label">Click-free exposure</div>
+                <div class="result-card-title">Brand impressions without a click</div>
+                <div class="result-value result-value--yellow" id="r-noclick">&mdash;</div>
+                <div class="result-sublabel">Monthly no-click brand impressions</div>
+                <div class="result-narrative" id="r-noclick-narrative"></div>
+            </div>
+            <div class="result-card result-card--green">
+                <div class="result-card-label">Annualized</div>
+                <div class="result-card-title">Yearly brand exposure value</div>
+                <div class="result-value" id="r-annual">&mdash;</div>
+                <div class="result-sublabel">Annual weighted impression value</div>
+                <div class="result-narrative" id="r-annual-narrative"></div>
+            </div>
+        </div>
+
+        <!-- Caveat -->
+        <div class="caveat-section">
+            <div class="caveat">
+                <strong>A note on precision.</strong> These are directional estimates, not audited figures. The value of an impression is inherently harder to measure than the value of a click &mdash; you can&rsquo;t track whether a human eye actually focused on your brand name in a search result.<br><br>
+                <strong>What this measures:</strong> The equivalent cost of achieving the same brand exposure through paid channels, adjusted for the quality and relevance of that exposure. It answers &ldquo;what would an advertiser pay for this visibility?&rdquo;<br><br>
+                <strong>What this doesn&rsquo;t measure:</strong> Actual brand recall, purchase intent, or revenue attribution. The gap between &ldquo;your brand appeared&rdquo; and &ldquo;someone remembered and acted&rdquo; is real. This framework values the exposure opportunity, not the conversion path.<br><br>
+                <strong>The SERP feature mix is an estimation.</strong> Google Search Console doesn&rsquo;t break down impressions by feature type. The percentages you entered are directional estimates, likely informed by SERP feature data in tools like Semrush or Ahrefs. The tool&rsquo;s value is in the relative picture it reveals, not decimal-point precision.
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- CLOSING                                    -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="closing">
+        <div class="closing-inner">
+            <blockquote>The click was only half the story. The impression was always the other half.</blockquote>
+            <p>In a zero-click world, your content library isn&rsquo;t just a traffic engine. It&rsquo;s also a brand engine &mdash; generating millions of weighted impressions that build familiarity, trust, and preference. The dashboard just can&rsquo;t see that part yet.</p>
+            <p style="margin-top: 24px;"><a href="../tools/content-library-valuation.html">Related tool: Content Library Valuation Calculator &rarr;</a></p>
+        </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="newsletter-section">
+        <div class="newsletter-inner">
+            <p>Get essays on content, craft, and building things &mdash; <span class="dim">no spam, no schedule.</span></p>
+            <form
+                action="https://buttondown.email/api/emails/embed-subscribe/ofei"
+                method="post"
+                target="popupwindow"
+                class="subscribe-form"
+            >
+                <input type="email" name="email" placeholder="your@email.com" required />
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section">
+        <div class="footer-inner">
+            <a href="../index.html">&larr; michaelofei.co</a>
+            <span>Framework by Michael Ofei. March 2026.</span>
+        </div>
+    </div>
+
+<script>
+// ── Helpers ──
+function fmt(n) {
+    if (n >= 1000000000) return '$' + (n / 1000000000).toFixed(1) + 'B';
+    if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+    if (n >= 1000) return '$' + (n / 1000).toFixed(0) + 'K';
+    return '$' + n.toFixed(0);
+}
+
+function fmtRaw(n) {
+    if (n >= 1000000000) return (n / 1000000000).toFixed(1) + 'B';
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+    if (n >= 1000) return Math.round(n / 1000) + 'K';
+    return n.toFixed(0);
+}
+
+function breakdownRow(label, value) {
+    return '<div class="result-breakdown-row"><span>' + label + '</span><span class="result-breakdown-value">' + value + '</span></div>';
+}
+
+function featureBarHTML(label, value, maxValue, colorClass) {
+    var pct = maxValue > 0 ? Math.min(100, (value / maxValue) * 100) : 0;
+    return '<div class="feature-bar-row">' +
+        '<div class="feature-bar-label">' + label + '</div>' +
+        '<div class="feature-bar-track"><div class="feature-bar-fill ' + colorClass + '" style="width: ' + pct + '%;"></div></div>' +
+        '<div class="feature-bar-value">' + fmt(value) + '</div>' +
+    '</div>';
+}
+
+// ── Map Pack toggle ──
+document.getElementById('hasMapPack').addEventListener('change', function() {
+    document.getElementById('mapPackGroup').style.display = this.value === 'yes' ? 'block' : 'none';
+    if (this.value === 'no') {
+        document.getElementById('pctMapPack').value = '';
+    }
+    updatePctRemaining();
+});
+
+// ── Live percentage tracking ──
+var featureInputs = ['pctAIONamed', 'pctAIOCited', 'pctSnippet', 'pctPAA', 'pctMedia', 'pctDiscover', 'pctMapPack'];
+featureInputs.forEach(function(id) {
+    document.getElementById(id).addEventListener('input', updatePctRemaining);
+});
+
+function updatePctRemaining() {
+    var total = 0;
+    featureInputs.forEach(function(id) {
+        total += parseFloat(document.getElementById(id).value) || 0;
+    });
+    var remaining = 100 - total;
+    var el = document.getElementById('pctRemaining');
+    if (remaining < 0) {
+        el.textContent = 'Over 100% by ' + Math.abs(remaining).toFixed(0) + '% — please adjust';
+        el.className = 'pct-remaining over';
+    } else if (remaining === 0) {
+        el.textContent = 'All impressions allocated to features (0% standard organic)';
+        el.className = 'pct-remaining exact';
+    } else {
+        el.textContent = remaining.toFixed(0) + '% allocated to standard organic positions';
+        el.className = 'pct-remaining';
+    }
+}
+
+// ── Relevance tracking ──
+var relInputs = ['relHigh', 'relMedium', 'relLow'];
+relInputs.forEach(function(id) {
+    document.getElementById(id).addEventListener('input', updateRelRemaining);
+});
+
+function updateRelRemaining() {
+    var total = 0;
+    relInputs.forEach(function(id) {
+        total += parseFloat(document.getElementById(id).value) || 0;
+    });
+    var el = document.getElementById('relRemaining');
+    if (total > 100) {
+        el.textContent = 'Over 100% by ' + (total - 100).toFixed(0) + '% — please adjust';
+        el.className = 'pct-remaining over';
+    } else if (total === 100) {
+        el.textContent = 'Adds up to 100%';
+        el.className = 'pct-remaining exact';
+    } else {
+        el.textContent = (100 - total).toFixed(0) + '% unallocated — must total 100%';
+        el.className = 'pct-remaining';
+    }
+}
+
+// ── Feature weights ──
+var WEIGHTS = {
+    aioNamed: 1.00,
+    aioCited: 0.70,
+    snippet: 0.85,
+    knowledgePanel: 0.80,
+    mapPack: 0.75,
+    top3NoAIO: 0.75,
+    top3WithAIO: 0.45,
+    paa: 0.45,
+    media: 0.40,
+    discover: 0.35,
+    pos4to7: 0.20,
+    pos8to10: 0.10
+};
+
+// ── Calculate ──
+function calculate() {
+    var totalImpressions = parseFloat(document.getElementById('totalImpressions').value) || 0;
+    var totalClicks = parseFloat(document.getElementById('totalClicks').value) || 0;
+    var aiOverviewPct = parseFloat(document.getElementById('aiOverviewPct').value) || 0;
+    var hasMapPack = document.getElementById('hasMapPack').value === 'yes';
+
+    // Feature percentages
+    var pctAIONamed = parseFloat(document.getElementById('pctAIONamed').value) || 0;
+    var pctAIOCited = parseFloat(document.getElementById('pctAIOCited').value) || 0;
+    var pctSnippet = parseFloat(document.getElementById('pctSnippet').value) || 0;
+    var pctPAA = parseFloat(document.getElementById('pctPAA').value) || 0;
+    var pctMedia = parseFloat(document.getElementById('pctMedia').value) || 0;
+    var pctDiscover = parseFloat(document.getElementById('pctDiscover').value) || 0;
+    var pctMapPack = hasMapPack ? (parseFloat(document.getElementById('pctMapPack').value) || 0) : 0;
+
+    var totalFeaturePct = pctAIONamed + pctAIOCited + pctSnippet + pctPAA + pctMedia + pctDiscover + pctMapPack;
+    var pctOrganic = Math.max(0, 100 - totalFeaturePct);
+
+    // Business relevance
+    var relHigh = parseFloat(document.getElementById('relHigh').value) || 0;
+    var relMedium = parseFloat(document.getElementById('relMedium').value) || 0;
+    var relLow = parseFloat(document.getElementById('relLow').value) || 0;
+    var relTotal = relHigh + relMedium + relLow;
+
+    // Normalize relevance if needed
+    if (relTotal > 0 && relTotal !== 100) {
+        relHigh = (relHigh / relTotal) * 100;
+        relMedium = (relMedium / relTotal) * 100;
+        relLow = (relLow / relTotal) * 100;
+    }
+
+    // Industry CPM and premium
+    var cpm = parseFloat(document.getElementById('industryCPM').value) || 17.80;
+    var premium = parseFloat(document.getElementById('organicPremium').value) || 1.0;
+
+    // Blended relevance weight
+    var relevanceWeight = (relHigh / 100 * 1.0) + (relMedium / 100 * 0.5) + (relLow / 100 * 0.15);
+
+    // Split organic impressions using AI Overview % to determine top3 weighting
+    // Organic bucket: top3 with/without AIO, positions 4-7, positions 8-10
+    var aioPct = aiOverviewPct / 100;
+
+    // Distribute organic bucket into position ranges
+    // Assumption: of standard organic impressions, ~30% are top 3, ~40% are 4-7, ~30% are 8-10
+    var organicTop3Pct = pctOrganic * 0.30;
+    var organic4to7Pct = pctOrganic * 0.40;
+    var organic8to10Pct = pctOrganic * 0.30;
+
+    // Top 3 organic: split by AI Overview presence
+    var top3NoAIOPct = organicTop3Pct * (1 - aioPct);
+    var top3WithAIOPct = organicTop3Pct * aioPct;
+
+    // Calculate weighted impressions per feature
+    var features = [
+        { name: 'AI Overview — named', pct: pctAIONamed, weight: WEIGHTS.aioNamed },
+        { name: 'Featured Snippet', pct: pctSnippet, weight: WEIGHTS.snippet },
+        { name: 'AI Overview — cited', pct: pctAIOCited, weight: WEIGHTS.aioCited },
+        { name: 'Top 3 (no AI Overview)', pct: top3NoAIOPct, weight: WEIGHTS.top3NoAIO },
+        { name: 'Top 3 (AI Overview present)', pct: top3WithAIOPct, weight: WEIGHTS.top3WithAIO },
+        { name: 'People Also Ask', pct: pctPAA, weight: WEIGHTS.paa },
+        { name: 'Image / Video', pct: pctMedia, weight: WEIGHTS.media },
+        { name: 'Google Discover', pct: pctDiscover, weight: WEIGHTS.discover },
+        { name: 'Positions 4–7', pct: organic4to7Pct, weight: WEIGHTS.pos4to7 },
+        { name: 'Positions 8–10', pct: organic8to10Pct, weight: WEIGHTS.pos8to10 }
+    ];
+
+    if (hasMapPack && pctMapPack > 0) {
+        features.splice(3, 0, { name: 'Map Pack', pct: pctMapPack, weight: WEIGHTS.mapPack });
+    }
+
+    var totalWeightedImpressions = 0;
+    var featureValues = [];
+
+    features.forEach(function(f) {
+        var impressions = totalImpressions * (f.pct / 100);
+        var weighted = impressions * f.weight;
+        var value = (weighted / 1000) * cpm * premium * relevanceWeight;
+        totalWeightedImpressions += weighted;
+        featureValues.push({ name: f.name, value: value, impressions: impressions, weight: f.weight });
+    });
+
+    // Total value
+    var totalValue = (totalWeightedImpressions / 1000) * cpm * premium * relevanceWeight;
+    var annualValue = totalValue * 12;
+
+    // No-click impressions
+    var noClickImpressions = Math.max(0, totalImpressions - totalClicks);
+
+    // Efficiency: value per 1000 raw impressions
+    var efficiency = totalImpressions > 0 ? (totalValue / (totalImpressions / 1000)) : 0;
+
+    // ── Render results ──
+    document.getElementById('r-headline').textContent = fmt(totalValue) + '/mo';
+    document.getElementById('r-headline-sub').textContent = fmt(annualValue) + ' annualized — equivalent brand exposure at ' + fmt(cpm * 1000).replace('$', '$') + ' CPM' + (premium > 1 ? ' + 1.5x organic premium' : '');
+
+    // Feature bars
+    var maxFeatureValue = 0;
+    featureValues.forEach(function(f) { if (f.value > maxFeatureValue) maxFeatureValue = f.value; });
+
+    var barsHTML = '';
+    featureValues.forEach(function(f) {
+        if (f.value > 0) {
+            var colorClass = f.weight >= 0.7 ? 'feature-bar-fill--green' : (f.weight >= 0.35 ? 'feature-bar-fill--yellow' : 'feature-bar-fill--dim');
+            barsHTML += featureBarHTML(f.name, f.value, maxFeatureValue, colorClass);
+        }
+    });
+    document.getElementById('r-feature-bars').innerHTML = barsHTML;
+
+    // Relevance breakdown
+    var highValue = totalValue * (relHigh / 100) * (1.0 / relevanceWeight);
+    var medValue = totalValue * (relMedium / 100) * (0.5 / relevanceWeight);
+    var lowValue = totalValue * (relLow / 100) * (0.15 / relevanceWeight);
+
+    // Recalculate properly: relevance per tier
+    var highTierValue = (totalWeightedImpressions / 1000) * cpm * premium * (relHigh / 100) * 1.0;
+    var medTierValue = (totalWeightedImpressions / 1000) * cpm * premium * (relMedium / 100) * 0.5;
+    var lowTierValue = (totalWeightedImpressions / 1000) * cpm * premium * (relLow / 100) * 0.15;
+
+    document.getElementById('r-relevance-breakdown').innerHTML =
+        breakdownRow('High relevance (' + relHigh.toFixed(0) + '% × 1.0x)', fmt(highTierValue) + '/mo') +
+        breakdownRow('Medium relevance (' + relMedium.toFixed(0) + '% × 0.5x)', fmt(medTierValue) + '/mo') +
+        breakdownRow('Low relevance (' + relLow.toFixed(0) + '% × 0.15x)', fmt(lowTierValue) + '/mo') +
+        breakdownRow('Blended relevance weight', relevanceWeight.toFixed(2) + 'x');
+
+    var strategicPct = relTotal > 0 ? ((highTierValue + medTierValue) / totalValue * 100) : 0;
+    document.getElementById('r-relevance-narrative').textContent =
+        strategicPct.toFixed(0) + '% of your impression value comes from high and medium relevance keywords. ' +
+        (strategicPct >= 70 ? 'Your impression portfolio is well-aligned with your business.' :
+         strategicPct >= 40 ? 'There\'s room to shift more of your content toward strategically relevant topics.' :
+         'Most of your visibility is on tangential topics. Consider whether your content strategy is creating the brand associations you want.');
+
+    // Efficiency
+    document.getElementById('r-efficiency').textContent = fmt(efficiency);
+    document.getElementById('r-efficiency-narrative').textContent =
+        'For every 1,000 raw impressions, ' + fmt(efficiency) + ' in weighted brand value. ' +
+        (efficiency > cpm * premium ? 'Your impression portfolio is high-quality — weighted value exceeds the base CPM.' :
+         'Below your industry CPM, suggesting a significant portion of impressions come from low-weight positions or low-relevance keywords.');
+
+    // No-click
+    var noClickPct = totalImpressions > 0 ? (noClickImpressions / totalImpressions * 100) : 0;
+    document.getElementById('r-noclick').textContent = fmtRaw(noClickImpressions);
+    document.getElementById('r-noclick-narrative').textContent =
+        noClickPct.toFixed(1) + '% of your impressions generate brand exposure without a click. ' +
+        'Traditional analytics sees none of this. These ' + fmtRaw(noClickImpressions) + ' monthly impressions are the brand engine your dashboard doesn\'t show.';
+
+    // Annual
+    document.getElementById('r-annual').textContent = fmt(annualValue) + '/yr';
+    document.getElementById('r-annual-narrative').textContent =
+        'Over 12 months, your search impressions generate ' + fmt(annualValue) + ' in equivalent brand exposure — ' +
+        'the cost an advertiser would pay to achieve comparable visibility in your industry.';
+
+    // Show results
+    document.getElementById('results').classList.add('visible');
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+<script async data-id="101499378" src="//static.getclicky.com/js"></script>
+</body>
+</html>
