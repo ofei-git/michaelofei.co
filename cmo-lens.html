@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The CMO Lens — Michael Ofei</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        :root {
+            --bg: #7A251E;
+            --bg-light: #8a352e;
+            --bg-dark: #6a1f18;
+            --text: #D7C9A7;
+            --text-bright: #E8DAB8;
+            --yellow: #E7B000;
+            --green: #00BB00;
+            --red: #FF3F00;
+            --dim: #a89878;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+            padding: 40px 20px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        header { margin-bottom: 48px; }
+
+        .label {
+            color: var(--dim);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: normal;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            color: var(--text-bright);
+        }
+
+        .meta { color: var(--yellow); font-size: 14px; }
+        .updated { color: var(--dim); font-size: 13px; margin-top: 4px; }
+
+        section { margin-bottom: 48px; }
+
+        h2 {
+            font-size: 16px;
+            font-weight: normal;
+            color: var(--yellow);
+            margin-bottom: 16px;
+        }
+
+        p { margin-bottom: 16px; }
+        strong { color: var(--text-bright); font-weight: 600; }
+        em { color: var(--dim); font-style: normal; }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--bg-light);
+            margin: 40px 0;
+        }
+
+        blockquote {
+            border-left: 2px solid var(--yellow);
+            padding-left: 20px;
+            margin: 24px 0;
+            color: var(--dim);
+            font-size: 14px;
+        }
+
+        /* Stat blocks */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        @media (max-width: 500px) {
+            .stat-grid { grid-template-columns: 1fr; }
+        }
+
+        .stat-card {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .stat-number.bad { color: var(--red); }
+        .stat-number.warn { color: var(--yellow); }
+        .stat-number.good { color: var(--green); }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.4;
+        }
+
+        .stat-source {
+            font-size: 10px;
+            color: var(--dim);
+            opacity: 0.6;
+            margin-top: 6px;
+        }
+
+        /* Visual blocks */
+        .visual {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 28px 24px;
+            margin: 24px 0;
+        }
+
+        .visual-caption {
+            font-size: 11px;
+            color: var(--dim);
+            text-align: center;
+            margin-top: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Comparison columns */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        @media (max-width: 500px) {
+            .compare-grid { grid-template-columns: 1fr; }
+        }
+
+        .compare-col {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .compare-col.highlight {
+            border: 1px solid var(--green);
+        }
+
+        .compare-header {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .compare-col:not(.highlight) .compare-header { color: var(--dim); }
+        .compare-col.highlight .compare-header { color: var(--green); }
+
+        .compare-item {
+            font-size: 13px;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--bg-light);
+            line-height: 1.5;
+        }
+
+        .compare-item:last-child { border-bottom: none; }
+
+        .compare-col:not(.highlight) .compare-item { color: var(--dim); }
+
+        /* Spectrum */
+        .spectrum-visual {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 32px 24px;
+            margin: 24px 0;
+        }
+
+        .spectrum-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--dim), var(--yellow), var(--green));
+            border-radius: 4px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .spectrum-marker {
+            position: absolute;
+            top: -22px;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: var(--yellow);
+        }
+
+        .spectrum-marker::after {
+            content: "▼";
+            display: block;
+            text-align: center;
+            margin-top: 2px;
+        }
+
+        .spectrum-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+        }
+
+        .spectrum-labels span:first-child { color: var(--dim); }
+        .spectrum-labels span:last-child { color: var(--green); }
+
+        /* Pain point list */
+        .pain-list {
+            margin: 24px 0;
+        }
+
+        .pain-item {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .pain-item:last-child { border-bottom: none; }
+
+        .pain-rank {
+            color: var(--red);
+            font-size: 14px;
+            font-weight: 600;
+            min-width: 24px;
+        }
+
+        .pain-content { flex: 1; }
+
+        .pain-title {
+            color: var(--text-bright);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .pain-desc {
+            color: var(--dim);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* Stakeholder rows */
+        .stakeholder-list {
+            margin: 24px 0;
+        }
+
+        .sh-item {
+            display: flex;
+            gap: 16px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--bg-light);
+            align-items: baseline;
+        }
+
+        .sh-item:last-child { border-bottom: none; }
+
+        .sh-who {
+            color: var(--yellow);
+            font-size: 13px;
+            min-width: 60px;
+            font-weight: 600;
+        }
+
+        .sh-wants {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* Equation */
+        .equation {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 28px 24px;
+            margin: 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .equation-part { text-align: center; }
+
+        .equation-value {
+            color: var(--text-bright);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .equation-label {
+            font-size: 11px;
+            color: var(--dim);
+            margin-top: 4px;
+        }
+
+        .equation-symbol {
+            font-size: 20px;
+            color: var(--yellow);
+        }
+
+        /* Tier cards */
+        .tier-row {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--bg-light);
+            align-items: baseline;
+        }
+
+        .tier-row:last-child { border-bottom: none; }
+
+        .tier-pct {
+            font-size: 20px;
+            font-weight: 600;
+            min-width: 56px;
+            text-align: right;
+        }
+
+        .tier-content { flex: 1; }
+
+        .tier-name {
+            font-size: 14px;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+
+        .tier-desc {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+
+        /* Opportunity block */
+        .opportunity {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            border-left: 3px solid var(--green);
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .opportunity-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+
+        .opportunity-text {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Writing lens section */
+        .lens-grid {
+            display: grid;
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .lens-card {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .lens-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .lens-card-title {
+            color: var(--text-bright);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .lens-card-level {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lens-card-level.t2 { color: var(--yellow); }
+        .lens-card-level.t3 { color: var(--green); }
+
+        .lens-card-desc {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .lens-card-example {
+            font-size: 12px;
+            color: var(--text);
+            padding: 8px 12px;
+            background: var(--bg-light);
+            border-radius: 4px;
+        }
+
+        .lens-card-example em {
+            color: var(--dim);
+            font-size: 11px;
+        }
+
+        /* Footnotes */
+        .footnotes {
+            margin-top: 48px;
+            padding-top: 20px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .footnotes h3 {
+            font-size: 12px;
+            color: var(--dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-weight: normal;
+        }
+
+        .footnotes a {
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 12px;
+            display: block;
+            padding: 4px 0;
+            line-height: 1.5;
+        }
+
+        .footnotes a:hover { color: var(--green); }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--bg-light);
+            color: var(--dim);
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="label">Internal reference</div>
+        <h1>The CMO Lens</h1>
+        <div class="meta">Understanding the people who shape markets — and how narrative gets them there.</div>
+        <div class="updated">Last updated: April 2026</div>
+    </header>
+
+    <section>
+        <h2>Why this page exists</h2>
+
+        <p>Not to become a CMO. To think at the level where narrative shapes markets. Content professionals who understand what keeps a CMO up at night write fundamentally different work than those who don't. The essays get sharper, the stakes get higher, the audience gets wider.</p>
+
+        <p>This is a reference for writing essays that a CMO would forward to their team — even if the essay wasn't written for CMOs specifically.</p>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>The numbers that define the role</h2>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-number bad">65%</div>
+                <div class="stat-label">of CEOs don't trust their CMO</div>
+                <div class="stat-source">Alvarez & Marsal, 2025</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number bad">84%</div>
+                <div class="stat-label">of CMOs report high strategic dysfunction</div>
+                <div class="stat-source">Gartner (n=403), 2025</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number warn">4.3yr</div>
+                <div class="stat-label">average CMO tenure (Fortune 500)</div>
+                <div class="stat-source">Spencer Stuart, 2025</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number warn">74%</div>
+                <div class="stat-label">face increased pressure to prove ROI</div>
+                <div class="stat-source">NIQ, 2025</div>
+            </div>
+        </div>
+
+        <p>The CMO operates in a structural trust deficit. Budgets are flat (7.7% of revenue, down from 9.1%), accountability is rising, and when profits fall short, marketing is cut first — 45% of the time before other departments.</p>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>What actually keeps them up at night</h2>
+
+        <div class="pain-list">
+            <div class="pain-item">
+                <div class="pain-rank">01</div>
+                <div class="pain-content">
+                    <div class="pain-title">Nobody can tell us apart</div>
+                    <div class="pain-desc">61% of tech CMOs struggle to create distinctive brand narratives that buyers recognize and repeat. Everyone sounds the same. The brand has no point of view the market can hold onto.</div>
+                </div>
+            </div>
+            <div class="pain-item">
+                <div class="pain-rank">02</div>
+                <div class="pain-content">
+                    <div class="pain-title">I can't prove any of this works</div>
+                    <div class="pain-desc">74% face rising ROI pressure. Only 30% have a clear definition of what marketing ROI even means. None of 200+ senior leaders surveyed by McKinsey could clearly articulate their MarTech ROI.</div>
+                </div>
+            </div>
+            <div class="pain-item">
+                <div class="pain-rank">03</div>
+                <div class="pain-content">
+                    <div class="pain-title">The CEO doesn't understand what we do</div>
+                    <div class="pain-desc">CEO-CMO misalignment increased 20% from 2023-2025. Only 32% of executives say their CMO makes compelling strategy recommendations based on market data. The CMO is fighting for a seat they're supposed to already have.</div>
+                </div>
+            </div>
+            <div class="pain-item">
+                <div class="pain-rank">04</div>
+                <div class="pain-content">
+                    <div class="pain-title">AI is changing everything and I'm not ready</div>
+                    <div class="pain-desc">62% lack skills, budget, or resources to compete on AI search. Organic visibility is declining. The playbook that worked for a decade is eroding and the replacement isn't clear yet.</div>
+                </div>
+            </div>
+            <div class="pain-item">
+                <div class="pain-rank">05</div>
+                <div class="pain-content">
+                    <div class="pain-title">Everyone wants something different from me</div>
+                    <div class="pain-desc">94% struggle to translate enterprise strategy into actionable plans. The CEO wants growth. The CFO wants attribution. Sales wants leads. Product wants positioning. The board wants all of it. "Strategic dysfunction" — unclear, conflicting objectives that marketing must somehow serve.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>The two CMOs</h2>
+
+        <p>Gartner identified a split that explains almost everything about CMO success and failure.</p>
+
+        <div class="compare-grid">
+            <div class="compare-col">
+                <div class="compare-header">Enterprise Operator (86%)</div>
+                <div class="compare-item">Translates company strategy into marketing execution</div>
+                <div class="compare-item">Reacts to objectives set by others</div>
+                <div class="compare-item">Measures against existing KPIs</div>
+                <div class="compare-item">Optimises the machine</div>
+                <div class="compare-item">Asks: "how do we hit the target?"</div>
+            </div>
+            <div class="compare-col highlight">
+                <div class="compare-header">Market Shaper (14%)</div>
+                <div class="compare-item">Brings customer insight that reshapes company strategy</div>
+                <div class="compare-item">Identifies unmet needs before they're obvious</div>
+                <div class="compare-item">Converts trends into visionary strategy</div>
+                <div class="compare-item">Changes how the market sees the category</div>
+                <div class="compare-item">Asks: "what should the market believe?"</div>
+            </div>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-number good">8x</div>
+                <div class="stat-label">more likely to succeed as CMO</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number good">2.6x</div>
+                <div class="stat-label">more likely to exceed revenue and profit goals</div>
+            </div>
+        </div>
+
+        <div class="opportunity">
+            <div class="opportunity-label">Where content professionals fit</div>
+            <div class="opportunity-text">Market shaping is a narrative act. Someone has to build the story architecture, develop the proof points, write the positioning, craft the keynotes, shape how the company talks about itself and its category. That someone is often a content professional operating at the highest level — whether they carry a content title or not. The CMO sets the direction. The narrative professional builds the vehicle.</div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>The two narratives</h2>
+
+        <p>Every marketing organization needs two narratives running in parallel. Most only build one.</p>
+
+        <div class="compare-grid">
+            <div class="compare-col">
+                <div class="compare-header">External narrative</div>
+                <div class="compare-item">How the market sees the brand</div>
+                <div class="compare-item">Demand generation and pipeline</div>
+                <div class="compare-item">Product positioning and messaging</div>
+                <div class="compare-item">Customer-facing content, campaigns, events</div>
+                <div class="compare-item">Conference presentations</div>
+            </div>
+            <div class="compare-col highlight">
+                <div class="compare-header">Internal narrative</div>
+                <div class="compare-item">How the organisation understands itself</div>
+                <div class="compare-item">Positioning documents and memos</div>
+                <div class="compare-item">Team alignment and shared vocabulary</div>
+                <div class="compare-item">Board presentations and executive comms</div>
+                <div class="compare-item">Cross-functional alignment (sales, product, finance)</div>
+            </div>
+        </div>
+
+        <p>The 84% strategic dysfunction stat is essentially: <strong>the internal narrative is broken.</strong> Teams aren't aligned. The CMO can't translate enterprise objectives into a coherent story that everyone rows behind. The external brand suffers because the internal house is in disorder.</p>
+
+        <p>The best CMOs are called "Chief Meaning Officers" — they create unified narratives amid fragmentation and competing priorities. Both narratives are made of the same raw material: words, structure, positioning, story. Both are content problems at their core.</p>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>What each stakeholder wants from the CMO</h2>
+
+        <div class="stakeholder-list">
+            <div class="sh-item">
+                <div class="sh-who">CEO</div>
+                <div class="sh-wants">Growth and market position. "Is marketing driving the business?" 70% measure marketing impact by revenue growth and margin. Wants a strategic sparring partner, not a campaign manager.</div>
+            </div>
+            <div class="sh-item">
+                <div class="sh-who">CFO</div>
+                <div class="sh-wants">Attribution and efficiency. "Prove every dollar." CFO pressure on CMOs increased 52% from 2023-2025. Every budget line is interrogated.</div>
+            </div>
+            <div class="sh-item">
+                <div class="sh-who">Board</div>
+                <div class="sh-wants">Long-term brand value vs. short-term returns. Board pressure rose 21%. When profits fall short, marketing is cut first. CMOs must frame brand as a commercial asset, not an expense.</div>
+            </div>
+            <div class="sh-item">
+                <div class="sh-who">Sales</div>
+                <div class="sh-wants">Pipeline and enablement. "Give me content that helps me close." Only 24% of tech CMOs effectively enable sales with content.</div>
+            </div>
+            <div class="sh-item">
+                <div class="sh-who">Product</div>
+                <div class="sh-wants">Positioning and go-to-market. How the product story meets the market. CMOs who co-develop strategy with product last longer.</div>
+            </div>
+            <div class="sh-item">
+                <div class="sh-who">Team</div>
+                <div class="sh-wants">Clarity and direction. Burnout is the #1 concern (25.9%). Workload satisfaction at 51%. Only 42% feel adequately staffed. The team needs the CMO to protect priorities, not add to the pile.</div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Why CMOs get fired</h2>
+
+        <div class="pain-list">
+            <div class="pain-item">
+                <div class="pain-rank">01</div>
+                <div class="pain-content">
+                    <div class="pain-title">Can't demonstrate revenue contribution</div>
+                    <div class="pain-desc">The board question: "If given $Xm, where would you invest it and what incremental revenue would result?" If you can't answer, you're replaceable.</div>
+                </div>
+            </div>
+            <div class="pain-item">
+                <div class="pain-rank">02</div>
+                <div class="pain-content">
+                    <div class="pain-title">Lack of market and customer insight</div>
+                    <div class="pain-desc">CEOs want CMOs who can "strategically spar on company, product, and market strategy." Not just deliver demand gen numbers — shape the company's understanding of the market.</div>
+                </div>
+            </div>
+            <div class="pain-item">
+                <div class="pain-rank">03</div>
+                <div class="pain-content">
+                    <div class="pain-title">Eroded trust with the C-suite</div>
+                    <div class="pain-desc">Even mediocre performance can be tolerated if trust exists. Without it, you're gone. Trust is built by speaking business language, not marketing language.</div>
+                </div>
+            </div>
+        </div>
+
+        <blockquote>"Almost every exceptional CMO has faced termination. It's not a sign of failure — it's the nature of the role." — Carilu Dietrich</blockquote>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>What the best CMOs actually do</h2>
+
+        <p>The pattern across the research is consistent. The best CMOs:</p>
+
+        <div class="equation">
+            <div class="equation-part">
+                <div class="equation-value">Market insight</div>
+                <div class="equation-label">see what others miss</div>
+            </div>
+            <div class="equation-symbol">+</div>
+            <div class="equation-part">
+                <div class="equation-value">Business language</div>
+                <div class="equation-label">revenue, margin, CAC</div>
+            </div>
+            <div class="equation-symbol">+</div>
+            <div class="equation-part">
+                <div class="equation-value">Internal narrative</div>
+                <div class="equation-label">align the organization</div>
+            </div>
+            <div class="equation-symbol">=</div>
+            <div class="equation-part">
+                <div class="equation-value" style="color: var(--green);">Market shaper</div>
+                <div class="equation-label">the 14% who succeed</div>
+            </div>
+        </div>
+        <div class="visual-caption">What separates market shapers from enterprise operators</div>
+
+        <p>They stop talking marketing and start talking business. They treat internal alignment as seriously as external brand. They convert trends into strategy rather than reacting to objectives set by others. And they use narrative — not just data — to build trust with the C-suite.</p>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>The AI search disruption — their blind spot</h2>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-number warn">62%</div>
+                <div class="stat-label">lack skills or budget to compete on AI/GEO</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number warn">33%</div>
+                <div class="stat-label">now tracking "share of AI voice"</div>
+            </div>
+        </div>
+
+        <p>AI search is an active, under-resourced pain point for CMOs. Organic visibility is declining. AI Overviews are compressing click-through rates. The measurement frameworks don't account for the impression-to-action shift. And most CMOs are being told to "do AI" without meaningful guidance on what that means for their content strategy.</p>
+
+        <div class="opportunity">
+            <div class="opportunity-label">Your advantage</div>
+            <div class="opportunity-text">You're writing the foundational content on AI search at the company that's building the tools for this shift. You have access to proprietary data, inside knowledge of where the market is heading, and the editorial skills to explain it. Most CMOs are looking for someone who can make sense of this disruption. You're building the sense-making apparatus.</div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Writing through the CMO lens</h2>
+
+        <p>The goal isn't to write as a CMO or for CMOs exclusively. It's to write as <strong>someone who works with words and narrative, sees patterns in how organisations communicate, and names them.</strong> The test: would a CMO forward this to their team?</p>
+
+        <div class="lens-grid">
+            <div class="lens-card">
+                <div class="lens-card-header">
+                    <div class="lens-card-title">Raise the stakes</div>
+                    <div class="lens-card-level t2">Tier 2 → 3</div>
+                </div>
+                <div class="lens-card-desc">Take a craft insight and ask: what does this cost the business? "Content quality" becomes "brand differentiation." "Editorial standards" become "whether the market can tell you apart."</div>
+                <div class="lens-card-example">
+                    <em>Before:</em> Why helpful content gets forgotten<br>
+                    <em>After:</em> Why helpful content gets forgotten — and what that costs your brand when AI is the one remembering
+                </div>
+            </div>
+
+            <div class="lens-card">
+                <div class="lens-card-header">
+                    <div class="lens-card-title">Name the pattern</div>
+                    <div class="lens-card-level t3">Tier 3</div>
+                </div>
+                <div class="lens-card-desc">Find a market mechanism or widely held assumption and reframe it. Don't tell people how to do their job — tell them they've been measuring the wrong thing, solving the wrong problem, or missing the structural shift underneath.</div>
+                <div class="lens-card-example">
+                    <em>Model:</em> The Impression Economy — impressions always had value; clicks obscured it. The IC Ceiling — the market already pays for three tiers; nobody named them.
+                </div>
+            </div>
+
+            <div class="lens-card">
+                <div class="lens-card-header">
+                    <div class="lens-card-title">Use business language</div>
+                    <div class="lens-card-level t3">Tier 3</div>
+                </div>
+                <div class="lens-card-desc">CMOs live in a world of revenue, margin, attribution, pipeline, and board presentations. Content that mirrors that frame is credible. Content that stays in "content metrics" (traffic, rankings, engagement) doesn't reach the room where decisions are made.</div>
+                <div class="lens-card-example">
+                    <em>Instead of:</em> "Your content library is undervalued"<br>
+                    <em>Try:</em> "Your content library is a depreciating asset and nobody's on the balance sheet watching it"
+                </div>
+            </div>
+
+            <div class="lens-card">
+                <div class="lens-card-header">
+                    <div class="lens-card-title">Acknowledge the political reality</div>
+                    <div class="lens-card-level t3">Tier 3</div>
+                </div>
+                <div class="lens-card-desc">Content that pretends the CMO just needs "better strategy" doesn't resonate. They know the system is broken — 84% dysfunction, 65% trust deficit, conflicting objectives from every direction. Naming this reality earns credibility instantly.</div>
+                <div class="lens-card-example">
+                    <em>Signal:</em> "The differentiation problem isn't a creative problem. It's an alignment problem — and most organisations don't have the internal narrative to solve it."
+                </div>
+            </div>
+
+            <div class="lens-card">
+                <div class="lens-card-header">
+                    <div class="lens-card-title">Ground it in research</div>
+                    <div class="lens-card-level t3">Tier 3</div>
+                </div>
+                <div class="lens-card-desc">Your credibility comes from mapping patterns with evidence, not from lived C-suite experience. Proprietary data, real JDs, market studies, primary research — these give you permission to make claims at a level your title alone wouldn't. The IC Ceiling is the model.</div>
+                <div class="lens-card-example">
+                    <em>The approach:</em> Research-backed pattern recognition. You're the translator on the expertise spectrum — deep enough to see it, skilled enough to name it, rigorous enough to back it up.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>The voice</h2>
+
+        <blockquote>You don't speak as a CMO. You don't speak to CMOs specifically. You speak as someone who works with words and narrative, who sees patterns in how organisations communicate, and who names them.</blockquote>
+
+        <p>The IC Ceiling proves this works. You wrote it as a practitioner who did research and mapped a pattern the market hadn't named. A CMO reads it and thinks "this person understands the market." An IC reads it and thinks "this person just handed me a career map." Both are right.</p>
+
+        <p><strong>The pattern namer who works with words.</strong> Not trying on anyone else's dress. Wearing yours and walking into bigger rooms.</p>
+    </section>
+
+    <div class="footnotes">
+        <h3>Key sources</h3>
+        <a href="https://www.gartner.com/en/newsroom/press-releases/2025-05-12-gartner-survey-reveals-market-shaping-cmos-are-eight-times-more-likely-to-succeed-in-their-role" target="_blank">Gartner — Market-Shaping CMOs Are 8x More Likely to Succeed (2025)</a>
+        <a href="https://www.spencerstuart.com/research-and-insight/cmo-tenure-study-2025-the-evolution-of-marketing-leadership" target="_blank">Spencer Stuart — CMO Tenure Study 2025</a>
+        <a href="https://www.alvarezandmarsal.com/thought-leadership/65-percent-of-CEOs-dont-trust-their-CMOs" target="_blank">Alvarez & Marsal — 65% of CEOs Don't Trust Their CMOs (2025)</a>
+        <a href="https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/analyzing-the-ceo-cmo-relationship-and-its-effect-on-growth" target="_blank">McKinsey — The CEO-CMO Relationship and Its Effect on Growth</a>
+        <a href="https://www.worldwidepartners.com/blog/202512010000/confessions-of-a-cmo" target="_blank">Worldwide Partners — Confessions of a CMO (2025)</a>
+        <a href="https://www.carilu.com/p/the-top-5-reasons-cmos-get-fired" target="_blank">Carilu Dietrich — The Top 5 Reasons CMOs Get Fired</a>
+        <a href="https://nielseniq.com/global/en/insights/report/2025/cmo-outlook-for-2026/" target="_blank">NIQ — CMO Outlook for 2026</a>
+        <a href="https://renegademarketing.com/blog/state-marketing-leadership-2025/" target="_blank">Renegade — State of Marketing Leadership 2025</a>
+    </div>
+
+    <footer>
+        <p>Private reference. Review and update as thinking evolves.</p>
+    </footer>
+</body>
+</html>
