@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map: Context-First Content Planning — Michael Ofei</title>
+    <meta name="description" content="How to translate customer context into a content plan that AI systems can work with. The three-layer spreadsheet, the context map, and the landing page mental model.">
+    <meta property="og:title" content="Map: Context-First Content Planning">
+    <meta property="og:description" content="Replacing keyword-first spreadsheets with context-first planning. Build the experience that both humans and AI agents use to understand your brand — for any industry, any size.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://michaelofei.co/tools/ai-search-visibility-map.html">
+    <style>
+        :root {
+            --bg: #7A251E;
+            --bg-light: #8a352e;
+            --bg-dark: #6a1f18;
+            --bg-darker: #5a1a15;
+            --text: #D7C9A7;
+            --text-bright: #E8DAB8;
+            --yellow: #E7B000;
+            --green: #00BB00;
+            --green-dim: #009900;
+            --dim: #a89878;
+            --dim-dark: #8a7a5a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* ── Layout ── */
+        .section { width: 100%; padding: 0 48px; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-narrow { max-width: 720px; margin: 0 auto; }
+
+        /* ── Top bar ── */
+        .topbar {
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .back { color: var(--dim); text-decoration: none; font-size: 13px; }
+        .back:hover { color: var(--green); }
+        .topbar-parent { color: var(--dim-dark); font-size: 12px; }
+        .topbar-parent a { color: var(--dim); text-decoration: none; }
+        .topbar-parent a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* HERO                                   */
+        /* ══════════════════════════════════════ */
+        .hero {
+            padding: 80px 48px 64px;
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dim);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 1.25;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero .lead {
+            font-size: 17px;
+            color: var(--text);
+            line-height: 1.65;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .hero-meta {
+            font-size: 12px;
+            color: var(--dim);
+            margin-top: 20px;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* PROBLEM STATEMENT                      */
+        /* ══════════════════════════════════════ */
+        .problem-section {
+            background: var(--bg-dark);
+            padding: 64px 48px;
+        }
+
+        .problem-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .problem-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .problem-inner p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .problem-inner p:last-child { margin-bottom: 0; }
+        .problem-inner strong { color: var(--text-bright); }
+        .problem-inner em { color: var(--yellow); font-style: normal; }
+
+        /* ══════════════════════════════════════ */
+        /* COMPARISON TABLES                      */
+        /* ══════════════════════════════════════ */
+        .comparison-section {
+            padding: 80px 48px;
+        }
+
+        .comparison-header {
+            max-width: 720px;
+            margin: 0 auto 40px;
+        }
+
+        .comparison-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .comparison-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .comparison-header p:last-child { margin-bottom: 0; }
+        .comparison-header strong { color: var(--text-bright); }
+
+        .comparison-block {
+            max-width: 1200px;
+            margin: 0 auto 48px;
+        }
+
+        .comparison-block:last-child { margin-bottom: 0; }
+
+        .comparison-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        .comparison-label--old { color: var(--dim); }
+        .comparison-label--new { color: var(--green); }
+
+        .comparison-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 600px;
+        }
+
+        .comparison-table thead th {
+            background: var(--bg-darker);
+            color: var(--dim);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .comparison-table--old thead th {
+            color: var(--dim-dark);
+        }
+
+        .comparison-table--new thead th {
+            color: var(--yellow);
+        }
+
+        .comparison-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .comparison-table--old tbody td {
+            color: var(--dim);
+        }
+
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+
+        .comparison-table tbody tr:nth-child(even) td {
+            background: rgba(106, 31, 24, 0.3);
+        }
+
+        .comparison-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+        }
+
+        .comparison-annotation strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* THREE LAYERS                           */
+        /* ══════════════════════════════════════ */
+        .layers-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .layers-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .layers-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .layers-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .layers-header p:last-child { margin-bottom: 0; }
+        .layers-header strong { color: var(--text-bright); }
+
+        .layer-block {
+            max-width: 1200px;
+            margin: 0 auto 64px;
+        }
+
+        .layer-block:last-child { margin-bottom: 0; }
+
+        .layer-title-bar {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .layer-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--bg-light);
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .layer-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--yellow);
+        }
+
+        .layer-subtitle {
+            font-size: 13px;
+            color: var(--dim);
+            margin-bottom: 24px;
+            padding-left: 48px;
+        }
+
+        .layer-desc {
+            max-width: 720px;
+            margin-bottom: 24px;
+        }
+
+        .layer-desc p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .layer-desc p:last-child { margin-bottom: 0; }
+        .layer-desc strong { color: var(--text-bright); }
+
+        .layer-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 24px;
+        }
+
+        .layer-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .layer-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+            white-space: nowrap;
+        }
+
+        .layer-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .layer-table tbody tr:last-child td { border-bottom: none; }
+
+        .layer-table tbody tr:nth-child(even) td {
+            background: rgba(90, 26, 21, 0.4);
+        }
+
+        .layer-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .td-dim { color: var(--dim); }
+        .td-green { color: var(--green); }
+        .td-yellow { color: var(--yellow); }
+
+        .layer-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+        }
+
+        .layer-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .layer-annotation p:last-child { margin-bottom: 0; }
+        .layer-annotation strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* MENTAL MODEL                           */
+        /* ══════════════════════════════════════ */
+        .model-section {
+            padding: 80px 48px;
+        }
+
+        .model-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .model-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .model-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .model-header p:last-child { margin-bottom: 0; }
+        .model-header strong { color: var(--text-bright); }
+
+        .model-diagram {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .model-center {
+            background: var(--bg-dark);
+            border: 2px solid var(--yellow);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .model-center-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--yellow);
+            margin-bottom: 8px;
+        }
+
+        .model-center-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .model-center-desc {
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .model-spokes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .model-spoke {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 24px 20px;
+            border-top: 2px solid var(--bg-light);
+        }
+
+        .model-spoke--proof { border-top-color: var(--green); }
+        .model-spoke--utility { border-top-color: var(--yellow); }
+        .model-spoke--distribution { border-top-color: var(--dim); }
+
+        .model-spoke-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .model-spoke--proof .model-spoke-label { color: var(--green); }
+        .model-spoke--utility .model-spoke-label { color: var(--yellow); }
+        .model-spoke--distribution .model-spoke-label { color: var(--dim); }
+
+        .model-spoke-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .model-spoke-desc {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .model-spoke-examples {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.55;
+        }
+
+        .model-caption {
+            max-width: 720px;
+            margin: 40px auto 0;
+        }
+
+        .model-caption p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .model-caption p:last-child { margin-bottom: 0; }
+        .model-caption strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* COMPONENT TYPES                        */
+        /* ══════════════════════════════════════ */
+        .components-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .components-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .components-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .components-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .components-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .component-card {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 24px 20px;
+            border-top: 3px solid var(--bg-light);
+        }
+
+        .component-card--narrative { border-top-color: var(--yellow); }
+        .component-card--proof { border-top-color: var(--green); }
+        .component-card--utility { border-top-color: #5B9FDB; }
+        .component-card--distribution { border-top-color: var(--dim); }
+        .component-card--entity { border-top-color: #9B59B6; }
+
+        .component-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .component-job {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .component-examples {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.55;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* IMPLICATIONS                           */
+        /* ══════════════════════════════════════ */
+        .implications-section {
+            padding: 80px 48px;
+        }
+
+        .implications-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .implications-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 24px;
+        }
+
+        .implication-item {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .implication-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .implication-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .implication-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .implication-desc strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* FOOTER ELEMENTS                        */
+        /* ══════════════════════════════════════ */
+        .version-bar {
+            padding: 24px 48px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--dim-dark);
+        }
+
+        .newsletter-section {
+            padding: 48px 48px 80px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .newsletter-inner {
+            max-width: 480px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-inner p { margin-bottom: 16px; }
+        .newsletter-inner .dim { color: var(--dim); }
+
+        .subscribe-form {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .subscribe-form input[type="email"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            font-family: inherit;
+            font-size: 14px;
+            background: var(--bg-darker);
+            border: 1px solid var(--dim);
+            border-radius: 4px;
+            color: var(--text);
+        }
+
+        .subscribe-form input[type="email"]::placeholder { color: var(--dim); }
+        .subscribe-form input[type="email"]:focus { outline: none; border-color: var(--yellow); }
+
+        .subscribe-form button {
+            padding: 10px 20px;
+            font-family: inherit;
+            font-size: 14px;
+            background: transparent;
+            border: 1px solid var(--green);
+            border-radius: 4px;
+            color: var(--green);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .subscribe-form button:hover {
+            background: var(--green);
+            color: var(--bg);
+        }
+
+        .footer-section {
+            padding: 24px 48px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--dim);
+            font-size: 13px;
+        }
+
+        .footer-inner a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+
+        .footer-inner a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* RESPONSIVE                             */
+        /* ══════════════════════════════════════ */
+        @media (max-width: 1100px) {
+            .components-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 900px) {
+            .hero, .problem-section, .comparison-section, .layers-section,
+            .model-section, .components-section, .implications-section,
+            .newsletter-section, .footer-section, .topbar {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero h1 { font-size: 28px; }
+            .model-spokes { grid-template-columns: 1fr; }
+            .components-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .components-grid { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <a href="ai-search-visibility-framework.html" class="back">&larr; AI Search Visibility Workflow</a>
+        <span class="topbar-parent">Practice 2 of 5 &middot; <a href="ai-search-visibility-framework.html">View all practices</a></span>
+    </div>
+
+    <!-- ══════════════ HERO ══════════════ -->
+    <div class="hero">
+        <div class="hero-inner">
+            <div class="hero-label">Deep Dive &middot; Practice 02: Map</div>
+            <h1>Context-First Content Planning</h1>
+            <p class="lead">How to translate customer context into a plan that both humans and AI agents can work with. Replacing keyword-first spreadsheets with a structure that represents the experience you're building — not just the pages you're publishing.</p>
+            <p class="hero-meta">v0.3 &middot; April 2026 &middot; Michael Ofei</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE PROBLEM ══════════════ -->
+    <div class="problem-section">
+        <div class="problem-inner">
+            <h2>The Spreadsheet That Needs to Change</h2>
+            <p>Every SEO team has the same planning spreadsheet. Rows of keywords, columns for search volume, difficulty, assigned URL, status. The organizing principle is search volume. The question it answers is <em>"what should we rank for?"</em></p>
+            <p>This sheet was designed for a world where users typed unnatural keyword phrases into Google because that's what the system demanded. "Best project management tool SaaS" isn't how anyone talks. It's how people learned to talk to search engines.</p>
+            <p>AI systems removed that constraint. People interact with AI the way they talk to a knowledgeable colleague &mdash; with full context, natural language, and the expectation of a personalized answer. The search volume of most real prompts is one.</p>
+            <p>The spreadsheet needs to answer a different question: <strong>"What experience do we need to build so that AI systems can connect us to the right customers in the right situations?"</strong></p>
+        </div>
+    </div>
+
+    <!-- ══════════════ OLD vs NEW ══════════════ -->
+    <div class="comparison-section">
+        <div class="comparison-header">
+            <h2>What Changes</h2>
+            <p>The shift isn't just swapping keywords for something else. It's changing what a row represents, what the columns measure, and what question the entire sheet answers.</p>
+        </div>
+
+        <div class="comparison-block">
+            <div class="comparison-label comparison-label--old">The keyword-first spreadsheet</div>
+            <div class="comparison-wrapper">
+                <table class="comparison-table comparison-table--old">
+                    <thead>
+                        <tr>
+                            <th>Keyword</th>
+                            <th>Volume</th>
+                            <th>KD</th>
+                            <th>URL</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>project management tool</td>
+                            <td>12,000</td>
+                            <td>80</td>
+                            <td>/blog/project-management</td>
+                            <td>Published</td>
+                        </tr>
+                        <tr>
+                            <td>notion vs jira</td>
+                            <td>3,400</td>
+                            <td>65</td>
+                            <td>/blog/notion-vs-jira</td>
+                            <td>Draft</td>
+                        </tr>
+                        <tr>
+                            <td>product roadmap template</td>
+                            <td>2,900</td>
+                            <td>45</td>
+                            <td>/templates/roadmap</td>
+                            <td>Published</td>
+                        </tr>
+                        <tr>
+                            <td>best pm tools for startups</td>
+                            <td>1,800</td>
+                            <td>55</td>
+                            <td>/blog/pm-tools-startups</td>
+                            <td>Not started</td>
+                        </tr>
+                        <tr>
+                            <td>notion product management</td>
+                            <td>720</td>
+                            <td>40</td>
+                            <td>/use-cases/product</td>
+                            <td>Not started</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="comparison-annotation">
+                <p>Every row is a keyword. Every piece of content has the same job: rank. The question is <strong>"what's the search volume?"</strong> &mdash; and the answer determines priority. A template with 2,900 monthly searches and a comparison page with 3,400 look roughly equal. They're not.</p>
+            </div>
+        </div>
+
+        <div class="comparison-block">
+            <div class="comparison-label comparison-label--new">The context-first spreadsheet (same customer world, same company)</div>
+            <div class="comparison-wrapper">
+                <table class="comparison-table comparison-table--new">
+                    <thead>
+                        <tr>
+                            <th>Problem Context</th>
+                            <th>Component</th>
+                            <th>Asset</th>
+                            <th>Surfaces</th>
+                            <th>Demand Signal</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"How do I keep my product team aligned without drowning in tools?"</td>
+                            <td>Narrative</td>
+                            <td>Product Teams landing page</td>
+                            <td>Site</td>
+                            <td class="td-dim">&mdash;</td>
+                            <td>Draft</td>
+                        </tr>
+                        <tr>
+                            <td>"We're drowning in tools, need to consolidate"</td>
+                            <td>Proof</td>
+                            <td>Case study: How Figma's PM team consolidated 4 tools into Notion</td>
+                            <td>Site</td>
+                            <td class="td-dim">"tool consolidation" &mdash; 1,200/mo</td>
+                            <td>Not started</td>
+                        </tr>
+                        <tr>
+                            <td>"Does this actually work for PM workflows?"</td>
+                            <td>Proof</td>
+                            <td>G2 reviews filtered to product managers</td>
+                            <td>G2, Capterra</td>
+                            <td class="td-dim">&mdash;</td>
+                            <td>Monitoring</td>
+                        </tr>
+                        <tr>
+                            <td>"I need a better way to write PRDs"</td>
+                            <td>Utility</td>
+                            <td>PRD template gallery (5 templates by company stage)</td>
+                            <td>Site</td>
+                            <td class="td-dim">"PRD template" &mdash; 2,900/mo</td>
+                            <td>Published</td>
+                        </tr>
+                        <tr>
+                            <td>"How do I connect to our dev workflow?"</td>
+                            <td>Utility</td>
+                            <td>Linear + GitHub integration guide</td>
+                            <td>Site</td>
+                            <td class="td-dim">"notion linear integration" &mdash; 880/mo</td>
+                            <td>Published</td>
+                        </tr>
+                        <tr>
+                            <td>"What tool should my PM team use?"</td>
+                            <td>Distribution</td>
+                            <td>Video: How a 12-person product team runs everything in Notion</td>
+                            <td>YouTube</td>
+                            <td class="td-dim">&mdash;</td>
+                            <td>Planned</td>
+                        </tr>
+                        <tr>
+                            <td>"Notion vs Jira for product management"</td>
+                            <td>Distribution</td>
+                            <td>Comparison page (honest, addresses switching cost)</td>
+                            <td>Site, Reddit</td>
+                            <td class="td-dim">"notion vs jira" &mdash; 3,400/mo</td>
+                            <td>Draft</td>
+                        </tr>
+                        <tr>
+                            <td>"Can anyone recommend a PM setup?"</td>
+                            <td>Distribution</td>
+                            <td>Authentic participation in r/productmanagement</td>
+                            <td>Reddit</td>
+                            <td class="td-dim">&mdash;</td>
+                            <td>Ongoing</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="comparison-annotation">
+                <p><strong>The rows aren't keywords anymore. They're customer situations.</strong> Each one connects to a specific component of the experience: the case study validates, the template attracts, the video amplifies, the Reddit participation provides social proof. Demand signals are a validation column, not the organizing principle &mdash; and they go beyond search volume to include video views, social engagement, support ticket frequency, and anything else that signals people care about this problem.</p>
+            </div>
+        </div>
+
+        <div class="comparison-block">
+            <div class="comparison-label comparison-label--new">Same framework, different industry &mdash; DTC activewear (Studio &amp; Yoga customer world)</div>
+            <div class="comparison-wrapper">
+                <table class="comparison-table comparison-table--new">
+                    <thead>
+                        <tr>
+                            <th>Problem Context</th>
+                            <th>Component</th>
+                            <th>Asset</th>
+                            <th>Surfaces</th>
+                            <th>Demand Signal</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"I want activewear that performs for my practice and looks good enough to wear after"</td>
+                            <td>Narrative</td>
+                            <td>Studio &amp; Yoga collection page with editorial + fabric technology</td>
+                            <td>Site</td>
+                            <td class="td-dim">&mdash;</td>
+                            <td>Published</td>
+                        </tr>
+                        <tr>
+                            <td>"Will these leggings go see-through when I squat?"</td>
+                            <td>Proof</td>
+                            <td>UGC try-on videos from real customers in studio settings</td>
+                            <td>TikTok, Instagram</td>
+                            <td class="td-dim">"squat proof leggings" &mdash; 6,200/mo</td>
+                            <td>Ongoing</td>
+                        </tr>
+                        <tr>
+                            <td>"What should I wear to hot yoga?"</td>
+                            <td>Utility</td>
+                            <td>Fabric guide: which materials work for hot yoga, reformer, barre</td>
+                            <td>Site</td>
+                            <td class="td-dim">"what to wear to hot yoga" &mdash; 3,100/mo</td>
+                            <td>Not started</td>
+                        </tr>
+                        <tr>
+                            <td>"Everything at Lululemon looks the same and costs twice as much"</td>
+                            <td>Distribution</td>
+                            <td>Honest comparison content addressing price, style range, and quality</td>
+                            <td>Site, YouTube</td>
+                            <td class="td-dim">"lululemon alternative" &mdash; 8,400/mo</td>
+                            <td>Planned</td>
+                        </tr>
+                        <tr>
+                            <td>"Can anyone recommend yoga leggings that actually stay up?"</td>
+                            <td>Distribution</td>
+                            <td>Authentic participation in r/yoga, r/xxfitness</td>
+                            <td>Reddit</td>
+                            <td class="td-dim">&mdash;</td>
+                            <td>Ongoing</td>
+                        </tr>
+                        <tr>
+                            <td>"Are these worth it? I've seen them everywhere on TikTok"</td>
+                            <td>Proof</td>
+                            <td>Trustpilot review cultivation + response strategy</td>
+                            <td>Trustpilot</td>
+                            <td class="td-dim">4.2 avg rating, 1,800+ reviews</td>
+                            <td>Monitoring</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="comparison-annotation">
+                <p><strong>Same six columns, completely different industry.</strong> The problem contexts are emotional and identity-driven, not functional. The surfaces shift from G2 and Reddit dev communities to TikTok, Instagram, and fitness subreddits. Demand signals include review ratings alongside search volume. But the structure is identical &mdash; every row is a customer situation mapped to an experience component on the right surface.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ TWO LAYERS ══════════════ -->
+    <div class="layers-section">
+        <div class="layers-header">
+            <h2>Two Layers of Planning</h2>
+            <p>The context-first spreadsheet works at two levels. <strong>Layer 1</strong> is the strategic view (which customer worlds are we investing in?). <strong>Layer 2</strong> is the context map (what experience are we building for each customer world?). If you need a coverage audit, filter or pivot Layer 2 by surface &mdash; but that's a spreadsheet technique, not a separate artifact.</p>
+            <p>Layer 1 is a single sheet. Layer 2 is one tab per priority customer world.</p>
+        </div>
+
+        <!-- Layer 1 -->
+        <div class="layer-block">
+            <div class="layer-title-bar">
+                <div class="layer-number">L1</div>
+                <div class="layer-title">Customer World Overview</div>
+            </div>
+            <div class="layer-subtitle">One sheet. The command center. Answers: "Which customer worlds are we investing in?"</div>
+            <div class="layer-table-wrapper">
+                <table class="layer-table">
+                    <thead>
+                        <tr>
+                            <th>Customer World</th>
+                            <th>Priority</th>
+                            <th>Who They Are</th>
+                            <th>Key Surfaces</th>
+                            <th>Current Focus</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Product Teams</td>
+                            <td class="td-green">P1</td>
+                            <td>PMs at 50&ndash;500 person companies. Roadmaps, specs, cross-functional comms.</td>
+                            <td>Site, YouTube, G2, Reddit</td>
+                            <td class="td-yellow">Building proof content</td>
+                            <td class="td-green">Active</td>
+                        </tr>
+                        <tr>
+                            <td>Marketing Teams</td>
+                            <td class="td-yellow">P2</td>
+                            <td>Content + demand gen at B2B SaaS. Campaigns, calendars, briefs.</td>
+                            <td>Site, YouTube, G2</td>
+                            <td class="td-yellow">Mapping problem contexts</td>
+                            <td class="td-yellow">Building</td>
+                        </tr>
+                        <tr>
+                            <td>Engineering Teams</td>
+                            <td class="td-dim">P3</td>
+                            <td>Dev teams managing docs, wikis, onboarding, technical specs.</td>
+                            <td class="td-dim">&mdash;</td>
+                            <td class="td-dim">&mdash;</td>
+                            <td class="td-dim">Researching</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="layer-annotation">
+                <p><strong>"Key Surfaces" and "Current Focus" are the management columns.</strong> Key Surfaces captures the surface selection decision &mdash; which platforms matter for this customer world (partly industry-dependent, partly customer-world-dependent). Current Focus is forward-looking: where is energy going right now? Status reflects maturity, not completion &mdash; customer worlds move from Researching to Building to Active to Extending, but they never reach "done." Selection comes from Practice 1 (Know): which customer worlds have the most distinct problem contexts and the most commercial potential?</p>
+            </div>
+        </div>
+
+        <!-- Layer 2 -->
+        <div class="layer-block">
+            <div class="layer-title-bar">
+                <div class="layer-number">L2</div>
+                <div class="layer-title">Context Map</div>
+            </div>
+            <div class="layer-subtitle">One tab per priority customer world. The planning view. Answers: "What experience are we building for this customer?"</div>
+            <div class="layer-desc">
+                <p>This is the full context-first table shown above &mdash; every component of the experience you're building for one customer world. The worked example (Notion &times; Product Teams) shows what a populated Layer 2 looks like.</p>
+                <p>Six columns, each doing distinct work:</p>
+            </div>
+            <div class="layer-table-wrapper">
+                <table class="layer-table">
+                    <thead>
+                        <tr>
+                            <th>Column</th>
+                            <th>What It Captures</th>
+                            <th>Why It Matters</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Problem Context</td>
+                            <td>The situation the customer brings to AI</td>
+                            <td>Replaces "keyword" as the row identity. Comes from Practice 1 (Know). Not a search term &mdash; a human situation. The Narrative row captures the overarching tension for the customer world; other rows capture specific problems.</td>
+                        </tr>
+                        <tr>
+                            <td>Component</td>
+                            <td>Narrative, Proof, Utility, or Distribution</td>
+                            <td>A tag, not the organizing principle. Tells you what type of experience component this row is and what job it does in the overall experience.</td>
+                        </tr>
+                        <tr>
+                            <td>Asset</td>
+                            <td>The specific content or action needed</td>
+                            <td>What you're actually building. Concrete enough to assign and track.</td>
+                        </tr>
+                        <tr>
+                            <td>Surfaces</td>
+                            <td>Where it lives (multi-select: site, YouTube, TikTok, G2, Reddit...)</td>
+                            <td>Not every component lives on your website. The available surfaces come from the Key Surfaces decision in Layer 1. Place the right thing on the right surface.</td>
+                        </tr>
+                        <tr>
+                            <td>Demand Signal</td>
+                            <td>Any evidence that people care about this problem</td>
+                            <td>Validation, not the organizing principle. Goes beyond search volume: video views, social engagement, support ticket frequency, sales call mentions. Some rows don't need demand data to justify existing.</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>Not started, planned, draft, published, monitoring, ongoing</td>
+                            <td>Execution tracking. "Monitoring" and "Ongoing" are important &mdash; review platforms, Reddit, and social surfaces don't have a "published" state.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="layer-annotation">
+                <p><strong>Optional columns</strong> depending on team size: Owner, Last Updated, URL, Notes. Keep it lean &mdash; the point is planning clarity, not tracking overhead.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ══════════════ EXPERIENCE BLUEPRINT ══════════════ -->
+    <div class="model-section">
+        <div class="model-header">
+            <h2>The Experience Blueprint</h2>
+            <p>The context map isn't a content calendar or a to-do list. It's the blueprint for how your brand shows up in one customer's world &mdash; <strong>across every surface where they or their AI agent might encounter you.</strong></p>
+            <p>Think about what happens when someone asks an AI assistant for a recommendation. The AI doesn't land on one page and read top to bottom. It assembles a picture from everything it finds across the web &mdash; your product pages, video reviews, community threads, review platform ratings, structured data. It builds its own first impression, in real time, from signals you've placed across surfaces.</p>
+            <p>Your context map is the blueprint for what that agent assembles. Every row is a signal. The more complete and consistent those signals are, the more confidently the agent can connect your brand to that person's situation.</p>
+        </div>
+
+        <div class="model-diagram">
+            <div class="model-center">
+                <div class="model-center-label">The Blueprint</div>
+                <div class="model-center-title">The Experience for This Customer World</div>
+                <div class="model-center-desc">Every component you build &mdash; every case study, template, video, review, community thread &mdash; adds to the picture that humans and AI agents use to understand your brand for this customer's situation.</div>
+            </div>
+
+            <div class="model-spokes">
+                <div class="model-spoke model-spoke--proof">
+                    <div class="model-spoke-label">What the human sees</div>
+                    <div class="model-spoke-title">One surface at a time</div>
+                    <div class="model-spoke-desc">They land on your site, find your video, read a review. Each touchpoint should feel like you understand their specific world.</div>
+                    <div class="model-spoke-examples">A PM sees templates built for their workflow. A yoga practitioner sees fabrics tested for their practice. A couple sees photos from evenings like theirs.</div>
+                </div>
+                <div class="model-spoke model-spoke--utility">
+                    <div class="model-spoke-label">What the AI agent sees</div>
+                    <div class="model-spoke-title">All surfaces at once</div>
+                    <div class="model-spoke-desc">The agent assembles a complete picture from everything you've published. Dense, consistent signals across surfaces mean confident recommendations.</div>
+                    <div class="model-spoke-examples">Product pages + customer reviews + community threads + video content + structured data = enough context to match your brand to the right situation.</div>
+                </div>
+                <div class="model-spoke model-spoke--distribution">
+                    <div class="model-spoke-label">What the context map does</div>
+                    <div class="model-spoke-title">Designs both experiences</div>
+                    <div class="model-spoke-desc">Every row serves the human and gives the AI agent more context to work with. The map is the blueprint for both experiences simultaneously.</div>
+                    <div class="model-spoke-examples">The form varies by industry &mdash; a SaaS hub page, a DTC collection, a restaurant profile &mdash; but the job is always the same: make this customer feel understood.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="model-caption">
+            <p>The sophistication is in the density. When someone's AI agent encounters your brand across multiple surfaces &mdash; and finds consistent, specific, context-rich information at every turn &mdash; it can make a confident recommendation. When it finds thin presence on one surface and silence everywhere else, it moves on to a brand that gave it more to work with.</p>
+            <p><strong>The context map makes this tangible.</strong> You can look at it and ask: if an AI agent assembled everything in this map right now, would it have enough to confidently recommend us for this customer's situation? If the answer is no, the gaps are visible. That's the planning power of the map.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ COMPONENT TYPES ══════════════ -->
+    <div class="components-section">
+        <div class="components-header">
+            <h2>Four Component Types</h2>
+            <p>Every row in the context map is one of four types. Each has a different job in the experience you're building. (Machine-readable entity signals &mdash; schema, structured data, knowledge base entries &mdash; live in Practice 3: Structure. They're infrastructure that makes all four components parseable, not a content type of their own.)</p>
+        </div>
+        <div class="components-grid">
+            <div class="component-card component-card--narrative">
+                <div class="component-name">Narrative</div>
+                <div class="component-job">The source of truth. The anchor for this customer world. Everything else points back to it or extends from it.</div>
+                <div class="component-examples">SaaS: "for [audience]" hub page. DTC: curated collection + editorial. Hospitality: experience page + Google Business Profile. Services: vertical-specific service page.</div>
+            </div>
+            <div class="component-card component-card--proof">
+                <div class="component-name">Proof</div>
+                <div class="component-job">Evidence that you deliver for this customer. Makes the narrative credible. Lives on owned site and external surfaces.</div>
+                <div class="component-examples">SaaS: case studies, G2 reviews. DTC: UGC try-on content, Trustpilot. Hospitality: Google reviews, food critic features. Services: client testimonials, portfolio pieces.</div>
+            </div>
+            <div class="component-card component-card--utility">
+                <div class="component-name">Utility</div>
+                <div class="component-job">Practical tools and resources that solve real problems for this customer. The attraction and retention engine.</div>
+                <div class="component-examples">SaaS: templates, integration guides. DTC: size guides, outfit builders, care instructions. Hospitality: menus, dietary filters, reservation tools. Services: calculators, audit tools, checklists.</div>
+            </div>
+            <div class="component-card component-card--distribution">
+                <div class="component-name">Distribution</div>
+                <div class="component-job">Your story told on surfaces you don't own. Extends brand presence to where AI agents and customers discover information.</div>
+                <div class="component-examples">SaaS: YouTube walkthroughs, Reddit participation. DTC: TikTok, Instagram, Pinterest. Hospitality: local food blogs, Instagram reels. Services: podcast appearances, guest articles, industry forums.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ IMPLICATIONS ══════════════ -->
+    <div class="implications-section">
+        <div class="implications-inner">
+            <h2>What This Changes About Content Planning</h2>
+
+            <div class="implication-item">
+                <div class="implication-title">Choosing your customer worlds becomes the first strategic decision</div>
+                <div class="implication-desc">You can't build this depth for every audience simultaneously. Choosing which customer worlds to invest in &mdash; and which to defer &mdash; is the most consequential decision. It comes from Practice 1 (Know): which customer worlds have problem contexts distinct enough to warrant their own experience?</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Broad content still exists, but it's no longer the whole strategy</div>
+                <div class="implication-desc">A general "best running shoes" article or "SEO strategy" guide that ranks for the head term still has value. But it's now the <strong>general-purpose layer</strong> &mdash; not the strategy itself. The strategic depth lives in the customer-world-specific experiences. The broad piece introduces. The specific experience converts.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Not every row needs a search volume to justify existing</div>
+                <div class="implication-desc">A Reddit participation strategy has no keyword volume. A TikTok review has no organic search potential. An Instagram community has no ranking to track. But all three build the multi-surface presence that AI agents use when making recommendations. <strong>Demand signals validate; they don't determine.</strong></div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Progress metrics shift from rankings to coverage and depth</div>
+                <div class="implication-desc">"How many of the top 10 do we hold?" becomes "How many problem contexts have we covered for this customer world? How many surfaces are we present on? How complete is the picture an AI agent would assemble?" Context Depth and Surface Coverage are the new KPIs.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Teams need a wider surface mix</div>
+                <div class="implication-desc">The keyword spreadsheet needed writers and SEO strategists. The context map also needs people managing community presence, review platforms, video content, and social surfaces. The specific roles depend on your industry &mdash; a DTC brand needs TikTok and Instagram expertise, a SaaS company needs forum and review site presence, a restaurant needs Google Business Profile management &mdash; but the pattern is the same: the surface mix is wider than most teams are structured for.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ VERSION ══════════════ -->
+    <div class="version-bar">
+        <p>v0.3 &middot; April 15, 2026 &middot; DTC worked example added (Studio &amp; Yoga). Layer 3 dropped &mdash; two-layer model. Problem Context leads as row identity. Role column removed. Surfaces as multi-select. Demand signals broadened. Layer 1 restructured for portfolio management.</p>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="newsletter-section">
+        <div class="newsletter-inner">
+            <p>Get essays on content, craft, and building things &mdash; <span class="dim">no spam, no schedule.</span></p>
+            <form
+                action="https://buttondown.email/api/emails/embed-subscribe/ofei"
+                method="post"
+                target="popupwindow"
+                class="subscribe-form"
+            >
+                <input type="email" name="email" placeholder="your@email.com" required />
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section">
+        <div class="footer-inner">
+            <a href="ai-search-visibility-framework.html">&larr; AI Search Visibility Workflow</a>
+            <span>Michael Ofei. April 2026.</span>
+        </div>
+    </div>
+
+</body>
+</html>

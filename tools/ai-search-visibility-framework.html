@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Search Visibility Workflow — Michael Ofei</title>
+    <meta name="description" content="A durable operating model for AI search visibility. Customer context, not keywords. Internal reference, continuously refined.">
+    <meta property="og:title" content="AI Search Visibility Workflow">
+    <meta property="og:description" content="A durable operating model for AI search visibility. Customer context, not keywords.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://michaelofei.co/tools/ai-search-visibility-framework.html">
+    <style>
+        :root {
+            --bg: #7A251E;
+            --bg-light: #8a352e;
+            --bg-dark: #6a1f18;
+            --bg-darker: #5a1a15;
+            --text: #D7C9A7;
+            --text-bright: #E8DAB8;
+            --yellow: #E7B000;
+            --green: #00BB00;
+            --green-dim: #009900;
+            --dim: #a89878;
+            --dim-dark: #8a7a5a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* ── Layout ── */
+        .section { width: 100%; padding: 0 48px; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-narrow { max-width: 720px; margin: 0 auto; }
+
+        /* ── Top bar ── */
+        .topbar { padding: 20px 48px; }
+        .back { color: var(--dim); text-decoration: none; font-size: 13px; }
+        .back:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* HERO                                   */
+        /* ══════════════════════════════════════ */
+        .hero {
+            padding: 80px 48px 64px;
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dim);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 1.25;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero .lead {
+            font-size: 17px;
+            color: var(--text);
+            line-height: 1.65;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .hero-meta {
+            font-size: 12px;
+            color: var(--dim);
+            margin-top: 20px;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* PRINCIPLE                              */
+        /* ══════════════════════════════════════ */
+        .principle-section {
+            background: var(--bg-dark);
+            padding: 64px 48px;
+        }
+
+        .principle-block {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .principle-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--yellow);
+            margin-bottom: 24px;
+        }
+
+        .principle-text {
+            font-size: 20px;
+            color: var(--text-bright);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .principle-text em {
+            font-style: normal;
+            color: var(--yellow);
+        }
+
+        .principle-footnote {
+            margin-top: 24px;
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* SHIFT (old → new reframe)              */
+        /* ══════════════════════════════════════ */
+        .shift-section {
+            padding: 80px 48px;
+        }
+
+        .shift-intro {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .shift-intro h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .shift-intro p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .shift-intro p:last-child { margin-bottom: 0; }
+        .shift-intro strong { color: var(--text-bright); }
+
+        .shift-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 0;
+            align-items: center;
+        }
+
+        .shift-side {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 40px 32px;
+        }
+
+        .shift-side--old { opacity: 0.6; }
+        .shift-side--new { border: 1px solid var(--green-dim); }
+
+        .shift-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dim);
+            margin-bottom: 20px;
+        }
+
+        .shift-side--new .shift-label { color: var(--green); }
+
+        .shift-item {
+            font-size: 15px;
+            color: var(--text);
+            padding: 8px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .shift-item:last-child { border-bottom: none; }
+
+        .shift-side--old .shift-item {
+            text-decoration: line-through;
+            color: var(--dim-dark);
+        }
+
+        .shift-side--new .shift-item {
+            color: var(--text-bright);
+        }
+
+        .shift-arrow {
+            text-align: center;
+            font-size: 28px;
+            color: var(--yellow);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* WORKFLOW                               */
+        /* ══════════════════════════════════════ */
+        .workflow-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .workflow-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .workflow-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .workflow-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .workflow-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .workflow-card {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 32px 24px;
+            position: relative;
+        }
+
+        .workflow-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--bg-light);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .workflow-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .workflow-question {
+            font-size: 15px;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .workflow-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+
+        .workflow-inputs,
+        .workflow-outputs {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.6;
+        }
+
+        .workflow-io-label {
+            color: var(--dim-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 10px;
+            margin-bottom: 4px;
+            margin-top: 12px;
+        }
+
+        .workflow-io-label:first-child { margin-top: 0; }
+
+        .workflow-connector {
+            display: none; /* Future: visual arrows between cards */
+        }
+
+        /* ══════════════════════════════════════ */
+        /* MATRIX                                 */
+        /* ══════════════════════════════════════ */
+        .matrix-section {
+            padding: 80px 48px;
+        }
+
+        .matrix-header {
+            max-width: 720px;
+            margin: 0 auto 20px;
+        }
+
+        .matrix-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .matrix-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .matrix-header p:last-child { margin-bottom: 0; }
+        .matrix-header strong { color: var(--text-bright); }
+
+        .matrix-wrapper {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 900px;
+        }
+
+        .matrix-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+            white-space: nowrap;
+        }
+
+        .matrix-table thead th:first-child {
+            border-radius: 8px 0 0 0;
+            min-width: 220px;
+        }
+
+        .matrix-table thead th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+
+        .matrix-table tbody td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .matrix-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .matrix-table tbody tr:nth-child(even) td {
+            background: rgba(106, 31, 24, 0.3);
+        }
+
+        .matrix-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .matrix-cell-empty {
+            color: var(--dim-dark);
+            font-style: italic;
+        }
+
+        .matrix-cell-content {
+            color: var(--text);
+        }
+
+        .matrix-caption {
+            max-width: 720px;
+            margin: 32px auto 0;
+        }
+
+        .matrix-caption p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .matrix-caption strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* KEY INSIGHT CALLOUTS                   */
+        /* ══════════════════════════════════════ */
+        .insight-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .insight-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .insight-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .insight-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .insight-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .insight-card {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 32px 24px;
+            border-top: 3px solid var(--bg-light);
+        }
+
+        .insight-card--highlight {
+            border-top-color: var(--yellow);
+        }
+
+        .insight-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+
+        .insight-card p {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .insight-card p:last-child { margin-bottom: 0; }
+
+        .insight-source {
+            font-size: 11px;
+            color: var(--dim-dark);
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        /* ══════════════════════════════════════ */
+        /* PRODUCT OPPORTUNITIES                  */
+        /* ══════════════════════════════════════ */
+        .opportunities-section {
+            padding: 80px 48px;
+        }
+
+        .opps-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .opps-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .opps-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .opps-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .opp-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 32px 28px;
+            border-left: 3px solid var(--dim-dark);
+        }
+
+        .opp-card--strong { border-left-color: var(--green); }
+        .opp-card--emerging { border-left-color: var(--yellow); }
+        .opp-card--gap { border-left-color: var(--dim-dark); }
+
+        .opp-position {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .opp-card--strong .opp-position { color: var(--green); }
+        .opp-card--emerging .opp-position { color: var(--yellow); }
+        .opp-card--gap .opp-position { color: var(--dim); }
+
+        .opp-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .opp-stage {
+            font-size: 12px;
+            color: var(--dim);
+            margin-bottom: 16px;
+        }
+
+        .opp-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .opp-job {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+            padding-top: 12px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .opp-job strong { color: var(--text); font-weight: 600; }
+
+        /* ══════════════════════════════════════ */
+        /* SOURCES / PROVENANCE                   */
+        /* ══════════════════════════════════════ */
+        .sources-section {
+            background: var(--bg-dark);
+            padding: 64px 48px;
+        }
+
+        .sources-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .sources-inner h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 24px;
+        }
+
+        .source-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .source-item:last-child { border-bottom: none; }
+
+        .source-title {
+            font-size: 14px;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+
+        .source-meta {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+
+        /* ── Version bar ── */
+        .version-bar {
+            padding: 24px 48px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--dim-dark);
+        }
+
+        .version-bar a {
+            color: var(--dim-dark);
+            text-decoration: none;
+        }
+
+        .version-bar a:hover { color: var(--green); }
+
+        /* ── Newsletter ── */
+        .newsletter-section {
+            padding: 48px 48px 80px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .newsletter-inner {
+            max-width: 480px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-inner p { margin-bottom: 16px; }
+        .newsletter-inner .dim { color: var(--dim); }
+
+        .subscribe-form {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .subscribe-form input[type="email"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            font-family: inherit;
+            font-size: 14px;
+            background: var(--bg-darker);
+            border: 1px solid var(--dim);
+            border-radius: 4px;
+            color: var(--text);
+        }
+
+        .subscribe-form input[type="email"]::placeholder { color: var(--dim); }
+        .subscribe-form input[type="email"]:focus { outline: none; border-color: var(--yellow); }
+
+        .subscribe-form button {
+            padding: 10px 20px;
+            font-family: inherit;
+            font-size: 14px;
+            background: transparent;
+            border: 1px solid var(--green);
+            border-radius: 4px;
+            color: var(--green);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .subscribe-form button:hover {
+            background: var(--green);
+            color: var(--bg);
+        }
+
+        /* ── Footer ── */
+        .footer-section {
+            padding: 24px 48px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--dim);
+            font-size: 13px;
+        }
+
+        .footer-inner a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+
+        .footer-inner a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* RESPONSIVE                             */
+        /* ══════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .hero, .shift-section, .workflow-section, .matrix-section,
+            .insight-section, .opportunities-section, .sources-section,
+            .newsletter-section, .footer-section, .topbar, .principle-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero h1 { font-size: 28px; }
+            .principle-text { font-size: 17px; }
+            .workflow-grid { grid-template-columns: 1fr 1fr 1fr; }
+            .insight-grid { grid-template-columns: 1fr; }
+            .opps-grid { grid-template-columns: 1fr; }
+
+            .shift-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .shift-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .workflow-grid { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <a href="../tools/index.html" class="back">&larr; Tools</a>
+    </div>
+
+    <!-- ══════════════ HERO ══════════════ -->
+    <div class="hero">
+        <div class="hero-inner">
+            <div class="hero-label">Internal Reference &middot; Living Document</div>
+            <h1>AI Search Visibility Workflow</h1>
+            <p class="lead">A durable operating model for visibility in AI search. Built on customer context, not keyword prediction. Five practices, one context map, and a framework that works for any industry.</p>
+            <p class="hero-meta">v0.3 &middot; April 2026 &middot; Michael Ofei</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE DURABLE PRINCIPLE ══════════════ -->
+    <div class="principle-section">
+        <div class="principle-block">
+            <div class="principle-label">The Durable Principle</div>
+            <p class="principle-text">
+                Understand your customer deeply enough to <em>anticipate their context before they state it</em>.
+                Create content specific enough that AI systems can connect you to that context <em>across any surface</em>.
+                Structure your brand entity so AI systems can <em>accurately parse what you are, what you do, and who you're for</em>.
+                Ensure your brand narrative is consistent <em>everywhere AI looks</em>.
+                Measure whether you're showing up in the right <em>conversations</em>, not the right keywords.
+            </p>
+            <p class="principle-footnote">
+                This holds regardless of which AI platforms dominate, how retrieval systems evolve, or what the next prediction cycle says. It's built on a single insight: the unit of SEO is shifting from the keyword to the customer.
+            </p>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE SHIFT ══════════════ -->
+    <div class="shift-section">
+        <div class="shift-intro">
+            <h2>What Changed</h2>
+            <p>Keywords were a proxy for human intent. A crude one. AI systems don't need that proxy anymore &mdash; they have the actual customer context. Devesh Khanal at Grow &amp; Convert calls this <strong>"invisible prompts"</strong>: every search is shaped by deep personal information the user never typed. The search volume of most real prompts is one.</p>
+            <p>This doesn't make keyword data useless. It makes it insufficient as the starting point for strategy. The starting point is now the customer.</p>
+        </div>
+        <div class="shift-grid">
+            <div class="shift-side shift-side--old">
+                <div class="shift-label">Keyword-Era Model</div>
+                <div class="shift-item">Start with keyword research</div>
+                <div class="shift-item">Organize by search volume</div>
+                <div class="shift-item">One keyword = one page</div>
+                <div class="shift-item">Track rankings per keyword</div>
+                <div class="shift-item">Optimize your website</div>
+                <div class="shift-item">Build backlinks for authority</div>
+            </div>
+            <div class="shift-arrow">&rarr;</div>
+            <div class="shift-side shift-side--new">
+                <div class="shift-label">Customer-Context Model</div>
+                <div class="shift-item">Start with customer problem contexts</div>
+                <div class="shift-item">Organize by decision situations</div>
+                <div class="shift-item">One context = many surfaces</div>
+                <div class="shift-item">Track brand presence per conversation</div>
+                <div class="shift-item">Publish across every surface AI reads</div>
+                <div class="shift-item">Build entity consistency for trust</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE WORKFLOW ══════════════ -->
+    <div class="workflow-section">
+        <div class="workflow-header">
+            <h2>Five Practices</h2>
+            <p>These aren't sequential steps. They're concurrent practices that reinforce each other. The numbering suggests a logical flow for someone starting from zero, but in reality you enter wherever your biggest gap is. A mature brand might start with Measure. A startup might jump straight to Publish. A company with great content but no structured data starts with Structure.</p>
+        </div>
+        <div class="workflow-grid">
+            <div class="workflow-card">
+                <div class="workflow-number">01</div>
+                <div class="workflow-card-title">Know</div>
+                <div class="workflow-question">"What situations do our customers bring to AI?"</div>
+                <div class="workflow-desc">Mine customer context from sales calls, support tickets, interviews, and community conversations. Identify problem contexts &mdash; not demographics or job titles, but the situations that produce invisible prompts.</div>
+                <div class="workflow-io-label">Sources</div>
+                <div class="workflow-inputs">Sales call transcripts, support tickets, customer interviews, community threads, CRM notes</div>
+                <div class="workflow-io-label">Output</div>
+                <div class="workflow-outputs">Problem context inventory &mdash; the rows of the context map</div>
+            </div>
+            <div class="workflow-card">
+                <div class="workflow-number">02</div>
+                <div class="workflow-card-title"><a href="ai-search-visibility-map.html" style="color: var(--yellow); text-decoration: none; border-bottom: 1px dashed var(--yellow);">Map</a></div>
+                <div class="workflow-question">"What experience are we building for this customer world?"</div>
+                <div class="workflow-desc">For each problem context, identify what content would connect your brand to that situation &mdash; across every surface where AI systems and customers encounter you. This is topical authority rebuilt around the customer.</div>
+                <div class="workflow-io-label">Input</div>
+                <div class="workflow-inputs">Problem context inventory from Know, customer world selection</div>
+                <div class="workflow-io-label">Output</div>
+                <div class="workflow-outputs">The Context Map &mdash; problem contexts mapped to experience components, surfaces, and demand signals per customer world. <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; font-size: 11px;">Deep dive &rarr;</a></div>
+            </div>
+            <div class="workflow-card">
+                <div class="workflow-number">03</div>
+                <div class="workflow-card-title">Structure</div>
+                <div class="workflow-question">"Can AI systems accurately parse what we are?"</div>
+                <div class="workflow-desc">Make your brand entity machine-readable. Schema markup, structured data, Wikidata properties, Knowledge Panel, entity relationships. This is infrastructure, not content &mdash; it's what lets AI systems identify, categorize, and relate your brand before they encounter your content. Entity signals from the context map live here.</div>
+                <div class="workflow-io-label">Input</div>
+                <div class="workflow-inputs">Current entity presence audit, context map surfaces from Map</div>
+                <div class="workflow-io-label">Output</div>
+                <div class="workflow-outputs">Machine-readable entity identity across all surfaces &mdash; the foundation that content is published onto</div>
+            </div>
+            <div class="workflow-card">
+                <div class="workflow-number">04</div>
+                <div class="workflow-card-title">Publish</div>
+                <div class="workflow-question">"Is our brand narrative out there, consistently?"</div>
+                <div class="workflow-desc">Execute against the context map. Create owned content, cultivate review presence, participate authentically in communities. The brand story should be the same on every surface. Structure makes you parseable; publishing makes you present.</div>
+                <div class="workflow-io-label">Input</div>
+                <div class="workflow-inputs">Context map gaps from Map, entity foundation from Structure</div>
+                <div class="workflow-io-label">Output</div>
+                <div class="workflow-outputs">Consistent brand narrative published across all surfaces AI reads</div>
+            </div>
+            <div class="workflow-card">
+                <div class="workflow-number">05</div>
+                <div class="workflow-card-title">Measure</div>
+                <div class="workflow-question">"Are we in the right conversations?"</div>
+                <div class="workflow-desc">Track brand presence at the topic level, not the prompt level. Monitor share of voice across AI surfaces. Validate demand with keyword and PPC data. Run entity consistency audits. Feeds back into every other practice.</div>
+                <div class="workflow-io-label">Input</div>
+                <div class="workflow-inputs">Published entity presence, structured data state</div>
+                <div class="workflow-io-label">Output</div>
+                <div class="workflow-outputs">Share of voice by topic, entity consistency scores, demand validation &mdash; identifies gaps across all practices</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE MATRIX ══════════════ -->
+    <div class="matrix-section">
+        <div class="matrix-header">
+            <h2>The Coverage Dashboard</h2>
+            <p>A derived view from the <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Context Map</a>. Useful for spotting gaps at a glance &mdash; but you plan in the context map, not here. The real planning artifacts are the <strong>customer world overview</strong> (which customer worlds, at what priority) and the <strong>context map</strong> (what to build, for which situations, on which surfaces). This coverage view is something you can derive by filtering or pivoting the context map by surface.</p>
+            <p>Each cell answers one question: <strong>does content exist, on this surface, that connects our brand to this person's situation?</strong> Empty cells are gaps. Filled cells are coverage.</p>
+        </div>
+        <div class="matrix-wrapper">
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th>Problem Context</th>
+                        <th>Site</th>
+                        <th>YouTube</th>
+                        <th>Review Platforms</th>
+                        <th>Reddit / Forums</th>
+                        <th>Press / Publications</th>
+                        <th>Knowledge Bases</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"Startup doing own SEO, no budget for agency"</td>
+                        <td class="matrix-cell-content">Beginner guides, free tool tutorials, "SEO on a budget" content</td>
+                        <td class="matrix-cell-content">Quick-win walkthroughs, 10-min setup videos</td>
+                        <td class="matrix-cell-content">G2 reviews from startup founders</td>
+                        <td class="matrix-cell-content">r/startups, r/SEO, Indie Hackers threads</td>
+                        <td class="matrix-cell-content">"Best free SEO tools" roundups in startup publications</td>
+                        <td class="matrix-cell-content">Wikidata: free tier, startup use case</td>
+                    </tr>
+                    <tr>
+                        <td>"Agency managing 20+ client accounts"</td>
+                        <td class="matrix-cell-content">Multi-project workflows, white-label reporting, client templates</td>
+                        <td class="matrix-cell-content">Agency workflow demos, client pitch tutorials</td>
+                        <td class="matrix-cell-content">G2/Capterra reviews from agency owners re: scale</td>
+                        <td class="matrix-cell-content">r/bigseo, agency Slack communities</td>
+                        <td class="matrix-cell-content">Agency-focused trade coverage (SEL, SMX)</td>
+                        <td class="matrix-cell-content">Crunchbase: agency partnerships, integrations</td>
+                    </tr>
+                    <tr>
+                        <td>"Enterprise SEO team proving ROI to C-suite"</td>
+                        <td class="matrix-cell-content">Enterprise case studies, ROI frameworks, executive reporting</td>
+                        <td class="matrix-cell-content">Webinars with enterprise SEO leaders</td>
+                        <td class="matrix-cell-content">Gartner/Forrester inclusion, enterprise-tier reviews</td>
+                        <td class="matrix-cell-content">Private communities (Superpath, etc.)</td>
+                        <td class="matrix-cell-content">Enterprise tech press, analyst reports</td>
+                        <td class="matrix-cell-content">Wikipedia: market position, enterprise clients</td>
+                    </tr>
+                    <tr>
+                        <td>"E-commerce brand losing traffic to Amazon"</td>
+                        <td class="matrix-cell-content">Product page SEO, Shopping Graph optimization, schema guides</td>
+                        <td class="matrix-cell-content">E-commerce SEO teardowns</td>
+                        <td class="matrix-cell-content">Reviews from DTC/e-commerce marketers</td>
+                        <td class="matrix-cell-content">r/ecommerce, Shopify community</td>
+                        <td class="matrix-cell-content">E-commerce trade publications</td>
+                        <td class="matrix-cell-empty">Gap</td>
+                    </tr>
+                    <tr>
+                        <td>"Content marketer proving SEO value to their team"</td>
+                        <td class="matrix-cell-content">Content ROI calculators, attribution guides</td>
+                        <td class="matrix-cell-content">Content strategy + SEO integration tutorials</td>
+                        <td class="matrix-cell-content">Reviews mentioning content workflow features</td>
+                        <td class="matrix-cell-content">r/content_marketing, content Slack groups</td>
+                        <td class="matrix-cell-content">Content marketing publications (Animalz, G&C)</td>
+                        <td class="matrix-cell-empty">Gap</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="matrix-caption">
+            <p><strong>The power is in the rows.</strong> If you get the problem contexts right &mdash; through sales calls, customer interviews, support tickets &mdash; the column work becomes execution. The strategic decision is which rows to prioritize.</p>
+            <p><strong>No keywords in this matrix.</strong> The rows aren't search terms. They're the invisible prompts &mdash; the context someone carries into a conversation with AI. "Startup doing own SEO, no budget for agency" isn't something anyone types verbatim. But it's the effective prompt behind hundreds of different literal prompts.</p>
+            <p><strong>The rows come from customers, not keyword tools.</strong> Persona mining &mdash; sales transcripts, support tickets, customer interviews, community threads &mdash; is more durable than prompt research because it captures the underlying context that drives all prompts, visible and invisible.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ KEY INSIGHTS ══════════════ -->
+    <div class="insight-section">
+        <div class="insight-header">
+            <h2>Supporting Insights</h2>
+            <p>Observations from multiple sources that converge on the same conclusion. These aren't predictions &mdash; they're evidence for why customer context, not keyword tracking, is the durable foundation.</p>
+        </div>
+        <div class="insight-grid">
+            <div class="insight-card insight-card--highlight">
+                <div class="insight-card-title">The Invisible Prompt Problem</div>
+                <p>AI recommendations are shaped by deep personal context the user never typed. The literal prompt ("find me an SEO tool") and the effective prompt (everything the AI knows about the user's business, budget, industry, and history) are radically different. You can't track the effective prompt. But you can build the content foundation that matches it.</p>
+                <div class="insight-source">Devesh Khanal, Grow &amp; Convert &mdash; "Invisible Prompts" (March 2026)</div>
+            </div>
+            <div class="insight-card insight-card--highlight">
+                <div class="insight-card-title">Entity Architecture as Primary Deliverable</div>
+                <p>The structured web of entities, relationships, and consistent brand narrative across sources is becoming the primary SEO deliverable. Not content, not links &mdash; but how clearly AI systems can parse what your brand is, what it does, and who it's for.</p>
+                <div class="insight-source">Domien Van der Heyden &mdash; "The Future of Search in 2027" (Prediction 7)</div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-card-title">AI Systems Read Beyond Your Website</div>
+                <p>AI models pull entities from reviews, Reddit threads, YouTube transcripts, press coverage, and product listings &mdash; not just your website. A Reddit comment explaining why someone switched tools carries more signal than a keyword-stuffed page. Your visibility is the sum of all your surfaces, not just your site.</p>
+                <div class="insight-source">Entity SEO article, Backlinko (Nov 2025, updated April 2026)</div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-card-title">Keywords as Proxy, Not Source</div>
+                <p>Keywords were always a proxy for human intent. AI search removes the proxy &mdash; users interact with technology as humans again, with full context and natural language. Keyword data still validates demand, but it no longer defines the strategy. The customer does.</p>
+                <div class="insight-source">Workflow synthesis, April 2026</div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-card-title">Topic-Level Measurement Over Prompt-Level</div>
+                <p>You can't track individual invisible prompts, but you can track brand presence at the topic level. Established brands with years of content have 59-85% LLM visibility; newer brands without entity depth show 8-24%. The signal is topic association, not prompt matching.</p>
+                <div class="insight-source">Grow &amp; Convert client data via Traqr (March 2026)</div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-card-title">The Digital Word of Mouth Parallel</div>
+                <p>AI search is converging with word of mouth. Both operate on deep contextual knowledge of the person asking. A friend who recommends a product factors in everything they know about you. ChatGPT does the same thing, using your conversation history instead of years of friendship.</p>
+                <div class="insight-source">Grow &amp; Convert analogy, validated against agentic search research</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ SEMRUSH PRODUCT OPPORTUNITIES ══════════════ -->
+    <div class="opportunities-section">
+        <div class="opps-header">
+            <h2>Where Semrush Fits</h2>
+            <p>Mapped against the five practices. The most valuable input (deep customer knowledge) isn't a tool problem &mdash; it's a process problem. The tool opportunities sit in validation, mapping, auditing, and measurement.</p>
+        </div>
+        <div class="opps-grid">
+            <div class="opp-card opp-card--strong">
+                <div class="opp-position">Strong Position</div>
+                <div class="opp-title">Demand Validation</div>
+                <div class="opp-stage">Supports: Map</div>
+                <div class="opp-desc">Keyword and PPC data validate whether a problem context has commercial demand. Search volume isn't the strategy anymore, but it's still evidence that humans care about a problem. CPC signals commercial intent.</div>
+                <div class="opp-job"><strong>Job to be done:</strong> "I've identified a problem context from customer research. Is there enough demand to prioritize content for it?"</div>
+            </div>
+            <div class="opp-card opp-card--strong">
+                <div class="opp-position">Strong Position</div>
+                <div class="opp-title">Technical Entity Audits</div>
+                <div class="opp-stage">Supports: Structure</div>
+                <div class="opp-desc">Schema validation, structured data completeness, crawlability, and entity markup become more essential as AI systems rely on machine-readable signals. Site Audit already covers the foundation; entity-specific checks extend it.</div>
+                <div class="opp-job"><strong>Job to be done:</strong> "Is my brand entity machine-readable? Can AI systems accurately parse what we are, what we do, and who we're for?"</div>
+            </div>
+            <div class="opp-card opp-card--emerging">
+                <div class="opp-position">Emerging Opportunity</div>
+                <div class="opp-title">Share of Voice / Brand Mention Tracking</div>
+                <div class="opp-stage">Supports: Measure</div>
+                <div class="opp-desc">Track how often your brand is associated with target topics across AI surfaces. Not "are we ranking for this prompt" but "how often does our brand appear when this topic comes up." Topic-level brand presence, not prompt-level rankings.</div>
+                <div class="opp-job"><strong>Job to be done:</strong> "Am I showing up in the right conversations? Is my share of voice growing for the problem contexts I'm targeting?"</div>
+            </div>
+            <div class="opp-card opp-card--emerging">
+                <div class="opp-position">Emerging Opportunity</div>
+                <div class="opp-title">Entity Consistency Scoring</div>
+                <div class="opp-stage">Supports: Structure + Measure</div>
+                <div class="opp-desc">Audit whether your brand narrative is consistent across surfaces AI reads &mdash; your site, Wikipedia, Wikidata, G2, Capterra, Knowledge Panels. Inconsistencies confuse AI systems. Consistency builds entity confidence.</div>
+                <div class="opp-job"><strong>Job to be done:</strong> "Is the story about my brand the same everywhere AI looks? Where are the contradictions?"</div>
+            </div>
+            <div class="opp-card opp-card--gap">
+                <div class="opp-position">Process Gap (Not a Tool Problem)</div>
+                <div class="opp-title">Customer Context Mining</div>
+                <div class="opp-stage">Supports: Know</div>
+                <div class="opp-desc">The most valuable input in this entire workflow &mdash; deep understanding of customer problem contexts from sales calls, support tickets, interviews &mdash; isn't something a SaaS tool can do for you. It's a process that requires human intelligence and organizational commitment.</div>
+                <div class="opp-job"><strong>Job to be done:</strong> "I need to understand the situations my customers bring to AI." &mdash; Semrush could potentially help organize the output (persona &rarr; topic map &rarr; entity audit), but the input is human.</div>
+            </div>
+            <div class="opp-card opp-card--gap">
+                <div class="opp-position">Needs Reframing</div>
+                <div class="opp-title">Prompt Research / AI Visibility Tracking</div>
+                <div class="opp-stage">Current: Measure</div>
+                <div class="opp-desc">Tracking individual prompts replicates the keyword model in a world where search volume is one. The tools that track "AI rankings" for specific prompts are measuring the visible surface, not the invisible context that actually drives recommendations. Value exists in topic-level trends, not prompt-level rankings.</div>
+                <div class="opp-job"><strong>Reframe:</strong> From "what prompts do we rank for?" to "which topics is our brand associated with across AI surfaces, and is that association growing?"</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ BOUNDARY NOTE ══════════════ -->
+    <div class="principle-section" style="padding: 48px 48px;">
+        <div class="principle-block" style="max-width: 720px; text-align: left;">
+            <div class="principle-label">Boundary: What This Workflow Doesn't Cover</div>
+            <p style="font-size: 15px; color: var(--text); line-height: 1.7; margin-bottom: 16px;"><strong style="color: var(--text-bright);">Agentic commerce</strong> &mdash; agents booking appointments, completing purchases, filling forms on behalf of users &mdash; is a related but separate concern. This workflow covers <em style="color: var(--yellow);">visibility</em> (can AI find and recommend you?). Agentic commerce covers <em style="color: var(--yellow);">action</em> (can AI do business with you?). The difference is closer to the gap between a storefront sign and a checkout counter. Both matter, but they're different problems with different owners &mdash; visibility is marketing/SEO; action readiness is product/engineering. Agentic commerce is more comparable to payment infrastructure and contact forms than it is to search visibility.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ SOURCES ══════════════ -->
+    <div class="sources-section">
+        <div class="sources-inner">
+            <h2>Source Material</h2>
+            <div class="source-item">
+                <div class="source-title">Invisible Prompts: Why You Can't See the AI Searches Driving Your Leads</div>
+                <div class="source-meta">Devesh Khanal, Grow &amp; Convert &middot; March 2026 &middot; Introduced the literal vs. effective prompt distinction and the "search volume of one" insight</div>
+            </div>
+            <div class="source-item">
+                <div class="source-title">The Future of Search in 2027 &mdash; 7 Predictions</div>
+                <div class="source-meta">Domien Van der Heyden &middot; Shared via LinkedIn &middot; Entity architecture as primary SEO deliverable (P7), AI agents replacing search for B2B (P1)</div>
+            </div>
+            <div class="source-item">
+                <div class="source-title">Entity SEO: How to Build Digital Brand Visibility in AI Search</div>
+                <div class="source-meta">Backlinko (Shannon, reviewed by Michael Ofei) &middot; Nov 2025, updated April 2026 &middot; Established entity-first visibility model, multi-surface brand presence</div>
+            </div>
+            <div class="source-item">
+                <div class="source-title">SEO Strategy Canvas</div>
+                <div class="source-meta">Michael Ofei &middot; Semrush flagship rewrite, in progress &middot; 8-zone decision framework including Target Audience and Topic &amp; Visibility Strategy zones</div>
+            </div>
+            <div class="source-item">
+                <div class="source-title">AI Search OS (Project Apex)</div>
+                <div class="source-meta">Semrush &middot; Four Pillars: Discoverability, Clarity, Authority, Trust &middot; Foundational curriculum for AI search visibility</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ VERSION ══════════════ -->
+    <div class="version-bar">
+        <p>v0.3 &middot; April 15, 2026 &middot; Aligned with Map deep dive v0.2. Updated terminology: customer worlds, context map, site. Entity signals consolidated under Structure. Industry-agnostic language throughout.</p>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="newsletter-section">
+        <div class="newsletter-inner">
+            <p>Get essays on content, craft, and building things &mdash; <span class="dim">no spam, no schedule.</span></p>
+            <form
+                action="https://buttondown.email/api/emails/embed-subscribe/ofei"
+                method="post"
+                target="popupwindow"
+                class="subscribe-form"
+            >
+                <input type="email" name="email" placeholder="your@email.com" required />
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section">
+        <div class="footer-inner">
+            <a href="../index.html">&larr; michaelofei.co</a>
+            <span>Michael Ofei. April 2026.</span>
+        </div>
+    </div>
+
+</body>
+</html>
