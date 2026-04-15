@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know: Customer Context Mining — Michael Ofei</title>
+    <meta name="description" content="How to identify customer worlds and extract the problem contexts that drive AI recommendations. The research practice that feeds everything else.">
+    <meta property="og:title" content="Know: Customer Context Mining">
+    <meta property="og:description" content="The first practice in AI search visibility. Discover customer worlds, extract problem contexts, capture surface intelligence. The foundation the context map is built on.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://michaelofei.co/tools/ai-search-visibility-know.html">
+    <style>
+        :root {
+            --bg: #7A251E;
+            --bg-light: #8a352e;
+            --bg-dark: #6a1f18;
+            --bg-darker: #5a1a15;
+            --text: #D7C9A7;
+            --text-bright: #E8DAB8;
+            --yellow: #E7B000;
+            --green: #00BB00;
+            --green-dim: #009900;
+            --dim: #a89878;
+            --dim-dark: #8a7a5a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* ── Layout ── */
+        .section { width: 100%; padding: 0 48px; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-narrow { max-width: 720px; margin: 0 auto; }
+
+        /* ── Top bar ── */
+        .topbar {
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .back { color: var(--dim); text-decoration: none; font-size: 13px; }
+        .back:hover { color: var(--green); }
+        .topbar-parent { color: var(--dim-dark); font-size: 12px; }
+        .topbar-parent a { color: var(--dim); text-decoration: none; }
+        .topbar-parent a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* HERO                                   */
+        /* ══════════════════════════════════════ */
+        .hero {
+            padding: 80px 48px 64px;
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dim);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 1.25;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero .lead {
+            font-size: 17px;
+            color: var(--text);
+            line-height: 1.65;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .hero-meta {
+            font-size: 12px;
+            color: var(--dim);
+            margin-top: 20px;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* PROBLEM STATEMENT                      */
+        /* ══════════════════════════════════════ */
+        .problem-section {
+            background: var(--bg-dark);
+            padding: 64px 48px;
+        }
+
+        .problem-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .problem-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .problem-inner p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .problem-inner p:last-child { margin-bottom: 0; }
+        .problem-inner strong { color: var(--text-bright); }
+        .problem-inner em { color: var(--yellow); font-style: normal; }
+
+        /* ══════════════════════════════════════ */
+        /* OUTPUTS                                */
+        /* ══════════════════════════════════════ */
+        .outputs-section {
+            padding: 80px 48px;
+        }
+
+        .outputs-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .outputs-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .outputs-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .outputs-header p:last-child { margin-bottom: 0; }
+        .outputs-header strong { color: var(--text-bright); }
+
+        .outputs-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .output-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 32px 28px;
+            border-top: 3px solid var(--bg-light);
+        }
+
+        .output-card--primary { border-top-color: var(--yellow); }
+        .output-card--secondary { border-top-color: var(--green); }
+
+        .output-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--bg-light);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .output-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+
+        .output-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .output-feeds {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+            padding-top: 16px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .output-feeds strong { color: var(--text); font-weight: 600; }
+
+        /* ══════════════════════════════════════ */
+        /* SOURCES                                */
+        /* ══════════════════════════════════════ */
+        .sources-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .sources-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .sources-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .sources-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .sources-header p:last-child { margin-bottom: 0; }
+        .sources-header strong { color: var(--text-bright); }
+
+        .sources-table-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .sources-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 900px;
+        }
+
+        .sources-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+            white-space: nowrap;
+        }
+
+        .sources-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .sources-table tbody tr:last-child td { border-bottom: none; }
+
+        .sources-table tbody tr:nth-child(even) td {
+            background: rgba(90, 26, 21, 0.4);
+        }
+
+        .sources-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .td-dim { color: var(--dim); }
+        .td-green { color: var(--green); }
+        .td-yellow { color: var(--yellow); }
+
+        .sources-listen {
+            max-width: 1200px;
+            margin: 32px auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .listen-card {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 24px 20px;
+            border-top: 3px solid var(--bg-light);
+        }
+
+        .listen-card--high { border-top-color: var(--yellow); }
+        .listen-card--pattern { border-top-color: var(--green); }
+        .listen-card--validation { border-top-color: var(--dim); }
+
+        .listen-card-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .listen-card--high .listen-card-label { color: var(--yellow); }
+        .listen-card--pattern .listen-card-label { color: var(--green); }
+        .listen-card--validation .listen-card-label { color: var(--dim); }
+
+        .listen-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .listen-card-desc {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .sources-annotation {
+            max-width: 720px;
+            margin: 32px auto 0;
+        }
+
+        .sources-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .sources-annotation p:last-child { margin-bottom: 0; }
+        .sources-annotation strong { color: var(--text); }
+
+        /* ── Callout box ── */
+        .callout-box {
+            max-width: 720px;
+            margin: 32px auto 0;
+            background: var(--bg);
+            border-left: 3px solid var(--yellow);
+            border-radius: 0 8px 8px 0;
+            padding: 24px 28px;
+        }
+
+        .callout-box-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--yellow);
+            margin-bottom: 10px;
+        }
+
+        .callout-box p {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .callout-box p:last-child { margin-bottom: 0; }
+        .callout-box strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* EXTRACTION                             */
+        /* ══════════════════════════════════════ */
+        .extraction-section {
+            padding: 80px 48px;
+        }
+
+        .extraction-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .extraction-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .extraction-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .extraction-header p:last-child { margin-bottom: 0; }
+        .extraction-header strong { color: var(--text-bright); }
+        .extraction-header em { color: var(--yellow); font-style: normal; }
+
+        .extraction-grid {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .extraction-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 28px 24px;
+            border-top: 3px solid var(--yellow);
+        }
+
+        .extraction-card-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--bg-light);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .extraction-card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .extraction-card-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .extraction-card-example {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+            padding-top: 12px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .extraction-card-example strong { color: var(--text); }
+
+        .extraction-table-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .extraction-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 800px;
+        }
+
+        .extraction-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+            white-space: nowrap;
+        }
+
+        .extraction-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .extraction-table tbody tr:last-child td { border-bottom: none; }
+
+        .extraction-table tbody tr:nth-child(even) td {
+            background: rgba(106, 31, 24, 0.3);
+        }
+
+        .extraction-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .extraction-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+        }
+
+        .extraction-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .extraction-annotation p:last-child { margin-bottom: 0; }
+        .extraction-annotation strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* DISCOVERY vs PRIORITIZATION            */
+        /* ══════════════════════════════════════ */
+        .process-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .process-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .process-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .process-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .process-header p:last-child { margin-bottom: 0; }
+        .process-header strong { color: var(--text-bright); }
+
+        .process-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 0;
+            align-items: stretch;
+        }
+
+        .process-side {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 40px 32px;
+        }
+
+        .process-side--discover { border: 1px solid var(--yellow); }
+        .process-side--prioritize { border: 1px solid var(--green-dim); }
+
+        .process-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+
+        .process-side--discover .process-label { color: var(--yellow); }
+        .process-side--prioritize .process-label { color: var(--green); }
+
+        .process-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+
+        .process-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .process-question {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .process-answer {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--bg-light);
+            margin-bottom: 16px;
+        }
+
+        .process-answer:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .process-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--yellow);
+        }
+
+        .process-annotation {
+            max-width: 720px;
+            margin: 32px auto 0;
+        }
+
+        .process-annotation p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .process-annotation p:last-child { margin-bottom: 0; }
+        .process-annotation strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* SCORING VIEW                           */
+        /* ══════════════════════════════════════ */
+        .scoring-section {
+            padding: 80px 48px;
+        }
+
+        .scoring-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .scoring-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .scoring-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .scoring-header p:last-child { margin-bottom: 0; }
+        .scoring-header strong { color: var(--text-bright); }
+        .scoring-header em { color: var(--yellow); font-style: normal; }
+
+        .scoring-table-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .scoring-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 900px;
+        }
+
+        .scoring-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .scoring-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .scoring-table tbody tr:last-child td { border-bottom: none; }
+
+        .scoring-table tbody tr:nth-child(even) td {
+            background: rgba(106, 31, 24, 0.3);
+        }
+
+        .scoring-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .scoring-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+        }
+
+        .scoring-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .scoring-annotation p:last-child { margin-bottom: 0; }
+        .scoring-annotation strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* PROBLEM CONTEXT INVENTORY              */
+        /* ══════════════════════════════════════ */
+        .inventory-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .inventory-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .inventory-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .inventory-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .inventory-header p:last-child { margin-bottom: 0; }
+        .inventory-header strong { color: var(--text-bright); }
+        .inventory-header em { color: var(--yellow); font-style: normal; }
+
+        .inventory-table-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .inventory-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 800px;
+        }
+
+        .inventory-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .inventory-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .inventory-table tbody tr:last-child td { border-bottom: none; }
+
+        .inventory-table tbody tr:nth-child(even) td {
+            background: rgba(90, 26, 21, 0.4);
+        }
+
+        .inventory-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .inventory-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+        }
+
+        .inventory-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .inventory-annotation p:last-child { margin-bottom: 0; }
+        .inventory-annotation strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* SURFACE INTELLIGENCE                   */
+        /* ══════════════════════════════════════ */
+        .surface-section {
+            padding: 80px 48px;
+        }
+
+        .surface-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .surface-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .surface-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .surface-header p:last-child { margin-bottom: 0; }
+        .surface-header strong { color: var(--text-bright); }
+        .surface-header em { color: var(--yellow); font-style: normal; }
+
+        .surface-examples {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .surface-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .surface-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 700px;
+        }
+
+        .surface-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+            white-space: nowrap;
+        }
+
+        .surface-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .surface-table tbody tr:last-child td { border-bottom: none; }
+
+        .surface-table tbody tr:nth-child(even) td {
+            background: rgba(106, 31, 24, 0.3);
+        }
+
+        .surface-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .surface-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+        }
+
+        .surface-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .surface-annotation p:last-child { margin-bottom: 0; }
+        .surface-annotation strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* WORKED EXAMPLES                        */
+        /* ══════════════════════════════════════ */
+        .example-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .example-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .example-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .example-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .example-header p:last-child { margin-bottom: 0; }
+        .example-header strong { color: var(--text-bright); }
+
+        .example-block {
+            max-width: 1200px;
+            margin: 0 auto 48px;
+        }
+
+        .example-block:last-child { margin-bottom: 0; }
+
+        .example-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .example-label--alt { color: var(--yellow); }
+
+        .example-context {
+            max-width: 720px;
+            margin-bottom: 24px;
+        }
+
+        .example-context p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .example-context p:last-child { margin-bottom: 0; }
+        .example-context strong { color: var(--text-bright); }
+
+        .example-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .example-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 600px;
+        }
+
+        .example-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+            white-space: nowrap;
+        }
+
+        .example-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .example-table tbody tr:last-child td { border-bottom: none; }
+
+        .example-table tbody tr:nth-child(even) td {
+            background: rgba(90, 26, 21, 0.4);
+        }
+
+        .example-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .example-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+        }
+
+        .example-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .example-annotation p:last-child { margin-bottom: 0; }
+        .example-annotation strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* HANDOFF                                */
+        /* ══════════════════════════════════════ */
+        .handoff-section {
+            padding: 64px 48px;
+        }
+
+        .handoff-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .handoff-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .handoff-inner p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .handoff-inner p:last-child { margin-bottom: 0; }
+        .handoff-inner strong { color: var(--text-bright); }
+        .handoff-inner em { color: var(--yellow); font-style: normal; }
+
+        .handoff-link {
+            display: inline-block;
+            margin-top: 8px;
+            color: var(--green);
+            text-decoration: none;
+            font-size: 14px;
+            border-bottom: 1px dashed var(--green-dim);
+        }
+
+        .handoff-link:hover { color: var(--text-bright); border-bottom-color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* IMPLICATIONS                           */
+        /* ══════════════════════════════════════ */
+        .implications-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .implications-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .implications-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 24px;
+        }
+
+        .implication-item {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .implication-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .implication-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .implication-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .implication-desc strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* FOOTER ELEMENTS                        */
+        /* ══════════════════════════════════════ */
+        .version-bar {
+            padding: 24px 48px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--dim-dark);
+        }
+
+        .footer-section {
+            padding: 24px 48px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--dim);
+            font-size: 13px;
+        }
+
+        .footer-inner a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+
+        .footer-inner a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* RESPONSIVE                             */
+        /* ══════════════════════════════════════ */
+        @media (max-width: 1100px) {
+            .sources-listen { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 900px) {
+            .hero, .problem-section, .outputs-section, .sources-section,
+            .extraction-section, .process-section, .scoring-section,
+            .inventory-section, .surface-section, .example-section,
+            .handoff-section, .implications-section,
+            .newsletter-section, .footer-section, .topbar {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero h1 { font-size: 28px; }
+            .outputs-grid { grid-template-columns: 1fr; }
+            .extraction-grid { grid-template-columns: 1fr; }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .process-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-inner { flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <a href="ai-search-visibility-workflow.html" class="back">&larr; AI Search Visibility Workflow</a>
+        <span class="topbar-parent">Practice 1 of 5 &middot; <a href="ai-search-visibility-workflow.html">View all practices</a></span>
+    </div>
+
+    <!-- ══════════════ HERO ══════════════ -->
+    <div class="hero">
+        <div class="hero-inner">
+            <div class="hero-label">Deep Dive &middot; Practice 01: Know</div>
+            <h1>Customer Context Mining</h1>
+            <p class="lead">How to identify the customer worlds your brand should invest in and extract the problem contexts that drive AI recommendations. This is the research practice that everything else is built on.</p>
+            <p class="hero-meta">v0.3 &middot; April 2026 &middot; Michael Ofei</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE PROBLEM ══════════════ -->
+    <div class="problem-section">
+        <div class="problem-inner">
+            <h2>The Audience Understanding Gap</h2>
+            <p>Most teams think they understand their audience because they've built personas or run keyword research. But those are proxies &mdash; abstractions that describe people in terms tools can measure. "Women 25&ndash;34, interested in fitness" is a persona. "Best yoga leggings" is a keyword. Neither captures the situation that leads someone to ask an AI for help.</p>
+            <p>AI search surfaced the gap. When someone asks ChatGPT "what should I wear to hot yoga that won't go see-through," they're bringing a <em>situation</em> &mdash; a practice, a body concern, a past experience with a product that failed them. The AI fills in context from everything it knows about this person. That's the invisible prompt. No keyword tool captures it. No persona template anticipates it.</p>
+            <p>But you can understand these situations <em>before</em> people search, by reading your customer reviews, monitoring their communities, and listening to their conversations with your team. The first practice in this workflow &mdash; <strong>Know</strong> &mdash; is about building that understanding systematically. Not as a one-off persona exercise, but as a continuous practice that keeps your strategy connected to reality.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ TWO OUTPUTS ══════════════ -->
+    <div class="outputs-section">
+        <div class="outputs-header">
+            <h2>Two Outputs</h2>
+            <p>Know produces two things. Everything downstream depends on them &mdash; the context map, the entity infrastructure, the publishing strategy. Get these wrong and you're building for customers you don't actually have.</p>
+        </div>
+        <div class="outputs-grid">
+            <div class="output-card output-card--primary">
+                <div class="output-number">01</div>
+                <div class="output-title">Defined and Prioritized Customer Worlds</div>
+                <div class="output-desc">A customer world is a group of people who share a situation, not a demographic. "Product teams at mid-size SaaS companies" is a customer world. "Studio yoga practitioners who want performance and style" is a customer world. "Women aged 25&ndash;34" is not.</div>
+                <div class="output-desc">Customer worlds have distinct problem contexts, distinct surfaces where they spend time, and distinct language they use to describe their challenges. You can't build depth for every customer world simultaneously. Defining them is research. Prioritizing them is strategy. Both happen in Know, but they're different muscles.</div>
+                <div class="output-feeds"><strong>Feeds into:</strong> the portfolio view in <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Practice 2 (Map)</a>, where you track which customer worlds you're investing in and at what priority.</div>
+            </div>
+            <div class="output-card output-card--secondary">
+                <div class="output-number">02</div>
+                <div class="output-title">Problem Contexts Within Priority Worlds</div>
+                <div class="output-desc">The situations, tensions, and specific problems that people in each customer world bring to AI. Not job titles, not demographics &mdash; the actual scenarios that trigger someone to ask for help. "We're drowning in tools and need to consolidate" is a problem context. "Will these leggings survive a squat?" is a problem context. "Product manager" is a role. "Fitness enthusiast" is a segment.</div>
+                <div class="output-desc">Problem contexts become the rows of the context map. Each one maps to a specific experience component &mdash; a case study, a template, a try-on video, a community thread &mdash; placed on the right surface.</div>
+                <div class="output-feeds"><strong>Feeds into:</strong> the context map in <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Practice 2 (Map)</a> &mdash; these become the rows that replace keywords as the organizing principle for content planning.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ WHERE TO MINE ══════════════ -->
+    <div class="sources-section">
+        <div class="sources-header">
+            <h2>Where to Mine</h2>
+            <p>Customer context comes from six types of source, each doing a different job. The <strong>specific source</strong> varies by business &mdash; a SaaS company mines sales calls, a DTC brand mines TikTok comments, a restaurant mines reservation notes. But the <strong>job each source does</strong> is the same regardless of industry.</p>
+        </div>
+
+        <div class="sources-table-wrapper">
+            <table class="sources-table">
+                <thead>
+                    <tr>
+                        <th>Job</th>
+                        <th>What It Reveals</th>
+                        <th>B2B SaaS</th>
+                        <th>DTC / E-commerce</th>
+                        <th>Hospitality / Services</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pre-purchase context</td>
+                        <td>How people describe their situation before buying</td>
+                        <td>Sales calls, demo recordings</td>
+                        <td>CS chats, DMs, pre-purchase emails, quiz responses</td>
+                        <td>Inquiry calls, booking messages, consultation requests</td>
+                    </tr>
+                    <tr>
+                        <td>Post-purchase reflection</td>
+                        <td>How they describe what they got vs. what they wanted</td>
+                        <td>Customer interviews, expansion conversations</td>
+                        <td>Post-purchase surveys, ambassador feedback, loyalty program data</td>
+                        <td>Post-stay surveys, follow-up emails, client retrospectives</td>
+                    </tr>
+                    <tr>
+                        <td>Support signals</td>
+                        <td>What they're actually trying to do (vs. what you designed for)</td>
+                        <td>Support tickets, help desk conversations</td>
+                        <td>Returns data, sizing questions, CS conversations</td>
+                        <td>Complaints, front-desk interactions, scope changes</td>
+                    </tr>
+                    <tr>
+                        <td>Peer-to-peer context</td>
+                        <td>How they frame their situation when asking peers</td>
+                        <td>Reddit, Slack communities, industry forums</td>
+                        <td>TikTok comments, Instagram, Reddit fitness/fashion subs</td>
+                        <td>Google Reviews, Instagram, food/travel blogs, local forums</td>
+                    </tr>
+                    <tr>
+                        <td>External validation</td>
+                        <td>How others frame your product after using it</td>
+                        <td>G2, Capterra reviews</td>
+                        <td>Trustpilot, on-site reviews, TikTok try-on/haul videos</td>
+                        <td>Yelp, TripAdvisor, food critic reviews, Google Reviews</td>
+                    </tr>
+                    <tr>
+                        <td>Behavioral patterns</td>
+                        <td>What they actually do (not what they say)</td>
+                        <td>CRM data, product usage analytics, win/loss records</td>
+                        <td>Purchase data, bundle patterns, repeat purchase rates</td>
+                        <td>Reservation patterns, table/room preferences, upsell data</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="sources-listen">
+            <div class="listen-card listen-card--high">
+                <div class="listen-card-label">Across all sources, listen for</div>
+                <div class="listen-card-title">Self-descriptions</div>
+                <div class="listen-card-desc">How people identify themselves and their situation. "As a solo marketer at a mid-stage startup..." or "I do hot yoga 4x a week and I'm sick of..." or "We're planning our anniversary dinner and..." These reveal which customer world they belong to, in their own language.</div>
+            </div>
+            <div class="listen-card listen-card--pattern">
+                <div class="listen-card-label">Across all sources, listen for</div>
+                <div class="listen-card-title">Competitor anchors</div>
+                <div class="listen-card-desc">Who they compare you to, and the framing of that comparison. "We're evaluating Notion vs. Jira" is a different world than "I want something cheaper than Lululemon." The competitor anchor reveals the decision context and the surfaces where that comparison happens.</div>
+            </div>
+            <div class="listen-card listen-card--validation">
+                <div class="listen-card-label">Across all sources, listen for</div>
+                <div class="listen-card-title">Surface breadcrumbs</div>
+                <div class="listen-card-desc">Where they mention discovering brands, doing research, or asking for recommendations. "I saw it on TikTok" or "I checked the G2 reviews" or "someone on Reddit recommended..." These are surface signals that feed directly into the Map.</div>
+            </div>
+        </div>
+
+        <div class="sources-annotation">
+            <p><strong>Start wherever you have the easiest access.</strong> Most companies already have support data, reviews, and community conversations. You don't need all six sources to begin &mdash; you need enough signal to start seeing patterns. The goal isn't to complete an exhaustive research project before moving to Map. It's to build a practice of continuous context mining that refreshes as customer situations evolve.</p>
+        </div>
+
+        <div class="callout-box">
+            <div class="callout-box-label">Entering a new market?</div>
+            <p>If you're launching a new product category, expanding into a new audience, or starting a business, your own customer data doesn't exist yet. Your mining shifts almost entirely to <strong>other people's customers</strong>: competitor reviews (what are people saying about the incumbents?), community conversations about the problem space (what problems exist that nobody's solving well?), and market-level demand signals (keyword data, trend data, competitive analysis from tools like Semrush).</p>
+            <p>The who/what/where extraction works the same way &mdash; you're just extracting from Lululemon's Trustpilot page and r/xxfitness threads instead of your own. Peer-to-peer context and external validation become your primary sources. Pre-purchase and post-purchase context barely exist yet. Behavioral patterns come from market research, not your own analytics.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE EXTRACTION STEP ══════════════ -->
+    <div class="extraction-section">
+        <div class="extraction-header">
+            <h2>What You Actually Do With the Sources</h2>
+            <p>This is the operational step that connects "we have data" to "we have customer worlds." For each source you mine, you're extracting three things from every signal. Not all three will be present in every signal &mdash; a TikTok comment might give you a clear <em>who</em> and <em>where</em> but a vague <em>what</em>. A sales call might give you rich <em>what</em> but no <em>where</em>. That's fine. You're building a composite picture, not filling out a form.</p>
+        </div>
+
+        <div class="extraction-grid">
+            <div class="extraction-card">
+                <div class="extraction-card-number">01</div>
+                <div class="extraction-card-title">Who is this person?</div>
+                <div class="extraction-card-desc">Their self-described situation, not your segmentation of them. Capture the language they use to frame who they are and what they do.</div>
+                <div class="extraction-card-example"><strong>SaaS:</strong> "PM at a 50-person startup, we do everything in spreadsheets right now." <strong>DTC:</strong> "I do Pilates 5x a week and I'm over spending $100 on leggings." <strong>Hospitality:</strong> "We're looking for somewhere special for our 10th anniversary."</div>
+            </div>
+            <div class="extraction-card">
+                <div class="extraction-card-number">02</div>
+                <div class="extraction-card-title">What situation are they in?</div>
+                <div class="extraction-card-desc">The problem, tension, or need that triggered them to look for a solution. This is the raw material that becomes a problem context.</div>
+                <div class="extraction-card-example"><strong>SaaS:</strong> "We need to consolidate 4 tools into one before Q3." <strong>DTC:</strong> "My last pair went see-through during squats. Never again." <strong>Hospitality:</strong> "I want somewhere with a tasting menu that isn't stuffy."</div>
+            </div>
+            <div class="extraction-card">
+                <div class="extraction-card-number">03</div>
+                <div class="extraction-card-title">Where did you find them?</div>
+                <div class="extraction-card-desc">The platform, community, or channel where this signal appeared. This is surface intelligence &mdash; it tells you where this customer world lives and makes decisions.</div>
+                <div class="extraction-card-example"><strong>SaaS:</strong> Sales call (Gong recording). <strong>DTC:</strong> TikTok comment on a try-on haul. <strong>Hospitality:</strong> Google Review mentioning Instagram discovery.</div>
+            </div>
+        </div>
+
+        <p style="max-width: 720px; margin: 0 auto 40px; font-size: 15px; color: var(--text); line-height: 1.7;"><strong style="color: var(--text-bright);">A practical scope:</strong> Pull a defined batch of material &mdash; 200 reviews, 50 sales conversations, a week of community monitoring, a quarter of returns data. Extract who/what/where for each signal. You'll end up with a messy spreadsheet of 200&ndash;400 raw signals. Most will overlap. Some will surprise you. That's the raw material for the next step.</p>
+
+        <div class="extraction-table-wrapper">
+            <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green); margin-bottom: 16px;">Example &mdash; Raw extraction for a DTC athleisure brand</div>
+            <table class="extraction-table">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Who</th>
+                        <th>What (Situation)</th>
+                        <th>Where (Surface)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Trustpilot review</td>
+                        <td>"I do reformer Pilates and yoga"</td>
+                        <td>"Finally leggings that don't slide during reformer. And they look cute enough for brunch after."</td>
+                        <td>Trustpilot (found via Google)</td>
+                    </tr>
+                    <tr>
+                        <td>TikTok comment</td>
+                        <td>"Gym girl, I lift 5x/week"</td>
+                        <td>"Are these actually squat-proof or is this just another #ad?"</td>
+                        <td>TikTok (try-on haul video)</td>
+                    </tr>
+                    <tr>
+                        <td>CS chat</td>
+                        <td>"I just wear them for errands and coffee runs"</td>
+                        <td>"Do you have anything that looks more like real pants? I don't actually work out in these."</td>
+                        <td>On-site chat</td>
+                    </tr>
+                    <tr>
+                        <td>Returns data</td>
+                        <td>(No self-description)</td>
+                        <td>Return reason: "Too sheer during exercise."</td>
+                        <td>(No surface signal)</td>
+                    </tr>
+                    <tr>
+                        <td>Reddit thread</td>
+                        <td>"Training for my first half marathon"</td>
+                        <td>"Can anyone recommend running leggings with a pocket that doesn't bounce? Tried Nike, too slippery."</td>
+                        <td>r/running</td>
+                    </tr>
+                    <tr>
+                        <td>Instagram DM</td>
+                        <td>"7 months pregnant, Pilates is keeping me sane"</td>
+                        <td>"Do these have enough stretch for a bump? I don't want to size up if the fabric gives."</td>
+                        <td>Instagram</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="extraction-annotation">
+            <p><strong>Notice what each row gives you.</strong> The Trustpilot review gives all three: who (Pilates/yoga practitioner), what (performance + transition), where (Trustpilot via Google). The returns data gives only a situation signal with no identity or surface. The Reddit thread gives you a surprise &mdash; a runner in a community you might not have been monitoring. All of this is raw material. The patterns emerge when you stack 200 of these.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ DISCOVERY vs PRIORITIZATION ══════════════ -->
+    <div class="process-section">
+        <div class="process-header">
+            <h2>Two Different Muscles</h2>
+            <p>Once you have a stack of extracted signals, you cluster them into candidate customer worlds and then decide which ones to invest in first. These are different exercises. Discovery is expansive &mdash; you want to find every distinct customer world. Prioritization is reductive &mdash; you choose where to build depth first, knowing you can't do everything at once.</p>
+            <p>Teams get stuck when they conflate the two. They start filtering before they've finished exploring, and end up with a narrow view shaped by existing assumptions. Or they keep exploring without ever committing, and nothing gets built.</p>
+        </div>
+
+        <div class="process-grid">
+            <div class="process-side process-side--discover">
+                <div class="process-label">Phase 1: Discovery</div>
+                <div class="process-title">Find the Customer Worlds</div>
+                <div class="process-desc">Group your extracted signals by shared situations and shared surfaces. Each cluster is a candidate customer world. Name them by the situation, not the demographic.</div>
+
+                <div class="process-question">What makes a cluster a distinct customer world?</div>
+                <div class="process-answer">Different problem contexts <strong>and</strong> different surfaces. If two groups share the same problems and the same surfaces, they're probably one customer world. "Gym &amp; Lifting" and "Studio &amp; Yoga" look similar (both exercise) but have different problems (compression vs. flexibility), different surfaces (r/xxfitness vs. r/yoga), and different competitive anchors (Gymshark vs. Alo Yoga). They're distinct.</div>
+
+                <div class="process-question">What about overlapping clusters?</div>
+                <div class="process-answer">Some signals will sit between two worlds. The person who does Pilates three mornings a week and wears the same leggings to lunch touches both "Studio &amp; Yoga" and "Everyday / Lifestyle." The test: would the same content on the same surfaces serve both groups? If yes, merge them. If you'd need meaningfully different content or surfaces, they're distinct worlds with some overlap at the edges.</div>
+
+                <div class="process-question">What if we find a world we didn't expect?</div>
+                <div class="process-answer">That's the point. If you only find the customer worlds you already knew about, you didn't mine deeply enough. The pregnant Pilates practitioner. The freelancer using your enterprise product. The running community asking about your brand in a subreddit you never monitored. Unexpected worlds are often the most valuable discovery.</div>
+            </div>
+
+            <div class="process-arrow">&rarr;</div>
+
+            <div class="process-side process-side--prioritize">
+                <div class="process-label">Phase 2: Prioritization</div>
+                <div class="process-title">Choose Where to Build Depth</div>
+                <div class="process-desc">Not every customer world gets a context map. You're making bets. Three questions guide the decision.</div>
+
+                <div class="process-question">Is there commercial weight behind this world?</div>
+                <div class="process-answer">For established brands: revenue data, repeat purchase rates, ACV or AOV by segment, deal velocity. For new market entrants: keyword demand data, competitor revenue signals, addressable market size, trend data. Tools like Semrush shift from a validation layer to a primary input when you don't have your own sales data yet.</div>
+
+                <div class="process-question">Can we credibly show up here?</div>
+                <div class="process-answer">Do you have proof for this customer world? Case studies, reviews, UGC, usage data? An established brand with hundreds of positive gym reviews can build faster than a new entrant starting from zero. For new markets, the question becomes "how long and how much investment to build credibility?" &mdash; not "do we have it?" Factor credibility into sequencing and investment level, not exclusion.</div>
+
+                <div class="process-question">Is the competitive position winnable?</div>
+                <div class="process-answer">Where can you differentiate? A DTC brand might have a clear advantage in studio wear against Lululemon on price, but no credible position in running gear against Nike and On. A SaaS company might own the product team workflow but face five incumbents in the marketing team space. For new entrants: competitive analysis is your primary research tool &mdash; mine the incumbents' weaknesses from their 1- and 2-star reviews.</div>
+            </div>
+        </div>
+
+        <div class="process-annotation">
+            <p><strong>The output of prioritization is Layer 1 of the context map</strong> &mdash; the Customer World Overview. Each row gets a priority (P1, P2, P3), a "Who They Are" description, key surfaces, a current focus, and a maturity status. P1 worlds get full context maps built in the Map practice. Lower-priority worlds stay in the overview as documented future investments &mdash; not forgotten, just sequenced.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ SCORING VIEW ══════════════ -->
+    <div class="scoring-section">
+        <div class="scoring-header">
+            <h2>Making the Priority Call Visible</h2>
+            <p>The three prioritization questions are judgment calls, not a formula. But the inputs that inform those judgments should be visible. Otherwise prioritization becomes a gut call that's hard to explain, hard to challenge, and hard to revisit when conditions change.</p>
+            <p>A simple scoring view &mdash; the three questions as columns, scored as <em>Strong</em>, <em>Moderate</em>, or <em>Weak</em>, with the evidence noted &mdash; makes the reasoning transparent. When leadership asks "why aren't we going after runners?" you can point to the table: weak evidence, no credibility, unwinnable competitive position. It's not a hunch. The inputs are visible.</p>
+        </div>
+
+        <div class="scoring-table-wrapper">
+            <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green); margin-bottom: 16px;">Example &mdash; DTC athleisure brand (Adanola)</div>
+            <table class="scoring-table">
+                <thead>
+                    <tr>
+                        <th>Customer World</th>
+                        <th>Commercial Weight</th>
+                        <th>Credibility</th>
+                        <th>Competitive Position</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Studio &amp; Yoga</td>
+                        <td class="td-green">Strong &mdash; highest repeat purchase rate, ~35% of revenue, growing</td>
+                        <td class="td-green">Strong &mdash; 400+ reviews mentioning yoga/Pilates, rich UGC</td>
+                        <td class="td-green">Winnable &mdash; differentiated on price vs. Lulu, aesthetic vs. Gymshark</td>
+                        <td class="td-green">P1</td>
+                    </tr>
+                    <tr>
+                        <td>Gym &amp; Lifting</td>
+                        <td class="td-green">Strong &mdash; fastest-growing segment, high AOV from bundles</td>
+                        <td class="td-green">Strong &mdash; TikTok squat-proof content drives organic traffic</td>
+                        <td class="td-yellow">Competitive &mdash; Gymshark owns this, but their quality complaints create an opening</td>
+                        <td class="td-green">P1</td>
+                    </tr>
+                    <tr>
+                        <td>Everyday / Lifestyle</td>
+                        <td class="td-yellow">Moderate &mdash; decent volume, lower AOV, lower repeat purchase</td>
+                        <td class="td-yellow">Moderate &mdash; CS signal exists but no dedicated proof assets</td>
+                        <td class="td-dim">Crowded &mdash; every athleisure brand plays here, no clear differentiation</td>
+                        <td class="td-yellow">P2</td>
+                    </tr>
+                    <tr>
+                        <td>Running</td>
+                        <td class="td-dim">Weak &mdash; minimal purchase data in this category</td>
+                        <td class="td-dim">Weak &mdash; no reviews mentioning running performance</td>
+                        <td class="td-dim">Hard &mdash; Nike, On, Hoka own this with decades of credibility</td>
+                        <td class="td-dim">Parked</td>
+                    </tr>
+                    <tr>
+                        <td>Maternity / Postpartum</td>
+                        <td class="td-dim">Unknown &mdash; no dedicated purchase tracking, small signal</td>
+                        <td class="td-dim">Emerging &mdash; a few organic reviews, some Instagram DMs</td>
+                        <td class="td-yellow">Moderate &mdash; few dedicated competitors, adjacent to studio world</td>
+                        <td class="td-dim">Parked</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="scoring-annotation">
+            <p><strong>The scoring isn't a formula &mdash; it's a conversation tool.</strong> Three "Strong" scores doesn't automatically mean P1. Context matters: Gym &amp; Lifting has a competitive yellow flag (Gymshark), but the opening created by their quality complaints is specific and actionable enough to justify P1 investment. Maternity has a moderate competitive position (few dedicated players), but the commercial weight is unknown and the credibility is thin. Parking it doesn't mean it's a bad bet &mdash; it means the evidence isn't there yet.</p>
+            <p><strong>For new market entrants:</strong> the Commercial Weight column shifts from internal data (revenue, repeat purchase) to external signals &mdash; keyword demand volume, competitor market share, addressable market estimates, trend data. Semrush becomes a primary input here, not a validation layer. Credibility starts at "Weak" or "None" by definition, so the scoring becomes about <strong>how quickly and at what cost you can build it</strong> (existing adjacent authority, ability to generate proof, speed to first UGC). The Competitive Position column stays the same &mdash; mine the incumbents' 1- and 2-star reviews to find the openings.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ PROBLEM CONTEXT INVENTORY ══════════════ -->
+    <div class="inventory-section">
+        <div class="inventory-header">
+            <h2>Building the Problem Context Inventory</h2>
+            <p>Once you've decided which customer worlds are P1, you go back to your raw signals and extract the full inventory of problem contexts for each world. This is the bridge between Output 1 (prioritized customer worlds) and Output 2 (problem contexts that become the rows of the Map).</p>
+            <p>The process: filter your raw signal spreadsheet for each P1 world. List every distinct situation. Merge the duplicates &mdash; "will these go see-through during squats?" and "are these actually squat-proof?" are the same problem context expressed differently. Refine the language into something that captures the <em>situation</em>, not just the surface-level question. Then sequence them by how central they are to the customer world's core tension.</p>
+        </div>
+
+        <div class="inventory-table-wrapper">
+            <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green); margin-bottom: 16px;">Example &mdash; Problem context inventory for Studio &amp; Yoga (Adanola)</div>
+            <table class="inventory-table">
+                <thead>
+                    <tr>
+                        <th>Problem Context</th>
+                        <th>Signal Frequency</th>
+                        <th>Key Sources</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"I want activewear that performs for my practice and looks good enough to wear after"</td>
+                        <td class="td-green">High &mdash; appears across all sources</td>
+                        <td>Reviews, TikTok, CS chats</td>
+                        <td>Core tension for this world. This is the Narrative row in the Map.</td>
+                    </tr>
+                    <tr>
+                        <td>"Will these leggings stay in place during reformer / inversions / transitions?"</td>
+                        <td class="td-green">High &mdash; 40+ review mentions, frequent TikTok question</td>
+                        <td>Trustpilot, TikTok comments, r/pilates</td>
+                        <td>Performance validation. Needs Proof component (UGC, studio test videos).</td>
+                    </tr>
+                    <tr>
+                        <td>"What should I wear to hot yoga?"</td>
+                        <td class="td-yellow">Moderate &mdash; seasonal spikes, strong Reddit signal</td>
+                        <td>r/yoga, on-site search, CS chats</td>
+                        <td>Utility opportunity. Fabric/heat guide. Also has keyword demand: "what to wear to hot yoga" 3,100/mo.</td>
+                    </tr>
+                    <tr>
+                        <td>"Everything at Lululemon looks the same and costs twice as much"</td>
+                        <td class="td-yellow">Moderate &mdash; comes up unprompted in reviews and Reddit</td>
+                        <td>Trustpilot, r/yoga, Instagram comments</td>
+                        <td>Competitive context. Distribution component: honest comparison content. "Lululemon alternative" 8,400/mo.</td>
+                    </tr>
+                    <tr>
+                        <td>"I need matching sets that work for barre, Pilates, and yoga without buying three different outfits"</td>
+                        <td class="td-yellow">Moderate &mdash; comes from multi-practice customers</td>
+                        <td>CS chats, Instagram DMs, post-purchase surveys</td>
+                        <td>Cross-practice versatility. Utility: style guide by practice type.</td>
+                    </tr>
+                    <tr>
+                        <td>"Can anyone recommend a good studio wear brand? I'm new to Pilates"</td>
+                        <td class="td-dim">Lower frequency, but high intent &mdash; recommendation-seeking</td>
+                        <td>r/pilates, r/yoga</td>
+                        <td>Distribution: community participation. These are the threads where AI agents find recommendations.</td>
+                    </tr>
+                    <tr>
+                        <td>"Are these worth it? I keep seeing them on TikTok but I've been burned before"</td>
+                        <td class="td-yellow">Moderate &mdash; trust/validation seeking</td>
+                        <td>TikTok comments, Reddit</td>
+                        <td>Proof: review cultivation + response strategy. Trust barrier to convert awareness into purchase.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="inventory-annotation">
+            <p><strong>These rows are the handoff to Map.</strong> Each problem context becomes a row in the <a href="ai-search-visibility-map.html" style="color: var(--text); text-decoration: none; border-bottom: 1px dashed var(--dim-dark);">context map</a>, where it gets assigned a component type (Narrative, Proof, Utility, Distribution), a specific asset, the surfaces it should live on, and a demand signal. The notes column here already starts suggesting component types &mdash; that's natural. The formal assignment happens in Map.</p>
+            <p><strong>Signal frequency isn't the same as priority.</strong> "Can anyone recommend a good studio wear brand?" appears less often in your data, but it's the exact type of thread where AI agents find and surface recommendations. Low frequency in your signals can still mean high strategic value in the Map.</p>
+            <p><strong>The inventory will have gaps.</strong> Your raw signals won't cover every problem context in a customer world. Some will emerge later through ongoing mining, customer interviews you haven't done yet, or community threads you haven't found. That's expected. The inventory is a starting point for Map, not a complete picture. Know is a practice, not a project &mdash; the inventory grows.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ SURFACE INTELLIGENCE ══════════════ -->
+    <div class="surface-section">
+        <div class="surface-header">
+            <h2>The Byproduct Worth Capturing</h2>
+            <p>If you followed the extraction step, you've already been recording <em>where</em> each signal came from. That's surface intelligence &mdash; and it's one of Know's most valuable outputs for the Map, even though it's technically a byproduct of the who/what/where capture.</p>
+            <p>The person mining customer context is in the best position to notice patterns like "this customer world lives on TikTok and trusts Trustpilot reviews" or "this segment compares options on G2 and asks peers in Slack communities." If you don't capture those patterns during Know, someone has to rediscover them during Map.</p>
+        </div>
+
+        <div class="surface-examples">
+            <div class="surface-table-wrapper">
+                <table class="surface-table">
+                    <thead>
+                        <tr>
+                            <th>Customer World</th>
+                            <th>Source That Revealed It</th>
+                            <th>Surface Signal</th>
+                            <th>Feeds Into</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Product Teams (SaaS)</td>
+                            <td>Sales calls &mdash; prospects mention comparing options on G2</td>
+                            <td>G2, Capterra are decision surfaces for this world</td>
+                            <td>Layer 1: Key Surfaces</td>
+                        </tr>
+                        <tr>
+                            <td>Product Teams (SaaS)</td>
+                            <td>Community monitoring &mdash; active threads in r/productmanagement</td>
+                            <td>Reddit is a recommendation surface, not just distribution</td>
+                            <td>Layer 2: Surfaces column</td>
+                        </tr>
+                        <tr>
+                            <td>Studio &amp; Yoga (DTC)</td>
+                            <td>CS chats &mdash; customers mention seeing product on TikTok</td>
+                            <td>TikTok is the discovery surface for this world</td>
+                            <td>Layer 1: Key Surfaces</td>
+                        </tr>
+                        <tr>
+                            <td>Gym &amp; Lifting (DTC)</td>
+                            <td>TikTok comments &mdash; squat-proof questions under try-on hauls</td>
+                            <td>TikTok is both discovery and validation; r/xxfitness is peer recommendation</td>
+                            <td>Layer 1: Key Surfaces + Layer 2: Surfaces</td>
+                        </tr>
+                        <tr>
+                            <td>Weekend Couples (Hospitality)</td>
+                            <td>Reservation notes &mdash; guests mention Instagram discovery</td>
+                            <td>Instagram is the discovery surface; Google Maps is the booking surface</td>
+                            <td>Layer 1: Key Surfaces</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="surface-annotation">
+                <p><strong>Notice the dual role of some platforms.</strong> For DTC brands especially, TikTok is both a mining source (you extract signals from comments) and a key surface (you'll publish there during Map). Reddit threads are both peer-to-peer context (mining source) and recommendation surfaces (publishing target). The same platform doing double duty is common &mdash; just be clear about which hat you're wearing.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ WORKED EXAMPLES ══════════════ -->
+    <div class="example-section">
+        <div class="example-header">
+            <h2>The Full Journey: Signals to Customer Worlds</h2>
+            <p>Two worked examples showing the discovery step &mdash; clustering raw signals into candidate customer worlds. The scoring and problem context inventory (shown in detail above) follow this step for each P1 world.</p>
+        </div>
+
+        <!-- ──── NOTION (SaaS) ──── -->
+        <div class="example-block">
+            <div class="example-label">B2B SaaS &mdash; Notion</div>
+            <div class="example-context">
+                <p>Same example used in the <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Map deep dive</a>. You've pulled 50 sales call transcripts, 200 support tickets, and spent a week monitoring r/productmanagement, r/startups, and the Notion subreddit. The extraction gave you ~300 raw signals. Here's what the clustering reveals:</p>
+            </div>
+            <div class="example-table-wrapper">
+                <table class="example-table">
+                    <thead>
+                        <tr>
+                            <th>Customer World</th>
+                            <th>Evidence</th>
+                            <th>Distinct Because</th>
+                            <th>Key Surfaces</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Product Teams</td>
+                            <td class="td-green">18/50 sales calls, high ticket volume</td>
+                            <td>Unique problems (roadmaps, specs, sprint boards), unique competitive anchor (Jira)</td>
+                            <td>G2, Reddit, YouTube</td>
+                        </tr>
+                        <tr>
+                            <td>Marketing Teams</td>
+                            <td class="td-green">12/50 sales calls, clear review patterns</td>
+                            <td>Different workflow (campaigns, calendars, briefs), different competitive set (Asana, Monday)</td>
+                            <td>G2, YouTube</td>
+                        </tr>
+                        <tr>
+                            <td>Engineering Teams</td>
+                            <td class="td-yellow">6/50 sales calls, significant support volume</td>
+                            <td>Technical workflow (docs, wikis), different competitors (Confluence, GitBook)</td>
+                            <td>Hacker News, dev communities</td>
+                        </tr>
+                        <tr>
+                            <td>Freelancers &amp; Solos</td>
+                            <td class="td-dim">Support tickets + Reddit, minimal sales contact</td>
+                            <td>Different scale, different needs (client access), entirely different surfaces</td>
+                            <td>YouTube, Twitter/X, indie forums</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ──── ADANOLA (DTC) ──── -->
+        <div class="example-block">
+            <div class="example-label example-label--alt">DTC Athleisure &mdash; Adanola</div>
+            <div class="example-context">
+                <p>Different business, same process. You've read 200 Trustpilot reviews, pulled a quarter of returns data, monitored r/xxfitness, r/yoga, and r/gym for two weeks, and reviewed 100 TikTok comments on brand-tagged haul videos. The extraction gave you ~250 raw signals. The clustering:</p>
+            </div>
+            <div class="example-table-wrapper">
+                <table class="example-table">
+                    <thead>
+                        <tr>
+                            <th>Customer World</th>
+                            <th>Evidence</th>
+                            <th>Distinct Because</th>
+                            <th>Key Surfaces</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Studio &amp; Yoga</td>
+                            <td class="td-green">Highest review density, rich TikTok/IG signal</td>
+                            <td>Flexibility, no-slide, studio-to-street transition. Anchor: Lululemon, Alo Yoga</td>
+                            <td>Instagram, TikTok, r/yoga, r/pilates</td>
+                        </tr>
+                        <tr>
+                            <td>Gym &amp; Lifting</td>
+                            <td class="td-green">Massive TikTok signal, squat-proof is #1 question</td>
+                            <td>Compression, durability, stays in place. Anchor: Gymshark, NVGTN</td>
+                            <td>TikTok, r/xxfitness, r/gym, YouTube</td>
+                        </tr>
+                        <tr>
+                            <td>Everyday / Lifestyle</td>
+                            <td class="td-yellow">CS chats, purchase patterns (non-exercise buyers)</td>
+                            <td>Aesthetic-first, comfort all day, not performance-driven</td>
+                            <td>TikTok, Instagram, Pinterest</td>
+                        </tr>
+                        <tr>
+                            <td>Running</td>
+                            <td class="td-dim">Some Reddit signals, minimal review presence</td>
+                            <td>Entirely different performance needs, different competitive set (Nike, On, Hoka)</td>
+                            <td>r/running, Strava communities</td>
+                        </tr>
+                        <tr>
+                            <td>Maternity / Postpartum</td>
+                            <td class="td-dim">Instagram DMs, a few reviews</td>
+                            <td>Stretch accommodation, sizing uncertainty, entirely different decision context</td>
+                            <td>Instagram, parenting forums</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="example-annotation">
+                <p><strong>Same structure, completely different landscape.</strong> Adanola's customer worlds are lifestyle-driven, not role-driven. Their sources are TikTok and Trustpilot, not Gong and G2. But the process &mdash; extract signals, cluster by shared situation + shared surface, test for distinctness &mdash; is identical. The scoring view and problem context inventory (both shown in detail above) follow this step for each P1 world.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ HANDOFF TO MAP ══════════════ -->
+    <div class="handoff-section">
+        <div class="handoff-inner">
+            <h2>The Handoff</h2>
+            <p>When Know is working, it produces a clean handoff to Map. You're delivering three things: <strong>prioritized customer worlds</strong> (with scoring rationale, key surfaces, and maturity status), <strong>problem context inventories</strong> for each P1 world (the rows that the context map will be built on), and <strong>surface intelligence</strong> captured during mining (which platforms matter for which worlds).</p>
+            <p>The handoff isn't a one-time event. Know is a <em>practice</em>, not a project. Customer worlds shift. New ones emerge. Problem contexts evolve as the market changes. TikTok surfaces new competitive dynamics. Support tickets reveal use cases you didn't design for. The context map stays current because the mining stays current.</p>
+            <p>The question that connects Know to Map: <strong>"For this customer world, what are all the situations that might lead someone to ask an AI for help &mdash; and what experience would we need to build so the AI recommends us?"</strong></p>
+            <a href="ai-search-visibility-map.html" class="handoff-link">Continue to Practice 2: Map &rarr;</a>
+        </div>
+    </div>
+
+    <!-- ══════════════ IMPLICATIONS ══════════════ -->
+    <div class="implications-section">
+        <div class="implications-inner">
+            <h2>What This Changes</h2>
+
+            <div class="implication-item">
+                <div class="implication-title">Customer world selection becomes the first strategic decision</div>
+                <div class="implication-desc">Not keyword selection, not topic selection &mdash; <strong>customer world selection</strong>. "Which groups of people are we building deep experiences for?" is a fundamentally different question than "what keywords should we rank for?" It's harder, it requires cross-functional input (sales, support, product &mdash; or CS, returns data, community), and it commits you to depth rather than breadth. But it's also more durable. Customer worlds don't change as fast as keyword trends.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">The richest input isn't in any tool</div>
+                <div class="implication-desc">This is the one practice in the workflow that no SaaS product can do for you. Semrush can validate demand. It can audit your entity infrastructure. It can track your share of voice. But it can't read your TikTok comments, parse your returns data, or understand why a particular customer world matters to your business. The most valuable input in the entire workflow is human intelligence and organizational commitment. Tools accelerate prioritization and validation &mdash; they don't replace discovery.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">New markets require mining other people's customers</div>
+                <div class="implication-desc">If you're entering a new market or launching a new product category, you don't have your own customer data yet. Your discovery happens in competitor review sections, community conversations about the problem space, and market-level demand signals. The process is identical &mdash; extract who/what/where, cluster, score, inventory &mdash; but the sources shift from internal to external. The strategic advantage comes from finding the gaps that incumbents aren't serving, visible in their 1- and 2-star reviews.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">You'll discover customer worlds you didn't design for</div>
+                <div class="implication-desc">The maternity example and the freelancer example aren't hypothetical &mdash; most companies have customer segments using their product in ways the product team didn't anticipate. These unexpected worlds are either valuable expansion opportunities or signals that your marketing is attracting the wrong people. Both are worth knowing about. Parking a world isn't the same as ignoring it.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Know never finishes</div>
+                <div class="implication-desc">Unlike keyword research (which produces a list you execute against), customer context mining is perpetual. Markets shift, competitors enter, customer needs evolve, new surfaces emerge. The teams that treat Know as a continuous practice will have context maps that stay relevant. The ones that treat it as a one-time project will be working from stale assumptions within two quarters.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">The biggest risk isn't the framework &mdash; it's organizational adoption</div>
+                <div class="implication-desc">"Read 200 reviews and extract who/what/where" is simple to explain and genuinely tedious to do. The teams that actually do it will have a significant advantage. Most won't. This is the same pattern behind every competitive moat built on customer closeness &mdash; the entrepreneurs who talk to their customers daily, the brand teams who interact with their community on Instagram every morning, the founders who still sit in on support calls. <strong>The ones closest to their customers are the ones who win.</strong> AI can accelerate the extraction (you can use it to help pull patterns from raw data), but the judgment about what matters, what's surprising, and what changes your strategy &mdash; that requires a human who's actually read the signals.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ VERSION ══════════════ -->
+    <div class="version-bar">
+        <p>v0.4 &middot; April 15, 2026 &middot; Cross-practice references softened (describe jobs, not Map terminology). Opening differentiated from Map page. Organizational adoption insight added. Newsletter CTA removed.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section">
+        <div class="footer-inner">
+            <a href="ai-search-visibility-workflow.html">&larr; AI Search Visibility Workflow</a>
+            <span>Michael Ofei. April 2026.</span>
+        </div>
+    </div>
+
+</body>
+</html>
