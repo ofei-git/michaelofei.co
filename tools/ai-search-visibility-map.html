@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Map: Context-First Content Planning — Michael Ofei</title>
-    <meta name="description" content="How to translate customer context into a content plan that AI systems can work with. The three-layer spreadsheet, the context map, and the landing page mental model.">
+    <meta name="description" content="How to translate customer context into a content plan that both humans and AI agents can work with. The context map, the Experience Blueprint, and four component types.">
     <meta property="og:title" content="Map: Context-First Content Planning">
     <meta property="og:description" content="Replacing keyword-first spreadsheets with context-first planning. Build the experience that both humans and AI agents use to understand your brand — for any industry, any size.">
     <meta property="og:type" content="website">
@@ -739,7 +739,7 @@
             <div class="hero-label">Deep Dive &middot; Practice 02: Map</div>
             <h1>Context-First Content Planning</h1>
             <p class="lead">How to translate customer context into a plan that both humans and AI agents can work with. Replacing keyword-first spreadsheets with a structure that represents the experience you're building — not just the pages you're publishing.</p>
-            <p class="hero-meta">v0.3 &middot; April 2026 &middot; Michael Ofei</p>
+            <p class="hero-meta">v0.4 &middot; April 2026 &middot; Michael Ofei</p>
         </div>
     </div>
 
@@ -977,75 +977,22 @@
         </div>
     </div>
 
-    <!-- ══════════════ TWO LAYERS ══════════════ -->
+    <!-- ══════════════ THE CONTEXT MAP ══════════════ -->
     <div class="layers-section">
         <div class="layers-header">
-            <h2>Two Layers of Planning</h2>
-            <p>The context-first spreadsheet works at two levels. <strong>Layer 1</strong> is the strategic view (which customer worlds are we investing in?). <strong>Layer 2</strong> is the context map (what experience are we building for each customer world?). If you need a coverage audit, filter or pivot Layer 2 by surface &mdash; but that's a spreadsheet technique, not a separate artifact.</p>
-            <p>Layer 1 is a single sheet. Layer 2 is one tab per priority customer world.</p>
+            <h2>The Context Map</h2>
+            <p>The context map assumes you've identified and prioritized your customer worlds in <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Practice 1 (Know)</a>. Know produces the strategic decisions: which customer worlds to invest in, at what priority, with what evidence, and on which surfaces. The context map is where those decisions become a content plan.</p>
+            <p>Each P1 customer world gets its own context map &mdash; either as a named tab in your spreadsheet or as rows filtered by a Customer World column in a single sheet. Either way, every row belongs to a specific customer world.</p>
         </div>
 
-        <!-- Layer 1 -->
         <div class="layer-block">
             <div class="layer-title-bar">
-                <div class="layer-number">L1</div>
-                <div class="layer-title">Customer World Overview</div>
-            </div>
-            <div class="layer-subtitle">One sheet. The command center. Answers: "Which customer worlds are we investing in?"</div>
-            <div class="layer-table-wrapper">
-                <table class="layer-table">
-                    <thead>
-                        <tr>
-                            <th>Customer World</th>
-                            <th>Priority</th>
-                            <th>Who They Are</th>
-                            <th>Key Surfaces</th>
-                            <th>Current Focus</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Product Teams</td>
-                            <td class="td-green">P1</td>
-                            <td>PMs at 50&ndash;500 person companies. Roadmaps, specs, cross-functional comms.</td>
-                            <td>Site, YouTube, G2, Reddit</td>
-                            <td class="td-yellow">Building proof content</td>
-                            <td class="td-green">Active</td>
-                        </tr>
-                        <tr>
-                            <td>Marketing Teams</td>
-                            <td class="td-yellow">P2</td>
-                            <td>Content + demand gen at B2B SaaS. Campaigns, calendars, briefs.</td>
-                            <td>Site, YouTube, G2</td>
-                            <td class="td-yellow">Mapping problem contexts</td>
-                            <td class="td-yellow">Building</td>
-                        </tr>
-                        <tr>
-                            <td>Engineering Teams</td>
-                            <td class="td-dim">P3</td>
-                            <td>Dev teams managing docs, wikis, onboarding, technical specs.</td>
-                            <td class="td-dim">&mdash;</td>
-                            <td class="td-dim">&mdash;</td>
-                            <td class="td-dim">Researching</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="layer-annotation">
-                <p><strong>"Key Surfaces" and "Current Focus" are the management columns.</strong> Key Surfaces captures the surface selection decision &mdash; which platforms matter for this customer world (partly industry-dependent, partly customer-world-dependent). Current Focus is forward-looking: where is energy going right now? Status reflects maturity, not completion &mdash; customer worlds move from Researching to Building to Active to Extending, but they never reach "done." Selection comes from <a href="ai-search-visibility-know.html" style="color: var(--text); text-decoration: none; border-bottom: 1px dashed var(--dim-dark);">Practice 1 (Know)</a>: which customer worlds have the most distinct problem contexts and the most commercial potential?</p>
-            </div>
-        </div>
-
-        <!-- Layer 2 -->
-        <div class="layer-block">
-            <div class="layer-title-bar">
-                <div class="layer-number">L2</div>
+                <div class="layer-number">&mdash;</div>
                 <div class="layer-title">Context Map</div>
             </div>
-            <div class="layer-subtitle">One tab per priority customer world. The planning view. Answers: "What experience are we building for this customer?"</div>
+            <div class="layer-subtitle">One per priority customer world. The planning view. Answers: "What experience are we building for this customer?"</div>
             <div class="layer-desc">
-                <p>This is the full context-first table shown above &mdash; every component of the experience you're building for one customer world. The worked example (Notion &times; Product Teams) shows what a populated Layer 2 looks like.</p>
+                <p>This is the full context-first table shown above &mdash; every component of the experience you're building for one customer world. The worked examples (Notion &times; Product Teams and Adanola &times; Studio &amp; Yoga) show what a populated context map looks like.</p>
                 <p>Six columns, each doing distinct work:</p>
             </div>
             <div class="layer-table-wrapper">
@@ -1076,7 +1023,7 @@
                         <tr>
                             <td>Surfaces</td>
                             <td>Where it lives (multi-select: site, YouTube, TikTok, G2, Reddit...)</td>
-                            <td>Not every component lives on your website. The available surfaces come from the Key Surfaces decision in Layer 1. Place the right thing on the right surface.</td>
+                            <td>Not every component lives on your website. The available surfaces come from the surface intelligence captured in <a href="ai-search-visibility-know.html" style="color: var(--text); text-decoration: none; border-bottom: 1px dashed var(--dim-dark);">Know</a>. Place the right thing on the right surface.</td>
                         </tr>
                         <tr>
                             <td>Demand Signal</td>
@@ -1206,7 +1153,7 @@
 
     <!-- ══════════════ VERSION ══════════════ -->
     <div class="version-bar">
-        <p>v0.3 &middot; April 15, 2026 &middot; DTC worked example added (Studio &amp; Yoga). Layer 3 dropped &mdash; two-layer model. Problem Context leads as row identity. Role column removed. Surfaces as multi-select. Demand signals broadened. Layer 1 restructured for portfolio management.</p>
+        <p>v0.4 &middot; April 15, 2026 &middot; Customer World Overview moved to Practice 1 (Know). Map now focuses entirely on the context map. Layer framing removed. Setup note added referencing Know as the source of customer world definitions, priorities, and surface intelligence.</p>
     </div>
 
     <!-- Footer -->
