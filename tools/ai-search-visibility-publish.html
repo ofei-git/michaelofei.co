@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publish: Deploy Your Brand Across Every Surface — Michael Ofei</title>
+    <meta name="description" content="How to translate your context map into surface-native content, coordinate diverse creators, and build multi-surface presence within your team and budget constraints.">
+    <meta property="og:title" content="Publish: Deploy Your Brand Across Every Surface">
+    <meta property="og:description" content="Surface-native deployment, not content repurposing. Build the multi-surface presence AI systems use to recommend you — within the constraints of your team and budget.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://michaelofei.co/tools/ai-search-visibility-publish.html">
+    <style>
+        :root {
+            --bg: #7A251E;
+            --bg-light: #8a352e;
+            --bg-dark: #6a1f18;
+            --bg-darker: #5a1a15;
+            --text: #D7C9A7;
+            --text-bright: #E8DAB8;
+            --yellow: #E7B000;
+            --green: #00BB00;
+            --green-dim: #009900;
+            --dim: #a89878;
+            --dim-dark: #8a7a5a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* ── Layout ── */
+        .section { width: 100%; padding: 0 48px; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-narrow { max-width: 720px; margin: 0 auto; }
+
+        /* ── Top bar ── */
+        .topbar {
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .back { color: var(--dim); text-decoration: none; font-size: 13px; }
+        .back:hover { color: var(--green); }
+        .topbar-parent { color: var(--dim-dark); font-size: 12px; }
+        .topbar-parent a { color: var(--dim); text-decoration: none; }
+        .topbar-parent a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* HERO                                   */
+        /* ══════════════════════════════════════ */
+        .hero {
+            padding: 80px 48px 64px;
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dim);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 1.25;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero .lead {
+            font-size: 17px;
+            color: var(--text);
+            line-height: 1.65;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .hero-meta {
+            font-size: 12px;
+            color: var(--dim);
+            margin-top: 20px;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* PROBLEM STATEMENT                      */
+        /* ══════════════════════════════════════ */
+        .problem-section {
+            background: var(--bg-dark);
+            padding: 64px 48px;
+        }
+
+        .problem-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .problem-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .problem-inner p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .problem-inner p:last-child { margin-bottom: 0; }
+        .problem-inner strong { color: var(--text-bright); }
+        .problem-inner em { color: var(--yellow); font-style: normal; }
+
+        /* ══════════════════════════════════════ */
+        /* DOMAINS                                */
+        /* ══════════════════════════════════════ */
+        .domains-section {
+            padding: 80px 48px;
+        }
+
+        .domains-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .domains-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .domains-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .domains-header p:last-child { margin-bottom: 0; }
+        .domains-header strong { color: var(--text-bright); }
+
+        .domains-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .domain-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 32px 24px;
+            border-top: 3px solid var(--bg-light);
+        }
+
+        .domain-card--owned { border-top-color: var(--green); }
+        .domain-card--semi { border-top-color: var(--yellow); }
+        .domain-card--community { border-top-color: var(--dim); }
+
+        .domain-card-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .domain-card--owned .domain-card-label { color: var(--green); }
+        .domain-card--semi .domain-card-label { color: var(--yellow); }
+        .domain-card--community .domain-card-label { color: var(--dim); }
+
+        .domain-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+
+        .domain-card-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+
+        .domain-card-surfaces {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+            padding-top: 12px;
+            border-top: 1px solid var(--bg-light);
+            margin-bottom: 12px;
+        }
+
+        .domain-card-surfaces strong { color: var(--text); font-weight: 600; }
+
+        .domain-card-skill {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+        }
+
+        .domain-card-skill strong { color: var(--text); font-weight: 600; }
+
+        /* ══════════════════════════════════════ */
+        /* ORCHESTRATION                          */
+        /* ══════════════════════════════════════ */
+        .orchestration-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .orchestration-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .orchestration-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .orchestration-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .orchestration-header p:last-child { margin-bottom: 0; }
+        .orchestration-header strong { color: var(--text-bright); }
+        .orchestration-header em { color: var(--yellow); font-style: normal; }
+
+        .orch-steps {
+            max-width: 720px;
+            margin: 0 auto 40px;
+        }
+
+        .orch-step {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .orch-step:last-child { border-bottom: none; }
+
+        .orch-step-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--yellow);
+            margin-bottom: 8px;
+        }
+
+        .orch-step-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .orch-step-desc strong { color: var(--text-bright); }
+
+        /* ── Callout box ── */
+        .callout-box {
+            max-width: 720px;
+            margin: 32px auto 0;
+            background: var(--bg-dark);
+            border-left: 3px solid var(--yellow);
+            border-radius: 0 8px 8px 0;
+            padding: 24px 28px;
+        }
+
+        .callout-box--on-dark {
+            background: var(--bg);
+        }
+
+        .callout-box-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--yellow);
+            margin-bottom: 10px;
+        }
+
+        .callout-box p {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .callout-box p:last-child { margin-bottom: 0; }
+        .callout-box strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* SURFACE-NATIVE SECTION                 */
+        /* ══════════════════════════════════════ */
+        .native-section {
+            padding: 80px 48px;
+        }
+
+        .native-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .native-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .native-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .native-header p:last-child { margin-bottom: 0; }
+        .native-header strong { color: var(--text-bright); }
+        .native-header em { color: var(--yellow); font-style: normal; }
+
+        /* ── Subsection headers ── */
+        .subsection-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .subsection-label--alt { color: var(--yellow); }
+
+        .subsection-desc {
+            max-width: 720px;
+            margin-bottom: 24px;
+        }
+
+        .subsection-desc p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .subsection-desc p:last-child { margin-bottom: 0; }
+        .subsection-desc strong { color: var(--text-bright); }
+
+        /* ── Generic table styles ── */
+        .table-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 700px;
+        }
+
+        .data-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+            white-space: nowrap;
+        }
+
+        .data-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .data-table tbody tr:last-child td { border-bottom: none; }
+
+        .data-table tbody tr:nth-child(even) td {
+            background: rgba(106, 31, 24, 0.3);
+        }
+
+        .data-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .data-table--dark tbody tr:nth-child(even) td {
+            background: rgba(90, 26, 21, 0.4);
+        }
+
+        .table-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .table-label--alt { color: var(--yellow); }
+
+        .table-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+        }
+
+        .table-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .table-annotation p:last-child { margin-bottom: 0; }
+        .table-annotation strong { color: var(--text); }
+
+        .td-dim { color: var(--dim); }
+        .td-green { color: var(--green); }
+        .td-yellow { color: var(--yellow); }
+
+        /* ══════════════════════════════════════ */
+        /* TEAM & BUDGET SECTION                  */
+        /* ══════════════════════════════════════ */
+        .team-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .team-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .team-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .team-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .team-header p:last-child { margin-bottom: 0; }
+        .team-header strong { color: var(--text-bright); }
+        .team-header em { color: var(--yellow); font-style: normal; }
+
+        .role-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .role-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 28px 24px;
+            border-left: 3px solid var(--bg-light);
+        }
+
+        .role-card--shift { border-left-color: var(--yellow); }
+        .role-card--budget { border-left-color: var(--green); }
+        .role-card--start { border-left-color: var(--dim); }
+        .role-card--priority { border-left-color: var(--yellow); }
+
+        .role-card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+
+        .role-card-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .role-card-desc:last-child { margin-bottom: 0; }
+
+        .role-card-detail {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+            padding-top: 12px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .role-card-detail strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* EDITORIAL PIPELINE SECTION             */
+        /* ══════════════════════════════════════ */
+        .pipeline-section {
+            padding: 80px 48px;
+        }
+
+        .pipeline-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .pipeline-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .pipeline-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .pipeline-header p:last-child { margin-bottom: 0; }
+        .pipeline-header strong { color: var(--text-bright); }
+
+        .pipeline-steps {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .pipeline-step {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .pipeline-step:last-child { border-bottom: none; }
+
+        .pipeline-step-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--yellow);
+            margin-bottom: 8px;
+        }
+
+        .pipeline-step-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .pipeline-step-desc strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* WORKED EXAMPLES                        */
+        /* ══════════════════════════════════════ */
+        .example-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .example-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .example-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .example-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .example-header p:last-child { margin-bottom: 0; }
+        .example-header strong { color: var(--text-bright); }
+
+        .example-block {
+            max-width: 1200px;
+            margin: 0 auto 64px;
+        }
+
+        .example-block:last-child { margin-bottom: 0; }
+
+        .example-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .example-label--alt { color: var(--yellow); }
+
+        .example-context {
+            max-width: 720px;
+            margin-bottom: 24px;
+        }
+
+        .example-context p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .example-context p:last-child { margin-bottom: 0; }
+        .example-context strong { color: var(--text-bright); }
+
+        .example-step-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dim);
+            margin: 32px 0 16px;
+        }
+
+        .example-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .example-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 700px;
+        }
+
+        .example-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+            white-space: nowrap;
+        }
+
+        .example-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .example-table tbody tr:last-child td { border-bottom: none; }
+
+        .example-table tbody tr:nth-child(even) td {
+            background: rgba(106, 31, 24, 0.3);
+        }
+
+        .example-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .example-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+        }
+
+        .example-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .example-annotation p:last-child { margin-bottom: 0; }
+        .example-annotation strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* HANDOFF                                */
+        /* ══════════════════════════════════════ */
+        .handoff-section {
+            padding: 64px 48px;
+        }
+
+        .handoff-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .handoff-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .handoff-inner p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .handoff-inner p:last-child { margin-bottom: 0; }
+        .handoff-inner strong { color: var(--text-bright); }
+        .handoff-inner em { color: var(--yellow); font-style: normal; }
+
+        .handoff-link {
+            display: inline-block;
+            margin-top: 8px;
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 14px;
+            border-bottom: 1px dashed var(--dim-dark);
+        }
+
+        .handoff-link:hover { color: var(--text-bright); border-bottom-color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* IMPLICATIONS                           */
+        /* ══════════════════════════════════════ */
+        .implications-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .implications-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .implications-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 24px;
+        }
+
+        .implication-item {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .implication-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .implication-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .implication-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .implication-desc strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* FOOTER ELEMENTS                        */
+        /* ══════════════════════════════════════ */
+        .version-bar {
+            padding: 24px 48px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--dim-dark);
+        }
+
+        .footer-section {
+            padding: 24px 48px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--dim);
+            font-size: 13px;
+        }
+
+        .footer-inner a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+
+        .footer-inner a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* RESPONSIVE                             */
+        /* ══════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .hero, .problem-section, .domains-section, .orchestration-section,
+            .native-section, .team-section, .pipeline-section,
+            .example-section, .handoff-section, .implications-section,
+            .footer-section, .topbar {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero h1 { font-size: 28px; }
+            .domains-grid { grid-template-columns: 1fr; }
+            .role-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .footer-inner { flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <a href="ai-search-visibility-workflow.html" class="back">&larr; AI Search Visibility Workflow</a>
+        <span class="topbar-parent">Practice 4 of 5 &middot; <a href="ai-search-visibility-workflow.html">View all practices</a></span>
+    </div>
+
+    <!-- ══════════════ HERO ══════════════ -->
+    <div class="hero">
+        <div class="hero-inner">
+            <div class="hero-label">Deep Dive &middot; Practice 04: Publish</div>
+            <h1>Deploy Your Brand Across Every Surface</h1>
+            <p class="lead">How to translate your context map into surface-native content, coordinate diverse creators around a consistent brand narrative, and build the multi-surface presence AI systems use to recommend you &mdash; within the constraints of your team and budget.</p>
+            <p class="hero-meta">v0.2 &middot; April 2026 &middot; Michael Ofei</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE PROBLEM ══════════════ -->
+    <div class="problem-section">
+        <div class="problem-inner">
+            <h2>The One-Surface Problem</h2>
+            <p>Most companies already publish across multiple surfaces. The blog team writes articles. The social team makes videos. Someone manages the review platform profiles. A community manager answers questions in forums. The work is happening. But look at the <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">context map</a> from Map, and you'll notice the problem: <strong>each surface operates in its own silo, with its own goals, its own voice, and no shared narrative tied to customer worlds.</strong></p>
+            <p>Before AI search, that was fine. Google indexed your website. Social had its own metrics. Reviews lived in their own universe. Each surface served a different purpose &mdash; brand awareness, community, conversion &mdash; and nobody needed to coordinate because the surfaces didn't talk to each other.</p>
+            <p>AI search changed the equation. When an AI agent evaluates whether to recommend your brand for someone's situation, it <em>assembles signal from every surface simultaneously</em> &mdash; your blog, your YouTube content, your review platform presence, your community contributions, your guest appearances. When those surfaces tell a coherent, consistent story about your brand for a specific customer world, the AI has strong evidence for the recommendation. When each surface is telling its own uncoordinated story &mdash; or when most surfaces are silent for a given problem context &mdash; the signal is weak.</p>
+            <p>The gap isn't content quality, and it isn't that teams only publish to their website. Most teams that have made it through <a href="ai-search-visibility-structure.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Structure</a> already create good content across multiple surfaces. The gap is <strong>coordination</strong> &mdash; ensuring that the content on every surface is working toward the same customer worlds, reinforcing the same brand narrative, and covering the same problem contexts. This is a different challenge than "make better content" or "be on more platforms." It's <strong>"make your existing surfaces tell a coordinated story, then fill the gaps strategically with the team and budget you actually have."</strong></p>
+            <p><a href="ai-search-visibility-structure.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Structure</a> made your brand parseable. Publish makes your brand present.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ THREE PUBLISHING DOMAINS ══════════════ -->
+    <div class="domains-section">
+        <div class="domains-header">
+            <h2>Three Publishing Domains</h2>
+            <p>Not all surfaces work the same way. Your blog and your Reddit presence are both "publishing," but they require different skills, different cadences, different budgets, and different measures of success. The three domains help you think about <strong>who does the work, what you control, and where the investment goes</strong> &mdash; so you can allocate limited resources honestly instead of pretending every surface gets equal attention.</p>
+        </div>
+        <div class="domains-grid">
+            <div class="domain-card domain-card--owned">
+                <div class="domain-card-label">Full Control</div>
+                <div class="domain-card-title">Owned Surfaces</div>
+                <div class="domain-card-desc">Your website, YouTube channel, podcast, email newsletter. You control the format, the timing, and the editorial direction. This is where the Narrative and Proof components from the <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none;">context map</a> get deployed &mdash; guided by problem contexts, not keywords.</div>
+                <div class="domain-card-surfaces"><strong>SaaS:</strong> Blog, documentation, YouTube tutorials, template galleries. <strong>DTC:</strong> Product pages, lookbooks, TikTok channel, styling guides. <strong>Services:</strong> Case studies, portfolio, project galleries, practice-area pages.</div>
+                <div class="domain-card-skill"><strong>Investment:</strong> Team time or contractor budget. This is where most existing content budgets already live &mdash; the shift is pointing that budget at context map gaps instead of keyword lists.</div>
+            </div>
+            <div class="domain-card domain-card--semi">
+                <div class="domain-card-label">You Control What You Say</div>
+                <div class="domain-card-title">Semi-Controlled Surfaces</div>
+                <div class="domain-card-desc">Guest posts, podcast appearances, conference talks, webinars, partner content, review platform responses. You control your words but not the final context. This is where the canonical narratives from <a href="ai-search-visibility-structure.html" style="color: var(--green); text-decoration: none;">Structure</a> become talking points and briefing documents.</div>
+                <div class="domain-card-surfaces"><strong>SaaS:</strong> Integration partner blogs, industry conference talks, analyst briefings. <strong>DTC:</strong> Influencer collaborations, fashion publication features, brand partnerships. <strong>Services:</strong> Industry association profiles, client testimonials, speaking engagements.</div>
+                <div class="domain-card-skill"><strong>Investment:</strong> Relationship building and preparation time. Lower direct cost, but depends on the editorial direction pipeline &mdash; without canonical narratives, every guest appearance tells a slightly different brand story.</div>
+            </div>
+            <div class="domain-card domain-card--community">
+                <div class="domain-card-label">You Participate, You Don't Publish</div>
+                <div class="domain-card-title">Community Participation</div>
+                <div class="domain-card-desc">Reddit, forums, industry Slack groups, social conversations, Discord servers. You don't deploy content here &mdash; you contribute to conversations that happen to be relevant to your customer worlds. The canonical narrative isn't stated explicitly. It shapes how your team members talk about problems &mdash; the language, the positioning, the perspective they carry naturally.</div>
+                <div class="domain-card-surfaces"><strong>SaaS:</strong> r/SaaS, r/startups, product subreddits, Indie Hackers, industry Slacks. <strong>DTC:</strong> r/yoga, fitness subreddits, TikTok comments, Facebook groups. <strong>Services:</strong> Industry forums, local business associations, professional communities.</div>
+                <div class="domain-card-skill"><strong>Investment:</strong> Team member time. Often the lowest-cost, highest-signal publishing activity &mdash; and the one most teams skip entirely.</div>
+            </div>
+        </div>
+
+        <div class="callout-box">
+            <div class="callout-box-label">The authenticity boundary</div>
+            <p>Community participation that reads like marketing gets flagged fast. A Reddit comment that sounds like a press release damages trust on the exact surface you're trying to build presence on. The distinction is real: a team member who genuinely uses the product and shares their experience is participating. A marketing coordinator posting scripted answers to planted questions is astroturfing. <strong>AI systems are also getting better at distinguishing organic mentions from promotional ones.</strong> The signal value of community participation comes from its independence &mdash; if it stops being independent, it stops being valuable.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE ORCHESTRATION WORKFLOW ══════════════ -->
+    <div class="orchestration-section">
+        <div class="orchestration-header">
+            <h2>The Orchestration Workflow</h2>
+            <p>Publish is the first practice in this workflow where the strategist's job shifts from direct execution to coordination. In <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Know</a>, you do the customer research. In <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Map</a>, you build the context map. In <a href="ai-search-visibility-structure.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Structure</a>, you define narratives and direct the encoding. In Publish, you <em>orchestrate other people's work across surfaces</em> &mdash; briefing creators, sequencing deployments, and reviewing output for narrative consistency.</p>
+            <p>The analogy to traditional SEO is direct. An SEO creates a brief for a writer, the writer executes, the SEO reviews for alignment. The SEO's value is the strategic direction &mdash; the intent, the positioning, the audience framing. The craft skill belongs to the writer. Surface-native deployment is the same model expanded across surfaces: the strategist provides narrative direction, each surface-native creator provides the craft skill for their platform. The strategist probably can't step in and make a great TikTok. That's not a gap in their practice. <strong>Their practice is the orchestration.</strong></p>
+        </div>
+
+        <div class="orch-steps">
+            <div class="orch-step">
+                <div class="orch-step-label">1. Build the deployment brief</div>
+                <div class="orch-step-desc">Create one brief per problem context &mdash; not per surface, per problem context. This is the single document that every creator on every surface references. The problem context is the organizing unit. You don't have a "Reddit plan" and a "YouTube plan." You have a deployment plan for "startup replacing Jira" that includes Reddit and YouTube.</div>
+                <div class="orch-step-desc" style="margin-top: 12px;">The brief has two layers. A <strong>shared layer</strong> at the top with the narrative foundation: the problem context from the <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none;">context map</a>, the customer world it belongs to, the canonical narratives from <a href="ai-search-visibility-structure.html" style="color: var(--green); text-decoration: none;">Structure</a> (company and customer-world level), competitive anchors, demand signal evidence, and the key positioning messages. Every creator reads this regardless of their surface. Below that, a <strong>surface-specific section</strong> for each surface being deployed to: the creator assigned, format constraints, what narrative consistency looks like on this surface, and status.</div>
+                <div class="orch-step-desc" style="margin-top: 12px;"><strong>The depth calibration:</strong> When you're briefing a surface where you have expertise (the blog), the brief can be detailed on format and approach. When you're briefing a surface where the creator knows more than you (TikTok, Reddit), the brief should focus on <em style="color: var(--yellow); font-style: normal;">what to say</em> &mdash; narrative, positioning, competitive anchor &mdash; and leave <em style="color: var(--yellow); font-style: normal;">how to say it</em> to the creator. Over-prescribing format from a position of surface ignorance produces content that's technically on-brief but natively wrong. Your expertise is the narrative direction. Trust the creator's platform expertise.</div>
+            </div>
+            <div class="orch-step">
+                <div class="orch-step-label">2. Sequence the deployment</div>
+                <div class="orch-step-desc">Not all surfaces need to go live simultaneously. For most problem contexts, starting with a <strong>foundation piece</strong> creates the narrative clarity that every other surface draws from. Often this is long-form writing &mdash; a blog post, an in-depth guide, a detailed product page. The process of writing 2,000 words about a problem context forces you to work through competitive framing, specific features, customer story arcs, and the precise language of your positioning. That thinking feeds into everything that follows: the YouTube creator has talking points, the Reddit contributor has vocabulary, the G2 comparison has feature-by-feature positioning, the template designer knows which workflow to build.</div>
+                <div class="orch-step-desc" style="margin-top: 12px;">This isn't repurposing. The blog post doesn't get cut into social snippets. The <em style="color: var(--yellow); font-style: normal;">thinking process</em> behind the long-form piece produces the raw narrative clarity that each surface-native creator then interprets in their own format.</div>
+                <div class="orch-step-desc" style="margin-top: 12px;">The foundation piece isn't always long-form writing. For a DTC brand, it might be a product shoot &mdash; the visual assets and styling direction that social, blog, and community content draws from. For a SaaS company, it might be a demo video that establishes the workflow other surfaces reference. <strong>The question is: which piece, created first, generates the most clarity for the surfaces that follow?</strong></div>
+            </div>
+            <div class="orch-step">
+                <div class="orch-step-label">3. Partner and deploy</div>
+                <div class="orch-step-desc">Assign each surface in the brief to its creator. The handoff is where the strategist's narrative expertise meets the creator's surface expertise. Two things happen: the creator gets the narrative direction they need to stay aligned, and the strategist gets feedback on whether the brief's surface-specific section is realistic for that platform.</div>
+                <div class="orch-step-desc" style="margin-top: 12px;">For <strong>internal teams</strong> (the blog writer, the social manager), this might be a standing briefing process &mdash; the same way SEOs currently brief content writers, but now extending to every surface. For <strong>external creators</strong> (freelance video producers, influencer partners), the brief carries more context since they don't have the ongoing relationship with the brand. For <strong>community participation</strong>, the "deployment" looks different: you're not handing someone a brief and asking for a deliverable. You're equipping a team member with the narrative vocabulary and trusting them to participate authentically. The brief for community is less "create this content" and more "here's how we talk about this problem context when it comes up."</div>
+            </div>
+            <div class="orch-step">
+                <div class="orch-step-label">4. Review for consistency</div>
+                <div class="orch-step-desc">When deployed content goes live, review it against the canonical narrative. Not for format or style &mdash; that's the creator's domain. For <strong>narrative alignment</strong>. Does the Reddit comment carry the same competitive positioning as the blog post? Does the TikTok reinforce the same customer-world value proposition? Does the G2 page use language consistent with the canonical narrative?</div>
+                <div class="orch-step-desc" style="margin-top: 12px;">The review isn't editing. It's a consistency check. The strategist is asking one question: <strong>if an AI system read this piece alongside everything else we've published for this problem context, would it see a coherent brand or a fragmented one?</strong></div>
+                <div class="orch-step-desc" style="margin-top: 12px;">Flag drift early. If a surface is consistently off-narrative, the issue is either the brief (not clear enough on narrative direction), the creator (not aligned with the positioning), or the narrative itself (doesn't translate to this surface). Each diagnosis leads to a different fix.</div>
+            </div>
+        </div>
+
+        <!-- The brief as artifact -->
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="subsection-label" style="color: var(--yellow);">The deployment brief as artifact</div>
+            <div class="subsection-desc">
+                <p>The brief lives wherever the team already works &mdash; a Google Doc per problem context, a Notion page, a Confluence doc. The format matters less than the access pattern: one URL per problem context, all creators can find it, and the surface-specific sections update as deployment progresses.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="data-table data-table--dark" style="min-width: 600px;">
+                <thead>
+                    <tr>
+                        <th>Brief Section</th>
+                        <th>Contents</th>
+                        <th>Who Reads It</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Shared foundation</td>
+                        <td>Problem context, customer world, canonical narratives (company + customer-world from Structure), competitive anchors, key positioning messages, demand signal evidence</td>
+                        <td>Every creator on every surface</td>
+                    </tr>
+                    <tr>
+                        <td>Per-surface sections</td>
+                        <td>Surface name, assigned creator, format constraints, what consistency looks like here, reference links, status (Briefed / In Progress / Deployed / Reviewed)</td>
+                        <td>The creator assigned to that surface</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-annotation">
+            <p><strong>One brief, multiple tabs or sections.</strong> If the team uses Google Docs, one doc per problem context with a section per surface. In Notion, one page per problem context with a linked database of surface assignments. The shared foundation is at the top &mdash; every creator reads it first, then scrolls to their surface section. This keeps the narrative consistent without requiring every creator to understand every surface.</p>
+        </div>
+
+        <!-- Context map as PM tool -->
+        <div style="max-width: 1200px; margin: 40px auto 0;">
+            <div class="subsection-label" style="color: var(--green);">The context map as project plan</div>
+            <div class="subsection-desc">
+                <p>In a project management tool, the <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">context map</a> translates directly into a deployment tracker. Each problem context becomes a task or epic. Each surface becomes a subtask within that epic, assigned to the surface-native creator, with the deployment brief linked as the reference document. Status tracking flows through five stages: <strong>Planned &rarr; Briefed &rarr; In Progress &rarr; Deployed &rarr; Reviewed.</strong></p>
+                <p>The strategist's Tuesday morning dashboard: which problem contexts are currently deploying, which surfaces are in progress, which have been deployed but not yet reviewed for consistency. This view tells you where to spend your time today &mdash; briefing the next deployment, checking in with creators on active work, or reviewing recently deployed content for narrative alignment.</p>
+                <p><strong>You need to be more organized than ever.</strong> Traditional SEO project management involved the strategist and a writer. Surface-native deployment involves the strategist and potentially five or six creators across different platforms, each with different timelines and workflows. The orchestration overhead is real &mdash; and a PM tool that tracks by problem context (not by surface or content type) is what keeps it manageable.</p>
+            </div>
+        </div>
+
+        <div class="callout-box--on-dark callout-box" style="margin-top: 32px;">
+            <div class="callout-box-label">What we're still exploring</div>
+            <p>The orchestration model is clear in principle. Some of the operational details need pressure-testing through real deployments:</p>
+            <p><strong>Brief depth.</strong> How detailed should surface-specific sections be, especially for platforms where the strategist has less expertise than the creator? Too little and the creator guesses at the narrative. Too much and you're prescribing format you don't understand. The right calibration probably varies by surface and by the relationship between strategist and creator.</p>
+            <p><strong>Brief unit.</strong> Is one brief per problem context always the right organizing unit? Or do complex deployments &mdash; where the same problem context spans six surfaces with six different creators on different timelines &mdash; need more granular tracking?</p>
+            <p><strong>Community review.</strong> How do you review community participation for consistency when it's ongoing and conversational, not a one-time deployment? A blog post can be reviewed before publishing. A Reddit comment happens in real time. The consistency check might need to be retrospective rather than pre-publication.</p>
+            <p><strong>Refresh cadence.</strong> When Structure's canonical narratives evolve (as they will), every active brief needs updating and every deployed surface needs re-reviewing. How tightly should this cascade? Immediately, or on the next deployment cycle?</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ SURFACE-NATIVE DEPLOYMENT ══════════════ -->
+    <div class="native-section">
+        <div class="native-header">
+            <h2>Surface-Native Deployment</h2>
+            <p>The same problem context expressed on five different surfaces looks like five completely different pieces of content. A blog post is not a YouTube video is not a Reddit comment is not a review response is not a TikTok. The narrative is the same. The format, tone, length, and visual language are completely different.</p>
+            <p>This is not "write the blog post, then cut it up for social." That's repurposing &mdash; and it produces content that's native to one surface and awkward on all the others. A blog excerpt posted to Reddit reads like marketing copy. A blog paragraph turned into a TikTok caption reads like someone who's never opened the app. <em>Surface-native deployment means creating for each surface in that surface's language, rhythm, and expectations.</em></p>
+        </div>
+
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="subsection-label">One problem context, five surfaces</div>
+            <div class="subsection-desc">
+                <p>To illustrate what surface-native actually means in practice, here's a single problem context deployed across surfaces. The brand narrative stays constant. Everything else changes.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <div class="table-label">Problem context: "Startup replacing Jira with something simpler"</div>
+            <table class="data-table data-table--dark" style="min-width: 800px;">
+                <thead>
+                    <tr>
+                        <th>Surface</th>
+                        <th>What It Looks Like</th>
+                        <th>Why It's Different</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Blog</td>
+                        <td>"How to manage your product roadmap without Jira" &mdash; a 2,000-word migration guide with workflow screenshots and decision frameworks</td>
+                        <td>Long-form, search-optimized, authoritative. Written for someone researching the decision.</td>
+                    </tr>
+                    <tr>
+                        <td>YouTube</td>
+                        <td>10-minute screencast showing how to build a sprint board, import tasks, and set up a roadmap view &mdash; real interface, real workflow</td>
+                        <td>Visual, demonstrative, show-don't-tell. Written for someone who wants to see it working.</td>
+                    </tr>
+                    <tr>
+                        <td>Reddit</td>
+                        <td>Genuine answer in r/startups to "what PM tools do you use?" &mdash; two paragraphs sharing the migration experience, what worked, what didn't</td>
+                        <td>Conversational, honest, peer-to-peer. Written for someone asking other humans, not brands.</td>
+                    </tr>
+                    <tr>
+                        <td>G2</td>
+                        <td>Comparison page positioning against Jira &mdash; feature-by-feature differences focused on the product team workflow</td>
+                        <td>Structured, evaluative, comparison-focused. Written for someone actively comparing options.</td>
+                    </tr>
+                    <tr>
+                        <td>Template gallery</td>
+                        <td>Free product roadmap template that demonstrates the workflow &mdash; pre-built with sprint columns, priority tags, and a team view</td>
+                        <td>Utility-driven, experiential. Not written at all &mdash; it's a tool that shows what the product does.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-annotation">
+            <p><strong>Same narrative thread through all five.</strong> Every piece reinforces "Notion replaces the Jira-Confluence-Google Docs sprawl for product teams." The blog explains it. The video shows it. The Reddit comment shares it as lived experience. The G2 page structures it for comparison shoppers. The template lets someone feel it. Five surfaces, five formats, one positioning &mdash; and an AI agent reading all five has overwhelming evidence for the recommendation.</p>
+            <p><strong>Notice what's missing: a repurposed blog post.</strong> None of these are derived from another. The Reddit comment isn't an excerpt from the blog. The YouTube video isn't someone reading the article aloud. Each was created for its surface. That's the investment &mdash; and why team and budget planning matters.</p>
+        </div>
+
+        <div class="callout-box" style="margin-top: 32px;">
+            <div class="callout-box-label">The context map is the publishing roadmap</div>
+            <p>The <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">context map</a> from Map already defines what needs to exist: problem contexts crossed with surfaces and component types. Each cell is a piece of content that either exists or doesn't. <strong>Publish's job is to fill those cells &mdash; strategically, given what your team can actually produce.</strong> The context map tells you what's missing. Your budget and team composition tell you what to fill first.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ TEAM & BUDGET REALITY ══════════════ -->
+    <div class="team-section">
+        <div class="team-header">
+            <h2>The Team and Budget Reality</h2>
+            <p>No team can publish natively across every surface at once. The context map has more cells than any team can fill &mdash; and trying to fill them all produces thin, low-quality content that helps nobody. The honest question isn't "how do we fill every cell?" It's <em>"given our team and budget, which surfaces produce the most signal for our priority customer worlds?"</em></p>
+            <p>This forces two shifts that most teams haven't made yet.</p>
+        </div>
+
+        <div class="role-grid">
+            <div class="role-card role-card--shift">
+                <div class="role-card-title">The Strategist's Network</div>
+                <div class="role-card-desc">The orchestration workflow above requires engaging with a wider range of creator types than traditional SEO: video producers, community managers, social content creators, customer success teams (for review responses), PR contacts (for press and publications), freelance specialists. <strong>Many of these people already exist in the organization &mdash; they're just not coordinated under a shared narrative.</strong></div>
+                <div class="role-card-desc">This changes hiring and partnering criteria. When you need a surface covered, you're looking for someone who's native to that platform, not someone who can "also do social." A freelance TikTok creator who understands the platform's language and rhythms, briefed with a strong deployment brief, will outperform an in-house generalist making their first TikTok.</div>
+            </div>
+            <div class="role-card role-card--budget">
+                <div class="role-card-title">Budget Follows Surfaces, Not Content Types</div>
+                <div class="role-card-desc">Traditional content budgets allocate for "blog posts" and "social posts." Surface-native publishing allocates for <strong>the surfaces that matter most to your P1 customer worlds</strong> &mdash; which might mean YouTube production, community management time, influencer collaboration fees, or review platform maintenance instead of more blog posts.</div>
+                <div class="role-card-desc">A SaaS company might shift 30% of its blog budget to YouTube production and template development. A DTC brand might redirect from long-form blog content to TikTok creator partnerships and community engagement. An agency might invest in conference speaking and partner content instead of a fourth blog post per week.</div>
+                <div class="role-card-detail"><strong>The budget question changes from</strong> "how many blog posts can we afford?" <strong>to</strong> "for our P1 customer worlds, which surfaces produce the most signal, and what does native content on those surfaces cost?"</div>
+            </div>
+            <div class="role-card role-card--start">
+                <div class="role-card-title">Start Where You Are</div>
+                <div class="role-card-desc">Most teams already have people operating on multiple surfaces &mdash; they're just not coordinated. The social media manager posts what they think works. Customer success responds to reviews with whatever language feels right. The founder does podcast appearances with their own pitch.</div>
+                <div class="role-card-desc">Publish's first job isn't hiring new people. It's <strong>connecting existing surface owners to the canonical narratives from Structure</strong>. Give the social team the canonical narrative. Brief the customer success team on review response language. Prepare the founder with talking points for the next podcast. The coordination is the intervention, not the headcount.</div>
+                <div class="role-card-detail"><strong>Then fill gaps incrementally.</strong> If nobody on the team creates video, that's a gap to fill when the budget allows &mdash; not a reason to skip YouTube entirely. A founder with an iPhone can record a 5-minute walkthrough that's more authentic than a polished production. The surface-native quality bar is "native to this platform," not "production-quality."</div>
+            </div>
+            <div class="role-card role-card--priority">
+                <div class="role-card-title">Prioritization Framework</div>
+                <div class="role-card-desc">When the context map has 40 empty cells and the budget supports filling 8 this quarter, the priority sequence is clear.</div>
+                <div class="role-card-desc"><strong>First:</strong> the surfaces your P1 customer worlds spend the most time on (captured in <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none;">Know's</a> surface intelligence). If your product team customers live on Reddit and YouTube, those surfaces matter more than Pinterest.</div>
+                <div class="role-card-desc"><strong>Second:</strong> within each surface, lead with Narrative and Proof components. These build the foundation &mdash; the source-of-truth content and the third-party validation. Utility and Distribution components compound on top of an existing foundation.</div>
+                <div class="role-card-desc"><strong>Third:</strong> community participation as a low-cost entry point. Even when the blog budget is spent, a team member can contribute genuinely to conversations in relevant subreddits or forums. This costs time, not money.</div>
+                <div class="role-card-detail"><strong>Three surfaces covered well beats seven covered thin.</strong> Depth of presence &mdash; consistent narrative, regular cadence, native format &mdash; matters more than breadth. Add surfaces as team capacity grows, guided by <a href="ai-search-visibility-measure.html" style="color: var(--green); text-decoration: none;">Practice 5 (Measure)</a>'s feedback on which surfaces produce the most signal.</div>
+            </div>
+        </div>
+
+        <div class="callout-box--on-dark callout-box" style="margin-top: 32px;">
+            <div class="callout-box-label">Budget allocation by industry</div>
+            <p>Where the money goes depends on where your customer worlds live. <strong>B2B SaaS:</strong> Heavy investment in blog and documentation (existing strength), moderate in YouTube and templates, light in community (time-based). The shift is adding video and interactive resources to the existing written content budget. <strong>DTC / E-Commerce:</strong> Heavy investment in social video (TikTok, Instagram Reels), moderate in community participation and influencer partnerships, light in long-form blog. The shift is adding SEO-driven content to the existing social budget. <strong>Services / Hospitality:</strong> Heavy investment in review platform management and local presence, moderate in case studies and portfolio, light in social. The shift is treating review responses and Google Business Profile updates as content work, not admin work.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ EDITORIAL DIRECTION PIPELINE ══════════════ -->
+    <div class="pipeline-section">
+        <div class="pipeline-header">
+            <h2>The Editorial Direction Pipeline</h2>
+            <p>The deployment brief provides the shared narrative foundation. But different creator types need that narrative translated into different forms of guidance. A blog writer needs a positioning lens. A video creator needs talking points. A community contributor needs vocabulary, not a script. The editorial direction pipeline is the standing system that translates <a href="ai-search-visibility-structure.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Structure's</a> canonical narratives into the right kind of guidance for each creator type &mdash; so that the shared foundation in the brief lands differently depending on who's reading it.</p>
+        </div>
+
+        <div class="pipeline-steps">
+            <div class="pipeline-step">
+                <div class="pipeline-step-label">For the blog writer</div>
+                <div class="pipeline-step-desc">The narrative becomes a <strong>positioning lens</strong>. Every piece reinforces this specific value proposition for this customer world. "We're writing about product roadmapping for teams replacing Jira" isn't a keyword brief &mdash; it's a narrative directive that shapes the angle, the examples, the competitive framing, and the call to action.</div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-step-label">For the video creator</div>
+                <div class="pipeline-step-desc">The narrative becomes <strong>talking points and visual direction</strong>. The competitive anchor from the customer-world narrative tells them which alternatives to reference. The problem context tells them which workflow to demonstrate. The canonical language gives them the words to use when introducing and closing the video.</div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-step-label">For the community contributor</div>
+                <div class="pipeline-step-desc">The narrative becomes <strong>vocabulary and perspective</strong> they carry into conversations naturally. Not scripts. Not talking points. A shared understanding of how the brand talks about problems in this customer world &mdash; the language, the framing, the competitive context. When someone on Reddit asks "what tools do you use for X?" the contributor's answer echoes the narrative without reciting it.</div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-step-label">For the review platform manager</div>
+                <div class="pipeline-step-desc">The narrative becomes <strong>response frameworks</strong>. When someone reviews the product positively, what aspects do you highlight in your thank-you? When someone reviews negatively, how do you respond in a way that's consistent with the brand positioning? Review responses are content &mdash; AI systems read them, and they contribute to the entity picture.</div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-step-label">For the guest contributor</div>
+                <div class="pipeline-step-desc">The narrative becomes a <strong>speaker brief</strong>. Podcast appearances, conference talks, webinar collaborations. The three things you always say. The competitive framing you use. The customer stories you reference. Without this brief, every external appearance is improvised &mdash; and the brand story drifts with each one.</div>
+            </div>
+        </div>
+
+        <div class="callout-box" style="margin-top: 32px;">
+            <div class="callout-box-label">The failure mode without this pipeline</div>
+            <p>Without editorial direction, you get a blog that sounds like the SEO team, a TikTok that sounds like Gen Z, a LinkedIn that sounds like corporate comms, and a Reddit presence that sounds like customer support. Each is native to its surface &mdash; but an AI system reading all of them sees four different brand voices. The editorial direction pipeline is <strong>what prevents surface-native deployment from becoming surface-fragmented deployment</strong>. It's the mechanism that keeps diversity of format from becoming inconsistency of identity.</p>
+            <p>This is also where Structure and Publish connect most tightly. Structure's canonical narratives are the input. This pipeline is the translator. Publish's surface-native content is the output. If the pipeline breaks &mdash; if creators don't receive or reference the narrative &mdash; you get the fragmentation that Structure was designed to prevent, reintroduced through content instead of through profiles.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ WORKED EXAMPLES ══════════════ -->
+    <div class="example-section">
+        <div class="example-header">
+            <h2>Deploying One Problem Context</h2>
+            <p>Two worked examples showing how a single row from the <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">context map</a> becomes surface-native content across multiple platforms. Same process, different surfaces, different team composition, different budget shape. Both use the canonical narratives from <a href="ai-search-visibility-structure.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Structure</a> and the customer worlds from <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Know</a>.</p>
+        </div>
+
+        <!-- ──── NOTION (SaaS) ──── -->
+        <div class="example-block">
+            <div class="example-label">B2B SaaS &mdash; Notion &times; Product Teams</div>
+            <div class="example-context">
+                <p><strong>Problem context:</strong> "Startup doing own product management, outgrowing Jira, wants something simpler"</p>
+                <p><strong>Canonical narrative (from Structure):</strong> "For product teams managing the full build cycle, Notion replaces the Jira-Confluence-Google Docs sprawl with one workspace where roadmaps, PRDs, sprint boards, and retrospectives connect."</p>
+            </div>
+
+            <div class="example-step-label">Surface deployment plan</div>
+            <div class="example-table-wrapper">
+                <table class="example-table" style="min-width: 900px;">
+                    <thead>
+                        <tr>
+                            <th>Surface</th>
+                            <th>Content</th>
+                            <th>Creator</th>
+                            <th>Domain</th>
+                            <th>Investment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Blog</td>
+                            <td>"How to manage your product roadmap without Jira" &mdash; migration guide with workflow screenshots and decision framework</td>
+                            <td>Content team</td>
+                            <td class="td-green">Owned</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>YouTube</td>
+                            <td>10-min screencast: building a sprint board in Notion, importing from Jira, setting up a roadmap view</td>
+                            <td>Product marketer or video creator</td>
+                            <td class="td-green">Owned</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>Reddit</td>
+                            <td>Genuine answers in r/startups and r/SaaS to "what PM tools do you use?" threads &mdash; sharing migration experience honestly</td>
+                            <td>PM team member or community manager</td>
+                            <td class="td-dim">Community</td>
+                            <td>Low (time)</td>
+                        </tr>
+                        <tr>
+                            <td>G2</td>
+                            <td>Comparison positioning against Jira &mdash; feature-by-feature differences for product team workflows</td>
+                            <td>Product marketing</td>
+                            <td class="td-yellow">Semi-controlled</td>
+                            <td>Low</td>
+                        </tr>
+                        <tr>
+                            <td>Template gallery</td>
+                            <td>Free product roadmap template with sprint columns, priority tags, and team views pre-built</td>
+                            <td>Product or content team</td>
+                            <td class="td-green">Owned</td>
+                            <td>Medium</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="example-annotation">
+                <p><strong>The narrative thread:</strong> Every piece reinforces "Notion replaces Jira-Confluence-Google Docs sprawl for product teams." The blog explains the case for switching. The video shows the workflow in action. The Reddit comment shares it as personal experience. The G2 page structures the comparison for evaluators. The template lets someone feel the difference before committing. Five formats, one positioning.</p>
+                <p><strong>Budget reality:</strong> Three medium-investment items (blog, video, template) and two low-investment items (Reddit, G2). A team with no video capability could start with the blog, template, and Reddit contributions &mdash; three surfaces covered &mdash; and add YouTube when the budget or skills allow. The G2 profile update is a one-time investment that compounds.</p>
+            </div>
+        </div>
+
+        <!-- ──── ADANOLA (DTC) ──── -->
+        <div class="example-block">
+            <div class="example-label example-label--alt">DTC Athleisure &mdash; Adanola &times; Studio &amp; Yoga</div>
+            <div class="example-context">
+                <p><strong>Problem context:</strong> "Looking for leggings that don't go see-through during yoga"</p>
+                <p><strong>Canonical narrative (from Structure):</strong> "For studio practitioners who want activewear that moves with them through reformer, barre, and yoga &mdash; and looks good enough for brunch after. Performance fabrics, flattering fits, half the price of Lululemon."</p>
+            </div>
+
+            <div class="example-step-label">Surface deployment plan</div>
+            <div class="example-table-wrapper">
+                <table class="example-table" style="min-width: 900px;">
+                    <thead>
+                        <tr>
+                            <th>Surface</th>
+                            <th>Content</th>
+                            <th>Creator</th>
+                            <th>Domain</th>
+                            <th>Investment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TikTok</td>
+                            <td>30-second fabric test video &mdash; showing opacity under stretch, studio lighting, real movement during poses</td>
+                            <td>Social / video creator</td>
+                            <td class="td-green">Owned</td>
+                            <td>Low&ndash;Medium</td>
+                        </tr>
+                        <tr>
+                            <td>Instagram</td>
+                            <td>Studio outfit post with fabric close-up in caption &mdash; tagged with yoga community hashtags, shot in a real studio</td>
+                            <td>Social creator</td>
+                            <td class="td-green">Owned</td>
+                            <td>Low</td>
+                        </tr>
+                        <tr>
+                            <td>Blog</td>
+                            <td>"What makes leggings squat-proof: fabric science and the bend test" &mdash; educational content that establishes product authority</td>
+                            <td>Content team</td>
+                            <td class="td-green">Owned</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>Reddit</td>
+                            <td>Genuine responses in r/yoga, r/Pilates to "what leggings do you wear?" threads &mdash; sharing experience, mentioning squat-proof quality</td>
+                            <td>Community manager or brand team member</td>
+                            <td class="td-dim">Community</td>
+                            <td>Low (time)</td>
+                        </tr>
+                        <tr>
+                            <td>Trustpilot</td>
+                            <td>Responses to reviews mentioning squat-proof quality and fabric performance &mdash; reinforcing the "performance fabrics" narrative</td>
+                            <td>Customer service or brand team</td>
+                            <td class="td-yellow">Semi-controlled</td>
+                            <td>Low (time)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="example-annotation">
+                <p><strong>The narrative thread:</strong> Every piece reinforces "performance fabrics that work as hard as you do, at half the luxury price." TikTok proves it visually (the fabric test). Instagram contextualizes it in the studio lifestyle. The blog explains the science. Reddit shares it as peer experience. Trustpilot validates it through customer interaction. Different surfaces, different creators, same positioning.</p>
+                <p><strong>Different budget shape.</strong> Adanola's deployment is lighter per item &mdash; social video and community responses are lower-cost than a SaaS company's blog-and-template approach. The investment concentrates on the surfaces where the Studio &amp; Yoga customer world actually lives: TikTok, Instagram, and fitness subreddits. A DTC brand that tried to lead with documentation and template galleries would be spending budget on the wrong surfaces.</p>
+            </div>
+        </div>
+
+        <div class="example-annotation" style="margin-top: 48px;">
+            <p><strong>Same framework, completely different execution.</strong> Notion's deployment is writing-heavy: a long blog post, a screencast, a template. Adanola's is visual-first: a TikTok video, an Instagram post, a fabric science article. The surfaces, creators, and budget shape follow the brand's customer worlds &mdash; not a one-size-fits-all content calendar. The process is identical: take a problem context from the context map, identify the surfaces that matter for that customer world, create surface-native content on each, maintain narrative consistency through the editorial pipeline. What changes is who makes the content and where the money goes.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ HANDOFF TO MEASURE ══════════════ -->
+    <div class="handoff-section">
+        <div class="handoff-inner">
+            <h2>The Handoff</h2>
+            <p>Publish deploys presence. Measure validates whether that presence is producing signal. You're delivering forward: <strong>content across surfaces that can be tracked for brand mention frequency, share of voice by topic, and entity consistency over time</strong>.</p>
+            <p>The question that connects them: <em>"We've deployed our narrative across five surfaces for our P1 customer worlds. Are we showing up in the AI conversations that matter? Is our share of voice growing? And which surfaces are producing the most signal per dollar spent?"</em></p>
+            <p>That last question &mdash; signal per dollar &mdash; is what closes the loop. Measure doesn't just tell you whether you're visible. It tells you <strong>which surfaces to invest more in, which to maintain, and which to deprioritize</strong>. That feedback shapes the next quarter's publishing plan, which reshapes the budget allocation, which flows back into the team's priorities. The workflow isn't linear. It's a feedback loop.</p>
+            <a href="ai-search-visibility-measure.html" class="handoff-link">Continue to Practice 5: Measure &rarr;</a>
+        </div>
+    </div>
+
+    <!-- ══════════════ IMPLICATIONS ══════════════ -->
+    <div class="implications-section">
+        <div class="implications-inner">
+            <h2>What This Changes</h2>
+
+            <div class="implication-item">
+                <div class="implication-title">Publishing shifted from platform-siloed to narrative-coordinated</div>
+                <div class="implication-desc">Most teams already create content across multiple surfaces &mdash; the blog team writes posts, the social team makes videos, community managers respond in forums. The problem isn't that they only publish to their website. It's that <strong>each surface operates independently, with no shared narrative tied to customer worlds</strong>. The shift isn't from one surface to many. It's from many surfaces running in silos to many surfaces coordinated around the same problem contexts. The unit of planning changes from "a blog post" or "a TikTok" to "a problem context deployed across surfaces."</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">The SEO team became a coordination function</div>
+                <div class="implication-desc">Surface-native publishing can't be done by one team writing blog posts. It requires diverse creators &mdash; each native to their surface &mdash; coordinated under consistent narrative direction. The SEO or content team's role shifts from creator to orchestrator: <strong>ensuring narrative consistency across creators who each specialize in a platform</strong>. This is a meaningful change in job description, hiring criteria, and team structure.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Budget follows surfaces, not content types</div>
+                <div class="implication-desc">"We need four blog posts this month" becomes "we need this problem context deployed on these three surfaces this month." The line items change: YouTube production, community management hours, influencer collaboration fees, review platform maintenance &mdash; alongside the blog budget, not instead of it. For teams with fixed budgets, this means making tradeoffs: <strong>fewer blog posts and more surface diversity often produces stronger AI visibility than depth on a single surface</strong>.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Community participation is the undervalued lever</div>
+                <div class="implication-desc">It's the lowest-cost publishing activity, it produces the most authentic signal, and it's the one most teams skip entirely. A genuine Reddit contribution in a relevant subreddit carries more entity signal than a repurposed blog excerpt on social media &mdash; because it's contextual, independent, and responds to a real person's question. AI systems weight organic mentions differently than self-published content. Community participation is where you earn that organic signal.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Surface-native is not the same as repurposed</div>
+                <div class="implication-desc">Cutting a blog post into social snippets is repurposing. Creating for each surface in its native format &mdash; length, tone, visual language, community norms &mdash; is surface-native. The first saves time. The second builds presence. AI systems that read your Reddit comment can tell whether it was written by someone who uses Reddit or someone who posted a marketing clip. The same is true for every surface. Native content compounds. Repurposed content fills a cell on a content calendar.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Consistency gets harder as you add surfaces and creators</div>
+                <div class="implication-desc"><a href="ai-search-visibility-structure.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Structure</a> defined the canonical narrative. Publishing it across five surfaces with five different creators introduces five opportunities for drift. The editorial direction pipeline isn't optional at scale &mdash; it's the mechanism that keeps surface-native deployment from becoming surface-fragmented deployment. And it requires ongoing attention: new creators need to be briefed, existing ones need periodic re-alignment, and the narratives themselves evolve as the business does.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Start narrow and deep, not wide and thin</div>
+                <div class="implication-desc">Three surfaces covered well &mdash; consistent narrative, regular cadence, native format &mdash; beats seven surfaces with one post each. Depth of presence matters more than breadth of presence. <strong>A brand that publishes consistently on their blog, YouTube, and Reddit for their P1 customer world has stronger AI visibility than a brand that posts once across seven platforms and goes silent.</strong> Add surfaces as the team and budget grow, guided by Measure's feedback on which surfaces produce the most signal per dollar.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ VERSION ══════════════ -->
+    <div class="version-bar">
+        <p>v0.2 &middot; April 16, 2026 &middot; Added orchestration workflow section (Brief &rarr; Sequence &rarr; Partner &rarr; Review) with deployment brief architecture, foundation piece sequencing concept, context map as project plan, and open questions. Tightened problem statement (siloed-to-coordinated, not website-to-multi-surface). Refined team section (strategist's network, not role shift rehash). Connected editorial pipeline to deployment brief.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section">
+        <div class="footer-inner">
+            <a href="ai-search-visibility-workflow.html">&larr; AI Search Visibility Workflow</a>
+            <span>Michael Ofei. April 2026.</span>
+        </div>
+    </div>
+
+</body>
+</html>

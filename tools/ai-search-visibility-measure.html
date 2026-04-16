@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Measure: Close the Loop — Michael Ofei</title>
+    <meta name="description" content="How to track whether your brand is being recommended in the AI conversations that matter — and what to do when it isn't. The practice that connects measurement to action.">
+    <meta property="og:title" content="Measure: Close the Loop">
+    <meta property="og:description" content="Topic-level brand association by customer world. The one measurement that tells a CMO, a Director, and a Head of SEO whether the work is paying off.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://michaelofei.co/tools/ai-search-visibility-measure.html">
+    <style>
+        :root {
+            --bg: #7A251E;
+            --bg-light: #8a352e;
+            --bg-dark: #6a1f18;
+            --bg-darker: #5a1a15;
+            --text: #D7C9A7;
+            --text-bright: #E8DAB8;
+            --yellow: #E7B000;
+            --green: #00BB00;
+            --green-dim: #009900;
+            --dim: #a89878;
+            --dim-dark: #8a7a5a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* ── Layout ── */
+        .section { width: 100%; padding: 0 48px; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-narrow { max-width: 720px; margin: 0 auto; }
+
+        /* ── Top bar ── */
+        .topbar {
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .back { color: var(--dim); text-decoration: none; font-size: 13px; }
+        .back:hover { color: var(--green); }
+        .topbar-parent { color: var(--dim-dark); font-size: 12px; }
+        .topbar-parent a { color: var(--dim); text-decoration: none; }
+        .topbar-parent a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* HERO                                   */
+        /* ══════════════════════════════════════ */
+        .hero {
+            padding: 80px 48px 64px;
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dim);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 1.25;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero .lead {
+            font-size: 17px;
+            color: var(--text);
+            line-height: 1.65;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .hero-meta {
+            font-size: 12px;
+            color: var(--dim);
+            margin-top: 20px;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* PROBLEM STATEMENT                      */
+        /* ══════════════════════════════════════ */
+        .problem-section {
+            background: var(--bg-dark);
+            padding: 64px 48px;
+        }
+
+        .problem-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .problem-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .problem-inner p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .problem-inner p:last-child { margin-bottom: 0; }
+        .problem-inner strong { color: var(--text-bright); }
+        .problem-inner em { color: var(--yellow); font-style: normal; }
+
+        /* ══════════════════════════════════════ */
+        /* OUTPUTS                                */
+        /* ══════════════════════════════════════ */
+        .outputs-section {
+            padding: 80px 48px;
+        }
+
+        .outputs-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .outputs-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .outputs-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .outputs-header p:last-child { margin-bottom: 0; }
+        .outputs-header strong { color: var(--text-bright); }
+
+        .outputs-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .output-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 32px 28px;
+            border-top: 3px solid var(--bg-light);
+        }
+
+        .output-card--primary { border-top-color: var(--yellow); }
+        .output-card--secondary { border-top-color: var(--green); }
+
+        .output-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--bg-light);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .output-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+
+        .output-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .output-feeds {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+            padding-top: 16px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .output-feeds strong { color: var(--text); font-weight: 600; }
+
+        /* ══════════════════════════════════════ */
+        /* MEASUREMENT SECTION                    */
+        /* ══════════════════════════════════════ */
+        .measurement-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .measurement-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .measurement-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .measurement-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .measurement-header p:last-child { margin-bottom: 0; }
+        .measurement-header strong { color: var(--text-bright); }
+        .measurement-header em { color: var(--yellow); font-style: normal; }
+
+        .scoring-grid {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .scoring-card {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 28px 24px;
+            border-top: 3px solid var(--bg-light);
+        }
+
+        .scoring-card--strong { border-top-color: var(--green); }
+        .scoring-card--moderate { border-top-color: var(--yellow); }
+        .scoring-card--absent { border-top-color: var(--dim-dark); }
+
+        .scoring-card-score {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .scoring-card--strong .scoring-card-score { color: var(--green); }
+        .scoring-card--moderate .scoring-card-score { color: var(--yellow); }
+        .scoring-card--absent .scoring-card-score { color: var(--dim-dark); }
+
+        .scoring-card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .scoring-card-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* SETUP SECTION                          */
+        /* ══════════════════════════════════════ */
+        .setup-section {
+            padding: 80px 48px;
+        }
+
+        .setup-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .setup-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .setup-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .setup-header p:last-child { margin-bottom: 0; }
+        .setup-header strong { color: var(--text-bright); }
+        .setup-header em { color: var(--yellow); font-style: normal; }
+
+        .setup-steps {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .setup-step {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .setup-step:last-child { border-bottom: none; }
+
+        .setup-step-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--yellow);
+            margin-bottom: 10px;
+        }
+
+        .setup-step-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 10px;
+        }
+
+        .setup-step-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            max-width: 720px;
+            margin-bottom: 12px;
+        }
+
+        .setup-step-desc:last-child { margin-bottom: 0; }
+        .setup-step-desc strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* STAKEHOLDER VIEWS                      */
+        /* ══════════════════════════════════════ */
+        .stakeholder-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .stakeholder-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .stakeholder-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .stakeholder-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .stakeholder-header p:last-child { margin-bottom: 0; }
+        .stakeholder-header strong { color: var(--text-bright); }
+
+        .stakeholder-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .stake-card {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 32px 24px;
+            border-top: 3px solid var(--bg-light);
+        }
+
+        .stake-card--cmo { border-top-color: var(--yellow); }
+        .stake-card--director { border-top-color: var(--green); }
+        .stake-card--seo { border-top-color: var(--dim); }
+
+        .stake-card-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .stake-card--cmo .stake-card-label { color: var(--yellow); }
+        .stake-card--director .stake-card-label { color: var(--green); }
+        .stake-card--seo .stake-card-label { color: var(--dim); }
+
+        .stake-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+
+        .stake-card-question {
+            font-size: 15px;
+            color: var(--text-bright);
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+
+        .stake-card-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .stake-card-desc:last-child { margin-bottom: 0; }
+        .stake-card-desc strong { color: var(--text-bright); }
+
+        .stake-card-detail {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+            padding-top: 16px;
+            border-top: 1px solid var(--bg-light);
+            margin-top: 16px;
+        }
+
+        .stake-card-detail strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* DIAGNOSTIC                             */
+        /* ══════════════════════════════════════ */
+        .diagnostic-section {
+            padding: 80px 48px;
+        }
+
+        .diagnostic-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .diagnostic-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .diagnostic-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .diagnostic-header p:last-child { margin-bottom: 0; }
+        .diagnostic-header strong { color: var(--text-bright); }
+        .diagnostic-header em { color: var(--yellow); font-style: normal; }
+
+        .diagnostic-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .diagnostic-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 28px 24px;
+            border-left: 3px solid var(--dim-dark);
+        }
+
+        .diagnostic-card--structure { border-left-color: var(--yellow); }
+        .diagnostic-card--publish { border-left-color: var(--green); }
+        .diagnostic-card--competitive { border-left-color: var(--dim); }
+        .diagnostic-card--platform { border-left-color: var(--dim); }
+        .diagnostic-card--know { border-left-color: var(--yellow); }
+
+        .diagnostic-card-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dim);
+            margin-bottom: 8px;
+        }
+
+        .diagnostic-card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .diagnostic-card-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        .diagnostic-card-desc strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* TABLES (shared)                        */
+        /* ══════════════════════════════════════ */
+        .table-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .table-label--alt { color: var(--yellow); }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 800px;
+        }
+
+        .data-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+            white-space: nowrap;
+        }
+
+        .data-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .data-table tbody tr:last-child td { border-bottom: none; }
+
+        .data-table tbody tr:nth-child(even) td {
+            background: rgba(106, 31, 24, 0.3);
+        }
+
+        .data-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .data-table--dark thead th { background: var(--bg-darker); }
+
+        .td-dim { color: var(--dim); }
+        .td-green { color: var(--green); }
+        .td-yellow { color: var(--yellow); }
+        .td-red { color: #c0392b; }
+
+        .table-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+        }
+
+        .table-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .table-annotation p:last-child { margin-bottom: 0; }
+        .table-annotation strong { color: var(--text); }
+
+        /* ── Callout box ── */
+        .callout-box {
+            max-width: 720px;
+            margin: 32px auto 0;
+            background: var(--bg);
+            border-left: 3px solid var(--yellow);
+            border-radius: 0 8px 8px 0;
+            padding: 24px 28px;
+        }
+
+        .callout-box--on-dark {
+            background: var(--bg-darker);
+        }
+
+        .callout-box-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--yellow);
+            margin-bottom: 10px;
+        }
+
+        .callout-box p {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .callout-box p:last-child { margin-bottom: 0; }
+        .callout-box strong { color: var(--text-bright); }
+
+        /* ── Subsection labels ── */
+        .subsection-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 12px;
+        }
+
+        .subsection-label--alt { color: var(--yellow); }
+
+        .subsection-desc {
+            max-width: 720px;
+            margin-bottom: 32px;
+        }
+
+        .subsection-desc p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .subsection-desc p:last-child { margin-bottom: 0; }
+        .subsection-desc strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* WORKED EXAMPLES                        */
+        /* ══════════════════════════════════════ */
+        .example-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .example-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .example-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .example-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .example-header p:last-child { margin-bottom: 0; }
+        .example-header strong { color: var(--text-bright); }
+
+        .example-block {
+            max-width: 1200px;
+            margin: 0 auto 48px;
+        }
+
+        .example-block:last-child { margin-bottom: 0; }
+
+        .example-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .example-label--alt { color: var(--yellow); }
+
+        .example-step-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dim);
+            margin: 32px 0 16px;
+        }
+
+        .example-context {
+            max-width: 720px;
+            margin-bottom: 24px;
+        }
+
+        .example-context p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .example-context p:last-child { margin-bottom: 0; }
+        .example-context strong { color: var(--text-bright); }
+
+        .example-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .example-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 700px;
+        }
+
+        .example-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+            white-space: nowrap;
+        }
+
+        .example-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .example-table tbody tr:last-child td { border-bottom: none; }
+
+        .example-table tbody tr:nth-child(even) td {
+            background: rgba(90, 26, 21, 0.4);
+        }
+
+        .example-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .example-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+        }
+
+        .example-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .example-annotation p:last-child { margin-bottom: 0; }
+        .example-annotation strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* FEEDBACK LOOP                          */
+        /* ══════════════════════════════════════ */
+        .feedback-section {
+            padding: 80px 48px;
+        }
+
+        .feedback-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .feedback-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .feedback-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .feedback-header p:last-child { margin-bottom: 0; }
+        .feedback-header strong { color: var(--text-bright); }
+
+        .feedback-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .feedback-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 28px 24px;
+            border-left: 3px solid var(--dim-dark);
+        }
+
+        .feedback-card--know { border-left-color: var(--yellow); }
+        .feedback-card--map { border-left-color: var(--green); }
+        .feedback-card--structure { border-left-color: var(--yellow); }
+        .feedback-card--publish { border-left-color: var(--green); }
+
+        .feedback-card-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dim);
+            margin-bottom: 8px;
+        }
+
+        .feedback-card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .feedback-card-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        .feedback-card-desc strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* IMPLICATIONS                           */
+        /* ══════════════════════════════════════ */
+        .implications-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .implications-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .implications-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 24px;
+        }
+
+        .implication-item {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .implication-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .implication-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .implication-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .implication-desc strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* FOOTER ELEMENTS                        */
+        /* ══════════════════════════════════════ */
+        .version-bar {
+            padding: 24px 48px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--dim-dark);
+        }
+
+        .footer-section {
+            padding: 24px 48px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--dim);
+            font-size: 13px;
+        }
+
+        .footer-inner a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+
+        .footer-inner a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* RESPONSIVE                             */
+        /* ══════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .hero, .problem-section, .outputs-section, .measurement-section,
+            .setup-section, .stakeholder-section, .diagnostic-section,
+            .example-section, .feedback-section, .implications-section,
+            .footer-section, .topbar {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero h1 { font-size: 28px; }
+            .outputs-grid { grid-template-columns: 1fr; }
+            .scoring-grid { grid-template-columns: 1fr; }
+            .stakeholder-grid { grid-template-columns: 1fr; }
+            .diagnostic-grid { grid-template-columns: 1fr; }
+            .feedback-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .footer-inner { flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <a href="ai-search-visibility-workflow.html" class="back">&larr; AI Search Visibility Workflow</a>
+        <span class="topbar-parent">Practice 5 of 5 &middot; <a href="ai-search-visibility-workflow.html">View all practices</a></span>
+    </div>
+
+    <!-- ══════════════ HERO ══════════════ -->
+    <div class="hero">
+        <div class="hero-inner">
+            <div class="hero-label">Deep Dive &middot; Practice 05: Measure</div>
+            <h1>Close the Loop</h1>
+            <p class="lead">How to track whether your brand is being recommended in the AI conversations your customers are having &mdash; and what to do when it isn't. The practice that connects measurement to action across every other practice in the workflow.</p>
+            <p class="hero-meta">v0.1 &middot; April 2026 &middot; Michael Ofei</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE PROBLEM ══════════════ -->
+    <div class="problem-section">
+        <div class="problem-inner">
+            <h2>The Wrong Scoreboard</h2>
+            <p>Most teams measuring AI search visibility are tracking the wrong things. Citation counts. AI Overview appearances. Rankings for specific prompts. These numbers feel concrete. They fill dashboards. They get reported to leadership. And they replicate exactly the mistake the industry made with keywords &mdash; <em>measuring what's countable instead of what's meaningful</em>.</p>
+            <p>Citation counts tell you how often your domain appears in AI responses. They don't tell you whether you appear for the topics your customers care about. A brand with 3,000 AI mentions could be invisible for every conversation that leads to a purchase decision and highly visible for support queries nobody was trying to win. The aggregate hides the strategic picture.</p>
+            <p>Prompt-level rankings replicate keyword tracking in a world where every real prompt is unique. Devesh Khanal's "invisible prompts" insight from the <a href="ai-search-visibility-workflow.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">main page</a> applies directly here: the literal prompt someone types and the effective prompt (shaped by everything the AI knows about that person) are radically different. Tracking "where do we rank for this exact prompt" is measuring the visible surface, not the invisible context that drives the recommendation.</p>
+            <p>The wrong scoreboard creates the wrong priorities. A team that optimizes for citation count invests in content that generates mentions rather than content that generates recommendations. A team that tracks AI Overview appearances is measuring one platform's current feature behavior &mdash; behavior that changes with every algorithm update. The metric shapes the behavior, and <strong>the wrong metric shapes the wrong behavior</strong>.</p>
+            <p>The measurement that matters is simpler in concept and harder in execution: <strong>when your customers ask AI for help with the problems you solve, is your brand in the answer?</strong></p>
+        </div>
+    </div>
+
+    <!-- ══════════════ TWO OUTPUTS ══════════════ -->
+    <div class="outputs-section">
+        <div class="outputs-header">
+            <h2>Two Outputs</h2>
+            <p>Measure is the only practice in the workflow that feeds backward &mdash; into every other practice. The other four move forward: Know informs Map, Map informs Structure, Structure informs Publish. Measure evaluates whether all four are producing the outcome they were designed for, and tells you where to invest next.</p>
+        </div>
+        <div class="outputs-grid">
+            <div class="output-card output-card--primary">
+                <div class="output-number">01</div>
+                <div class="output-title">Topic-Level Brand Presence by Customer World</div>
+                <div class="output-desc">The primary measurement. For each P1 customer world, a score that answers: across the topics that matter, how consistently is our brand being recommended by AI systems? Tracked against competitors, over time, across platforms. This is the closest thing to market share in AI search.</div>
+                <div class="output-desc">Not "how many citations did we get?" but "in the conversations that lead to purchase decisions for our P1 customers, are we in the answer, and is that improving?"</div>
+                <div class="output-feeds"><strong>Feeds into:</strong> resource allocation across all practices. The CMO uses it to decide which customer worlds to invest in. The Director uses it to identify which topics need work. The SEO Head uses it to connect AI visibility to existing SEO metrics.</div>
+            </div>
+            <div class="output-card output-card--secondary">
+                <div class="output-number">02</div>
+                <div class="output-title">A Diagnostic Signal Layer</div>
+                <div class="output-desc">When the primary number moves &mdash; up or down &mdash; you need to know why. The diagnostic layer connects the score to the practices: is it an entity consistency problem (<a href="ai-search-visibility-structure.html" style="color: var(--green); text-decoration: none;">Structure</a>)? A surface coverage gap (<a href="ai-search-visibility-publish.html" style="color: var(--green); text-decoration: none;">Publish</a>)? A competitive shift? A customer world evolution (<a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none;">Know</a>)?</div>
+                <div class="output-desc">The primary measurement tells you <strong>what happened</strong>. The diagnostic layer tells you <strong>where to look</strong>.</div>
+                <div class="output-feeds"><strong>Feeds into:</strong> specific practices based on the diagnosis. Entity consistency drift goes back to Structure. Surface gaps go back to Publish. Customer world shifts go back to Know. The diagnostic turns a number into an action.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE PRIMARY MEASUREMENT ══════════════ -->
+    <div class="measurement-section">
+        <div class="measurement-header">
+            <h2>The Primary Measurement</h2>
+            <p>Topic-level brand association by customer world. The concept is straightforward: for each customer world you've invested in, define the topics that matter (these come from <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Know's</a> problem context inventory). For each topic, ask AI platforms the questions your customers would actually ask. Score whether your brand appears, and how.</p>
+            <p>You're not tracking individual prompts. You're tracking whether your brand is <em>associated with a topic</em> &mdash; whether AI systems have enough signal to recommend you when that topic comes up, regardless of how the question is phrased. The invisible prompt problem means you can't track specific queries. But you can track whether the topic association exists.</p>
+        </div>
+
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="subsection-label">The scoring model</div>
+            <div class="subsection-desc">
+                <p>Not all appearances are equal. Being explicitly recommended is a stronger signal than being listed among six alternatives. The scoring captures this with three levels.</p>
+            </div>
+        </div>
+
+        <div class="scoring-grid">
+            <div class="scoring-card scoring-card--strong">
+                <div class="scoring-card-score">3</div>
+                <div class="scoring-card-title">Primary Recommendation</div>
+                <div class="scoring-card-desc">Your brand is named first, explicitly recommended, or positioned as the answer to the question. "For product teams replacing Jira, Notion is a strong option because..." This is the position you want.</div>
+            </div>
+            <div class="scoring-card scoring-card--moderate">
+                <div class="scoring-card-score">1</div>
+                <div class="scoring-card-title">Mentioned</div>
+                <div class="scoring-card-desc">Your brand is listed among options, referenced for comparison, or included in a roundup but not specifically recommended. "Options include Linear, Notion, Asana, and Monday." You're in the conversation but not winning it.</div>
+            </div>
+            <div class="scoring-card scoring-card--absent">
+                <div class="scoring-card-score">0</div>
+                <div class="scoring-card-title">Absent</div>
+                <div class="scoring-card-desc">Your brand doesn't appear in the response at all. The AI recommended competitors or gave generic advice without naming you. You're not in the conversation.</div>
+            </div>
+        </div>
+
+        <div style="max-width: 720px; margin: 0 auto;">
+            <p style="font-size: 15px; color: var(--text); line-height: 1.7; margin-bottom: 16px;"><strong style="color: var(--text-bright);">The math is simple.</strong> Per topic, you run 4&ndash;6 prompt variations across 3&ndash;4 AI platforms. Say 5 prompts &times; 4 platforms = 20 queries. Maximum possible score: 20 &times; 3 = 60. If you score 40, your presence score for that topic is 67%. Roll up across all topics in a customer world for the aggregate presence score. Compare against the same calculation for your top competitor.</p>
+            <p style="font-size: 15px; color: var(--text); line-height: 1.7;"><strong style="color: var(--text-bright);">The competitive context is non-negotiable.</strong> An absolute presence score means nothing without knowing where your competitors stand. "Our brand presence is 42%" is uninterpretable. "Our brand presence is 42%, our top competitor is at 71%, and we were at 35% last quarter" tells you exactly where you stand, where the gap is, and whether you're closing it.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ SETTING UP THE MEASUREMENT ══════════════ -->
+    <div class="setup-section">
+        <div class="setup-header">
+            <h2>Setting Up the Measurement</h2>
+            <p>Three decisions define the measurement: which topics to track, how to write the prompts, and which platforms to query. Get these right once and the monthly execution becomes mechanical.</p>
+        </div>
+
+        <div class="setup-steps">
+            <div class="setup-step">
+                <div class="setup-step-label">Decision 1</div>
+                <div class="setup-step-title">Topic Selection</div>
+                <div class="setup-step-desc">Select 6&ndash;10 topics per P1 customer world from <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Know's</a> problem context inventory. Not every problem context becomes a tracked topic &mdash; choose the ones where being recommended would directly influence a purchase or engagement decision. These should be the conversations where your brand either wins or loses a customer.</div>
+                <div class="setup-step-desc"><strong>The selection criteria:</strong> Is this a topic your customer world brings to AI when making a decision? Would a recommendation here move revenue? Is there a competitive landscape (multiple brands could be recommended)? If all three are yes, it's a tracked topic. A problem context like "I need a refund" is a real customer situation but not a topic where AI recommendation drives competitive advantage.</div>
+                <div class="setup-step-desc"><strong>Include both branded and unbranded topics.</strong> "Notion vs Jira" is a branded comparison topic &mdash; useful for tracking head-to-head positioning. "Best tools for product roadmapping" is an unbranded discovery topic &mdash; where new customers encounter you for the first time. The unbranded topics are harder to win and more valuable to track because they're where market share actually shifts.</div>
+            </div>
+            <div class="setup-step">
+                <div class="setup-step-label">Decision 2</div>
+                <div class="setup-step-title">Prompt Design</div>
+                <div class="setup-step-desc">For each topic, write 4&ndash;6 prompt variations that simulate how a real person in that customer world would ask AI for help. Not optimized queries. Not SEO-style keyword strings. Natural, conversational questions with the kind of context a real human would include.</div>
+                <div class="setup-step-desc">Variation matters. AI responses are sensitive to prompt framing &mdash; a question asked as "best tool for X" produces different results than "I need help with X, what should I use?" Multiple angles per topic produce a more stable signal than a single prompt that might catch a favorable (or unfavorable) response by chance.</div>
+                <div class="setup-step-desc"><strong>A practical example for the topic "Jira alternatives for startups":</strong> "What should a 30-person startup use instead of Jira?" / "Best project management for small product teams" / "Jira is overkill for my startup, what else is there?" / "Simple product management tools that aren't enterprise-heavy" / "We're a small PM team and Jira feels like too much &mdash; recommendations?" Each circles the same topic from a different angle, simulating the range of ways a real product lead might phrase the question.</div>
+            </div>
+            <div class="setup-step">
+                <div class="setup-step-label">Decision 3</div>
+                <div class="setup-step-title">Platform Selection</div>
+                <div class="setup-step-desc">Query across the AI platforms your customer world actually uses. At minimum: ChatGPT, Perplexity, and Gemini. Add AI Overview (via Google search) if your customer world still uses Google as a starting point. The platform distribution matters &mdash; if nearly half of your existing mentions come from one platform, you need to be tracking that platform specifically.</div>
+                <div class="setup-step-desc"><strong>Platform behavior differs.</strong> ChatGPT and Perplexity actively search the web for current information &mdash; they're more responsive to recent content and structured data. Gemini draws more from Google's index and Knowledge Graph. AI Overviews pull from ranked search results. Each platform assembles the recommendation differently, which means your brand can be strong on one and absent from another for the same topic. That divergence is a signal, not noise &mdash; it tells you where the gap is and what type of investment (content, entity encoding, review presence) would close it.</div>
+            </div>
+        </div>
+
+        <div class="callout-box" style="margin-top: 40px;">
+            <div class="callout-box-label">The practical scope</div>
+            <p>6 topics &times; 5 prompts &times; 4 platforms = 120 queries per customer world. If you have two P1 customer worlds, that's 240 queries per measurement cycle. That's a half-day of focused work, done manually. Tedious, yes. But similar in effort to the customer context mining in <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Know</a> &mdash; and the qualitative insight from reading the actual AI responses (how your brand is described, what competitors are positioned against you, what language the AI uses) is as valuable as the score itself.</p>
+            <p><strong>Keep the prompt set consistent between cycles.</strong> The same prompts, queried monthly, produce a comparable trend line. If you change the prompts, you lose the comparison. Add new prompts as topics evolve, but maintain the core set for continuity.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ THREE STAKEHOLDER VIEWS ══════════════ -->
+    <div class="stakeholder-section">
+        <div class="stakeholder-header">
+            <h2>Three Views, Three Decisions</h2>
+            <p>The same measurement serves three different people at three different levels of detail. Each person asks a different question, sees a different view of the data, and makes a different type of decision. The measurement practice needs to produce all three views &mdash; not three separate measurement systems, but three lenses on the same underlying data.</p>
+        </div>
+        <div class="stakeholder-grid">
+            <div class="stake-card stake-card--cmo">
+                <div class="stake-card-label">Quarterly &middot; Customer World Level</div>
+                <div class="stake-card-title">The CMO</div>
+                <div class="stake-card-question">"Are we winning the conversations that matter?"</div>
+                <div class="stake-card-desc">Sees one number per customer world: the aggregate brand presence score, compared against the top competitor and trended over time. This is the market share equivalent.</div>
+                <div class="stake-card-desc"><strong>Decision it drives:</strong> Where to allocate resources across customer worlds. "Product Teams is at 66% and growing &mdash; maintain investment. Marketing Teams is at 41% with Asana at 71% &mdash; increase investment. Engineering is at 28% and Confluence dominates &mdash; park it."</div>
+                <div class="stake-card-detail"><strong>What triggers action:</strong> A customer world dropping 10+ points quarter-over-quarter. A competitor closing a gap you thought was stable. A new competitor appearing in conversations where they weren't before.</div>
+            </div>
+            <div class="stake-card stake-card--director">
+                <div class="stake-card-label">Monthly &middot; Topic Level</div>
+                <div class="stake-card-title">The Director of AI Visibility</div>
+                <div class="stake-card-question">"Where should I invest next?"</div>
+                <div class="stake-card-desc">Sees the topic-level breakdown within each customer world: which topics are strong, which are weak, which are trending up or down, and what competitors own each topic. This is the diagnostic layer that drives resource allocation.</div>
+                <div class="stake-card-desc"><strong>Decision it drives:</strong> Which topics to invest in for the next quarter's publishing plan. "Roadmapping is at 67% but Productboard leads at 81% &mdash; we need proof assets. Sprint planning is at 25% and Jira's at 95% &mdash; strategic question for the CMO on whether to fight or accept."</div>
+                <div class="stake-card-detail"><strong>What triggers action:</strong> A topic declining across platforms. A topic where investment isn't moving the number after two cycles. A new topic emerging from <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none;">Know's</a> ongoing mining.</div>
+            </div>
+            <div class="stake-card stake-card--seo">
+                <div class="stake-card-label">Monthly &middot; Platform &times; Topic Level</div>
+                <div class="stake-card-title">The Head of SEO</div>
+                <div class="stake-card-question">"How does this connect to what I'm already measuring?"</div>
+                <div class="stake-card-desc">Sees the platform-level breakdown per topic: strong on ChatGPT but absent from Gemini, cited in AI Overviews because of organic rankings, mentioned on Perplexity because of review platform presence. This connects AI visibility to existing SEO metrics.</div>
+                <div class="stake-card-desc"><strong>Decision it drives:</strong> Which platform-specific investments to make. "AI Overview is strong because our blog post ranks #2 &mdash; protect that ranking. Gemini is weak &mdash; Gemini weights review platforms heavily, check G2 positioning. Perplexity responds fastest to fresh content &mdash; prioritize content updates."</div>
+                <div class="stake-card-detail"><strong>What triggers action:</strong> A platform where presence drops while organic ranking holds (entity problem, not content problem). A platform where presence grows despite no ranking (community and review signal working). Divergence between platforms on the same topic.</div>
+            </div>
+        </div>
+
+        <div class="callout-box--on-dark callout-box" style="margin-top: 32px;">
+            <div class="callout-box-label">The integration point</div>
+            <p>The Head of SEO's existing dashboard &mdash; Search Console, rank tracking, backlink monitoring &mdash; doesn't go away. AI visibility adds a layer on top. The most actionable signals are where the two layers <strong>connect</strong>: a page that ranks well organically and also gets cited by AI surfaces is a compounding asset. A page that ranks well but never appears in AI responses is a diagnostic signal &mdash; what's missing? Often: entity-dense language, specific customer-world framing, competitive anchoring. The page exists but hasn't been optimized for how AI systems evaluate recommendations.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ DIAGNOSTIC LAYER ══════════════ -->
+    <div class="diagnostic-section">
+        <div class="diagnostic-header">
+            <h2>When the Numbers Move</h2>
+            <p>The presence score is the alarm. The diagnostic layer is the investigation. When a topic's score changes &mdash; up or down &mdash; five questions trace the cause back to a specific practice. You're not starting from scratch each time. You're checking a short list of <em>likely causes</em>, each connected to an action you already know how to take.</p>
+        </div>
+        <div class="diagnostic-grid">
+            <div class="diagnostic-card diagnostic-card--structure">
+                <div class="diagnostic-card-label">Check Structure</div>
+                <div class="diagnostic-card-title">Did the entity narrative fragment?</div>
+                <div class="diagnostic-card-desc">If presence drops across multiple topics simultaneously, the cause is often upstream of content. A surface description went stale or wrong. A profile got updated without referencing the canonical narrative. Someone changed the G2 category. <strong>Run the consistency audit from <a href="ai-search-visibility-structure.html" style="color: var(--green); text-decoration: none;">Structure</a>.</strong> The Surface Registry should flag any surface that's drifted since the last check.</div>
+            </div>
+            <div class="diagnostic-card diagnostic-card--publish">
+                <div class="diagnostic-card-label">Check Publish</div>
+                <div class="diagnostic-card-title">Did a key surface go stale or gain new content?</div>
+                <div class="diagnostic-card-desc">If presence drops for a specific topic, check the context map. Did content on a key surface get outdated? Did a competitor publish a major piece on this topic that displaced yours? Conversely, if presence jumped, which surface deployment produced the lift? <strong>The context map from <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none;">Map</a> tells you which cells exist and which are empty.</strong></div>
+            </div>
+            <div class="diagnostic-card diagnostic-card--competitive">
+                <div class="diagnostic-card-label">External</div>
+                <div class="diagnostic-card-title">Did a competitor invest heavily?</div>
+                <div class="diagnostic-card-desc">If your absolute score is stable but your relative position dropped, a competitor moved. They launched a feature, published a comparison page, built entity density on this topic. <strong>Check the competitive presence column in your measurement data</strong> &mdash; which competitor's score jumped, and on which platforms? That tells you what type of investment they made.</div>
+            </div>
+            <div class="diagnostic-card diagnostic-card--platform">
+                <div class="diagnostic-card-label">External</div>
+                <div class="diagnostic-card-title">Did a platform change behavior?</div>
+                <div class="diagnostic-card-desc">If presence drops on one platform but holds on others, the cause may be a platform retrieval change, not a brand problem. AI platforms update how they search, rank, and synthesize sources. <strong>Check the platform-level view from the SEO Head's dashboard.</strong> If only Gemini dropped, the issue is likely specific to how Gemini retrieves &mdash; not a gap in your content or entity infrastructure.</div>
+            </div>
+            <div class="diagnostic-card diagnostic-card--know">
+                <div class="diagnostic-card-label">Check Know</div>
+                <div class="diagnostic-card-title">Did the customer world evolve?</div>
+                <div class="diagnostic-card-desc">If presence is low despite sustained investment, the problem might not be execution &mdash; it might be that the topics you're tracking no longer match how your customer world frames their problems. Language shifts. New competitors enter the conversation. New problem contexts emerge. <strong>Go back to <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none;">Know's</a> mining sources</strong> and check whether the problem contexts have shifted since the last refresh.</div>
+            </div>
+        </div>
+
+        <div class="table-annotation" style="margin-top: 32px;">
+            <p><strong>The diagnostic isn't a separate measurement.</strong> It's a decision tree you walk when the primary number moves. Most movements will trace to one of these five causes within minutes. The diagnostic layer is what turns a dashboard into an action plan &mdash; you don't just know the score changed, you know which practice to revisit and what to look for when you get there.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ WORKED EXAMPLES ══════════════ -->
+    <div class="example-section">
+        <div class="example-header">
+            <h2>The Full Measurement Cycle</h2>
+            <p>Two worked examples showing what the measurement actually produces. The first shows a mature brand with existing AI presence and competitive dynamics. The second shows a smaller brand establishing its baseline. Same methodology, very different numbers, very different strategic implications.</p>
+        </div>
+
+        <!-- ──── NOTION (SaaS) ──── -->
+        <div class="example-block">
+            <div class="example-label">B2B SaaS &mdash; Notion &times; Product Teams</div>
+            <div class="example-context">
+                <p>Six topics selected from Know's problem context inventory for the Product Teams customer world. Each queried with 5 prompt variations across 4 platforms (ChatGPT, Perplexity, Gemini, AI Overview). 120 total queries. Presence score calculated as percentage of maximum possible weighted score.</p>
+            </div>
+
+            <div class="example-step-label">Topic-level results</div>
+            <div class="example-table-wrapper">
+                <table class="example-table" style="min-width: 900px;">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Presence</th>
+                            <th>Primary Rec?</th>
+                            <th>Top Competitor</th>
+                            <th>Their Score</th>
+                            <th>Trend</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PRD templates &amp; workflows</td>
+                            <td class="td-green">92%</td>
+                            <td class="td-green">Yes &mdash; across all platforms</td>
+                            <td>Confluence</td>
+                            <td>58%</td>
+                            <td>&rarr; Stable</td>
+                        </tr>
+                        <tr>
+                            <td>Jira alternatives for startups</td>
+                            <td class="td-green">88%</td>
+                            <td class="td-green">Yes &mdash; ChatGPT, Perplexity, AI Overview</td>
+                            <td>Linear</td>
+                            <td>72%</td>
+                            <td>&uarr; Growing (was 80%)</td>
+                        </tr>
+                        <tr>
+                            <td>Replacing Confluence for docs</td>
+                            <td class="td-green">83%</td>
+                            <td class="td-green">Yes &mdash; ChatGPT, Perplexity, AI Overview</td>
+                            <td>Confluence (incumbent)</td>
+                            <td>70%</td>
+                            <td>&uarr; Growing</td>
+                        </tr>
+                        <tr>
+                            <td>Product roadmap tools</td>
+                            <td class="td-yellow">67%</td>
+                            <td class="td-yellow">Mixed &mdash; primary on 2 platforms, mentioned on 2</td>
+                            <td>Productboard</td>
+                            <td>81%</td>
+                            <td>&rarr; Stable</td>
+                        </tr>
+                        <tr>
+                            <td>Product team collaboration</td>
+                            <td class="td-yellow">42%</td>
+                            <td class="td-dim">No &mdash; mentioned only, never primary</td>
+                            <td>Slack</td>
+                            <td>65%</td>
+                            <td>&darr; Declining (was 50%)</td>
+                        </tr>
+                        <tr>
+                            <td>Sprint planning</td>
+                            <td class="td-dim">25%</td>
+                            <td class="td-dim">No &mdash; rarely mentioned</td>
+                            <td>Jira</td>
+                            <td>95%</td>
+                            <td>&rarr; Stable</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="example-step-label">CMO summary</div>
+            <div class="example-table-wrapper">
+                <table class="example-table" style="min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>Customer World</th>
+                            <th>Brand Presence</th>
+                            <th>vs. Last Quarter</th>
+                            <th>#1 Competitor</th>
+                            <th>Their Presence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Product Teams</td>
+                            <td class="td-green">66%</td>
+                            <td class="td-green">&uarr; +8%</td>
+                            <td>Linear</td>
+                            <td>62%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="example-annotation">
+                <p><strong>What the Director sees:</strong> Three topics are strong and either stable or growing &mdash; maintain them. Roadmapping is the investment opportunity: Notion is present but Productboard leads because they're category-specific. The gap is addressable with proof assets (case studies of teams using Notion for roadmaps, comparison content, template gallery). Collaboration is declining and the topic may be too broad &mdash; AI gives generic answers when the question is vague. Sprint planning is a strategic question for the CMO: Jira's dominance is structural, and fighting for this topic may not be worth the investment.</p>
+                <p><strong>What the SEO Head sees (product roadmap topic, zoomed in):</strong> Primary recommendation on ChatGPT and AI Overview &mdash; both are pulling from Notion's blog content that ranks organically. Mentioned-only on Perplexity and Gemini. Perplexity may be surfacing more recent sources (Productboard published a roadmapping guide last month). Gemini may be weighting G2's category pages, where Productboard is the category leader. Actions: update the blog guide to maintain freshness, ensure G2 feature descriptions specifically cover roadmapping workflows.</p>
+            </div>
+        </div>
+
+        <!-- ──── ADANOLA (DTC) ──── -->
+        <div class="example-block">
+            <div class="example-label example-label--alt">DTC Athleisure &mdash; Adanola &times; Studio &amp; Yoga</div>
+            <div class="example-context">
+                <p>Six topics from the Studio &amp; Yoga problem context inventory. Same methodology: 5 prompts &times; 4 platforms per topic. A very different competitive landscape &mdash; Lululemon dominates most conversations, and Adanola is a newer brand establishing presence.</p>
+            </div>
+
+            <div class="example-step-label">Topic-level results</div>
+            <div class="example-table-wrapper">
+                <table class="example-table" style="min-width: 900px;">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Presence</th>
+                            <th>Primary Rec?</th>
+                            <th>Top Competitor</th>
+                            <th>Their Score</th>
+                            <th>Trend</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lululemon alternatives</td>
+                            <td class="td-yellow">50%</td>
+                            <td class="td-yellow">Perplexity only</td>
+                            <td>Girlfriend Collective</td>
+                            <td>62%</td>
+                            <td>&mdash; Baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Squat-proof activewear</td>
+                            <td class="td-dim">25%</td>
+                            <td class="td-dim">No</td>
+                            <td>Gymshark</td>
+                            <td>72%</td>
+                            <td>&mdash; Baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Yoga leggings</td>
+                            <td class="td-dim">8%</td>
+                            <td class="td-dim">No</td>
+                            <td>Lululemon</td>
+                            <td>95%</td>
+                            <td>&mdash; Baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Pilates &amp; reformer wear</td>
+                            <td class="td-dim">8%</td>
+                            <td class="td-dim">No</td>
+                            <td>Lululemon</td>
+                            <td>88%</td>
+                            <td>&mdash; Baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Studio-to-street transition</td>
+                            <td class="td-dim">8%</td>
+                            <td class="td-dim">No</td>
+                            <td>Vuori</td>
+                            <td>65%</td>
+                            <td>&mdash; Baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Hot yoga clothing</td>
+                            <td class="td-dim">0%</td>
+                            <td class="td-dim">No</td>
+                            <td>Lululemon</td>
+                            <td>80%</td>
+                            <td>&mdash; Baseline</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="example-step-label">CMO summary</div>
+            <div class="example-table-wrapper">
+                <table class="example-table" style="min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>Customer World</th>
+                            <th>Brand Presence</th>
+                            <th>vs. Last Quarter</th>
+                            <th>#1 Competitor</th>
+                            <th>Their Presence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Studio &amp; Yoga</td>
+                            <td class="td-dim">17%</td>
+                            <td>&mdash; Baseline</td>
+                            <td>Lululemon</td>
+                            <td>78%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="example-annotation">
+                <p><strong>A completely different strategic picture.</strong> Adanola isn't in most of these conversations. The gap to Lululemon is 61 points. That's not a failure &mdash; it's the starting position for a smaller, newer brand. The baseline is the baseline.</p>
+                <p><strong>But the data reveals a clear strategy.</strong> The one topic where Adanola shows up (Lululemon alternatives, 50%) is exactly the competitive positioning from <a href="ai-search-visibility-structure.html" style="color: var(--text); text-decoration: none; border-bottom: 1px dashed var(--dim-dark);">Structure's</a> canonical narrative. The positioning is landing &mdash; AI systems know Adanola as a Lululemon alternative. The challenge is transferring that association to unbranded topics. When someone asks "what are the best yoga leggings?" (not mentioning Lululemon), Adanola doesn't appear. That's the gap between being known as an alternative and being known as a category player.</p>
+                <p><strong>What the Director sees:</strong> "Lululemon alternatives" is our entry point &mdash; build from there. The adjacent topic with the best shot is "squat-proof activewear" (25%, and Gymshark's quality complaints create an opening). "Hot yoga clothing" is 0% despite Adanola having the product for it &mdash; this is a pure awareness gap, not a product gap. Investment priority: deploy proof assets (try-on videos, community participation in r/yoga) for the squat-proof topic, and create the foundation piece for hot yoga (the <a href="ai-search-visibility-map.html" style="color: var(--text); text-decoration: none; border-bottom: 1px dashed var(--dim-dark);">context map</a> probably has this as an empty cell). Track whether these moves shift the numbers over two quarters.</p>
+                <p><strong>What the SEO Head sees:</strong> Perplexity is the platform where Adanola appears most reliably &mdash; likely because Perplexity searches the web more actively and picks up on Trustpilot reviews and blog content. Gemini and ChatGPT barely register &mdash; the entity signals may not be strong enough yet. This maps to <a href="ai-search-visibility-structure.html" style="color: var(--text); text-decoration: none; border-bottom: 1px dashed var(--dim-dark);">Structure's</a> audit findings: Adanola's TikTok bio says "Your new favourite brand" (no entity signal), Trustpilot has a platform default description, Wikidata doesn't exist. The entity infrastructure gap is directly visible in the platform-level measurement data.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE HONEST CAVEAT ══════════════ -->
+    <div class="setup-section" style="border-top: 1px solid var(--bg-light);">
+        <div class="setup-header">
+            <h2>The Honest State of Tooling</h2>
+            <p>This measurement is largely manual today. The emerging AI visibility tools &mdash; Semrush's AI Visibility, Traqr, Profound, and others &mdash; are building the infrastructure to automate parts of this process. They can track mentions across LLMs, discover topics, and monitor citation trends at a scale manual work can't match. That infrastructure is genuinely valuable.</p>
+            <p>But as of April 2026, most tools have a gap between what they track and what the three stakeholders need. The typical limitations: topics are auto-discovered from the brand outward (not strategically defined from customer worlds inward), there's no way to group topics by customer world, competitive share of voice within a topic isn't visible, and the aggregate visibility score hides the strategic picture. You see "40/100" but not "strong in one customer world, invisible in another."</p>
+            <p>These are solvable product gaps, and the tools are evolving rapidly. The recommendation: <strong>build the measurement practice now, manually, and layer tools on top as they mature.</strong> The manual process has its own advantage &mdash; you read the actual AI responses. You see how your brand is described, what competitors are positioned against you, what language the AI uses. That qualitative insight is as valuable as the score itself, and it's the kind of thing tool-generated dashboards compress away.</p>
+        </div>
+
+        <div class="callout-box" style="margin-top: 0;">
+            <div class="callout-box-label">What the tooling needs to catch up on</div>
+            <p><strong>User-defined topics.</strong> Let the strategist input their own topics (from the context map) rather than only showing auto-discovered ones. "Track my visibility for these 15 topics" is the Director's dashboard.</p>
+            <p><strong>Customer world grouping.</strong> Let users tag topics into groups and roll up visibility scores per group. That's the bridge between a domain-wide "40/100" and the strategic "66% for Product Teams, 17% for Studio &amp; Yoga" view that drives resource decisions.</p>
+            <p><strong>Competitive share of voice per topic.</strong> For each tracked topic, show which brands appear, how often, and in what position. "Your brand: 15 mentions. Lululemon: 45. Gymshark: 30." Without competitive context, absolute numbers are uninterpretable.</p>
+            <p><strong>Content attribution.</strong> Connect topic visibility to the content and surfaces that produce it. "You're mentioned for 'Lululemon alternatives' because Perplexity cites this blog post and these two Reddit threads." That closes the loop between measurement and action &mdash; you know not just <em>what</em> your visibility is, but <em>what's producing it</em>.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE FEEDBACK LOOP ══════════════ -->
+    <div class="feedback-section" style="background: var(--bg-dark);">
+        <div class="feedback-header">
+            <h2>The Feedback Loop</h2>
+            <p>Measure is the only practice that connects back to every other practice. The other four move forward in a logical sequence. Measure evaluates the system and directs attention to the practice that needs it. The workflow isn't linear. It's a cycle.</p>
+        </div>
+        <div class="feedback-grid">
+            <div class="feedback-card feedback-card--know">
+                <div class="feedback-card-label">Measure &rarr; Know</div>
+                <div class="feedback-card-title">The topics might be wrong</div>
+                <div class="feedback-card-desc">If presence stays low across most topics despite sustained investment through Structure and Publish, the issue might not be execution &mdash; it might be that the topics no longer match how your customer world frames their problems. <strong>Go back to Know.</strong> Refresh the mining. Check whether the problem contexts have shifted, whether new customer worlds have emerged, or whether the competitive landscape has changed the conversations people are having.</div>
+            </div>
+            <div class="feedback-card feedback-card--map">
+                <div class="feedback-card-label">Measure &rarr; Map</div>
+                <div class="feedback-card-title">The context map might have gaps</div>
+                <div class="feedback-card-desc">If presence is low for a specific topic despite content existing, the context map may need restructuring. Wrong component type for the topic (a Narrative piece where Proof was needed). Wrong surface (blog content for a topic where the customer world makes decisions on YouTube). <strong>Go back to Map.</strong> Check whether the context map cells for this topic are filled with the right content on the right surfaces.</div>
+            </div>
+            <div class="feedback-card feedback-card--structure">
+                <div class="feedback-card-label">Measure &rarr; Structure</div>
+                <div class="feedback-card-title">The entity foundation might be drifting</div>
+                <div class="feedback-card-desc">If presence drops across multiple topics simultaneously, the cause is likely upstream of content. Entity consistency may have drifted &mdash; a surface description went stale, a profile was updated without referencing the canonical narrative, a category mismatch appeared. <strong>Go back to Structure.</strong> Run the consistency audit. Check the Surface Registry for drift.</div>
+            </div>
+            <div class="feedback-card feedback-card--publish">
+                <div class="feedback-card-label">Measure &rarr; Publish</div>
+                <div class="feedback-card-title">The surface investment might need rebalancing</div>
+                <div class="feedback-card-desc">If one AI platform shows strong presence while another is weak for the same topic, the publishing investment may be misallocated. Each platform retrieves differently &mdash; some weight blog content, others weight review platforms, others weight community mentions. <strong>Go back to Publish.</strong> Check whether the surfaces you're investing in match the platforms where your customers encounter AI.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ CADENCE ══════════════ -->
+    <div class="diagnostic-section">
+        <div class="diagnostic-header">
+            <h2>Cadence</h2>
+            <p>Different measurements refresh at different rates because the underlying systems move at different speeds. AI platform recommendations shift over weeks and months, not days. Entity consistency drifts on a quarterly cycle as various teams update their surfaces. The cadence should match the pace of change &mdash; frequent enough to catch movement, infrequent enough that the signal is meaningful.</p>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="data-table" style="min-width: 700px;">
+                <thead>
+                    <tr>
+                        <th>Who</th>
+                        <th>What They Check</th>
+                        <th>How Often</th>
+                        <th>What Triggers Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CMO</td>
+                        <td>Customer world presence vs. competitors</td>
+                        <td>Quarterly</td>
+                        <td>A customer world dropping 10+ points. A competitor closing the gap. A customer world reaching saturation (80%+).</td>
+                    </tr>
+                    <tr>
+                        <td>Director</td>
+                        <td>Topic-level presence within customer worlds</td>
+                        <td>Monthly</td>
+                        <td>A topic declining across platforms. Investment not moving the number after 2 cycles. A new topic emerging from Know.</td>
+                    </tr>
+                    <tr>
+                        <td>SEO Head</td>
+                        <td>Platform-level breakdown per topic, connected to organic metrics</td>
+                        <td>Monthly</td>
+                        <td>Platform divergence on the same topic. Presence dropping while organic ranking holds. A platform where community signal outperforms content signal.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-annotation">
+            <p><strong>The full measurement cycle runs monthly.</strong> That's when the Director and SEO Head get fresh data. The CMO view is a quarterly rollup of three monthly cycles &mdash; enough data points to distinguish a trend from noise. In between cycles, the diagnostic layer is passive &mdash; you're not checking constantly, you're checking when the numbers move.</p>
+            <p><strong>Quarter 1 is the baseline.</strong> Don't react to the first round of numbers. They tell you where you are, not whether you're doing well. The strategic value begins in Quarter 2, when you can compare against the baseline and start reading trends.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ IMPLICATIONS ══════════════ -->
+    <div class="implications-section">
+        <div class="implications-inner">
+            <h2>What This Changes</h2>
+
+            <div class="implication-item">
+                <div class="implication-title">The measurement practice is simpler than the industry is making it</div>
+                <div class="implication-desc">One primary metric: topic-level brand presence by customer world. One diagnostic layer: five questions that trace movement back to a practice. Three views for three stakeholders. That's the measurement system. The industry is producing increasingly complex dashboards with citation counts, mention trends, prompt rankings, and visibility scores. Most of that complexity measures what's countable. The practice here measures what matters: <strong>are we being recommended in the conversations our customers are having?</strong></div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Manual measurement produces insight that automated tools miss</div>
+                <div class="implication-desc">When you manually query AI platforms with your prompt set, you read the responses. You see how your brand is described &mdash; which features the AI highlights, which competitor it positions you against, what language it uses. You notice when the AI hedges ("Notion is an option, though some teams prefer...") versus when it commits ("For product teams replacing Jira, Notion is the strongest choice because..."). That qualitative layer &mdash; the <em>how</em> of the recommendation, not just the <em>whether</em> &mdash; disappears in a dashboard. It's worth preserving even as tools automate the scoring.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Competitive context is non-negotiable</div>
+                <div class="implication-desc">An absolute presence score is meaningless without competitive context. "Our presence is 42%" doesn't tell you whether to celebrate or panic. "Our presence is 42%, up from 35%, and our top competitor is at 71%" tells you everything: the direction, the gap, and the scale of the challenge. <strong>Every measurement cycle must include the competitive landscape.</strong> This adds work (you're scoring competitors alongside yourself), but without it the numbers don't support decisions.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">The scoreboard shapes behavior</div>
+                <div class="implication-desc">A team measured on citation counts optimizes for citations &mdash; which might mean producing content that gets mentioned frequently in AI responses without ever being specifically recommended. A team measured on topic-level brand presence optimizes for being the recommended answer &mdash; which requires the right entity infrastructure, the right content on the right surfaces, and genuine authority in that customer world. <strong>Get the scoreboard right first.</strong> The behavior follows.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">AI visibility connects to existing SEO metrics, it doesn't replace them</div>
+                <div class="implication-desc">Organic rankings still matter &mdash; they feed AI Overviews and influence how AI platforms evaluate authority. Backlinks still matter &mdash; they signal credibility. Site health still matters &mdash; if AI crawlers can't access your content, entity signals don't help. AI visibility measurement is a new layer on an existing foundation. The Head of SEO doesn't need a new dashboard. They need <strong>three additional columns on the dashboard they already have</strong>: AI presence for this topic, which platforms cite us, and where the gap is between organic performance and AI visibility.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Build the practice now, automate later</div>
+                <div class="implication-desc">The tools will catch up. The strategic frameworks for customer-world-grouped measurement, competitive share of voice by topic, and content attribution are clear &mdash; they're product opportunities waiting to be built. But waiting for the tools means waiting to understand your position. <strong>A manual measurement done today is more valuable than a perfect automated dashboard six months from now.</strong> Start with the practice. Layer the tools as they mature. The muscle of reading AI responses, scoring your presence, and diagnosing the causes of movement &mdash; that muscle is worth building regardless of tooling.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ VERSION ══════════════ -->
+    <div class="version-bar">
+        <p>v0.1 &middot; April 16, 2026 &middot; Initial build. Primary measurement: topic-level brand association by customer world. Three stakeholder views (CMO, Director, SEO Head). Scoring model (Primary/Mentioned/Absent). Diagnostic layer linking to all four preceding practices. Two worked examples (Notion + Adanola). Honest tooling caveat with product gap analysis. Feedback loop architecture.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section">
+        <div class="footer-inner">
+            <a href="ai-search-visibility-workflow.html">&larr; AI Search Visibility Workflow</a>
+            <span>Michael Ofei. April 2026.</span>
+        </div>
+    </div>
+
+</body>
+</html>
