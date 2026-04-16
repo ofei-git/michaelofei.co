@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structure: Make Your Brand Machine-Readable — Michael Ofei</title>
+    <meta name="description" content="How to define your brand identity, audit cross-surface consistency, and encode it into the infrastructure AI systems read. The practice that turns brand consistency into a visibility deliverable.">
+    <meta property="og:title" content="Structure: Make Your Brand Machine-Readable">
+    <meta property="og:description" content="Define your brand identity. Audit whether AI systems agree. Encode it into every surface they read. Brand consistency is now an SEO deliverable.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://michaelofei.co/tools/ai-search-visibility-structure.html">
+    <style>
+        :root {
+            --bg: #7A251E;
+            --bg-light: #8a352e;
+            --bg-dark: #6a1f18;
+            --bg-darker: #5a1a15;
+            --text: #D7C9A7;
+            --text-bright: #E8DAB8;
+            --yellow: #E7B000;
+            --green: #00BB00;
+            --green-dim: #009900;
+            --dim: #a89878;
+            --dim-dark: #8a7a5a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* ── Layout ── */
+        .section { width: 100%; padding: 0 48px; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-narrow { max-width: 720px; margin: 0 auto; }
+
+        /* ── Top bar ── */
+        .topbar {
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .back { color: var(--dim); text-decoration: none; font-size: 13px; }
+        .back:hover { color: var(--green); }
+        .topbar-parent { color: var(--dim-dark); font-size: 12px; }
+        .topbar-parent a { color: var(--dim); text-decoration: none; }
+        .topbar-parent a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* HERO                                   */
+        /* ══════════════════════════════════════ */
+        .hero {
+            padding: 80px 48px 64px;
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dim);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 1.25;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero .lead {
+            font-size: 17px;
+            color: var(--text);
+            line-height: 1.65;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .hero-meta {
+            font-size: 12px;
+            color: var(--dim);
+            margin-top: 20px;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* PROBLEM STATEMENT                      */
+        /* ══════════════════════════════════════ */
+        .problem-section {
+            background: var(--bg-dark);
+            padding: 64px 48px;
+        }
+
+        .problem-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .problem-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .problem-inner p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .problem-inner p:last-child { margin-bottom: 0; }
+        .problem-inner strong { color: var(--text-bright); }
+        .problem-inner em { color: var(--yellow); font-style: normal; }
+
+        /* ══════════════════════════════════════ */
+        /* OUTPUTS                                */
+        /* ══════════════════════════════════════ */
+        .outputs-section {
+            padding: 80px 48px;
+        }
+
+        .outputs-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .outputs-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .outputs-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .outputs-header p:last-child { margin-bottom: 0; }
+        .outputs-header strong { color: var(--text-bright); }
+
+        .outputs-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .output-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 32px 28px;
+            border-top: 3px solid var(--bg-light);
+        }
+
+        .output-card--primary { border-top-color: var(--yellow); }
+        .output-card--secondary { border-top-color: var(--green); }
+
+        .output-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--bg-light);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .output-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+
+        .output-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .output-feeds {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+            padding-top: 16px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .output-feeds strong { color: var(--text); font-weight: 600; }
+
+        /* ══════════════════════════════════════ */
+        /* CONTEXT / WHY NOW                      */
+        /* ══════════════════════════════════════ */
+        .context-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .context-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .context-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .context-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .context-header p:last-child { margin-bottom: 0; }
+        .context-header strong { color: var(--text-bright); }
+
+        .context-principle {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px 32px;
+            background: var(--bg);
+            border-radius: 12px;
+            border: 1px solid var(--bg-light);
+        }
+
+        .context-principle-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--yellow);
+            margin-bottom: 16px;
+        }
+
+        .context-principle-text {
+            font-size: 18px;
+            color: var(--text-bright);
+            line-height: 1.6;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* DEFINE SECTION                         */
+        /* ══════════════════════════════════════ */
+        .define-section {
+            padding: 80px 48px;
+        }
+
+        .define-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .define-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .define-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .define-header p:last-child { margin-bottom: 0; }
+        .define-header strong { color: var(--text-bright); }
+        .define-header em { color: var(--yellow); font-style: normal; }
+
+        .define-grid {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .define-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 28px 24px;
+            border-top: 3px solid var(--yellow);
+        }
+
+        .define-card-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--bg-light);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .define-card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .define-card-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .define-card-example {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+            padding-top: 12px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .define-card-example strong { color: var(--text); }
+
+        /* ── Subsection headers ── */
+        .subsection-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .subsection-label--alt { color: var(--yellow); }
+
+        .subsection-desc {
+            max-width: 720px;
+            margin-bottom: 24px;
+        }
+
+        .subsection-desc p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .subsection-desc p:last-child { margin-bottom: 0; }
+        .subsection-desc strong { color: var(--text-bright); }
+
+        /* ── Callout box ── */
+        .callout-box {
+            max-width: 720px;
+            margin: 32px auto 0;
+            background: var(--bg-dark);
+            border-left: 3px solid var(--yellow);
+            border-radius: 0 8px 8px 0;
+            padding: 24px 28px;
+        }
+
+        .define-section .callout-box {
+            background: var(--bg-dark);
+        }
+
+        .audit-section .callout-box {
+            background: var(--bg);
+        }
+
+        .callout-box-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--yellow);
+            margin-bottom: 10px;
+        }
+
+        .callout-box p {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .callout-box p:last-child { margin-bottom: 0; }
+        .callout-box strong { color: var(--text-bright); }
+
+        /* ── Generic table styles ── */
+        .table-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 700px;
+        }
+
+        .data-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+            white-space: nowrap;
+        }
+
+        .data-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .data-table tbody tr:last-child td { border-bottom: none; }
+
+        .data-table tbody tr:nth-child(even) td {
+            background: rgba(106, 31, 24, 0.3);
+        }
+
+        .data-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .data-table--dark tbody tr:nth-child(even) td {
+            background: rgba(90, 26, 21, 0.4);
+        }
+
+        .table-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .table-label--alt { color: var(--yellow); }
+
+        .table-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+        }
+
+        .table-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .table-annotation p:last-child { margin-bottom: 0; }
+        .table-annotation strong { color: var(--text); }
+
+        .td-dim { color: var(--dim); }
+        .td-green { color: var(--green); }
+        .td-yellow { color: var(--yellow); }
+
+        /* ══════════════════════════════════════ */
+        /* AUDIT SECTION                          */
+        /* ══════════════════════════════════════ */
+        .audit-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .audit-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .audit-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .audit-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .audit-header p:last-child { margin-bottom: 0; }
+        .audit-header strong { color: var(--text-bright); }
+        .audit-header em { color: var(--yellow); font-style: normal; }
+
+        .audit-steps {
+            max-width: 720px;
+            margin: 0 auto 40px;
+        }
+
+        .audit-step {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .audit-step:last-child { border-bottom: none; }
+
+        .audit-step-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--yellow);
+            margin-bottom: 8px;
+        }
+
+        .audit-step-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .audit-step-desc strong { color: var(--text-bright); }
+
+        .frag-grid {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .frag-card {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 24px 20px;
+            border-top: 3px solid var(--bg-light);
+        }
+
+        .frag-card--category { border-top-color: var(--yellow); }
+        .frag-card--stale { border-top-color: var(--dim); }
+        .frag-card--missing { border-top-color: #c0392b; }
+        .frag-card--voice { border-top-color: var(--green); }
+
+        .frag-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .frag-card-desc {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ══════════════════════════════════════ */
+        /* ENCODE SECTION                         */
+        /* ══════════════════════════════════════ */
+        .encode-section {
+            padding: 80px 48px;
+        }
+
+        .encode-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .encode-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .encode-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .encode-header p:last-child { margin-bottom: 0; }
+        .encode-header strong { color: var(--text-bright); }
+
+        .encode-grid {
+            max-width: 1200px;
+            margin: 0 auto 48px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .encode-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 28px 24px;
+            border-left: 3px solid var(--bg-light);
+        }
+
+        .encode-card--p1 { border-left-color: var(--yellow); }
+        .encode-card--p2 { border-left-color: var(--green); }
+        .encode-card--p3 { border-left-color: var(--dim); }
+        .encode-card--p4 { border-left-color: var(--dim-dark); }
+
+        .encode-card-priority {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .encode-card--p1 .encode-card-priority { color: var(--yellow); }
+        .encode-card--p2 .encode-card-priority { color: var(--green); }
+        .encode-card--p3 .encode-card-priority { color: var(--dim); }
+        .encode-card--p4 .encode-card-priority { color: var(--dim-dark); }
+
+        .encode-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+
+        .encode-card-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .encode-card-detail {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.6;
+            padding-top: 12px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .encode-card-detail strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* WORKED EXAMPLES                        */
+        /* ══════════════════════════════════════ */
+        .example-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .example-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .example-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .example-header p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .example-header p:last-child { margin-bottom: 0; }
+        .example-header strong { color: var(--text-bright); }
+
+        .example-block {
+            max-width: 1200px;
+            margin: 0 auto 64px;
+        }
+
+        .example-block:last-child { margin-bottom: 0; }
+
+        .example-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .example-label--alt { color: var(--yellow); }
+
+        .example-context {
+            max-width: 720px;
+            margin-bottom: 24px;
+        }
+
+        .example-context p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .example-context p:last-child { margin-bottom: 0; }
+        .example-context strong { color: var(--text-bright); }
+
+        .example-step-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dim);
+            margin: 32px 0 16px;
+        }
+
+        .example-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .example-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 600px;
+        }
+
+        .example-table thead th {
+            background: var(--bg-darker);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--bg-light);
+            white-space: nowrap;
+        }
+
+        .example-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--bg-light);
+            vertical-align: top;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .example-table tbody tr:last-child td { border-bottom: none; }
+
+        .example-table tbody tr:nth-child(even) td {
+            background: rgba(90, 26, 21, 0.4);
+        }
+
+        .example-table tbody td:first-child {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .example-annotation {
+            max-width: 720px;
+            margin: 24px auto 0;
+        }
+
+        .example-annotation p {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .example-annotation p:last-child { margin-bottom: 0; }
+        .example-annotation strong { color: var(--text); }
+
+        /* ══════════════════════════════════════ */
+        /* HANDOFF                                */
+        /* ══════════════════════════════════════ */
+        .handoff-section {
+            padding: 64px 48px;
+        }
+
+        .handoff-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .handoff-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .handoff-inner p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .handoff-inner p:last-child { margin-bottom: 0; }
+        .handoff-inner strong { color: var(--text-bright); }
+        .handoff-inner em { color: var(--yellow); font-style: normal; }
+
+        .handoff-link {
+            display: inline-block;
+            margin-top: 8px;
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 14px;
+            border-bottom: 1px dashed var(--dim-dark);
+        }
+
+        .handoff-link:hover { color: var(--text-bright); border-bottom-color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* IMPLICATIONS                           */
+        /* ══════════════════════════════════════ */
+        .implications-section {
+            background: var(--bg-dark);
+            padding: 80px 48px;
+        }
+
+        .implications-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .implications-inner h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 24px;
+        }
+
+        .implication-item {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .implication-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .implication-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+        }
+
+        .implication-desc {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .implication-desc strong { color: var(--text-bright); }
+
+        /* ══════════════════════════════════════ */
+        /* FOOTER ELEMENTS                        */
+        /* ══════════════════════════════════════ */
+        .version-bar {
+            padding: 24px 48px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--dim-dark);
+        }
+
+        .footer-section {
+            padding: 24px 48px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--dim);
+            font-size: 13px;
+        }
+
+        .footer-inner a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+
+        .footer-inner a:hover { color: var(--green); }
+
+        /* ══════════════════════════════════════ */
+        /* RESPONSIVE                             */
+        /* ══════════════════════════════════════ */
+        @media (max-width: 1100px) {
+            .frag-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 900px) {
+            .hero, .problem-section, .outputs-section, .context-section,
+            .define-section, .audit-section, .encode-section,
+            .example-section, .handoff-section, .implications-section,
+            .footer-section, .topbar {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero h1 { font-size: 28px; }
+            .outputs-grid { grid-template-columns: 1fr; }
+            .define-grid { grid-template-columns: 1fr; }
+            .encode-grid { grid-template-columns: 1fr; }
+            .frag-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .footer-inner { flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <a href="ai-search-visibility-workflow.html" class="back">&larr; AI Search Visibility Workflow</a>
+        <span class="topbar-parent">Practice 3 of 5 &middot; <a href="ai-search-visibility-workflow.html">View all practices</a></span>
+    </div>
+
+    <!-- ══════════════ HERO ══════════════ -->
+    <div class="hero">
+        <div class="hero-inner">
+            <div class="hero-label">Deep Dive &middot; Practice 03: Structure</div>
+            <h1>Make Your Brand Machine-Readable</h1>
+            <p class="lead">How to articulate what your brand is, audit whether AI systems agree, and encode your identity into the infrastructure they read. The practice that turns brand consistency into a visibility deliverable.</p>
+            <p class="hero-meta">v0.3 &middot; April 2026 &middot; Michael Ofei</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ THE PROBLEM ══════════════ -->
+    <div class="problem-section">
+        <div class="problem-inner">
+            <h2>The Identity Fragmentation Problem</h2>
+            <p>Most brands describe themselves differently on every surface they occupy. Their G2 profile calls them a "project management tool." Wikidata says "note-taking application." Crunchbase still has the description from their Series A. LinkedIn sounds like HR wrote it. TikTok sounds like an intern wrote it. Each description was written by a different person, at a different time, for a different audience &mdash; and nobody coordinates because nobody had to.</p>
+            <p>Before AI search, this didn't matter for visibility. Your Trustpilot description had nothing to do with your search rankings. Your TikTok bio existed in a completely separate universe from your schema markup. Google read your website. Everything else was a branding concern.</p>
+            <p>AI search changed the equation. AI systems don't just read your website &mdash; they <em>assemble your brand identity from every surface simultaneously</em>. Your G2 reviews, your Wikidata entry, your YouTube channel description, your social bios, your community mentions. When those surfaces tell different stories about what you are, the AI's confidence drops. And when it's not confident about what you are, it's not confident recommending you.</p>
+            <p>The only precedent is NAP consistency in local SEO &mdash; making sure your Name, Address, and Phone number were identical across every directory. But NAP was mechanical: copy your address correctly across 50 listings. This is strategic: <strong>articulate what your brand is, then make sure every surface AI reads agrees</strong>. Brand narrative consistency became an SEO deliverable. Most teams haven't caught up.</p>
+            <p style="margin-top: 16px; font-size: 14px; color: var(--dim); line-height: 1.65;"><strong style="color: var(--text);">A note on technical accessibility:</strong> This practice assumes your content is technically accessible to AI systems &mdash; that crawlers can reach and render your pages, that your site loads and functions properly, that basic technical SEO foundations are in place. If AI systems can't access your content, entity signals don't matter. Technical accessibility (crawlability, rendering, emerging AI-specific protocols) is foundational infrastructure this workflow builds on top of, not a replacement for.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ TWO OUTPUTS ══════════════ -->
+    <div class="outputs-section">
+        <div class="outputs-header">
+            <h2>Two Outputs</h2>
+            <p>Structure produces the identity foundation that Publish builds on and Measure audits. Without the first output, the second is just technical markup with no strategic backbone. Without the second, your identity exists in a Google Doc that AI systems can't read.</p>
+        </div>
+        <div class="outputs-grid">
+            <div class="output-card output-card--primary">
+                <div class="output-number">01</div>
+                <div class="output-title">Defined Brand Narratives</div>
+                <div class="output-desc">The canonical articulation of what your brand is &mdash; at company level and for each priority customer world. One paragraph each. These are the source of truth that every schema description, every profile bio, every piece of content, and every community interaction draws from.</div>
+                <div class="output-desc">Company-level answers "what are we?" for AI systems and humans alike. Customer-world-level answers "what are we <em style="color: var(--yellow); font-style: normal;">for this specific customer</em>?" Both need to exist before encoding makes any sense.</div>
+                <div class="output-feeds"><strong>Feeds into:</strong> the encoding step below (what you encode), <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Practice 2 (Map)</a> retroactively sharpens the Narrative component row, and Practice 4 (Publish) as the narrative foundation for all content and presence.</div>
+            </div>
+            <div class="output-card output-card--secondary">
+                <div class="output-number">02</div>
+                <div class="output-title">Consistent Entity Infrastructure</div>
+                <div class="output-desc">Machine-readable identity across all surfaces AI reads. Schema markup on your site, Knowledge Graph presence, profile descriptions on review platforms, social bios, business directories. Not just markup on your website &mdash; consistency across every surface where your brand is described.</div>
+                <div class="output-desc">The infrastructure that makes your brand parseable. Content is published onto this foundation. Without it, even great content sits on a brand that AI systems can't confidently identify or categorize.</div>
+                <div class="output-feeds"><strong>Feeds into:</strong> Practice 4 (Publish) builds content on this foundation. Practice 5 (Measure) uses this as the baseline for ongoing consistency audits.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ WHY THIS MATTERS NOW ══════════════ -->
+    <div class="context-section">
+        <div class="context-header">
+            <h2>Why This Matters Now</h2>
+            <p>Before AI search, brand consistency lived in a brand guidelines PDF that marketing referenced and everyone else ignored. SEO teams managed your website. Social teams managed your bios. Product teams wrote G2 responses. Nobody coordinated because the surfaces didn't talk to each other &mdash; your Wikidata entry had nothing to do with your organic rankings.</p>
+            <p>AI systems changed this fundamentally. When someone asks an AI for a recommendation, the system pulls from every surface where your brand appears &mdash; simultaneously. It reads your schema markup, your review platform profiles, your social bios, your Wikipedia entry, your community mentions. It assembles a composite identity in real time. If those sources agree, the AI's entity confidence is high. If they disagree, the AI hedges &mdash; or moves on to a brand that gave it clearer signals.</p>
+            <p>This means <strong>every surface where your brand is described is now an input to your AI search visibility</strong>. Your Trustpilot profile description. Your TikTok bio. Your Wikidata entry. Your Crunchbase short description. None of these were SEO concerns before. They all are now.</p>
+        </div>
+        <div class="context-principle">
+            <div class="context-principle-label">The Shift</div>
+            <div class="context-principle-text">Brand narrative consistency became an SEO deliverable the moment AI systems started reading every surface to understand what your brand is.</div>
+        </div>
+    </div>
+
+    <!-- ══════════════ STEP 1: DEFINE ══════════════ -->
+    <div class="define-section">
+        <div class="define-header">
+            <h2>Step 1: Define Your Narratives</h2>
+            <p>Before you can encode your identity or audit your consistency, you need to know what you're being consistent <em>about</em>. Most teams skip this step &mdash; they go straight to schema markup or content creation without ever writing down what their brand actually is at each level. Then they wonder why AI systems describe them differently on every surface.</p>
+            <p>The definition work happens at two levels: company and customer world. The output is lightweight &mdash; one paragraph each. <strong>The hard part isn't writing the paragraph. It's getting organizational alignment on a single version.</strong></p>
+        </div>
+
+        <!-- Company-level -->
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="subsection-label">Company-Level Narrative</div>
+            <div class="subsection-desc">
+                <p>Three questions produce one paragraph. This paragraph becomes the master description that every schema entry, every profile bio, and every About section draws from. If your company had to introduce itself in one breath to an AI system that had never encountered you, this is what you'd say.</p>
+            </div>
+        </div>
+
+        <div class="define-grid">
+            <div class="define-card">
+                <div class="define-card-number">01</div>
+                <div class="define-card-title">What are we?</div>
+                <div class="define-card-desc">The category. Not marketing language &mdash; the honest answer. This goes in your schema "description," your Wikidata "instance of" field, and the first sentence of every profile.</div>
+                <div class="define-card-example"><strong>SaaS:</strong> "Connected workspace." <strong>DTC:</strong> "Activewear brand." <strong>Hospitality:</strong> "Farm-to-table restaurant." <strong>Services:</strong> "Digital marketing agency."</div>
+            </div>
+            <div class="define-card">
+                <div class="define-card-number">02</div>
+                <div class="define-card-title">What do we do?</div>
+                <div class="define-card-desc">The core value. What someone gets from you that they can't get from doing nothing. Specific enough that an AI system could distinguish you from your category peers.</div>
+                <div class="define-card-example"><strong>SaaS:</strong> "Replace scattered tools with one system that adapts to how each team works." <strong>DTC:</strong> "Studio-to-street performance at half the luxury price." <strong>Hospitality:</strong> "Seasonal tasting menus using local ingredients." <strong>Services:</strong> "Content-led SEO for B2B SaaS companies."</div>
+            </div>
+            <div class="define-card">
+                <div class="define-card-number">03</div>
+                <div class="define-card-title">Who are we for?</div>
+                <div class="define-card-desc">The audience, in situation terms. Not demographics &mdash; the customer worlds from <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none;">Know</a>. Broad enough to cover your brand, specific enough to be useful.</div>
+                <div class="define-card-example"><strong>SaaS:</strong> "Teams replacing tool sprawl." <strong>DTC:</strong> "People who want their workout wardrobe to work as hard as they do." <strong>Hospitality:</strong> "Couples and small groups seeking memorable dining." <strong>Services:</strong> "B2B SaaS companies scaling organic growth."</div>
+            </div>
+        </div>
+
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="subsection-desc">
+                <p>Combine into one paragraph. Two examples:</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Canonical Narrative</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Notion (SaaS)</td>
+                        <td>Notion is a connected workspace where teams organize work, manage projects, and build shared knowledge &mdash; replacing scattered tools with one system that adapts to how each team works.</td>
+                    </tr>
+                    <tr>
+                        <td>Adanola (DTC)</td>
+                        <td>Adanola is a UK-based activewear brand making performance-driven pieces that transition from studio to street &mdash; designed for people who want their workout wardrobe to work as hard as they do, without the luxury price tag.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-annotation">
+            <p><strong>This is the paragraph that matters more than any schema implementation.</strong> If this paragraph is clear and everyone in the organization uses it, your entity consistency is already ahead of 90% of brands. If this paragraph doesn't exist &mdash; or if marketing has one version, sales has another, and product has a third &mdash; no amount of structured data will fix the fragmentation downstream.</p>
+        </div>
+
+        <!-- Customer-world-level -->
+        <div style="max-width: 1200px; margin: 40px auto 0;">
+            <div class="subsection-label subsection-label--alt">Customer-World Narratives</div>
+            <div class="subsection-desc">
+                <p>For each P1 customer world from <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Know</a>, articulate how your brand positions itself for that customer's situation. These are shorter and more specific &mdash; they capture the competitive anchor and the specific value for this world. They feed into the Narrative component row in the <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">context map</a> and into the encoding of collection and audience pages.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <div class="table-label">Notion &mdash; Customer-world narratives</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Customer World</th>
+                        <th>Narrative</th>
+                        <th>Competitive Anchor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Product Teams</td>
+                        <td>For product teams managing the full build cycle &mdash; roadmaps, PRDs, sprint boards, retrospectives &mdash; Notion replaces the Jira-Confluence-Google Docs sprawl with one workspace where everything connects.</td>
+                        <td>Jira, Confluence</td>
+                    </tr>
+                    <tr>
+                        <td>Marketing Teams</td>
+                        <td>For marketing teams running campaigns across channels, Notion replaces the spreadsheet-and-slide workflow with connected briefs, calendars, and cross-functional requests.</td>
+                        <td>Asana, Monday</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-wrapper" style="margin-top: 32px;">
+            <div class="table-label table-label--alt">Adanola &mdash; Customer-world narratives</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Customer World</th>
+                        <th>Narrative</th>
+                        <th>Competitive Anchor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Studio &amp; Yoga</td>
+                        <td>For studio practitioners who want activewear that moves with them through reformer, barre, and yoga &mdash; and looks good enough for brunch after. Performance fabrics, flattering fits, half the price of Lululemon.</td>
+                        <td>Lululemon, Alo Yoga</td>
+                    </tr>
+                    <tr>
+                        <td>Gym &amp; Lifting</td>
+                        <td>For lifters who need compression that stays put through squats and deadlifts. Squat-proof, durable, designed for real workouts &mdash; not just the Instagram post.</td>
+                        <td>Gymshark, NVGTN</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Entity density pass -->
+        <div style="max-width: 1200px; margin: 40px auto 0;">
+            <div class="subsection-label subsection-label--alt">The Entity Density Pass</div>
+            <div class="subsection-desc">
+                <p>The three-question framework produces clean, human-readable narratives. But clean isn't enough. AI systems extract entity relationships from your descriptions &mdash; brand names, product names, competitive alternatives, integrations, specific use cases. Abstract language like "helps teams organize work" creates weak entity signals. <strong>Concrete language that names specific entities creates the relationships AI systems use to categorize and recommend you.</strong></p>
+                <p>Once you have the clean narrative, run an entity density pass: replace abstractions with the actual entity names.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <div class="table-label">Before and after &mdash; Notion</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Narrative</th>
+                        <th>Entities AI Can Extract</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Clean (from framework)</td>
+                        <td>Notion is a connected workspace where teams organize work, manage projects, and build shared knowledge &mdash; replacing scattered tools with one system that adapts to how each team works.</td>
+                        <td class="td-dim">Notion, connected workspace, teams &mdash; 3 entities</td>
+                    </tr>
+                    <tr>
+                        <td>Entity-dense</td>
+                        <td>Notion is a connected workspace where product teams, marketing teams, and engineering teams organize roadmaps, PRDs, campaign briefs, and technical documentation in one system &mdash; replacing Jira, Confluence, Asana, and Google Docs with a platform that integrates with Linear, GitHub, Slack, and Figma.</td>
+                        <td class="td-green">Notion, connected workspace, product teams, marketing teams, engineering teams, roadmaps, PRDs, campaign briefs, technical documentation, Jira, Confluence, Asana, Google Docs, Linear, GitHub, Slack, Figma &mdash; 17 entities</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-wrapper" style="margin-top: 24px;">
+            <div class="table-label table-label--alt">Before and after &mdash; Adanola</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Narrative</th>
+                        <th>Entities AI Can Extract</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Clean (from framework)</td>
+                        <td>Adanola is a UK-based activewear brand making performance-driven pieces that transition from studio to street &mdash; designed for people who want their workout wardrobe to work as hard as they do, without the luxury price tag.</td>
+                        <td class="td-dim">Adanola, UK, activewear brand, studio, street &mdash; 5 entities</td>
+                    </tr>
+                    <tr>
+                        <td>Entity-dense</td>
+                        <td>Adanola is a UK-based activewear brand making squat-proof leggings, seamless sports bras, and studio-to-street sets for yoga, Pilates, and gym training &mdash; a Lululemon and Gymshark alternative with performance fabrics at half the luxury price, sold on adanola.com and stocked at Selfridges.</td>
+                        <td class="td-green">Adanola, UK, activewear brand, squat-proof leggings, seamless sports bras, studio-to-street sets, yoga, Pilates, gym training, Lululemon, Gymshark, performance fabrics, adanola.com, Selfridges &mdash; 14 entities</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-annotation">
+            <p><strong>Same core narrative, radically different entity density.</strong> The clean version tells a human what the brand is. The entity-dense version tells a human <em>and</em> creates a web of relationships that AI systems can extract &mdash; competitive positioning (Lululemon, Gymshark), product categories (leggings, sports bras), use cases (yoga, Pilates, gym), distribution channels (own site, Selfridges). Use the clean version for social bios with character limits. Use the entity-dense version for schema descriptions, Wikidata entries, and profile descriptions where space allows.</p>
+        </div>
+
+        <!-- When narratives evolve -->
+        <div class="callout-box" style="margin-top: 32px;">
+            <div class="callout-box-label">When narratives evolve</div>
+            <p>Narratives have a shelf life. A tech company that encoded "connected workspace" across all surfaces six months ago may now be positioning around AI agents &mdash; and every previously-aligned surface has become a new fragmentation source. A DTC brand that launches a men's line. A restaurant that shifts from casual to fine dining. <strong>When the canonical narrative changes, the entire Audit and Encode cycle needs to rerun.</strong></p>
+            <p>The faster a business moves, the more frequently Structure needs to refresh. Watch for these triggers: major product pivot, new positioning language on the homepage, new customer world identified in Know, market expansion, acquisition. Each one means the narratives defined here need revisiting &mdash; and every surface encoded against the old narrative needs updating.</p>
+        </div>
+
+        <div class="callout-box" style="margin-top: 16px;">
+            <div class="callout-box-label">Where these feed</div>
+            <p>These narratives feed both directions. <strong>Back into Map</strong> &mdash; where they sharpen the Narrative component row in each context map. The Narrative row is no longer just "create a hub page" but "deploy this specific positioning on this surface." <strong>Forward into encoding</strong> &mdash; where the company-level narrative becomes your schema description, your Wikidata entry, and every profile bio. Customer-world narratives become collection page descriptions, audience landing page schema, and the voice for content in that customer world.</p>
+        </div>
+
+        <!-- Storing and managing narratives -->
+        <div style="max-width: 1200px; margin: 40px auto 0;">
+            <div class="subsection-label subsection-label--alt">Storing and Managing the Narratives</div>
+            <div class="subsection-desc">
+                <p>The canonical narratives need a home &mdash; a single document that everyone references, not a slide deck buried in someone's inbox. The tool matters less than the access pattern: one URL, one source of truth, visible version history, and the ability for relevant teams to comment and suggest.</p>
+            </div>
+        </div>
+
+        <div style="max-width: 720px; margin: 0 auto;">
+            <div class="audit-step" style="padding: 20px 0; border-bottom: 1px solid var(--bg-light);">
+                <div class="audit-step-label">Section 1: Current Narratives</div>
+                <div class="audit-step-desc">Always at the top. The company-level narrative (entity-dense version), each customer-world narrative with its competitive anchor, and the date each was last approved. This is the section people bookmark. When someone needs to write a G2 profile, update a social bio, or brief an agency, they start here.</div>
+            </div>
+            <div class="audit-step" style="padding: 20px 0; border-bottom: 1px solid var(--bg-light);">
+                <div class="audit-step-label">Section 2: Narrative History</div>
+                <div class="audit-step-desc">A running log of meaningful shifts. Each entry captures: the date, what changed, why it changed (the trigger &mdash; product pivot, new customer world, repositioning), and who approved it. Not a changelog for every word edit &mdash; just the strategic shifts. When the company moves from "connected workspace" to "AI-powered workspace with agents," that's an entry. When the DTC brand launches a men's line and adds a new customer world, that's an entry. This history becomes valuable when teams need to understand <em>why</em> the narrative changed &mdash; and when new hires need context on the brand's evolution.</div>
+            </div>
+            <div class="audit-step" style="padding: 20px 0; border-bottom: 1px solid var(--bg-light);">
+                <div class="audit-step-label">Section 3: Surface Registry</div>
+                <div class="audit-step-desc">A table listing every surface where the narrative is deployed: the surface name, who owns it (social team, SEO, product marketing, front-of-house manager), the date it was last aligned, and its current status (Consistent / Needs Update / Stale). This turns the consistency audit from a periodic project into a living tracker. <strong>When a new narrative version is approved, every row in the surface registry flips to "Needs Update"</strong> &mdash; and the row owners are responsible for bringing their surface into alignment.</div>
+            </div>
+            <div class="audit-step" style="padding: 20px 0;">
+                <div class="audit-step-label">Who owns it</div>
+                <div class="audit-step-desc">One person or a very small group has final approval on narrative changes. In a SaaS company, this is typically a brand lead or head of marketing. In a DTC brand, it might be the founder or creative director. In a restaurant group, the owner or managing partner. In an agency, the managing director. Other teams &mdash; product, sales, community, front-of-house &mdash; can suggest changes through comments. But the canonical version is controlled, not crowdsourced. <strong>Distributed input, centralized approval.</strong> The surface registry can have distributed ownership (the social team owns the TikTok bio, the SEO team owns schema, the restaurant manager owns the Google Business Profile), but the narrative itself has a single approver.</div>
+            </div>
+        </div>
+
+        <div class="table-annotation" style="margin-top: 24px;">
+            <p><strong>Put it where people already work.</strong> If the team lives in Google Workspace, it's a Google Doc with a linked Sheet for the surface registry. In Notion, it's a wiki page with a database for the registry. In Microsoft, it's a SharePoint doc with a linked Excel tracker. Don't create a new system for this. The narratives need to live where the people who reference them &mdash; the social media manager updating a bio, the SEO writing schema, the account manager briefing a partner &mdash; will actually find them.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ STEP 2: AUDIT ══════════════ -->
+    <div class="audit-section">
+        <div class="audit-header">
+            <h2>Step 2: The Consistency Audit</h2>
+            <p>Now you know what you should be saying. The next step is finding out how far reality has drifted. The consistency audit is embarrassingly simple and almost nobody does it: <em>collect your brand description from every surface, read them back to back, and mark the contradictions.</em></p>
+        </div>
+
+        <!-- Surface inventory -->
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="subsection-label" style="color: var(--green);">Surface Inventory by Industry</div>
+            <div class="subsection-desc">
+                <p>Start with the surfaces your customer worlds use (captured in <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Know</a>). Then add the entity databases that AI systems read directly. Not every business needs every surface &mdash; a local restaurant doesn't need Crunchbase, a SaaS company probably doesn't need TikTok. The surfaces that matter are the ones where your customers and AI agents encounter you.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="data-table data-table--dark" style="min-width: 900px;">
+                <thead>
+                    <tr>
+                        <th>Surface Type</th>
+                        <th>B2B SaaS</th>
+                        <th>DTC / E-Commerce</th>
+                        <th>Services / Hospitality</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Your site</td>
+                        <td>About page, product/feature pages, "for [audience]" landing pages</td>
+                        <td>About page, collection pages, product pages (potentially hundreds)</td>
+                        <td>About page, service pages, menu, team/practitioner bios</td>
+                    </tr>
+                    <tr>
+                        <td>Review platforms</td>
+                        <td>G2, Capterra, TrustRadius</td>
+                        <td>Trustpilot, Amazon, on-site reviews</td>
+                        <td>Google Reviews, Yelp, TripAdvisor</td>
+                    </tr>
+                    <tr>
+                        <td>Social profiles</td>
+                        <td>LinkedIn, YouTube, GitHub</td>
+                        <td>TikTok, Instagram, Pinterest, YouTube</td>
+                        <td>Instagram, Facebook, TikTok</td>
+                    </tr>
+                    <tr>
+                        <td>Business databases</td>
+                        <td>Crunchbase, LinkedIn Company</td>
+                        <td>Google Merchant Center</td>
+                        <td>Google Business Profile, Apple Maps</td>
+                    </tr>
+                    <tr>
+                        <td>Knowledge bases</td>
+                        <td>Wikidata, Wikipedia</td>
+                        <td>Wikidata (if notable enough)</td>
+                        <td>Wikidata (if notable enough)</td>
+                    </tr>
+                    <tr>
+                        <td>Knowledge Panel</td>
+                        <td>Google Knowledge Panel</td>
+                        <td>Google Knowledge Panel</td>
+                        <td>Google Knowledge Panel</td>
+                    </tr>
+                    <tr>
+                        <td>Industry-specific</td>
+                        <td>Product Hunt, StackShare, integration marketplaces</td>
+                        <td>Affiliate networks, marketplace listings</td>
+                        <td>OpenTable, Resy, booking platforms, local directories</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- The read-through -->
+        <div style="max-width: 1200px; margin: 40px auto 0;">
+            <div class="subsection-label" style="color: var(--green);">The Read-Through</div>
+        </div>
+        <div class="audit-steps">
+            <div class="audit-step">
+                <div class="audit-step-label">Collect</div>
+                <div class="audit-step-desc">Copy your brand description from every surface on your inventory into a single document. Include the platform name next to each one. For social platforms with character limits, capture the full bio text.</div>
+            </div>
+            <div class="audit-step">
+                <div class="audit-step-label">Read back to back</div>
+                <div class="audit-step-desc">Read every description in sequence. Out loud if possible. You're looking for the feeling of reading about the same company versus the feeling of reading about different companies that happen to share a name.</div>
+            </div>
+            <div class="audit-step">
+                <div class="audit-step-label">Mark four things</div>
+                <div class="audit-step-desc"><strong>Contradictions</strong> &mdash; surfaces that describe you differently. <strong>Staleness</strong> &mdash; descriptions written years ago that no longer reflect what you do. <strong>Absences</strong> &mdash; surfaces with no description at all, or platform defaults. <strong>Category mismatches</strong> &mdash; platforms that categorize you in different categories (this one is especially damaging for entity clarity).</div>
+            </div>
+            <div class="audit-step">
+                <div class="audit-step-label">Score</div>
+                <div class="audit-step-desc">For each surface: does this echo the canonical narrative? A simple <strong>Consistent / Partial / Missing / Wrong</strong> assessment is enough. The goal isn't a detailed report &mdash; it's a clear picture of where the gaps are, ordered by the surface's importance to your customer worlds.</div>
+            </div>
+        </div>
+
+        <!-- Fragmentation types -->
+        <div style="max-width: 1200px; margin: 40px auto 0;">
+            <div class="subsection-label" style="color: var(--yellow);">Common Fragmentation Patterns</div>
+        </div>
+        <div class="frag-grid">
+            <div class="frag-card frag-card--category">
+                <div class="frag-card-title">Category Contradictions</div>
+                <div class="frag-card-desc">G2 says "project management." Wikidata says "note-taking application." Capterra says "collaboration tool." AI systems encounter three different answers to "what is this?" The entity graph fragments.</div>
+            </div>
+            <div class="frag-card frag-card--stale">
+                <div class="frag-card-title">Description Staleness</div>
+                <div class="frag-card-desc">Crunchbase still has the Series A pitch. LinkedIn About was written by a departed CMO. Trustpilot shows the platform default. The descriptions are technically present but describe a company that no longer exists.</div>
+            </div>
+            <div class="frag-card frag-card--missing">
+                <div class="frag-card-title">Missing Presences</div>
+                <div class="frag-card-desc">No Wikidata entry. Unclaimed Knowledge Panel. Empty YouTube About section. These aren't inconsistencies &mdash; they're gaps where AI systems look for you and find nothing. Silence is a signal too.</div>
+            </div>
+            <div class="frag-card frag-card--voice">
+                <div class="frag-card-title">Voice Drift</div>
+                <div class="frag-card-desc">LinkedIn sounds corporate. TikTok sounds casual. G2 sounds enterprise. Your site sounds startup. Each was written by a different team for a different audience. The question: would an AI reading all four know it's the same company?</div>
+            </div>
+        </div>
+
+        <div class="callout-box" style="margin-top: 32px;">
+            <div class="callout-box-label">What about mentions you don't control?</div>
+            <p>The audit focuses on <strong>controlled surfaces</strong> &mdash; your site, your profiles, your Wikidata entry, your schema. These are where you fix fragmentation. But your brand also appears on surfaces you didn't write: blog roundups, podcast interviews, Reddit threads, listicle features, news coverage.</p>
+            <p><strong>Don't chase these.</strong> Organic third-party mentions are valuable to AI systems precisely because they're independent. A Reddit comment explaining why someone switched to your product carries more entity weight than a self-published description because it's independent verification. Trying to control how every external source describes you is unreasonable at scale and counterproductive &mdash; you'd be trying to manage signals that are valuable because they're unmanaged.</p>
+            <p>The practical distinction: <strong>Controlled surfaces</strong> (your profiles, your schema) &mdash; fix the fragmentation here, this is Structure's job. <strong>Semi-controlled surfaces</strong> (your podcast appearances, guest articles, conference talks) &mdash; use your canonical narrative in future appearances, this is a Publish concern. <strong>Uncontrolled surfaces</strong> (third-party mentions, organic discussions) &mdash; measure these in Practice 5, don't manage them. The one exception: if a major authoritative source (Wikipedia, an industry database) has something factually wrong, correct it through their editorial process.</p>
+        </div>
+
+        <div class="callout-box" style="margin-top: 16px;">
+            <div class="callout-box-label">The audit is the highest-leverage action</div>
+            <p>The consistency audit and the fixes that follow it produce more entity improvement than any schema implementation. Most teams skip straight to technical markup. The ones that start with "are we even telling the same story everywhere?" find the biggest gaps before writing a line of JSON-LD. <strong>Fix the fragmentation before you encode the foundation.</strong></p>
+        </div>
+    </div>
+
+    <!-- ══════════════ STEP 3: ENCODE ══════════════ -->
+    <div class="encode-section">
+        <div class="encode-header">
+            <h2>Step 3: Encode</h2>
+            <p>The audit shows where reality has drifted from your canonical narratives. Encoding fixes the gaps and builds the machine-readable infrastructure that AI systems use to parse your brand. The priority sequence is the same regardless of industry &mdash; what changes is which surfaces carry the most weight and where the effort concentrates.</p>
+        </div>
+
+        <div class="encode-grid">
+            <div class="encode-card encode-card--p1">
+                <div class="encode-card-priority">Priority 1 &mdash; Highest Leverage</div>
+                <div class="encode-card-title">Fix the Fragmentation</div>
+                <div class="encode-card-desc">Update all surface descriptions to use your canonical narratives. Request category corrections on platforms you don't fully control. Adapt the narrative for platform constraints (character limits on social bios) while maintaining the core identity.</div>
+                <div class="encode-card-detail"><strong>What this looks like:</strong> Rewriting your G2 company description. Updating your Crunchbase profile. Aligning your social bios. Refreshing your Trustpilot company page. Contacting G2 about a category mismatch. Compressing your canonical narrative into 80 characters for TikTok without losing what you are.</div>
+            </div>
+            <div class="encode-card encode-card--p2">
+                <div class="encode-card-priority">Priority 2 &mdash; On-Site Foundation</div>
+                <div class="encode-card-title">Schema Markup</div>
+                <div class="encode-card-desc">Organization schema with your canonical description. sameAs links connecting to every external presence. Type-appropriate schema: Product for e-commerce, LocalBusiness for brick-and-mortar, SoftwareApplication for tools.</div>
+                <div class="encode-card-detail"><strong>Why sameAs matters:</strong> This is the explicit signal to AI systems that your website, your G2 profile, your YouTube channel, and your Wikidata entry are all the same entity. Without sameAs, AI systems infer the connection. With it, the connection is declared. List every external URL where your brand has a profile.</div>
+            </div>
+            <div class="encode-card encode-card--p3">
+                <div class="encode-card-priority">Priority 3 &mdash; Knowledge Graph</div>
+                <div class="encode-card-title">Wikidata, Wikipedia, Knowledge Panel</div>
+                <div class="encode-card-desc">Wikidata: create or update your entry with correct properties &mdash; "instance of," official website, industry, key people, products, integrations. This directly feeds Google's Knowledge Graph. Wikipedia: assess eligibility (not every brand qualifies, and this is not a marketing exercise). Knowledge Panel: claim and verify through Google Search Console.</div>
+                <div class="encode-card-detail"><strong>For newer or smaller brands:</strong> Wikidata eligibility depends on notability. If your brand doesn't qualify yet, focus on the surfaces you do control &mdash; complete Google Merchant Center data, rich Google Business Profile, claimed social profiles. The Knowledge Graph path opens as the brand grows. Don't force it.</div>
+            </div>
+            <div class="encode-card encode-card--p4">
+                <div class="encode-card-priority">Priority 4 &mdash; Compounds Over Time</div>
+                <div class="encode-card-title">Profile Completeness on Key Surfaces</div>
+                <div class="encode-card-desc">Go beyond descriptions. Fill every available field on your key platforms: features, integrations, screenshots, pricing tiers, categories, contact information. A complete profile signals entity maturity to AI systems. An empty profile with a name and one-line description signals minimal presence.</div>
+                <div class="encode-card-detail"><strong>Surface selection from Know:</strong> The surfaces that matter are the ones your customer worlds use. A SaaS company might prioritize G2 and Capterra feature completeness. A DTC brand might prioritize Google Merchant Center product data. A restaurant might prioritize Google Business Profile attributes (cuisine type, price range, dining options, hours).</div>
+            </div>
+        </div>
+
+        <!-- Cross-industry differences -->
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="subsection-label">Where the Effort Concentrates</div>
+            <div class="subsection-desc">
+                <p>The priority sequence (fix fragmentation, encode schema, build Knowledge Graph presence, complete profiles) is universal. What changes is where the heavy lifting sits.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="data-table" style="min-width: 800px;">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>B2B SaaS</th>
+                        <th>DTC / E-Commerce</th>
+                        <th>Services / Hospitality</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Highest-leverage single surface</td>
+                        <td>G2 / Capterra profile alignment</td>
+                        <td>Product schema across catalog</td>
+                        <td>Google Business Profile</td>
+                    </tr>
+                    <tr>
+                        <td>Biggest typical gap</td>
+                        <td>Wikidata staleness or absence</td>
+                        <td>Social bio fragmentation</td>
+                        <td>Multi-location inconsistency</td>
+                    </tr>
+                    <tr>
+                        <td>Heaviest encoding work</td>
+                        <td>Review platform monitoring (moderate)</td>
+                        <td>Product feed completeness &mdash; hundreds of SKUs (massive)</td>
+                        <td>Multi-platform profile management (moderate to heavy)</td>
+                    </tr>
+                    <tr>
+                        <td>Industry-specific priority</td>
+                        <td>Crunchbase, StackShare, integration marketplaces</td>
+                        <td>Google Merchant Center, collection page schema</td>
+                        <td>Apple Maps, reservation platforms, local directories</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-annotation">
+            <p><strong>Notice the effort disparity.</strong> A SaaS company's encoding work is concentrated on a handful of high-value surfaces &mdash; maybe 10&ndash;15 profiles and one website's schema. A DTC brand with 200 products needs Product schema on every product page, consistent collection page schema, and complete Google Merchant Center data. A multi-location restaurant group needs a fully built Google Business Profile for every location. The priority sequence is the same. The scale of execution is very different.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ WORKED EXAMPLES ══════════════ -->
+    <div class="example-section">
+        <div class="example-header">
+            <h2>The Full Journey: Define, Audit, Encode</h2>
+            <p>Two worked examples showing how the three steps connect. Same process, different surfaces, different scale of encoding work. Both use the customer worlds identified in <a href="ai-search-visibility-know.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Know</a> and the context maps from <a href="ai-search-visibility-map.html" style="color: var(--green); text-decoration: none; border-bottom: 1px dashed var(--green-dim);">Map</a>.</p>
+        </div>
+
+        <!-- ──── NOTION (SaaS) ──── -->
+        <div class="example-block">
+            <div class="example-label">B2B SaaS &mdash; Notion</div>
+
+            <div class="example-step-label">Step 1: Define</div>
+            <div class="example-context">
+                <p><strong>Company narrative:</strong> "Notion is a connected workspace where teams organize work, manage projects, and build shared knowledge &mdash; replacing scattered tools with one system that adapts to how each team works."</p>
+                <p><strong>Product Teams (P1):</strong> "For product teams managing the full build cycle, Notion replaces the Jira-Confluence-Google Docs sprawl with one workspace where roadmaps, PRDs, sprint boards, and retrospectives connect."</p>
+                <p><strong>Marketing Teams (P1):</strong> "For marketing teams running campaigns across channels, Notion replaces the spreadsheet-and-slide workflow with connected briefs, calendars, and cross-functional requests."</p>
+            </div>
+
+            <div class="example-step-label">Step 2: Audit</div>
+            <div class="example-table-wrapper">
+                <table class="example-table">
+                    <thead>
+                        <tr>
+                            <th>Surface</th>
+                            <th>Current Description</th>
+                            <th>Assessment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Site (About)</td>
+                            <td>"The connected workspace for your wiki, docs, and projects" &mdash; close to canonical</td>
+                            <td class="td-green">Consistent</td>
+                        </tr>
+                        <tr>
+                            <td>G2</td>
+                            <td>Category: "Project Management Software" &mdash; accurate for one customer world but not the full picture</td>
+                            <td class="td-yellow">Partial</td>
+                        </tr>
+                        <tr>
+                            <td>Wikidata</td>
+                            <td>Instance of: "note-taking application"</td>
+                            <td style="color: #c0392b;">Wrong</td>
+                        </tr>
+                        <tr>
+                            <td>Crunchbase</td>
+                            <td>Series B era description, focuses on individual note-taking use case</td>
+                            <td style="color: #c0392b;">Stale</td>
+                        </tr>
+                        <tr>
+                            <td>YouTube</td>
+                            <td>"Notion makes it easy to organize your life and work" &mdash; consumer framing, not team-centric</td>
+                            <td class="td-yellow">Partial</td>
+                        </tr>
+                        <tr>
+                            <td>LinkedIn</td>
+                            <td>HR-flavored description emphasizing workplace culture and mission</td>
+                            <td class="td-yellow">Partial</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="example-annotation">
+                <p><strong>The Wikidata entry is the biggest problem.</strong> "Note-taking application" feeds Google's Knowledge Graph directly &mdash; which means AI systems parsing Notion's entity start from the wrong category. The Crunchbase description is stale but less damaging because fewer AI systems weight it heavily. The G2 category is partially correct &mdash; project management is one legitimate customer world, but it doesn't represent the full entity.</p>
+            </div>
+
+            <div class="example-step-label">Step 3: Encode</div>
+            <div class="example-context">
+                <p><strong>Priority 1:</strong> Update Wikidata "instance of" to "productivity software" or "collaborative software." Update Crunchbase description. Align YouTube About and LinkedIn Company description with canonical narrative.</p>
+                <p><strong>Priority 2:</strong> Organization schema on site with canonical description, sameAs links to G2, Capterra, Crunchbase, Wikidata, YouTube, LinkedIn, GitHub.</p>
+                <p><strong>Priority 3:</strong> Verify Knowledge Panel claim. Submit suggested edits if description is pulling from stale Wikidata entry.</p>
+                <p><strong>Priority 4:</strong> Complete G2 and Capterra profiles &mdash; all feature fields, integrations, screenshots, use-case tags for Product Teams and Marketing Teams.</p>
+            </div>
+        </div>
+
+        <!-- ──── ADANOLA (DTC) ──── -->
+        <div class="example-block">
+            <div class="example-label example-label--alt">DTC Athleisure &mdash; Adanola</div>
+
+            <div class="example-step-label">Step 1: Define</div>
+            <div class="example-context">
+                <p><strong>Company narrative:</strong> "Adanola is a UK-based activewear brand making performance-driven pieces that transition from studio to street &mdash; designed for people who want their workout wardrobe to work as hard as they do, without the luxury price tag."</p>
+                <p><strong>Studio &amp; Yoga (P1):</strong> "For studio practitioners who want activewear that moves with them through reformer, barre, and yoga &mdash; and looks good enough for brunch after. Performance fabrics, flattering fits, half the price of Lululemon."</p>
+                <p><strong>Gym &amp; Lifting (P1):</strong> "For lifters who need compression that stays put through squats and deadlifts. Squat-proof, durable, designed for real workouts &mdash; not just the Instagram post."</p>
+            </div>
+
+            <div class="example-step-label">Step 2: Audit</div>
+            <div class="example-table-wrapper">
+                <table class="example-table">
+                    <thead>
+                        <tr>
+                            <th>Surface</th>
+                            <th>Current Description</th>
+                            <th>Assessment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Site (About)</td>
+                            <td>Editorial brand story &mdash; matches canonical tone and positioning</td>
+                            <td class="td-green">Consistent</td>
+                        </tr>
+                        <tr>
+                            <td>TikTok bio</td>
+                            <td>"Your new favourite brand" &mdash; personality-driven, no identity signal</td>
+                            <td class="td-yellow">Partial</td>
+                        </tr>
+                        <tr>
+                            <td>Instagram bio</td>
+                            <td>"Performance meets style" &mdash; closer but generic, could be any activewear brand</td>
+                            <td class="td-yellow">Partial</td>
+                        </tr>
+                        <tr>
+                            <td>Trustpilot</td>
+                            <td>Platform default description &mdash; not customized</td>
+                            <td style="color: #c0392b;">Missing</td>
+                        </tr>
+                        <tr>
+                            <td>Wikidata</td>
+                            <td>No entry exists</td>
+                            <td style="color: #c0392b;">Absent</td>
+                        </tr>
+                        <tr>
+                            <td>Google Merchant Center</td>
+                            <td>Product feed data only, no brand-level narrative</td>
+                            <td class="td-yellow">Incomplete</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="example-annotation">
+                <p><strong>A different fragmentation pattern.</strong> Notion's problem is contradiction (surfaces that actively disagree). Adanola's problem is <strong>absence and vagueness</strong> &mdash; surfaces where the brand either isn't described at all (Trustpilot, Wikidata) or is described too generically to create entity clarity (TikTok, Instagram). "Your new favourite brand" tells an AI system nothing about what Adanola is. That's a missed signal on a platform where the brand's customer worlds are most active.</p>
+            </div>
+
+            <div class="example-step-label">Step 3: Encode</div>
+            <div class="example-context">
+                <p><strong>Priority 1:</strong> Write Trustpilot company description using canonical narrative. Rewrite social bios: compress the canonical narrative for platform character limits while preserving "activewear," "studio to street," and "performance." Complete Google Merchant Center brand data.</p>
+                <p><strong>Priority 2:</strong> Product schema on every product page &mdash; Brand, description, price, aggregateRating, material, available sizes. Organization + Brand schema on homepage. This is the heaviest encoding step for DTC: potentially hundreds of product pages.</p>
+                <p><strong>Priority 3:</strong> Assess Wikidata eligibility. If not yet notable enough, ensure Google Merchant Center brand data is complete (this is the DTC equivalent of the Knowledge Graph for product entities). Collection page schema per customer world &mdash; connecting the Studio &amp; Yoga narrative to its products.</p>
+                <p><strong>Priority 4:</strong> Rich Pinterest profile (complete About, board descriptions aligned with customer worlds). Product-level schema completion across the full catalog.</p>
+            </div>
+        </div>
+
+        <div class="example-annotation">
+            <p><strong>Same three steps, completely different execution.</strong> Notion's encoding is concentrated &mdash; maybe 8 profiles to align and one website's schema to implement. Adanola's encoding includes a massive product catalog and social platforms where character limits demand creative compression of the brand narrative. The process is identical. The surface mix and the scale of the work are not.</p>
+        </div>
+    </div>
+
+    <!-- ══════════════ HANDOFF TO PUBLISH ══════════════ -->
+    <div class="handoff-section">
+        <div class="handoff-inner">
+            <h2>The Handoff</h2>
+            <p>Structure defines and encodes your identity. Publish deploys it. You're delivering two things forward: <strong>canonical narratives at every level</strong> (the source of truth for how your brand talks about itself in content, community participation, and review responses) and <strong>a consistent entity foundation</strong> (the infrastructure that all content is published onto).</p>
+            <p>The distinction matters. Structure answers <em>"can AI systems parse what we are?"</em> Publish answers "is our story out there, everywhere it needs to be?" Structure gives you an identity that's consistent and machine-readable. Publish gives you a <em>presence</em> that's rich, authentic, and covering the surfaces where your customer worlds make decisions.</p>
+            <p>The question that connects them: <strong>"Now that AI systems can accurately parse what we are, is our brand narrative present and consistent across every surface where customers and AI agents encounter us?"</strong></p>
+            <a href="#" class="handoff-link">Continue to Practice 4: Publish (coming soon)</a>
+        </div>
+    </div>
+
+    <!-- ══════════════ IMPLICATIONS ══════════════ -->
+    <div class="implications-section">
+        <div class="implications-inner">
+            <h2>What This Changes</h2>
+
+            <div class="implication-item">
+                <div class="implication-title">Brand consistency became an SEO deliverable</div>
+                <div class="implication-desc">AI search made every surface where your brand is described an input to your visibility. Your Trustpilot profile, your TikTok bio, your Wikidata entry &mdash; these were never SEO concerns before. They are now. The teams that coordinate across surfaces will have stronger entity signals than the teams that optimize their website in isolation.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">The highest-leverage action is the least technical</div>
+                <div class="implication-desc">The one-paragraph narrative exercise and the consistency audit together produce more entity improvement than any schema implementation. Most teams skip straight to markup. The ones that start with <strong>"are we even telling the same story everywhere?"</strong> find the biggest gaps before writing a line of JSON-LD.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Different industries, same priority sequence</div>
+                <div class="implication-desc">The specific surfaces differ (G2 vs. Trustpilot vs. Google Business Profile). The encoding effort differs (5 profiles vs. 500 product pages). But the sequence is universal: define the narrative, audit cross-surface consistency, fix the fragmentation, encode schema, build Knowledge Graph presence, complete profiles. The process works for a SaaS company, a DTC brand, a restaurant chain, and a consulting firm.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Structure is infrastructure, not a project</div>
+                <div class="implication-desc">Structure operates at three cadences, and most teams only do the first. <strong>Initial setup:</strong> Define, Audit, Encode for the first time. This is where most teams stop. <strong>Drift maintenance:</strong> periodic re-audits (quarterly or semi-annual) to catch surfaces where other teams updated descriptions with inconsistent language, new profiles that were created without referencing the canonical narrative, or descriptions that went stale. <strong>Pivot refresh:</strong> triggered by significant business evolution &mdash; new product positioning, new customer worlds, market expansion, acquisition. A tech company that repositions around AI agents after building its entity identity around "connected workspace" needs to rerun the full cycle. Every surface encoded against the old narrative becomes a new fragmentation source the moment the narrative moves. The faster the business evolves, the more frequently Structure needs to refresh.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">You can't encode what you haven't defined</div>
+                <div class="implication-desc">This is the most common failure mode. Teams implement Organization schema with a generic meta description. They create a Wikidata entry with a stale tagline. They update their G2 profile with whatever the product marketer had in a slide deck. The encoding is only as good as the narrative behind it. If the narrative doesn't exist &mdash; or if three different versions of it live in three different departments &mdash; the encoding just amplifies the fragmentation.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Encoding affects retrieval immediately but training data on its own timeline</div>
+                <div class="implication-desc">AI systems encounter your brand through two mechanisms. <strong>Retrieval</strong> &mdash; real-time web searches that read your current surfaces as they are right now. When ChatGPT searches the web to answer a question about your brand, it reads your current G2 profile, your current schema, your current Trustpilot page. This is the mechanism Structure's encoding work most directly affects, and it's where you see results first. <strong>Training data</strong> &mdash; the corpus the model was trained on, which reflects a snapshot in time and updates on its own cycle (months to years between major runs). If your Wikidata entry said "note-taking application" when training data was collected, the model may carry that association regardless of today's corrections. The trend is toward more retrieval and grounding, which means the surfaces you control and encode today carry increasing weight. But the honest framing is: consistent, entity-dense signals across controlled surfaces compound over time across both mechanisms. You build the picture AI systems assemble whether they're searching live or drawing from training data &mdash; but the live layer is where the encoding work pays off first.</div>
+            </div>
+
+            <div class="implication-item">
+                <div class="implication-title">Entity SEO is the tactical layer beneath this practice</div>
+                <div class="implication-desc">The five optimization strategies from entity SEO &mdash; entity foundation assessment, query decomposition testing, competitive entity mapping, entity-dense content, and strategic co-citations &mdash; are the implementation playbook for the encoding step. Structure sets the strategy and infrastructure. Entity SEO techniques operationalize the encoding. (The Backlinko entity SEO article covers this depth in a way that complements rather than duplicates this practice.)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ VERSION ══════════════ -->
+    <div class="version-bar">
+        <p>v0.3 &middot; April 16, 2026 &middot; Added practical storage guidance (three-section document: Current Narratives, Narrative History, Surface Registry). Added ownership model (distributed input, centralized approval — industry-agnostic language). Added training data vs. retrieval distinction as implication (encoding affects real-time grounding immediately; training data on its own timeline; trend toward more retrieval).</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section">
+        <div class="footer-inner">
+            <a href="ai-search-visibility-workflow.html">&larr; AI Search Visibility Workflow</a>
+            <span>Michael Ofei. April 2026.</span>
+        </div>
+    </div>
+
+</body>
+</html>
