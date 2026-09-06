@@ -1,0 +1,132 @@
+/* Shared editorial treatment. Page-specific styles only retain diagram geometry. */
+.essay-diagrams {
+  --bg: #fff;
+  --bg-dark: #faf8f5;
+  --bg-darker: #fff;
+  --bg-light: #ece8e2;
+  --text: #3d3935;
+  --text-bright: #272522;
+  --dim: #706961;
+  --dim-dark: #706961;
+  --yellow: #4054d6;
+  --green: #4b6356;
+  --green-dim: #adbab1;
+  --red: #8c4f42;
+}
+.essay-diagrams .visual {
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.essay-diagrams .visual p { font-size: inherit; line-height: inherit; margin: 0; }
+.essay-diagrams .visual .visual-caption,
+.essay-diagrams .visual figcaption {
+  margin: 26px 0 0;
+  color: var(--dim);
+  font-size: 13px;
+  text-align: left;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.6;
+}
+.essay-diagrams .diagram-note {
+  margin: 0 0 20px;
+  color: var(--dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.essay-diagrams .visual div { min-width: 0; }
+.essay-diagrams .visual :is(ul,ol) { margin: 0; }
+.essay-diagrams .tier-card,
+.essay-diagrams .tool-card,
+.essay-diagrams .tool-callout,
+.essay-diagrams .token-callout {
+  margin: 36px 0;
+  padding: 26px;
+  background: #faf8f5;
+  border: 1px solid var(--line);
+  border-radius: 2px !important;
+  font-family: -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.essay-diagrams .tier-card ul { padding-left: 18px; }
+.essay-diagrams .tier-card li { font-size: 14px; line-height: 1.6; }
+.essay-diagrams .tier-card li::before { content: none; }
+.essay-diagrams .tier-card li::marker { color: var(--muted); }
+.essay-diagrams .tier-card-question { font-size: 19px; }
+.essay-diagrams :is(.tool-card,.tool-callout,.token-callout) p { margin: 0; font-size: 15px; }
+.essay-diagrams :is(.tool-card-label,.tool-callout-label,.token-callout-header,.further-reading-label) { text-transform: none; letter-spacing: normal; font-size: 13px; }
+.essay-diagrams .further-reading { margin: 40px 0; padding: 25px; border: 1px solid var(--line); background: #faf8f5; }
+.essay-diagrams .further-reading p { font-size: 17px; }
+.essay-diagrams .visual :is(.fetch-code,.strip-before,.strip-after,.folder-structure,.js-shell-line) {
+  font-family: ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.essay-diagrams .visual :is(.fetch-code,.fetch-line,.strip-before,.strip-after,.folder-structure) { overflow: visible; white-space: normal; overflow-wrap: anywhere; }
+.essay-diagrams .fetch-header { flex-wrap: wrap; }
+.essay-diagrams .fetch-size { margin-left: 0; }
+.essay-diagrams .chunk-block { font-size: 14px; }
+.essay-diagrams .generate-source-text,
+.essay-diagrams .generate-output { font-size: 14px; }
+.essay-diagrams .retrieve-chunk-text { white-space: normal; overflow: visible; }
+.essay-diagrams .retrieve-chunk { gap: 10px; }
+.essay-diagrams .strip-column { overflow-wrap: anywhere; }
+.essay-diagrams .platform-table { overflow-x: auto; }
+.essay-diagrams .platform-table table { width: 100%; min-width: 570px; font-size: 13px; }
+.essay-diagrams .platform-table th { text-transform: none; letter-spacing: normal; }
+.essay-diagrams .js-compare-panel { overflow-wrap: anywhere; }
+.essay-diagrams .layer-stack { gap: 12px; }
+.essay-diagrams .layer-bar { width: 100%; background: #fff; border: 1px solid var(--line); color: var(--ink); }
+.essay-diagrams .layer-bar .label { color: var(--ink); font-size: 14px; }
+.essay-diagrams .layer-bar .detail { color: var(--muted); font-size: 13px; }
+.essay-diagrams .trigger-row { padding: 18px 0; }
+.essay-diagrams .trigger-example { font-size: 13px; }
+.essay-diagrams .deploy-channel { min-height: 48px; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+.essay-diagrams .deploy-pulse,
+.essay-diagrams .deploy-channel::before { display: none; }
+.essay-diagrams .asset-db-hcell { text-transform: none; letter-spacing: normal; }
+.essay-diagrams .asset-name { font-size: 13px; }
+.essay-diagrams .asset-db-header,
+.essay-diagrams .asset-db-row { grid-template-columns: minmax(0,1fr) 90px 65px; }
+.essay-diagrams .decouple-sketch { display: block; width: 100%; height: auto; }
+.essay-diagrams .attention-row { display: grid; grid-template-columns: 150px minmax(0,1fr); }
+.essay-diagrams .attention-label { text-align: left; }
+.essay-diagrams .attention-zone { font-size: 12px; text-transform: none; letter-spacing: normal; margin-top: 12px; }
+.essay-diagrams .dashboard-metric { gap: 12px; }
+.essay-diagrams .dashboard-metric-label { font-size: 13px; }
+.essay-diagrams .dashboard-metric-value { white-space: nowrap; }
+.essay-diagrams .question-range { font-size: 14px; }
+.essay-diagrams .question-text { font-size: 20px; }
+@media (max-width: 560px) {
+  .essay-diagrams .decouple-sketch text { font-size: 25px; }
+  .essay-diagrams .decouple-sketch text:last-child { text-anchor: end; }
+  .essay-diagrams .visual { padding: 24px 20px; }
+  .essay-diagrams .visual :is(.strip-columns,.generate-sources,.js-compare,.dashboard-compare,.contrast-grid,.skills-grid,.expansion-compare,.use-comparison) { display: grid; grid-template-columns: minmax(0,1fr); gap: 22px; }
+  .essay-diagrams .visual :is(.flow,.context-flow,.loop-container) { flex-direction: column; align-items: stretch; }
+  .essay-diagrams .flow-arrow { transform: rotate(90deg); text-align: center; }
+  .essay-diagrams .visual .paths { grid-template-columns: minmax(0,1fr); }
+  .essay-diagrams .path-box { text-align: left; }
+  .essay-diagrams .visual .path-desc { font-size: 14px; }
+  .essay-diagrams .layer-bar { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .essay-diagrams .visual .trigger-row { grid-template-columns: minmax(0,1fr); gap: 7px; }
+  .essay-diagrams .trigger-header { display: none; }
+  .essay-diagrams .visual .trigger-example { display: block; }
+  .essay-diagrams .attention-row { grid-template-columns: 125px minmax(0,1fr); }
+  .essay-diagrams .question-step { gap: 12px; }
+  .essay-diagrams .question-text { font-size: 17px; }
+  .essay-diagrams .question-tier-label { min-width: 45px; font-size: 12px; }
+  .essay-diagrams .stakeholder-row { grid-template-columns: 45px 20px minmax(0,1fr); gap: 8px; }
+  .essay-diagrams .stakeholder-who { font-size: 14px; }
+  .essay-diagrams .visual .asset-db-header,
+  .essay-diagrams .visual .asset-db-row { grid-template-columns: minmax(0,1fr) 60px 40px; gap: 8px; }
+  .essay-diagrams .asset-db-cell { padding: 12px 0; }
+  .essay-diagrams .asset-db-cell--date { font-size: 12px; }
+  .essay-diagrams .asset-db-hcell { font-size: 12px; }
+  .essay-diagrams .visual .token-compare { gap: 28px; }
+  .essay-diagrams .visual .token-bar { width: 72px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .essay-diagrams *, .essay-diagrams *::before, .essay-diagrams *::after { animation: none !important; transition: none !important; }
+}

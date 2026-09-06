@@ -1,315 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michael Ofei</title>
-    <meta name="description" content="Essays and tools on content strategy, storytelling, and building things with words and code. By Michael Ofei.">
-    <meta property="og:title" content="Michael Ofei">
-    <meta property="og:description" content="Essays and tools on content strategy, storytelling, and building things with words and code.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://michaelofei.co/">
-    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
-    <style>
-        :root {
-            /* Red Sands palette */
-            --bg: #7A251E;
-            --bg-light: #8a352e;
-            --text: #D7C9A7;
-            --text-bright: #E8DAB8;
-            --yellow: #E7B000;
-            --green: #00BB00;
-            --red: #FF3F00;
-            --dim: #a89878;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            font-size: 15px;
-            padding: 40px 20px;
-            max-width: 680px;
-            margin: 0 auto;
-        }
-
-        header {
-            margin-bottom: 60px;
-        }
-
-        .prompt {
-            color: var(--green);
-            margin-right: 8px;
-        }
-
-        h1 {
-            font-size: 18px;
-            font-weight: normal;
-            margin-bottom: 8px;
-            color: var(--text-bright);
-        }
-
-        .tagline {
-            color: var(--dim);
-            font-size: 14px;
-        }
-
-        nav {
-            margin-top: 24px;
-            display: flex;
-            gap: 24px;
-        }
-
-        nav a {
-            color: var(--dim);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: var(--green);
-        }
-
-        nav a.active {
-            color: var(--yellow);
-        }
-
-        section {
-            margin-bottom: 48px;
-        }
-
-        h2 {
-            font-size: 14px;
-            font-weight: normal;
-            color: var(--yellow);
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .essay-list {
-            list-style: none;
-        }
-
-        .essay-list li {
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: 16px;
-        }
-
-        .essay-list a {
-            color: var(--text);
-            text-decoration: none;
-        }
-
-        .essay-list a:hover {
-            color: var(--green);
-        }
-
-        .date {
-            color: var(--dim);
-            font-size: 13px;
-            flex-shrink: 0;
-        }
-
-        .project {
-            margin-bottom: 20px;
-        }
-
-        .project-title {
-            color: var(--text-bright);
-            margin-bottom: 4px;
-        }
-
-        .project-title a {
-            color: var(--text-bright);
-            text-decoration: none;
-        }
-
-        .project-title a:hover {
-            color: var(--green);
-        }
-
-        .project-desc {
-            color: var(--dim);
-            font-size: 14px;
-        }
-
-        footer {
-            margin-top: 80px;
-            padding-top: 24px;
-            border-top: 1px solid var(--bg-light);
-            color: var(--dim);
-            font-size: 13px;
-        }
-
-        footer a {
-            color: var(--dim);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: var(--green);
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: var(--yellow);
-            margin-left: 4px;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        /* Newsletter signup */
-        .newsletter {
-            margin: 48px 0;
-        }
-
-        .newsletter p {
-            margin-bottom: 1rem;
-        }
-
-        .newsletter .dim {
-            color: var(--dim);
-        }
-
-        .subscribe-form {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .subscribe-form input[type="email"] {
-            flex: 1;
-            min-width: 200px;
-            padding: 0.75rem;
-            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
-            font-size: 1rem;
-            background: #5a1a15;
-            border: 1px solid var(--dim);
-            color: var(--text);
-        }
-
-        .subscribe-form input[type="email"]::placeholder {
-            color: var(--dim);
-        }
-
-        .subscribe-form input[type="email"]:focus {
-            outline: none;
-            border-color: var(--yellow);
-        }
-
-        .subscribe-form button {
-            padding: 0.75rem 1.5rem;
-            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
-            font-size: 1rem;
-            background: transparent;
-            border: 1px solid var(--green);
-            color: var(--green);
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .subscribe-form button:hover {
-            background: var(--green);
-            color: var(--bg);
-        }
-
-        @media (max-width: 500px) {
-            body {
-                font-size: 14px;
-                padding: 24px 16px;
-            }
-
-            nav {
-                flex-wrap: wrap;
-                gap: 16px;
-            }
-
-            .essay-list li {
-                flex-direction: column;
-                gap: 4px;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Michael Ofei turns first-hand experience into trusted media through editorial direction, writing and video.">
+  <title>Michael Ofei | Editorial Direction, Writing and Video</title>
+  <link rel="canonical" href="https://michaelofei.co/">
+  <meta property="og:title" content="Michael Ofei | Editorial Direction, Writing and Video">
+  <meta property="og:description" content="Michael Ofei turns first-hand experience into trusted media through editorial direction, writing and video.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://michaelofei.co/">
+  <link rel="alternate" type="application/rss+xml" title="Michael Ofei" href="/feed.xml">
+  <link rel="icon" href="/assets/site/ram-mark-v2.png" type="image/png">
+  <link rel="stylesheet" href="/styles.css?v=1">
 </head>
 <body>
-    <header>
-        <h1><span class="prompt">~</span>Michael Ofei<span class="cursor"></span></h1>
-        <p class="tagline">Building things with words and code.</p>
-        <nav>
-            <a href="index.html" class="active">home</a>
-            <a href="essays/index.html">essays</a>
-            <a href="tools/">tools</a>
-            <a href="about.html">about</a>
-            <a href="feed.xml">rss</a>
-        </nav>
-    </header>
+  <header class="site-header">
+    <a class="site-mark" href="/" aria-label="Michael Ofei — home">
+      <img src="/assets/site/ram-mark-v2.png" alt="" width="256" height="256">
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="/about">About</a>
+      <a href="/work">Work</a>
+      <a href="/essays/">Writing</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </header>
 
-    <section>
-        <h2>Recent Essays</h2>
-        <ul class="essay-list">
-            <li>
-                <a href="essays/the-ic-ceiling.html">The IC Ceiling</a>
-                <span class="date">Apr 2026</span>
-            </li>
-            <li>
-                <a href="essays/content-perspective.html">Why Your Brand Needs a Content Perspective</a>
-                <span class="date">Apr 2026</span>
-            </li>
-            <li>
-                <a href="essays/the-impression-economy.html">The Impression Economy</a>
-                <span class="date">Mar 2026</span>
-            </li>
-            <li>
-                <a href="essays/it-all-starts-with-writing.html">It All Starts with Writing</a>
-                <span class="date">Mar 2026</span>
-            </li>
-            <li>
-                <a href="essays/content-teams-dont-have-a-speed-problem.html">Content Teams Don't Have a Speed Problem</a>
-                <span class="date">Mar 2026</span>
-            </li>
-        </ul>
+  <main>
+    <section class="introduction" aria-labelledby="intro-heading">
+      <div class="introduction-copy">
+        <h1 id="intro-heading">I’m Michael Ofei. I turn first-hand experience into trusted media.</h1>
+
+        <figure class="portrait">
+          <img src="/assets/site/michael-portrait.jpg" alt="Michael Ofei" width="400" height="600" decoding="async">
+        </figure>
+
+        <p class="lead">I work with brands that have something worth saying and want to be known for it. I can lead the editorial direction, make the content myself, or do both.</p>
+      </div>
     </section>
 
-    <section>
-        <h2>Featured Tool</h2>
-        <div style="margin-bottom: 4px;"><a href="tools/content-library-valuation.html" style="color: var(--text-bright); text-decoration: none;">Content Library Valuation</a></div>
-        <p style="color: var(--dim); font-size: 14px;">Value your content library as a business asset — across five views, for five different conversations. <a href="tools/" style="color: var(--green); text-decoration: none;">All tools →</a></p>
+    <p class="current-work"><strong>Currently:</strong> Making long-form videos for Backlinko and developing an independent series about language and belonging.</p>
+
+    <section class="endorsement" aria-label="Endorsement">
+      <blockquote>
+        <p>“What sets Michael apart is his ability to dive deep as an expert writer while also guiding the team as our editor.”</p>
+        <footer class="endorsement-source">
+          <img src="/assets/site/leigh-mckenzie.jpg" alt="" width="400" height="400" loading="lazy" decoding="async">
+          <span><strong>Leigh McKenzie</strong><br>Director of Online Visibility, Semrush</span>
+        </footer>
+      </blockquote>
     </section>
 
-    <section class="newsletter">
-        <p>Get essays and tools by email — <span class="dim">no spam, no schedule.</span></p>
-        <form
-            action="https://buttondown.email/api/emails/embed-subscribe/ofei"
-            method="post"
-            target="popupwindow"
-            class="subscribe-form"
-        >
-            <input type="email" name="email" placeholder="your@email.com" required />
-            <button type="submit">Subscribe</button>
-        </form>
+    <section class="selected-writing" aria-labelledby="writing-heading">
+      <h2 id="writing-heading">Selected writing</h2>
+      <ol class="essay-list">
+        <li>
+          <a href="/essays/the-lens-method">
+            <span class="essay-title">The Lens Method</span>
+            <span class="essay-description">How to use expert perspectives without losing your own point of view.</span>
+          </a>
+        </li>
+        <li>
+          <a href="/essays/content-perspective">
+            <span class="essay-title">Why Your Brand Needs a Content Perspective</span>
+            <span class="essay-description">What your brand believes, beyond its strategy and tone of voice.</span>
+          </a>
+        </li>
+        <li>
+          <a href="/essays/content-teams-dont-have-a-speed-problem">
+            <span class="essay-title">Content Teams Don’t Have a Speed Problem</span>
+            <span class="essay-description">Why faster production leaves the hardest editorial problems untouched.</span>
+          </a>
+        </li>
+      </ol>
     </section>
+  </main>
 
-    <footer>
-        <a href="feed.xml">RSS</a> · <a href="privacy.html">privacy</a>
-    </footer>
-    <script async data-id="101499378" src="//static.getclicky.com/js"></script>
+  <footer class="site-footer">
+    <span>© 2026 Michael Ofei</span>
+    <span><a href="mailto:michael@ofei.co">Email</a> · <a href="https://www.linkedin.com/in/michaelofei/">LinkedIn</a></span>
+  </footer>
+  <script async data-id="101499378" src="//static.getclicky.com/js"></script>
 </body>
 </html>

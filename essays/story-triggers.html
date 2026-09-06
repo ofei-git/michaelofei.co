@@ -1,509 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Story Triggers — Michael Ofei</title>
-    <meta name="description" content="Most people feel story triggers every day and never realize there's machinery underneath. Once you see them, you can't unsee them.">
+    <meta name="description" content="The patterns I have been studying to understand why some stories hold our attention.">
     <meta property="og:title" content="Story Triggers">
-    <meta property="og:description" content="Most people feel story triggers every day and never realize there's machinery underneath. Once you see them, you can't unsee them.">
+    <meta property="og:description" content="The patterns I have been studying to understand why some stories hold our attention.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://michaelofei.co/essays/story-triggers.html">
+    <meta property="og:url" content="https://michaelofei.co/essays/story-triggers">
+    <link rel="canonical" href="https://michaelofei.co/essays/story-triggers">
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
-    <style>
-        :root {
-            /* Red Sands palette */
-            --bg: #7A251E;
-            --bg-light: #8a352e;
-            --bg-dark: #6a1f18;
-            --text: #D7C9A7;
-            --text-bright: #E8DAB8;
-            --yellow: #E7B000;
-            --green: #00BB00;
-            --red: #FF3F00;
-            --dim: #a89878;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            font-size: 15px;
-            padding: 40px 20px;
-            max-width: 680px;
-            margin: 0 auto;
-        }
-
-        header {
-            margin-bottom: 48px;
-        }
-
-        .back {
-            color: var(--dim);
-            text-decoration: none;
-            font-size: 14px;
-            display: inline-block;
-            margin-bottom: 24px;
-        }
-
-        .back:hover {
-            color: var(--green);
-        }
-
-        h1 {
-            font-size: 20px;
-            font-weight: normal;
-            margin-bottom: 8px;
-            line-height: 1.4;
-            color: var(--text-bright);
-        }
-
-        .meta {
-            color: var(--yellow);
-            font-size: 14px;
-        }
-
-        article {
-            margin-bottom: 60px;
-        }
-
-        article p {
-            margin-bottom: 20px;
-        }
-
-        article h2 {
-            font-size: 16px;
-            font-weight: normal;
-            color: var(--yellow);
-            margin-top: 48px;
-            margin-bottom: 16px;
-        }
-
-        article a {
-            color: var(--green);
-            text-decoration: none;
-        }
-
-        article a:hover {
-            text-decoration: underline;
-        }
-
-        article strong {
-            color: var(--text-bright);
-            font-weight: 600;
-        }
-
-        article em {
-            color: var(--dim);
-            font-style: normal;
-        }
-
-        blockquote {
-            border-left: 2px solid var(--yellow);
-            padding-left: 20px;
-            margin: 24px 0;
-            color: var(--dim);
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid var(--bg-light);
-            margin: 32px 0;
-        }
-
-        /* INLINE VISUALS */
-        .visual {
-            background: var(--bg-dark);
-            border-radius: 8px;
-            padding: 32px 24px;
-            margin: 32px 0;
-        }
-
-        .visual-caption {
-            font-size: 12px;
-            color: var(--dim);
-            text-align: center;
-            margin-top: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Trigger Table */
-        .trigger-table {
-            font-size: 13px;
-            width: 100%;
-        }
-
-        .trigger-header {
-            display: grid;
-            grid-template-columns: 140px 1fr 1fr;
-            gap: 12px;
-            padding: 10px 12px;
-            background: var(--bg-light);
-            border-radius: 4px 4px 0 0;
-            color: var(--yellow);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .trigger-row {
-            display: grid;
-            grid-template-columns: 140px 1fr 1fr;
-            gap: 12px;
-            padding: 12px 12px;
-            border-bottom: 1px solid var(--bg-light);
-            align-items: start;
-        }
-
-        .trigger-row:last-child {
-            border-bottom: none;
-        }
-
-        .trigger-name {
-            color: var(--text-bright);
-            font-weight: 600;
-            font-size: 12px;
-        }
-
-        .trigger-mechanism {
-            color: var(--text);
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .trigger-example {
-            color: var(--dim);
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        /* Layering Visual */
-        .layer-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .layer-bar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 14px;
-            border-radius: 4px;
-            font-size: 11px;
-            letter-spacing: 0.5px;
-        }
-
-        .layer-bar .label {
-            color: var(--text-bright);
-            min-width: 130px;
-            font-size: 11px;
-        }
-
-        .layer-bar .detail {
-            color: var(--dim);
-            font-size: 11px;
-        }
-
-        .layer-1 { background: rgba(231, 176, 0, 0.15); border-left: 3px solid var(--yellow); }
-        .layer-2 { background: rgba(0, 187, 0, 0.1); border-left: 3px solid var(--green); }
-        .layer-3 { background: rgba(231, 176, 0, 0.1); border-left: 3px solid var(--yellow); opacity: 0.85; }
-        .layer-4 { background: rgba(0, 187, 0, 0.07); border-left: 3px solid var(--green); opacity: 0.7; }
-
-        /* Comparison Visual (Outcome Uncertainty) */
-        .comparison {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .comparison-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 4px;
-        }
-
-        .comparison-before {
-            background: var(--bg-light);
-            border-left: 3px solid var(--dim);
-        }
-
-        .comparison-after {
-            background: rgba(231, 176, 0, 0.12);
-            border-left: 3px solid var(--yellow);
-        }
-
-        .comparison-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            min-width: 90px;
-            color: var(--dim);
-        }
-
-        .comparison-after .comparison-label {
-            color: var(--yellow);
-        }
-
-        .comparison-text {
-            font-size: 13px;
-            color: var(--text);
-        }
-
-        .comparison-arrow {
-            color: var(--yellow);
-            font-size: 16px;
-        }
-
-        /* Intent Comparison Visual (Status Anxiety) */
-        .intent-comparison {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .intent-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            font-size: 13px;
-        }
-
-        .intent-setup {
-            color: var(--text);
-        }
-
-        .intent-plus, .intent-equals {
-            color: var(--yellow);
-            font-size: 16px;
-        }
-
-        .intent-follow {
-            color: var(--text);
-        }
-
-        .intent-result {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 4px 10px;
-            border-radius: 3px;
-        }
-
-        .intent-good {
-            color: var(--green);
-            border: 1px solid var(--green);
-        }
-
-        .intent-bad {
-            color: var(--red);
-            border: 1px solid var(--red);
-        }
-
-        /* Newsletter signup */
-        .newsletter {
-            margin: 60px 0;
-            padding-top: 24px;
-            border-top: 1px solid var(--bg-light);
-        }
-
-        .newsletter p {
-            margin-bottom: 1rem;
-        }
-
-        .newsletter .dim {
-            color: var(--dim);
-        }
-
-        .subscribe-form {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .subscribe-form input[type="email"] {
-            flex: 1;
-            min-width: 200px;
-            padding: 0.75rem;
-            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
-            font-size: 1rem;
-            background: #5a1a15;
-            border: 1px solid var(--dim);
-            color: var(--text);
-        }
-
-        .subscribe-form input[type="email"]::placeholder {
-            color: var(--dim);
-        }
-
-        .subscribe-form input[type="email"]:focus {
-            outline: none;
-            border-color: var(--yellow);
-        }
-
-        .subscribe-form button {
-            padding: 0.75rem 1.5rem;
-            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
-            font-size: 1rem;
-            background: transparent;
-            border: 1px solid var(--green);
-            color: var(--green);
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .subscribe-form button:hover {
-            background: var(--green);
-            color: var(--bg);
-        }
-
-        footer {
-            margin-top: 80px;
-            padding-top: 24px;
-            border-top: 1px solid var(--bg-light);
-            color: var(--dim);
-            font-size: 13px;
-        }
-
-        footer a {
-            color: var(--dim);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: var(--green);
-        }
-
-        @media (max-width: 500px) {
-            body {
-                font-size: 14px;
-                padding: 24px 16px;
-            }
-
-            .visual {
-                padding: 24px 16px;
-            }
-
-            .trigger-header {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .trigger-row {
-                grid-template-columns: 1fr;
-                gap: 4px;
-                padding: 14px 12px;
-            }
-
-            .trigger-name {
-                font-size: 13px;
-            }
-
-            .trigger-mechanism {
-                font-size: 12px;
-            }
-
-            .trigger-example {
-                font-size: 11px;
-            }
-
-            .trigger-header > *:nth-child(3) {
-                display: none;
-            }
-
-            .layer-bar .label {
-                min-width: 100px;
-                font-size: 10px;
-            }
-
-            .layer-bar .detail {
-                font-size: 10px;
-            }
-
-            .comparison-label {
-                min-width: 70px;
-                font-size: 9px;
-            }
-
-            .comparison-text {
-                font-size: 12px;
-            }
-
-            .intent-row {
-                font-size: 12px;
-                gap: 6px;
-            }
-
-            .intent-setup, .intent-follow {
-                font-size: 12px;
-            }
-
-            .intent-result {
-                font-size: 10px;
-            }
-        }
-    </style>
+  <link rel="icon" href="/assets/site/ram-mark-v2.png" type="image/png">
+  <link rel="stylesheet" href="/styles.css?v=1">
+  <link rel="stylesheet" href="/assets/site/essay-diagrams/story-triggers.css?v=1">
+  <link rel="stylesheet" href="/assets/site/essay-diagrams/common.css?v=1">
 </head>
 <body>
-    <header>
-        <a href="../index.html" class="back">&larr; home</a>
-        <h1>Story Triggers</h1>
-        <p class="meta">February 2026</p>
-    </header>
+  <header class="site-header">
+    <a class="site-mark" href="/" aria-label="Michael Ofei — home">
+      <img src="/assets/site/ram-mark-v2.png" alt="" width="256" height="256">
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="/about">About</a>
+      <a href="/work">Work</a>
+      <a href="/essays/" aria-current="page">Writing</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </header>
 
+  <main class="essay-page">
     <article>
-        <p><strong>Story triggers</strong> are the psychological mechanisms that make stories stick. There are about eight of them, all backed by research, and they've been operating since humans started sitting around fires. They run in the content you consume, the pitches you hear, and the conversations that hold your attention longer than they should.</p>
+      <header class="essay-header">
+        <p class="essay-kicker"><time datetime="2026-02">February 2026</time> · 7 minute read</p>
+        <h1>Story Triggers</h1>
+        <p class="essay-deck">The patterns I have been studying to understand why some stories hold our attention.</p>
+      </header>
 
-        <p>Most people feel these triggers every day and never realize there's machinery underneath. Here's what I mean.</p>
+      <div class="essay-body essay-diagrams story-triggers">
+<p><strong>Story triggers</strong> is my name for patterns that help hold attention. I have grouped eight of them here. This is a working framework drawn from stories and ideas I have encountered, not an exhaustive scientific taxonomy.</p>
 
-        <p>Game of Thrones spent nine episodes building Ned Stark as the hero. Then they cut his head off. What happened next wasn't just surprise. It was disorientation. Your brain had built a prediction model for where the story was going, and the show shattered it. You felt <em>unsafe</em>. If they could kill Ned Stark, they could kill anyone. Every scene that followed carried weight it didn't have before.</p>
+        <p>You can notice them in stories you already know.</p>
 
-        <p>That feeling is <strong>outcome uncertainty</strong>, one of the most powerful story triggers. When we're invested in someone's journey and genuinely unsure whether they'll succeed, our need for closure kicks in. We can't walk away until we know how it ends. Once you understand <em>why</em> that scene worked, you start noticing the same mechanism everywhere.</p>
+        <p>Game of Thrones spent nine episodes building Ned Stark as the hero. Then they cut his head off. For me, the surprise changed the stakes of the show: if they could kill Ned Stark, who else might die?</p>
 
-        <h2>Noticing the machinery</h2>
+        <p>I call that <strong>outcome uncertainty</strong>. When I care about someone's journey and cannot predict the ending, I want to keep watching. Naming the pattern helps me notice it in other stories.</p>
+
+        <h2>Noticing what holds attention</h2>
 
         <p>I didn't find these triggers through academic study. I found them because a formula stopped working.</p>
 
         <p>For years, I relied on social proof (another trigger) to open content. Share the proof point, show the receipts, get to the point. It worked because readers trusted evidence. Then the conditions changed. The proof points dried up. Language models started writing the same formulas. The template wasn't wrong. It was just no longer enough.</p>
 
-        <p>When I started asking why some stories still landed while most disappeared, I ended up in psychology research. Books like <em>The Science of Storytelling</em>. Long Seth Godin interviews where, thirty or forty minutes in, he always lands on the same point: humans would do almost anything to improve their status and feel accepted. How people view the world, culturally and emotionally, is how you reach them.</p>
+        <p>When I started asking why I remembered some stories and forgot others, I ended up in psychology research. Books like <em>The Science of Storytelling</em>. Long Seth Godin interviews where, thirty or forty minutes in, he often returns to the same point: humans would do almost anything to improve their status and feel accepted. How people view the world, culturally and emotionally, is how you reach them.</p>
 
-        <p>What I found was that stories have an operating system. A set of psychological triggers that activate specific responses in the human brain. They work whether you're giving a speech, pitching an investor, writing a blog post, or trying to get your kid to eat their vegetables.</p>
+        <p>The research gave me names for patterns I'd noticed in stories. They work whether you're giving a speech, pitching an investor, writing a blog post, or trying to get your kid to eat their vegetables.</p>
 
-        <p>I started mapping them. Building a database. Not to become a manipulation expert, but to understand the game I'd been playing blindly my whole life.</p>
+        <p>I started mapping them. Building a database. I wanted to understand why some stories held my attention.</p>
 
         <p>Three triggers in particular changed how I think.</p>
 
         <h2>Outcome uncertainty</h2>
 
-        <p>This is the one running every time you can't stop watching something.</p>
+        <p>This is one reason I keep watching a story.</p>
 
-        <p>I hate knowing the outcome of anything. A sporting event, a movie, a book. If someone tells me the score before I've watched the recording, the engagement drops immediately. That's not a personality quirk. That's the trigger at work.</p>
+        <p>I hate knowing the outcome of anything. A sporting event, a movie, a book. If someone tells me the score before I've watched the recording, the engagement drops immediately. That's how uncertainty affects my own interest.</p>
 
-        <p>Research on narrative engagement shows that uncertainty about outcomes increases sustained attention and memory consolidation. When we don't know how something ends, our brains stay active, processing possibilities, running simulations. The resolution, when it finally comes, provides satisfaction that reinforces the whole experience.</p>
+        <p>I find myself considering different endings as I watch. That is an observation about my experience, not a claim that every audience responds the same way.</p>
 
         <p>This is why sports are so compelling. Underdog narratives, status on the line, careers being defined in real time, and nobody knows what happens next.</p>
 
-        <p>YouTube creators figured this out intuitively. The shift from "How to Build a Desk" to "I Gave Myself 30 Days to Build a Desk With No Experience" isn't just a title change. It's an entirely different trigger architecture. The first promises information. The second promises uncertainty.</p>
+        <p>YouTube creators figured this out intuitively. The shift from "How to Build a Desk" to "I Gave Myself 30 Days to Build a Desk With No Experience" isn't just a title change. The second title makes you wonder whether the person will succeed. The first promises information. The second promises uncertainty.</p>
 
-        <!-- YouTube Title Comparison Visual -->
-        <div class="visual">
+        <figure class="essay-visual visual">
             <div class="comparison">
                 <div class="comparison-item comparison-before">
                     <span class="comparison-label">Information</span>
@@ -515,14 +84,14 @@
                     <span class="comparison-text">"I Gave Myself 30 Days to Build a Desk With No Experience"</span>
                 </div>
             </div>
-            <p class="visual-caption">Same topic, different trigger</p>
-        </div>
+            <figcaption class="visual-caption">Same topic, different trigger</figcaption>
+        </figure>
 
         <p>You already know how to build a desk (or you can Google it). What you don't know is whether <em>this person</em> will succeed. That gap keeps you watching.</p>
 
         <h2>Status anxiety</h2>
 
-        <p>This is the trigger hiding in plain sight.</p>
+        <p>Some stories hold our attention because they make us question where we stand.</p>
 
         <p><strong>Status anxiety</strong> activates when someone perceives a threat to their position, whether professional, social, or intellectual. Humans are wired to monitor their standing. When something suggests that status could be at risk, it triggers immediate emotional investment.</p>
 
@@ -534,28 +103,7 @@
 
         <p>The subtlety matters. Status anxiety is powerful and dangerous in equal measure. The line between motivation and manipulation is whether you're offering a genuine path forward.</p>
 
-        <!-- Motivation vs Extraction Visual -->
-        <div class="visual">
-            <div class="intent-comparison">
-                <div class="intent-row intent-honest">
-                    <span class="intent-setup">"You're falling behind"</span>
-                    <span class="intent-plus">+</span>
-                    <span class="intent-follow">"Here's how to catch up"</span>
-                    <span class="intent-equals">=</span>
-                    <span class="intent-result intent-good">Motivation</span>
-                </div>
-                <div class="intent-row intent-exploit">
-                    <span class="intent-setup">"You're falling behind"</span>
-                    <span class="intent-plus">+</span>
-                    <span class="intent-follow">"Buy my course"</span>
-                    <span class="intent-equals">=</span>
-                    <span class="intent-result intent-bad">Extraction</span>
-                </div>
-            </div>
-            <p class="visual-caption">Same trigger, different intent</p>
-        </div>
-
-        <p>The trigger is the same. The intent is what separates craft from exploitation.</p>
+        <p>Before using that anxiety, I'd want to know whether the content actually helps the person feeling it.</p>
 
         <h2>Relatable moments</h2>
 
@@ -565,16 +113,15 @@
 
         <p><strong>Relatable moments</strong> activate in-group recognition. When we see someone exhibit the same behaviors or thoughts we have, it creates instant psychological connection. We're drawn to people who share our unspoken experiences, and that connection is the foundation of trust.</p>
 
-        <p>Memes work on this trigger. The best memes aren't funny in the traditional joke sense. They're funny because they capture a universal but rarely acknowledged experience. "Me pretending to look busy when my boss walks by." That's not a punchline. That's recognition. And recognition is more powerful than humor because it says: <em>you're not alone in this.</em></p>
+        <p>Memes work on this trigger. The best memes aren't funny in the traditional joke sense. They're funny because they capture a universal but rarely acknowledged experience. "Me pretending to look busy when my boss walks by." You recognize yourself in it. And recognition is more powerful than humor because it says: <em>you're not alone in this.</em></p>
 
-        <p>The key is authenticity. Manufactured relatability is obvious and the audience can tell. The goal isn't to <em>create</em> relatable moments. It's to <em>find</em> them. Pay attention to the small, specific experiences that others probably share but haven't put words to yet. The more specific, the more universal it feels.</p>
+        <p>The key is authenticity. Manufactured relatability is obvious and the audience can tell. Start with experiences you've actually had. Pay attention to the small, specific experiences that others probably share but haven't put words to yet. The more specific, the more universal it feels.</p>
 
-        <h2>The rest of the machinery</h2>
+        <h2>Eight patterns to look for</h2>
 
-        <p>Those three barely scratch the surface. Here are eight core story triggers I've mapped, each activating a different mechanism in the brain.</p>
+        <p>I have also been collecting examples of five other patterns. Together, these are eight things I look for when thinking about what makes a story interesting.</p>
 
-        <!-- Trigger Table -->
-        <div class="visual">
+        <figure class="essay-visual visual">
             <div class="trigger-table">
                 <div class="trigger-header">
                     <span>Trigger</span>
@@ -622,13 +169,12 @@
                     <span class="trigger-example">You can't stop watching because you genuinely don't know what happens next</span>
                 </div>
             </div>
-            <p class="visual-caption">Eight core story triggers</p>
-        </div>
+            <figcaption class="visual-caption">Eight patterns in this framework</figcaption>
+        </figure>
 
-        <p>These triggers aren't tricks. They're the vocabulary of human attention, and they layer. Game of Thrones didn't just use outcome uncertainty. It combined it with status anxiety (the constant power struggles), unexpected change (Ned Stark, the Red Wedding), and underdog narratives (Arya, Jon Snow, Tyrion).</p>
+        <p>A story can use several of these triggers at once. Game of Thrones didn't just use outcome uncertainty. It combined it with status anxiety (the constant power struggles), unexpected change (Ned Stark, the Red Wedding), and underdog narratives (Arya, Jon Snow, Tyrion).</p>
 
-        <!-- Layering Visual -->
-        <div class="visual">
+        <figure class="essay-visual visual">
             <div class="layer-stack">
                 <div class="layer-bar layer-1">
                     <span class="label">Outcome Uncertainty</span>
@@ -647,42 +193,33 @@
                     <span class="detail">Arya, Jon Snow, Tyrion</span>
                 </div>
             </div>
-            <p class="visual-caption">How triggers layer in a single story</p>
-        </div>
+            <figcaption class="visual-caption">Several triggers in one story</figcaption>
+        </figure>
 
-        <p>The best storytellers, whether they're filmmakers, founders, or the friend who always holds the room at dinner, use multiple triggers without thinking about it. The difference between intuition and intention is just awareness.</p>
+        <p>The best storytellers, whether they're filmmakers, founders, or the friend who always holds the room at dinner, use multiple triggers without thinking about it. Naming the patterns helps me make more deliberate choices.</p>
 
-        <hr>
+        <p>I notice these patterns in political speeches, product launches and ordinary conversation. A vulnerable admission might create recognition; an unanswered question might make me curious. Those are interpretations to test against the story, not a way to read everyone's motives.</p>
 
-        <p>Once you know what to look for, you can't stop. Political speeches run on status anxiety and underdog narratives. Product launches combine curiosity gaps with social proof. A first date that goes well almost always involves someone sharing a vulnerable moment that triggers recognition: <em>oh, you feel that way too?</em></p>
+        <p>I'm still on this journey. I can only recall a few triggers without looking them up. The database I've been building exists because I haven't internalized them all yet, and that's fine. I use the list to notice things I might otherwise miss.</p>
 
-        <p>I'm still on this journey. I can only recall a few triggers without looking them up. The database I've been building exists because I haven't internalized them all yet, and that's fine. The goal isn't to memorize a list. It's to train your eye.</p>
+        <p>The next time a story holds my attention, I want to be able to explain why.</p>
 
-        <p>The triggers aren't new. They've been running since the first person sat around a fire and said <em>let me tell you what happened.</em></p>
-
-        <p>The only thing that's changed is that now you can see them.</p>
+        <p>That gives me something specific to try in my own work.</p>
 
         <blockquote>
             This is a working document. The triggers keep revealing themselves.
         </blockquote>
+      </div>
     </article>
 
-    <section class="newsletter">
-        <p>Get essays and tools by email &mdash; <span class="dim">no spam, no schedule.</span></p>
-        <form
-            action="https://buttondown.email/api/emails/embed-subscribe/ofei"
-            method="post"
-            target="popupwindow"
-            class="subscribe-form"
-        >
-            <input type="email" name="email" placeholder="your@email.com" required />
-            <button type="submit">Subscribe</button>
-        </form>
-    </section>
+    <div class="essay-endmatter">
+    </div>
+  </main>
 
-    <footer>
-        <a href="../index.html">&larr; back to home</a>
-    </footer>
-    <script async data-id="101499378" src="//static.getclicky.com/js"></script>
+  <footer class="site-footer">
+    <span>© 2026 Michael Ofei</span>
+    <span><a href="mailto:michael@ofei.co">Email</a> · <a href="https://www.linkedin.com/in/michaelofei/">LinkedIn</a></span>
+  </footer>
+  <script async data-id="101499378" src="//static.getclicky.com/js"></script>
 </body>
 </html>

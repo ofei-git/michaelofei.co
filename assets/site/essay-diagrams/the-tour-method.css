@@ -1,0 +1,188 @@
+.essay-diagrams.the-tour-method .flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+.essay-diagrams.the-tour-method .flow-box {
+            background: var(--bg-light);
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--text);
+            text-align: center;
+        }
+.essay-diagrams.the-tour-method .flow-box--accent {
+            background: var(--bg-light);
+            border: 1px solid var(--yellow);
+            color: var(--yellow);
+        }
+.essay-diagrams.the-tour-method .flow-box--result {
+            background: var(--bg-light);
+            border: 1px solid var(--green);
+            color: var(--green);
+        }
+.essay-diagrams.the-tour-method .flow-arrow {
+            color: var(--yellow);
+        }
+.essay-diagrams.the-tour-method .spectrum {
+            position: relative;
+            padding-top: 8px;
+        }
+.essay-diagrams.the-tour-method .spectrum-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--yellow), var(--green));
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+.essay-diagrams.the-tour-method .spectrum-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text);
+
+        }
+.essay-diagrams.the-tour-method .spectrum-markers {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 0 4px;
+        }
+.essay-diagrams.the-tour-method .spectrum-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+.essay-diagrams.the-tour-method .spectrum-marker-name {
+            font-size: 12px;
+            color: var(--text-bright);
+            white-space: nowrap;
+        }
+.essay-diagrams.the-tour-method .spectrum-marker-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--text-bright);
+        }
+.essay-diagrams.the-tour-method .spectrum-marker:first-child .spectrum-marker-dot {
+            border-color: var(--yellow);
+        }
+.essay-diagrams.the-tour-method .spectrum-marker:last-child .spectrum-marker-dot {
+            border-color: var(--green);
+        }
+.essay-diagrams.the-tour-method .saturation-blocks {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 12px;
+            height: 40px;
+        }
+.essay-diagrams.the-tour-method .sat-block {
+            flex: 1;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: rgba(39, 37, 34, 0.5);
+        }
+.essay-diagrams.the-tour-method .sat-1 { background: var(--bg-light);  }
+.essay-diagrams.the-tour-method .sat-2 { background: var(--bg-light);  }
+.essay-diagrams.the-tour-method .sat-3 { background: var(--bg-light);  }
+.essay-diagrams.the-tour-method .sat-4 { background: var(--bg-light);  }
+.essay-diagrams.the-tour-method .sat-5 { background: var(--bg-light);  }
+.essay-diagrams.the-tour-method .sat-6 { background: var(--bg-light);  }
+.essay-diagrams.the-tour-method .sat-7 { background: var(--bg-light);  }
+.essay-diagrams.the-tour-method .saturation-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 14px;
+        }
+.essay-diagrams.the-tour-method .sat-label-left {
+            color: var(--text);
+        }
+.essay-diagrams.the-tour-method .sat-label-right {
+            color: var(--dim);
+        }
+.essay-diagrams.the-tour-method .sat-threshold {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+.essay-diagrams.the-tour-method .sat-threshold-line {
+            flex: 1;
+            height: 1px;
+            background: var(--yellow);
+
+        }
+.essay-diagrams.the-tour-method .sat-threshold-label {
+            font-size: 12px;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+.essay-diagrams.the-tour-method .sat-marker {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+.essay-diagrams.the-tour-method .sat-marker-most {
+            color: var(--red);
+        }
+.essay-diagrams.the-tour-method .sat-marker-few {
+            color: var(--green);
+        }
+.essay-diagrams.the-tour-method .paths {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+.essay-diagrams.the-tour-method .path-box {
+            background: var(--bg-light);
+            border-radius: 4px;
+            padding: 16px 14px;
+            text-align: center;
+        }
+.essay-diagrams.the-tour-method .path-label {
+            font-size: 13px;
+            color: var(--yellow);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+.essay-diagrams.the-tour-method .path-desc {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+.essay-diagrams.the-tour-method .example-label {
+            font-size: 12px;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            margin-top: 36px;
+        }
+@media (max-width: 500px){
+.essay-diagrams.the-tour-method .flow {
+                flex-direction: column;
+            }
+.essay-diagrams.the-tour-method .flow-arrow {
+                transform: rotate(90deg);
+            }
+.essay-diagrams.the-tour-method .paths {
+                grid-template-columns: 1fr;
+            }
+.essay-diagrams.the-tour-method .spectrum-markers {
+                gap: 4px;
+            }
+.essay-diagrams.the-tour-method .spectrum-marker-name {
+                font-size: 12px;
+            }
+}

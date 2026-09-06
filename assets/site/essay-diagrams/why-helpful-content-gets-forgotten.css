@@ -1,0 +1,128 @@
+.essay-diagrams.why-helpful-content-gets-forgotten .spectrum {
+            position: relative;
+            padding-top: 8px;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .spectrum-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--dim), var(--green));
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .spectrum-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text);
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .spectrum-label {
+            max-width: 45%;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .spectrum-label-title {
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .spectrum-label-desc {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .transform-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .transform-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 16px;
+            align-items: center;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .transform-box {
+            background: var(--bg-light);
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .transform-topic {
+            color: var(--dim);
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .transform-thesis {
+            color: var(--text-bright);
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .transform-arrow {
+            color: var(--yellow);
+            font-size: 18px;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .transform-category {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--yellow);
+            margin-bottom: 8px;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .test-box {
+            text-align: center;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .test-question {
+            font-size: 14px;
+            color: var(--text-bright);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .test-check {
+            font-size: 12px;
+            color: var(--dim);
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .comparison-col {
+            text-align: center;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .comparison-header {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--yellow);
+            margin-bottom: 12px;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .comparison-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--dim);
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .comparison-col:last-child .comparison-icon {
+            color: var(--green);
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .comparison-text {
+            font-size: 12px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+.essay-diagrams.why-helpful-content-gets-forgotten .comparison-subtext {
+            font-size: 12px;
+            color: var(--dim);
+            margin-top: 8px;
+        }
+@media (max-width: 500px){
+.essay-diagrams.why-helpful-content-gets-forgotten .transform-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+.essay-diagrams.why-helpful-content-gets-forgotten .transform-arrow {
+                transform: rotate(90deg);
+            }
+.essay-diagrams.why-helpful-content-gets-forgotten .comparison {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+.essay-diagrams.why-helpful-content-gets-forgotten .spectrum-labels {
+                flex-direction: column;
+                gap: 16px;
+            }
+.essay-diagrams.why-helpful-content-gets-forgotten .spectrum-label {
+                max-width: 100%;
+            }
+}

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Contact Michael Ofei about editorial direction, writing, video, team development or a brand collaboration.">
+  <title>Contact Michael Ofei | Editorial and Video Projects</title>
+  <link rel="canonical" href="https://michaelofei.co/contact">
+  <meta property="og:title" content="Contact Michael Ofei | Editorial and Video Projects">
+  <meta property="og:description" content="Contact Michael Ofei about editorial direction, writing, video, team development or a brand collaboration.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://michaelofei.co/contact">
+  <link rel="alternate" type="application/rss+xml" title="Michael Ofei" href="/feed.xml">
+  <link rel="icon" href="/assets/site/ram-mark-v2.png" type="image/png">
+  <link rel="stylesheet" href="/styles.css?v=1">
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-mark" href="/" aria-label="Michael Ofei — home">
+      <img src="/assets/site/ram-mark-v2.png" alt="" width="256" height="256">
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="/about">About</a>
+      <a href="/work">Work</a>
+      <a href="/essays/">Writing</a>
+      <a href="/contact" aria-current="page">Contact</a>
+    </nav>
+  </header>
+
+  <main class="contact-page">
+    <header class="contact-introduction">
+      <h1>Tell me what you’re working on.</h1>
+      <p class="lead">A few sentences is enough. Tell me what you’re making, who it’s for and where you think I could help.</p>
+      <p class="contact-context">I’m most useful when there’s real experience or expertise behind the work and someone cares how it reaches the audience.</p>
+    </header>
+
+    <form class="contact-form" action="https://formspree.io/f/meaqlarq" method="post" data-contact-form>
+      <input class="contact-honeypot" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="contact-field">
+        <label for="contact-name">Name</label>
+        <input id="contact-name" name="name" type="text" autocomplete="name" required>
+      </div>
+
+      <div class="contact-field">
+        <label for="contact-email">Email</label>
+        <input id="contact-email" name="email" type="email" autocomplete="email" required>
+      </div>
+
+      <div class="contact-field">
+        <label for="contact-company">Company or brand <span class="contact-optional">(optional)</span></label>
+        <input id="contact-company" name="company" type="text" autocomplete="organization">
+      </div>
+
+      <div class="contact-field">
+        <label for="contact-interest">What are you interested in?</label>
+        <select id="contact-interest" name="interest" required>
+          <option value="">Choose one</option>
+          <option>An article, essay or video</option>
+          <option>Editorial direction or an ongoing partnership</option>
+          <option>Building or improving an editorial team</option>
+          <option>A brand collaboration or integration</option>
+          <option>Speaking or an interview</option>
+          <option>Something else</option>
+        </select>
+      </div>
+
+      <div class="contact-field">
+        <label for="contact-message">What are you working on?</label>
+        <textarea id="contact-message" name="message" placeholder="What are you making? Who is it for? Where could you use some help?" required></textarea>
+      </div>
+
+      <button class="contact-submit" type="submit">Send enquiry</button>
+      <p class="contact-form-status" data-form-status role="status" aria-live="polite"></p>
+      <p class="contact-form-note">Prefer to write directly? <a href="mailto:michael@ofei.co">Email me at michael@ofei.co</a>.</p>
+      <p class="contact-form-note">Your enquiry is processed by Formspree and emailed to me. <a href="/privacy">Privacy details</a>.</p>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 Michael Ofei</span>
+    <span><a href="mailto:michael@ofei.co">Email</a> · <a href="https://www.linkedin.com/in/michaelofei/">LinkedIn</a></span>
+  </footer>
+
+  <script>
+    const contactForm = document.querySelector('[data-contact-form]');
+    const formStatus = document.querySelector('[data-form-status]');
+    const submitButton = contactForm.querySelector('[type="submit"]');
+
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (!contactForm.reportValidity()) return;
+
+      const endpoint = contactForm.action;
+
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending…';
+      formStatus.textContent = '';
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { Accept: 'application/json' }
+        });
+
+        if (!response.ok) throw new Error('Submission failed');
+
+        contactForm.reset();
+        formStatus.textContent = 'Thanks. Your message has been sent.';
+      } catch (error) {
+        formStatus.textContent = 'Something went wrong. Please email michael@ofei.co instead.';
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send enquiry';
+      }
+    });
+  </script>
+  <script async data-id="101499378" src="//static.getclicky.com/js"></script>
+</body>
+</html>

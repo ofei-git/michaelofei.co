@@ -1,0 +1,375 @@
+.essay-diagrams.voice-prompting .compress-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+        }
+.essay-diagrams.voice-prompting .thought-expanded {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: flex-start;
+        }
+.essay-diagrams.voice-prompting .thought-line {
+            background: var(--yellow);
+            height: 4px;
+            border-radius: 2px;
+
+        }
+.essay-diagrams.voice-prompting .thought-line:nth-child(1) { width: 100px; }
+.essay-diagrams.voice-prompting .thought-line:nth-child(2) { width: 80px;  }
+.essay-diagrams.voice-prompting .thought-line:nth-child(3) { width: 120px; }
+.essay-diagrams.voice-prompting .thought-line:nth-child(4) { width: 60px;  }
+.essay-diagrams.voice-prompting .thought-line:nth-child(5) { width: 90px; }
+.essay-diagrams.voice-prompting .thought-line:nth-child(6) { width: 70px;  }
+.essay-diagrams.voice-prompting .compress-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--dim);
+        }
+.essay-diagrams.voice-prompting .compress-arrow span {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+.essay-diagrams.voice-prompting .compress-arrow .arrow {
+            font-size: 20px;
+        }
+.essay-diagrams.voice-prompting .thought-compressed {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-light);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+        }
+.essay-diagrams.voice-prompting .compressed-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 100%;
+        }
+.essay-diagrams.voice-prompting .compressed-line {
+            background: var(--dim);
+            height: 3px;
+            border-radius: 1px;
+            width: 100%;
+        }
+.essay-diagrams.voice-prompting .waveform-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+.essay-diagrams.voice-prompting .waveform-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+.essay-diagrams.voice-prompting .waveform-label {
+            font-size: 12px;
+            color: var(--dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+.essay-diagrams.voice-prompting .waveform {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            height: 60px;
+        }
+.essay-diagrams.voice-prompting .wave-bar {
+            width: 4px;
+            background: var(--green);
+            border-radius: 2px;
+        }
+.essay-diagrams.voice-prompting .wave-bar:nth-child(1) { height: 20px; }
+.essay-diagrams.voice-prompting .wave-bar:nth-child(2) { height: 35px; }
+.essay-diagrams.voice-prompting .wave-bar:nth-child(3) { height: 50px; }
+.essay-diagrams.voice-prompting .wave-bar:nth-child(4) { height: 40px; }
+.essay-diagrams.voice-prompting .wave-bar:nth-child(5) { height: 55px; }
+.essay-diagrams.voice-prompting .wave-bar:nth-child(6) { height: 30px; }
+.essay-diagrams.voice-prompting .wave-bar:nth-child(7) { height: 45px; }
+.essay-diagrams.voice-prompting .wave-bar:nth-child(8) { height: 25px; }
+.essay-diagrams.voice-prompting .wave-bar:nth-child(9) { height: 50px; }
+.essay-diagrams.voice-prompting .wave-bar:nth-child(10) { height: 35px; }
+.essay-diagrams.voice-prompting .wave-bar:nth-child(11) { height: 55px; }
+.essay-diagrams.voice-prompting .wave-bar:nth-child(12) { height: 40px; }
+.essay-diagrams.voice-prompting .flow-arrow {
+            font-size: 24px;
+            color: var(--yellow);
+        }
+.essay-diagrams.voice-prompting .full-output {
+            background: var(--bg-light);
+            padding: 12px 16px;
+            border-radius: 4px;
+            border: 2px solid var(--green);
+            font-size: 12px;
+            color: var(--text-bright);
+            max-width: 120px;
+            line-height: 1.6;
+        }
+.essay-diagrams.voice-prompting .expansion-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+.essay-diagrams.voice-prompting .expansion-side {
+            text-align: center;
+        }
+.essay-diagrams.voice-prompting .expansion-label {
+            font-size: 12px;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+.essay-diagrams.voice-prompting .text-block {
+            background: var(--bg-light);
+            border-radius: 4px;
+            padding: 16px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+.essay-diagrams.voice-prompting .compressed-text {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.4;
+        }
+.essay-diagrams.voice-prompting .expanded-text {
+            font-size: 12px;
+            color: var(--text-bright);
+            line-height: 1.6;
+            text-align: left;
+        }
+.essay-diagrams.voice-prompting .braindump-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+        }
+.essay-diagrams.voice-prompting .scattered-thoughts {
+            position: relative;
+            width: 140px;
+            height: 120px;
+            border: 2px dashed var(--dim);
+            border-radius: 8px;
+
+        }
+.essay-diagrams.voice-prompting .scattered-word {
+            position: absolute;
+            font-size: 12px;
+            color: var(--yellow);
+            transform: rotate(var(--rotation));
+        }
+.essay-diagrams.voice-prompting .scattered-word:nth-child(1) { top: 8%; left: 10%; --rotation: -5deg; }
+.essay-diagrams.voice-prompting .scattered-word:nth-child(2) { top: 20%; left: 50%; --rotation: 3deg; }
+.essay-diagrams.voice-prompting .scattered-word:nth-child(3) { top: 35%; left: 5%; --rotation: -8deg; }
+.essay-diagrams.voice-prompting .scattered-word:nth-child(4) { top: 45%; left: 55%; --rotation: 6deg; }
+.essay-diagrams.voice-prompting .scattered-word:nth-child(5) { top: 58%; left: 20%; --rotation: -3deg; }
+.essay-diagrams.voice-prompting .scattered-word:nth-child(6) { top: 70%; left: 60%; --rotation: 4deg; }
+.essay-diagrams.voice-prompting .scattered-word:nth-child(7) { top: 82%; left: 30%; --rotation: -6deg; }
+.essay-diagrams.voice-prompting .scattered-word:nth-child(8) { top: 15%; left: 75%; --rotation: 8deg; }
+.essay-diagrams.voice-prompting .scattered-word:nth-child(9) { top: 65%; left: 5%; --rotation: -4deg; }
+.essay-diagrams.voice-prompting .transform-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--yellow);
+        }
+.essay-diagrams.voice-prompting .transform-arrow span {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+.essay-diagrams.voice-prompting .structured-output {
+            width: 140px;
+            border: 2px solid var(--green);
+            border-radius: 8px;
+            padding: 12px;
+        }
+.essay-diagrams.voice-prompting .structure-line {
+            height: 6px;
+            background: var(--green);
+            border-radius: 2px;
+            margin-bottom: 8px;
+
+        }
+.essay-diagrams.voice-prompting .structure-line:nth-child(1) { width: 70%; }
+.essay-diagrams.voice-prompting .structure-line:nth-child(2) { width: 100%; }
+.essay-diagrams.voice-prompting .structure-line:nth-child(3) { width: 85%; }
+.essay-diagrams.voice-prompting .structure-line:nth-child(4) { width: 60%; }
+.essay-diagrams.voice-prompting .structure-line:nth-child(5) { width: 90%; margin-bottom: 0; }
+.essay-diagrams.voice-prompting .parallel-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+.essay-diagrams.voice-prompting .terminal-grid {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+.essay-diagrams.voice-prompting .terminal-window {
+            width: 80px;
+            height: 60px;
+            background: var(--bg-light);
+            border-radius: 6px;
+            border: 2px solid var(--green);
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+.essay-diagrams.voice-prompting .terminal-dots {
+            display: flex;
+            gap: 4px;
+        }
+.essay-diagrams.voice-prompting .terminal-dots span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--dim);
+        }
+.essay-diagrams.voice-prompting .terminal-dots span:first-child {
+            background: var(--red);
+        }
+.essay-diagrams.voice-prompting .terminal-dots span:nth-child(2) {
+            background: var(--yellow);
+        }
+.essay-diagrams.voice-prompting .terminal-dots span:last-child {
+            background: var(--green);
+        }
+.essay-diagrams.voice-prompting .terminal-waves {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            justify-content: center;
+        }
+.essay-diagrams.voice-prompting .mini-wave {
+            height: 4px;
+            background: var(--green);
+            border-radius: 2px;
+
+        }
+.essay-diagrams.voice-prompting .mini-wave:first-child {
+            width: 70%;
+        }
+.essay-diagrams.voice-prompting .mini-wave:last-child {
+            width: 50%;
+        }
+.essay-diagrams.voice-prompting .voice-source {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+.essay-diagrams.voice-prompting .voice-rings {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+.essay-diagrams.voice-prompting .ring {
+            position: absolute;
+            border: 2px solid var(--yellow);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+.essay-diagrams.voice-prompting .ring-1 {
+            width: 30px;
+            height: 30px;
+
+        }
+.essay-diagrams.voice-prompting .ring-2 {
+            width: 45px;
+            height: 45px;
+
+        }
+.essay-diagrams.voice-prompting .ring-3 {
+            width: 60px;
+            height: 60px;
+
+        }
+.essay-diagrams.voice-prompting .person-icon {
+            font-size: 16px;
+            color: var(--yellow);
+            z-index: 1;
+        }
+.essay-diagrams.voice-prompting .use-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+.essay-diagrams.voice-prompting .use-col {
+            text-align: center;
+        }
+.essay-diagrams.voice-prompting .use-label {
+            font-size: 12px;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+.essay-diagrams.voice-prompting .use-list {
+            background: var(--bg-light);
+            border-radius: 4px;
+            padding: 16px;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+.essay-diagrams.voice-prompting .use-list.typing {
+            color: var(--dim);
+            border-top: 3px solid var(--dim);
+        }
+.essay-diagrams.voice-prompting .use-list.speaking {
+            color: var(--text-bright);
+            border-top: 3px solid var(--green);
+        }
+@media (max-width: 500px){
+.essay-diagrams.voice-prompting .compress-visual {
+                flex-direction: column;
+                gap: 16px;
+            }
+.essay-diagrams.voice-prompting .compress-arrow {
+                transform: rotate(90deg);
+            }
+.essay-diagrams.voice-prompting .waveform-visual {
+                flex-direction: column;
+            }
+.essay-diagrams.voice-prompting .flow-arrow {
+                transform: rotate(90deg);
+            }
+.essay-diagrams.voice-prompting .expansion-compare,
+.essay-diagrams.voice-prompting .use-comparison {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+.essay-diagrams.voice-prompting .braindump-visual {
+                flex-direction: column;
+                gap: 16px;
+            }
+.essay-diagrams.voice-prompting .transform-arrow {
+                transform: rotate(90deg);
+            }
+.essay-diagrams.voice-prompting .terminal-grid {
+                gap: 8px;
+            }
+.essay-diagrams.voice-prompting .terminal-window {
+                width: 70px;
+                height: 50px;
+            }
+}

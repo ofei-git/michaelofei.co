@@ -1,0 +1,305 @@
+.essay-diagrams.the-impression-economy .decouple-chart {
+            position: relative;
+            height: 160px;
+            margin-bottom: 8px;
+        }
+.essay-diagrams.the-impression-economy .decouple-axis-y {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 24px;
+            width: 1px;
+            background: var(--dim-dark);
+        }
+.essay-diagrams.the-impression-economy .decouple-axis-x {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 24px;
+            height: 1px;
+            background: var(--dim-dark);
+        }
+.essay-diagrams.the-impression-economy .decouple-line {
+            position: absolute;
+            left: 8px;
+            right: 0;
+            bottom: 25px;
+        }
+.essay-diagrams.the-impression-economy .decouple-impressions {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+        }
+.essay-diagrams.the-impression-economy .decouple-impressions::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 0;
+            border-bottom: 2px solid var(--yellow);
+            clip-path: polygon(0% 55%, 25% 52%, 45% 48%, 55% 40%, 70% 30%, 85% 18%, 100% 5%);
+            height: 100%;
+        }
+.essay-diagrams.the-impression-economy .decouple-clicks {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+        }
+.essay-diagrams.the-impression-economy .decouple-clicks::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-bottom: 2px solid var(--green);
+            clip-path: polygon(0% 50%, 25% 48%, 45% 50%, 55% 58%, 70% 65%, 85% 72%, 100% 78%);
+            height: 100%;
+        }
+.essay-diagrams.the-impression-economy .decouple-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--dim-dark);
+            margin-top: 4px;
+            padding-left: 8px;
+        }
+.essay-diagrams.the-impression-economy .decouple-legend {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-top: 12px;
+            font-size: 12px;
+        }
+.essay-diagrams.the-impression-economy .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+.essay-diagrams.the-impression-economy .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+.essay-diagrams.the-impression-economy .legend-dot--yellow { background: var(--yellow); }
+.essay-diagrams.the-impression-economy .legend-dot--green { background: var(--green); }
+.essay-diagrams.the-impression-economy .decouple-divider {
+            position: absolute;
+            left: 48%;
+            top: 0;
+            bottom: 24px;
+            border-left: 1px dashed var(--dim-dark);
+        }
+.essay-diagrams.the-impression-economy .decouple-divider-label {
+            position: absolute;
+            top: -2px;
+            left: 48%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: var(--dim-dark);
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+.essay-diagrams.the-impression-economy .attention-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+.essay-diagrams.the-impression-economy .attention-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+.essay-diagrams.the-impression-economy .attention-label {
+            font-size: 12px;
+            color: var(--dim);
+            min-width: 110px;
+            text-align: right;
+        }
+.essay-diagrams.the-impression-economy .attention-bar {
+            height: 12px;
+            border-radius: 3px;
+
+        }
+.essay-diagrams.the-impression-economy .attention-bar--10 { width: 100%; background: var(--green); }
+.essay-diagrams.the-impression-economy .attention-bar--8 { width: 80%; background: var(--yellow); }
+.essay-diagrams.the-impression-economy .attention-bar--7 { width: 70%; background: var(--yellow); }
+.essay-diagrams.the-impression-economy .attention-bar--5 { width: 50%; background: var(--dim); }
+.essay-diagrams.the-impression-economy .attention-bar--4 { width: 40%; background: var(--dim); }
+.essay-diagrams.the-impression-economy .attention-bar--2 { width: 20%; background: var(--dim-dark); }
+.essay-diagrams.the-impression-economy .attention-bar--1 { width: 10%; background: var(--dim-dark); }
+.essay-diagrams.the-impression-economy .attention-zone {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 0 4px;
+            margin-top: 4px;
+        }
+.essay-diagrams.the-impression-economy .attention-zone--high { color: var(--green); }
+.essay-diagrams.the-impression-economy .attention-zone--medium { color: var(--yellow); }
+.essay-diagrams.the-impression-economy .attention-zone--low { color: var(--dim-dark); }
+.essay-diagrams.the-impression-economy .dashboard-compare {
+            display: grid;
+            grid-template-columns: 1fr 32px 1fr;
+            gap: 0;
+            align-items: center;
+        }
+.essay-diagrams.the-impression-economy .dashboard-side {
+            padding: 20px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+.essay-diagrams.the-impression-economy .dashboard-side--old {
+            background: var(--bg-darker);
+
+        }
+.essay-diagrams.the-impression-economy .dashboard-side--new {
+            background: var(--bg-darker);
+            border: 1px solid var(--green-dim);
+        }
+.essay-diagrams.the-impression-economy .dashboard-side-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+.essay-diagrams.the-impression-economy .dashboard-side--old .dashboard-side-label { color: var(--dim-dark); }
+.essay-diagrams.the-impression-economy .dashboard-side--new .dashboard-side-label { color: var(--green); }
+.essay-diagrams.the-impression-economy .dashboard-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(39, 37, 34, 0.15);
+        }
+.essay-diagrams.the-impression-economy .dashboard-metric:last-child { border-bottom: none; }
+.essay-diagrams.the-impression-economy .dashboard-metric-label { color: var(--dim); }
+.essay-diagrams.the-impression-economy .dashboard-metric-value { color: var(--text-bright); font-weight: 600; }
+.essay-diagrams.the-impression-economy .dashboard-metric-value--dim { color: var(--dim-dark); }
+.essay-diagrams.the-impression-economy .dashboard-metric-value--green { color: var(--green); }
+.essay-diagrams.the-impression-economy .dashboard-arrow {
+            text-align: center;
+            color: var(--yellow);
+            font-size: 18px;
+        }
+.essay-diagrams.the-impression-economy .exposure-curve {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 6px;
+            height: 100px;
+            padding-bottom: 24px;
+            position: relative;
+        }
+.essay-diagrams.the-impression-economy .exposure-bar {
+            width: 48px;
+            background: var(--dim-dark);
+            border-radius: 3px 3px 0 0;
+            position: relative;
+
+        }
+.essay-diagrams.the-impression-economy .exposure-bar:nth-child(1) { height: 12%; }
+.essay-diagrams.the-impression-economy .exposure-bar:nth-child(2) { height: 25%; }
+.essay-diagrams.the-impression-economy .exposure-bar:nth-child(3) { height: 42%; }
+.essay-diagrams.the-impression-economy .exposure-bar:nth-child(4) { height: 60%; background: var(--dim); }
+.essay-diagrams.the-impression-economy .exposure-bar:nth-child(5) { height: 75%; background: var(--yellow); }
+.essay-diagrams.the-impression-economy .exposure-bar:nth-child(6) { height: 88%; background: var(--yellow); }
+.essay-diagrams.the-impression-economy .exposure-bar:nth-child(7) { height: 95%; background: var(--green); }
+.essay-diagrams.the-impression-economy .exposure-bar-label {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: var(--dim-dark);
+        }
+.essay-diagrams.the-impression-economy .exposure-threshold {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: calc(24px + 60%);
+            border-top: 1px dashed var(--yellow);
+        }
+.essay-diagrams.the-impression-economy .exposure-threshold-label {
+            position: absolute;
+            right: 0;
+            top: -14px;
+            font-size: 12px;
+            color: var(--yellow);
+            letter-spacing: 0.5px;
+        }
+.essay-diagrams.the-impression-economy .exposure-y-label {
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: rotate(-90deg) translateX(-50%);
+            font-size: 12px;
+            color: var(--dim-dark);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transform-origin: left center;
+            white-space: nowrap;
+        }
+.essay-diagrams.the-impression-economy .equation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            font-size: 14px;
+            color: var(--text);
+        }
+.essay-diagrams.the-impression-economy .equation-part {
+            text-align: center;
+        }
+.essay-diagrams.the-impression-economy .equation-label {
+            font-size: 12px;
+            color: var(--dim);
+            margin-top: 4px;
+        }
+.essay-diagrams.the-impression-economy .equation-symbol {
+            font-size: 20px;
+            color: var(--yellow);
+        }
+.essay-diagrams.the-impression-economy .tool-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--green-dim);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+            text-align: center;
+        }
+.essay-diagrams.the-impression-economy .tool-card-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+.essay-diagrams.the-impression-economy .tool-card p {
+            font-size: 14px;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+.essay-diagrams.the-impression-economy .tool-card a {
+            color: var(--green);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--green-dim);
+            font-size: 14px;
+        }
+.essay-diagrams.the-impression-economy .tool-card a:hover {
+            border-bottom-style: solid;
+        }
+@media (max-width: 500px){
+.essay-diagrams.the-impression-economy .dashboard-compare {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+.essay-diagrams.the-impression-economy .dashboard-arrow { transform: rotate(90deg); }
+.essay-diagrams.the-impression-economy .attention-label { min-width: 80px; font-size: 12px; }
+.essay-diagrams.the-impression-economy .equation { flex-wrap: wrap; gap: 8px; }
+.essay-diagrams.the-impression-economy .exposure-bar { width: 32px; }
+}

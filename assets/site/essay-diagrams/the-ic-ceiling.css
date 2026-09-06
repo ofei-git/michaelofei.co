@@ -1,0 +1,179 @@
+.essay-diagrams.the-ic-ceiling .question-progression {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+.essay-diagrams.the-ic-ceiling .question-step {
+            display: flex;
+            align-items: stretch;
+            gap: 16px;
+            padding: 18px 0;
+        }
+.essay-diagrams.the-ic-ceiling .question-step:not(:last-child) {
+            border-bottom: 1px solid var(--bg-light);
+        }
+.essay-diagrams.the-ic-ceiling .question-tier-label {
+            min-width: 60px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-top: 2px;
+        }
+.essay-diagrams.the-ic-ceiling .question-tier-label.t1 { color: var(--dim); }
+.essay-diagrams.the-ic-ceiling .question-tier-label.t2 { color: var(--yellow); }
+.essay-diagrams.the-ic-ceiling .question-tier-label.t3 { color: var(--green); }
+.essay-diagrams.the-ic-ceiling .question-content {
+            flex: 1;
+        }
+.essay-diagrams.the-ic-ceiling .question-text {
+            font-size: 14px;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+.essay-diagrams.the-ic-ceiling .question-range {
+            font-size: 12px;
+            color: var(--dim);
+        }
+.essay-diagrams.the-ic-ceiling .tier-card {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 3px;
+        }
+.essay-diagrams.the-ic-ceiling .tier-card:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+.essay-diagrams.the-ic-ceiling .tier-card:last-child {
+            border-radius: 0 0 8px 8px;
+        }
+.essay-diagrams.the-ic-ceiling .tier-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+.essay-diagrams.the-ic-ceiling .tier-card-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+.essay-diagrams.the-ic-ceiling .tier-card-name.t1 { color: var(--dim); }
+.essay-diagrams.the-ic-ceiling .tier-card-name.t2 { color: var(--yellow); }
+.essay-diagrams.the-ic-ceiling .tier-card-name.t3 { color: var(--green); }
+.essay-diagrams.the-ic-ceiling .tier-card-question {
+            font-size: 13px;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+.essay-diagrams.the-ic-ceiling .tier-card-skills {
+            list-style: none;
+            padding: 0;
+        }
+.essay-diagrams.the-ic-ceiling .tier-card-skills li {
+            font-size: 12px;
+            color: var(--dim);
+            padding: 3px 0;
+            padding-left: 14px;
+            position: relative;
+        }
+.essay-diagrams.the-ic-ceiling .tier-card-skills li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: var(--green);
+        }
+.essay-diagrams.the-ic-ceiling .tier-card-examples {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--dim);
+        }
+.essay-diagrams.the-ic-ceiling .tier-card-examples span {
+
+        }
+.essay-diagrams.the-ic-ceiling .tier-connector {
+            text-align: center;
+            padding: 6px 0;
+            color: var(--yellow);
+            font-size: 12px;
+            background: var(--bg);
+        }
+.essay-diagrams.the-ic-ceiling .contrast-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+@media (max-width: 500px){
+.essay-diagrams.the-ic-ceiling .contrast-grid { grid-template-columns: 1fr; }
+}
+.essay-diagrams.the-ic-ceiling .contrast-col-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+.essay-diagrams.the-ic-ceiling .contrast-col-label.yes { color: var(--green); }
+.essay-diagrams.the-ic-ceiling .contrast-col-label.no { color: var(--red); }
+.essay-diagrams.the-ic-ceiling .contrast-item {
+            font-size: 13px;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+.essay-diagrams.the-ic-ceiling .contrast-item:last-child { border-bottom: none; }
+.essay-diagrams.the-ic-ceiling .contrast-col.yes-col .contrast-item { color: var(--text); }
+.essay-diagrams.the-ic-ceiling .contrast-col.no-col .contrast-item { color: var(--dim); text-decoration: line-through;  }
+.essay-diagrams.the-ic-ceiling .stakeholder-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+.essay-diagrams.the-ic-ceiling .stakeholder-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 0;
+        }
+.essay-diagrams.the-ic-ceiling .stakeholder-row:not(:last-child) {
+            border-bottom: 1px solid var(--bg-light);
+        }
+.essay-diagrams.the-ic-ceiling .stakeholder-tier {
+            min-width: 60px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+.essay-diagrams.the-ic-ceiling .stakeholder-tier.t1 { color: var(--dim); }
+.essay-diagrams.the-ic-ceiling .stakeholder-tier.t2 { color: var(--yellow); }
+.essay-diagrams.the-ic-ceiling .stakeholder-tier.t3 { color: var(--green); }
+.essay-diagrams.the-ic-ceiling .stakeholder-arrow {
+            color: var(--yellow);
+            font-size: 14px;
+        }
+.essay-diagrams.the-ic-ceiling .stakeholder-who {
+            font-size: 13px;
+            color: var(--text-bright);
+        }
+.essay-diagrams.the-ic-ceiling .further-reading {
+            margin: 32px 0;
+            padding: 20px 24px;
+            border: 1px solid var(--bg-light);
+            border-radius: 6px;
+        }
+.essay-diagrams.the-ic-ceiling .further-reading-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--yellow);
+            margin-bottom: 8px;
+        }
+.essay-diagrams.the-ic-ceiling .further-reading p {
+            font-size: 14px;
+            margin-bottom: 0;
+            color: var(--dim);
+        }
+.essay-diagrams.the-ic-ceiling .further-reading a {
+            color: var(--green);
+            text-decoration: none;
+        }
+.essay-diagrams.the-ic-ceiling .further-reading a:hover {
+            text-decoration: underline;
+        }
