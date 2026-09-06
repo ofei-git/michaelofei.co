@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Contact Michael Ofei about editorial direction, writing, video, team development or a brand collaboration.">
-  <title>Contact Michael Ofei | Editorial and Video Projects</title>
+  <meta name="description" content="Get in touch about working with Michael Ofei on an editorial project, video, ongoing partnership, speaking engagement or brand collaboration.">
+  <title>Contact Michael Ofei</title>
   <link rel="canonical" href="https://michaelofei.co/contact">
-  <meta property="og:title" content="Contact Michael Ofei | Editorial and Video Projects">
-  <meta property="og:description" content="Contact Michael Ofei about editorial direction, writing, video, team development or a brand collaboration.">
+  <meta property="og:title" content="Contact Michael Ofei">
+  <meta property="og:description" content="Get in touch about working with Michael Ofei on an editorial project, video, ongoing partnership, speaking engagement or brand collaboration.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://michaelofei.co/contact">
   <link rel="alternate" type="application/rss+xml" title="Michael Ofei" href="/feed.xml">
@@ -32,9 +32,10 @@
       <h1>Tell me what you’re working on.</h1>
       <p class="lead">A few sentences is enough. Tell me what you’re making, who it’s for and where you think I could help.</p>
       <p class="contact-context">I’m most useful when there’s real experience or expertise behind the work and someone cares how it reaches the audience.</p>
+      <p class="contact-context">This form is for enquiries about working with me directly. I don’t handle job applications or freelance pitches for Semrush or Backlinko here.</p>
     </header>
 
-    <form class="contact-form" action="https://formspree.io/f/meaqlarq" method="post" data-contact-form>
+    <form id="contact-form" class="contact-form" action="https://formspree.io/f/meaqlarq" method="post" data-contact-form>
       <input class="contact-honeypot" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="contact-field">
         <label for="contact-name">Name</label>
@@ -60,6 +61,7 @@
           <option>Building or improving an editorial team</option>
           <option>A brand collaboration or integration</option>
           <option>Speaking or an interview</option>
+          <option value="privacy">A privacy question or deletion request</option>
           <option>Something else</option>
         </select>
       </div>
@@ -71,20 +73,25 @@
 
       <button class="contact-submit" type="submit">Send enquiry</button>
       <p class="contact-form-status" data-form-status role="status" aria-live="polite"></p>
-      <p class="contact-form-note">Prefer to write directly? <a href="mailto:michael@ofei.co">Email me at michael@ofei.co</a>.</p>
       <p class="contact-form-note">Your enquiry is processed by Formspree and emailed to me. <a href="/privacy">Privacy details</a>.</p>
     </form>
   </main>
 
   <footer class="site-footer">
     <span>© 2026 Michael Ofei</span>
-    <span><a href="mailto:michael@ofei.co">Email</a> · <a href="https://www.linkedin.com/in/michaelofei/">LinkedIn</a></span>
+    <span><a href="/contact">Contact</a> · <a href="https://www.linkedin.com/in/michaelofei/">LinkedIn</a></span>
   </footer>
 
   <script>
     const contactForm = document.querySelector('[data-contact-form]');
     const formStatus = document.querySelector('[data-form-status]');
     const submitButton = contactForm.querySelector('[type="submit"]');
+    const privacyEnquiry = new URLSearchParams(window.location.search).get('enquiry') === 'privacy';
+    if (privacyEnquiry) {
+      document.getElementById('contact-interest').value = 'privacy';
+      document.querySelector('label[for="contact-message"]').textContent = 'How can I help with your privacy request?';
+      document.getElementById('contact-message').placeholder = 'Describe your question or the information you would like removed.';
+    }
 
     contactForm.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -107,9 +114,10 @@
         if (!response.ok) throw new Error('Submission failed');
 
         contactForm.reset();
+        if (privacyEnquiry) document.getElementById('contact-interest').value = 'privacy';
         formStatus.textContent = 'Thanks. Your message has been sent.';
       } catch (error) {
-        formStatus.textContent = 'Something went wrong. Please email michael@ofei.co instead.';
+        formStatus.textContent = 'Your message wasn’t sent. Your answers are still here. Please try again in a moment.';
       } finally {
         submitButton.disabled = false;
         submitButton.textContent = 'Send enquiry';
